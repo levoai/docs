@@ -1,11 +1,11 @@
 # Welcome to Levo!
 Levo empowers modern development teams to build reliable, resilient, and secure APIs.
 
-![](./assets/before-levo.svg)
+![](./assets/before-levo.jpg)
 
 ------
 
-![](./assets/after-levo.svg)
+![](./assets/after-levo.jpg)
 
 
 ### What value does Levo provide?
@@ -24,7 +24,7 @@ Levo empowers modern development teams to build reliable, resilient, and secure 
 - Accelerate compliance initiatives by providing proof of API security posture to auditors.
 
 ### How does Levo work?
-![](./assets/how-it-works.svg)
+![](./assets/how-it-works.jpg)
 The `observe` phase is optional, if you already have OpenAPI specifications for your APIs. Levo can simply import your OpenAPI and Swagger files.
 
 ### [How do I use Levo?][using-levo]
