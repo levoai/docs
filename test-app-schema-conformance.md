@@ -1,4 +1,4 @@
-# Automated API Contract Testing
+# Using your own app to evaluate Levo's schema conformance testing
 
 Ensure you target application is running and note down its URL.
 
