@@ -4,7 +4,7 @@
 ## What is it?
 Attackers substitute the ID of their own resource in the API call with an ID of a resource belonging to another user. The lack of proper authorization checks allows attackers to access the specified resource. This attack is also known as IDOR (Insecure Direct Object Reference).
 
-In the above example Troy (who is an authenticated user) is able to access Scott's receipt! This is a serious vulnerablity, that is a result of improper authorization checks at the `GET /receipts/{receipt_id}` API endpoint.
+In the above example Troy (who is an authenticated user) is able to access Scott's receipt! This is a serious vulnerability, that is a result of improper authorization checks at the `GET /receipts/{receipt_id}` API endpoint.
 
 ## References
 [OWASP API TOP-10 #1](https://owasp.org/www-project-api-security/) <br>
