@@ -1,5 +1,5 @@
 # Broken Object Level Authorization (aka IDOR)
-![IDOR / BOLA](./IDOR.svg)
+![IDOR / BOLA](../../assets/IDOR.svg)
 
 ## What is it?
 Attackers substitute the ID of their own resource in the API call with an ID of a resource belonging to another user. The lack of proper authorization checks allows attackers to access the specified resource. This attack is also known as IDOR (Insecure Direct Object Reference).
@@ -7,7 +7,7 @@ Attackers substitute the ID of their own resource in the API call with an ID of 
 In the above example Troy (who is an authenticated user) is able to access Scott's receipt! This is a serious vulnerability, that is a result of improper authorization checks at the `GET /receipts/{receipt_id}` API endpoint.
 
 ## References
-[OWASP API TOP-10 #1](https://owasp.org/www-project-api-security/) <br>
+[OWASP API TOP-10 #1](https://owasp.org/www-project-api-security/)  
 [BOLA / IDOR in API Security Encyclopedia](https://apisecurity.io/encyclopedia/content/owasp/api1-broken-object-level-authorization)
 
 ## Test case FAQs

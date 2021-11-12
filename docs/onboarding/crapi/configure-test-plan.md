@@ -1,3 +1,7 @@
+---
+sidebar_position: 3
+---
+
 # Configure Your Test Plan
 
 Just like developers run tests using JUnit, XUnit, & PyTest `fixtures`, Levo's test plans use fixtures to drive tests. The fixtures provide seed data required for the proper execution of the tests.

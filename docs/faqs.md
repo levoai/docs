@@ -1,3 +1,7 @@
+---
+sidebar_position: 6
+---
+
 # FAQs
 
 #### Why do you need Levo?
