@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # How do I use Levo?
 
 Below are high level steps:
@@ -21,6 +25,6 @@ Below are high level steps:
 [linux]: levo-cli/levo-cli-for-linux.md
 [windows]: levo-cli/levo-cli-for-windows.md
 [use-malschema]: https://github.com/levoai/demo-apps/blob/main/MalSchema/README.rst
-[use-my-app-for-schema-tests]: ./test-app-schema-conformance.md
-[use-crapi]: ./test-crapi-security.md
-[use-my-app-for-security-tests]: ./test-app-security.md
+[use-my-app-for-schema-tests]: ./onboarding/crapi/configure-test-plan.md
+[use-crapi]: ./onboarding/crapi/crapi.md
+[use-my-app-for-security-tests]: ./onboarding/test-app-security.md

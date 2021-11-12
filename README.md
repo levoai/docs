@@ -1,35 +1,33 @@
-# Welcome to Levo!
-Levo empowers modern development teams to build reliable, resilient, and secure APIs.
+# Levo.ai Docs
 
-![](./assets/before-levo.jpg)
+This website is built using [Docusaurus 2](https://docusaurus.io/), a modern static website generator.
 
-------
+### Installation
 
-![](./assets/after-levo.jpg)
+```
+$ yarn
+```
 
+### Local Development
 
-### What value does Levo provide?
+```
+$ yarn start
+```
 
-#### For Developers
-- Automatically test all API endpoints for conformance to their OpenAPI Schemas.
-- Ensure that the API implementation matches their specification.
-- Prevent breaking changes from impacting API deployments in production.
-- Ship regression free APIs to customers and partners.
-- Do all of the above in CI/CD.
+This command starts a local development server and opens up a browser window. Most changes are reflected live without having to restart the server.
 
-#### For Security Engineering
-- Automatically test all API endpoints for comprehensive security vulnerabilities in CI/CD.
-- Shift security left and prevent vulnerabilities from leaking into production.
-- Scale security coverage in agile environments by empowering developers to own & operate security testing.
-- Accelerate compliance initiatives by providing proof of API security posture to auditors.
+### Build
 
-### How does Levo work?
-![](./assets/how-it-works.jpg)
-The `observe` phase is optional, if you already have OpenAPI specifications for your APIs. Levo can simply import your OpenAPI and Swagger files.
+```
+$ yarn build
+```
 
-### [How do I use Levo?][using-levo]
+This command generates static content into the `build` directory and can be served using any static contents hosting service.
 
-### [FAQs][faqs]
+### Deployment
 
-[using-levo]: ./using-levo.md
-[faqs]: ./faqs.md
+```
+$ GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
+```
+
+If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.

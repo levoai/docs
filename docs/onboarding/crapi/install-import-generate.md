@@ -1,4 +1,8 @@
-# Install / Import / Generate
+---
+sidebar_position: 2
+---
+
+# Install, Import, Generate
 
 ## Install crAPI
 1. Install the crAPI demo application by following instructions [here][install-crapi].

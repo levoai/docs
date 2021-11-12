@@ -1,12 +1,12 @@
 # API Schema / Contract Non-Conformance
-![Schema Conformance](./schema-conformance.svg)
+![Schema Conformance](../assets/schema-conformance.svg)
 
 ## What is it?
 API endpoints have a defined schema (aka contract), that is often described in [**OpenAPI Specification**][1] format. The contract allows clients of the API endpoint to interact with it, without knowledge of the underlying implementation. Schema / Contract conformance testing ensures that said contract matches the actual implementation of the API endpoint. [Contract testing][contract-driven-testing] is a critical tool to detect breaking changes before they are deployed to production!
 
 ## References
-[API Contract Testing](https://docs.pact.io/) <br>
-[API Schema Validation](https://github.com/schemathesis/schemathesis/blob/master/README.rst) <br>
+[API Contract Testing](https://docs.pact.io/)  
+[API Schema Validation](https://github.com/schemathesis/schemathesis/blob/master/README.rst)  
 [Contract Driven Testing][contract-driven-testing]
 
 ## How does it work?

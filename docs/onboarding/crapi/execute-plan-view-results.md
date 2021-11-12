@@ -1,4 +1,8 @@
-# Execute Plan / View Results
+---
+sidebar_position: 4
+---
+
+# Execute Plan & View Results
 
 ## Execute the test plan against crAPI
 Execute the following in the shell where you installed Levo CLI:
