@@ -1,6 +1,6 @@
 # Using your own app to evaluate Levo's schema conformance testing
 
-Ensure you target application is running and note down its URL.
+Ensure your target application is running and note down its URL.
 
 Use `host.docker.internal` instead of `localhost` or `127.0.0.1` for targets on your local machine.
 
