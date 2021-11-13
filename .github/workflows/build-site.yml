@@ -20,7 +20,7 @@ jobs:
           USE_SSH: true
           GIT_USER: git
         run: |
-          git config --global user.email "levoaibot@gmail.com"
+          git config --global user.email "github-bot@levo.ai"
           git config --global user.name "levobot"
           if [ -e yarn.lock ]; then
             yarn install --frozen-lockfile
