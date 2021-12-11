@@ -1,8 +1,5 @@
----
-sidebar_position: 1
----
 
-# What is crAPI?
+# Evaluate Levo using the sample application `crAPI`
 
 You can read more about crAPI [here](https://github.com/levoai/demo-apps/blob/main/crAPI/README.md). Below are high level steps to launch and security test crAPI's APIs.
 
