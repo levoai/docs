@@ -27,7 +27,7 @@ First review the [Concepts][concepts] section. Then follow these steps:
 ###### No worries. You have two options:
 
 ###### - Try Levo's [OnBoarding][onboarding], where a fully hosted sample app is available for you to evaluate Levo with.
-###### - Or download the sample app, and follow [these][crapi] instructions.
+###### - Or download the sample app, and follow [these][sample-apps] instructions.
 
 [concepts]: ../concepts.md
 [mac]: ../levo-cli/levo-cli-for-mac-os.md
@@ -37,4 +37,4 @@ First review the [Concepts][concepts] section. Then follow these steps:
 [use-my-app-for-schema-tests]: ../test-your-app/test-app-schema-conformance.md
 [use-my-app-for-security-tests]: ../test-your-app/test-app-security.md
 [onboarding]: ./trying-levo.md
-[crapi]: ./test-sample-app/crapi.md
+[sample-apps]: ./test-sample-app/levo-sample-applications.md
