@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Levo CLI for Mac OS
 **Prerequisites**
 
