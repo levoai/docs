@@ -10,7 +10,7 @@ sidebar_position: 4
 
 Levo provides fully hosted sample applications as part of the onboarding process. These sample applications are used to showcase Levo's security & resilience testing capabilities.
 
-If prefer to use your own applications to try Levo, follow the instructions in the [`How Do I Test My Own Apps?`][test-your-own-app] section.
+If you prefer to use your own applications to evaluate Levo, follow the instructions in the [`How Do I Test My Own Apps?`][test-your-own-app] section.
 
 
 [levo.ai]: https://levo.ai/signup
