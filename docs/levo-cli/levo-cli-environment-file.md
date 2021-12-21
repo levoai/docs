@@ -49,7 +49,7 @@ The `default` specifies credentials for the default user, that is used in most o
 
 2. if want to specify an `endpoint` that authenticates using `username` & `password`:
 ```
-TBD
+This is coming soon.
 ```
 
 ### The API being tested has granular role or scope information
