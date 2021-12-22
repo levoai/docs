@@ -17,7 +17,7 @@ sidebar_position: 3
 ```bash
 mkdir -p $HOME/.config/configstore
 
-export DOCKERHOST=$(ifconfig | awk '/docker0/{getline; print}' | awk '{ print $2 }')
+export DOCKERHOST=$(docker network inspect bridge --format='{{(index .IPAM.Config 0).Gateway}}')
  
 alias levo="sudo docker run --rm --add-host=host.docker.internal:$DOCKERHOST --mount type=bind,source=$HOME/.config/configstore,target=/home/levo/.config/configstore -v $PWD:/home/levo/work:rw -e LOCAL_USER_ID=$(id -u) -e LOCAL_GROUP_ID=$(id -g) -e TERM=xterm-256color -ti levoai/levo:stable" 
 ```
