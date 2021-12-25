@@ -9,6 +9,8 @@ sidebar_position: 3
 *   Use of Levo CLI requires Docker (min version: 18.03.0)
 *   Linux version that supports Docker
 *   Ensure that you are able to launch and use Docker containers, and network connectivity works
+*   Bash or Bash compatible shell
+*   `ip` command installed (if missing see notes below)
 
 ### Instructions to Setup Levo CLI
 
@@ -16,10 +18,8 @@ sidebar_position: 3
 
 ```bash
 mkdir -p $HOME/.config/configstore
-
-export DOCKERHOST=$(docker network inspect bridge --format='{{(index .IPAM.Config 0).Gateway}}')
  
-alias levo="sudo docker run --rm --add-host=host.docker.internal:$DOCKERHOST --mount type=bind,source=$HOME/.config/configstore,target=/home/levo/.config/configstore -v $PWD:/home/levo/work:rw -e LOCAL_USER_ID=$(id -u) -e LOCAL_GROUP_ID=$(id -g) -e TERM=xterm-256color -ti levoai/levo:stable" 
+alias levo="sudo docker run --rm --add-host=host.docker.internal:`ip route|awk '/docker0/ { print $9 }'` --mount type=bind,source=$HOME/.config/configstore,target=/home/levo/.config/configstore -v $PWD:/home/levo/work:rw -e LOCAL_USER_ID=$(id -u) -e LOCAL_GROUP_ID=$(id -g) -e TERM=xterm-256color -ti levoai/levo:stable" 
 ```
 
 *   Now signup and create an account on [Levo.ai](https://Levo.ai) via the CLI:
@@ -35,6 +35,11 @@ levo login
 > The CLI container mounts your current working directory as R/W. This directory is used to read schema files, and export test plans etc.
 
 > Please note that the alias is only available in the current terminal session. If you want to persist this across sessions, you need to persist this in the shell's profile (.bashrc, etc.). Please refer to the shell documentation.
+
+> **ip** command can be installed as shown below:  
+    - Debian: `sudo apt install iproute2`  
+    - Fedora/CentOS: `sudo yum -y install iproute`  
+    - Arch: `sudo pacman -S iproute2`
 
 ### [Upgrade Instructions][cli-upgrade]
 
