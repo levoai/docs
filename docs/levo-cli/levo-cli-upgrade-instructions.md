@@ -23,7 +23,7 @@ docker pull levoai/levo:stable
 ```bash
 docker pull levoai/levo:<x.x.x>
 
-alias levo="docker run --rm -v $HOME/.config/configstore:/home/levo/.config/configstore:rw -v $PWD:/home/levo/work:rw -e TERM=xterm-256color -ti levoai/levo:<x.x.x>"
+alias levo='docker run --rm -v $HOME/.config/configstore:/home/levo/.config/configstore:rw -v $PWD:/home/levo/work:rw -e TERM=xterm-256color -ti levoai/levo:<x.x.x>'
 ```
 
 ### Linux
@@ -39,7 +39,7 @@ docker pull levoai/levo:stable
 ```bash
 docker pull levoai/levo:<x.x.x>
 
-alias levo="sudo docker run --rm --add-host=host.docker.internal:`ip route|awk '/docker0/ { print $9 }'` -v $HOME/.config/configstore:/home/levo/.config/configstore:rw -v $PWD:/home/levo/work:rw -e TERM=xterm-256color -ti levoai/levo:<x.x.x>" 
+alias levo='sudo docker run --rm --add-host=host.docker.internal:`ip route|awk '\''/docker0/ { print $9 }'\''` -v $HOME/.config/configstore:/home/levo/.config/configstore:rw -v $PWD:/home/levo/work:rw -e TERM=xterm-256color -ti levoai/levo:<x.x.x>'
 ```
 
 ### Windows
