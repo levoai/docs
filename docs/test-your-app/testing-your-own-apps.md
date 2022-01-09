@@ -29,7 +29,7 @@ First review the [Concepts][concepts] section. Then follow these steps:
 ###### - Try Levo's [OnBoarding][onboarding], where a fully hosted sample app is available for you to evaluate Levo with.
 ###### - Or download the sample app, and follow [these][sample-apps] instructions.
 
-[concepts]: ../concepts.md
+[concepts]: ../concepts/concepts.md
 [mac]: ../levo-cli/levo-cli-for-mac-os.md
 [linux]: ../levo-cli/levo-cli-for-linux.md
 [windows]: ../levo-cli/levo-cli-for-windows.md
