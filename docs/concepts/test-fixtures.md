@@ -44,6 +44,10 @@ def vehicleid():
 
 While the example above returns a hardcoded value, the fixture could be coded to perform a database lookup, or make an API call to get the appropriate value.
 
+## Auto Generation of Fixtures
+Levo auto generates test fixtures for various mandatory API parameters, and configures them with example values provided in the OpenAPI schema. Skeleton fixtures are generated in cases where example values are not available.
+
+You can always modify and customize the auto generated fixtures to suit specific needs.
 
 
 [fixtures]: https://en.wikipedia.org/wiki/Test_fixture#Software
