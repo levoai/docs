@@ -1,3 +1,6 @@
+---
+sidebar_position: 1
+---
 
 # Evaluate Levo using the sample application `crAPI`
 
