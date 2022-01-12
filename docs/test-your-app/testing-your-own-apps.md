@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 1
 ---
 
 # How do I use Levo with my own applications?
@@ -34,7 +34,7 @@ First review the [Concepts][concepts] section. Then follow these steps:
 [linux]: ../levo-cli/levo-cli-for-linux.md
 [windows]: ../levo-cli/levo-cli-for-windows.md
 
-[use-my-app-for-schema-tests]: ../test-your-app/test-app-schema-conformance.md
-[use-my-app-for-security-tests]: ../test-your-app/test-app-security.md
+[use-my-app-for-schema-tests]: ./test-app-schema-conformance.md
+[use-my-app-for-security-tests]: ./test-app-security/test-app-security-1.md
 [onboarding]: ./trying-levo.md
 [sample-apps]: ./test-sample-app/levo-sample-applications.md

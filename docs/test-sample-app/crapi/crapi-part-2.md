@@ -21,6 +21,11 @@ Skip this step if you have already completed it.
 
 Now we will use the Levo CLI to execute the test plan.
 
+### Prerequisites
+- Ensure you copied the `LRN (Levo Resource Name)` to the clipboard in the previous step
+- Ensure you downloaded the `environment.yml` file from the test plan to your desktop
+- Ensure the `environment.yml` file is in the same directory from which you launch Levo CLI
+
 Execute the following in the shell where you installed Levo CLI:
 
 ```
@@ -30,7 +35,7 @@ Execute the following in the shell where you installed Levo CLI:
 export TEST_PLAN_LRN="<LRN value copied to your clipboard in previous steps>"
 
 # Execute security tests against crAPI 
-levo test --plan-lrn $TEST_PLAN_LRN --target-url http://host.docker.internal:8888
+levo test --plan-lrn $TEST_PLAN_LRN --target-url http://host.docker.internal:8888 --env-file environment.yml
 ```
 
 ## View the test results in the `Test Runs` page

@@ -34,7 +34,11 @@ sidebar_position: 2
 
 6. **Copy** the LRN (Levo Resource Name) of `My crAPI Test Plan` to the clipboard.
 
+7. Open the test plan `My crAPI Test Plan`, navigate to the `environment.yml` section, 
+and download this file to your desktop. You can read more about the purpose of the file [here][env-file].
+
 [install-crapi]: https://github.com/levoai/demo-apps/blob/main/crAPI/docs/quick-start.md
 [crapi-openapi-spec]: https://raw.githubusercontent.com/levoai/demo-apps/main/crAPI/api-specs/demo%20scenarios/onboarding-scenarios.json
 [crapi-credentials]: https://github.com/levoai/demo-apps/blob/main/crAPI/docs/user-asset-info.md#user-info
 [fixtures]: ../../concepts/test-fixtures.md
+[env-file]: ../../levo-cli/levo-cli-environment-file.md

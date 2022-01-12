@@ -1,3 +1,7 @@
+---
+sidebar_position: 2
+---
+
 # Using your own app to evaluate Levo's schema conformance testing
 
 Ensure your target application is running and note down its URL.
