@@ -35,8 +35,8 @@ From the test plans screen **copy** the LRN (Levo Resource Name) of your test pl
 #### The next section describes running your test plan using the Levo CLI.
 
 [example-values]: https://swagger.io/docs/specification/adding-examples/
-[fixtures]: ../../concepts/test-fixtures.md
-[fixture-example]: ../../concepts/test-fixtures#test-fixture-format
+[fixtures]: ../../concepts/fixtures/test-fixtures.md
+[fixture-example]: ../../concepts/fixtures/configure-fixtures.md
 
 [horizontal-priv-abuse]: https://en.wikipedia.org/wiki/Privilege_escalation#Horizontal
 [vertical-priv-abuse]: https://en.wikipedia.org/wiki/Privilege_escalation#Vertical

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 1
 ---
 
 # Test Fixtures for API Parameters
@@ -22,11 +22,11 @@ Levo provides fixtures for configuring seed values for various API endpoint para
 
 Fixtures at the `Test Suite` level will automatically apply to all `Test Cases` within that `Test Suite`. Fixtures ate the `Test Plan` level will apply to all `Test Suites`.
 
-![](../assets/fixtures.png)
+![](../../assets/fixtures.png)
 
 ## Test Fixture Format
 
-![](../assets/get-vehicle-id-ep.png)
+![](../../assets/get-vehicle-id-ep.png)
 
 Above is an example of an API endpoint that has `{vehicleId}` as a path parameter. This endpoint checks if the vehicle specified by the `{vehicleId}` is present in it's database.
 

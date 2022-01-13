@@ -48,5 +48,5 @@ The next section describes the processing of configuring API parameter values vi
 
 
 [example-values]: https://swagger.io/docs/specification/adding-examples/
-[fixtures]: ../../concepts/test-fixtures.md
+[fixtures]: ../../concepts/fixtures/test-fixtures.md
 [download-env-step]: ./test-app-security-2#download-the-environmentyml-file

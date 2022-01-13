@@ -11,7 +11,7 @@ Below are a few key concepts that should be pretty intuitive for developers and 
 
 ### [Test Plans](./test-plans.md)
 
-### [Test Fixtures for API Parameters](./test-fixtures.md)
+### [Test Fixtures for API Parameters](./fixtures/test-fixtures.md)
 
 ### [Test Runner](./test-runner.md)
 

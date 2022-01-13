@@ -48,6 +48,6 @@ Inside `crAPI`, use the top level menu to navigate to `Hackpad`. Follow instruct
 ## Congratulations! You are done.
 
 
-[fixtures]: ../../concepts/test-fixtures.md
+[fixtures]: ../../concepts/fixtures/test-fixtures.md
 [levo-cli]: ../../levo-cli/levo-cli-intro.md
 [IDOR]: ../../issues/vulnerabilities/IDOR.md
