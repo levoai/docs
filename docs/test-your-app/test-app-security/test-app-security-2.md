@@ -43,4 +43,4 @@ From the test plans screen **copy** the LRN (Levo Resource Name) of your test pl
 
 [horizontal-priv-abuse]: https://en.wikipedia.org/wiki/Privilege_escalation#Horizontal
 [vertical-priv-abuse]: https://en.wikipedia.org/wiki/Privilege_escalation#Vertical
-[env-file]: ../../levo-cli/levo-cli-environment-file.md
+[env-file]: ../../concepts/env-yaml-file/environment-yaml-file.md
