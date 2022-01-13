@@ -16,3 +16,5 @@ Below are a few key concepts that should be pretty intuitive for developers and 
 ### [Test Runner](./test-runner.md)
 
 ### [Test Runs & Reports](./test-run-reports.md)
+
+### [Providing Authentication for Tests](./authentication/authn-authz.md)

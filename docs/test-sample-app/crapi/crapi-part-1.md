@@ -41,4 +41,4 @@ and download this file to your desktop. You can read more about the purpose of t
 [crapi-openapi-spec]: https://raw.githubusercontent.com/levoai/demo-apps/main/crAPI/api-specs/demo%20scenarios/onboarding-scenarios.json
 [crapi-credentials]: https://github.com/levoai/demo-apps/blob/main/crAPI/docs/user-asset-info.md#user-info
 [fixtures]: ../../concepts/test-fixtures.md
-[env-file]: ../../concepts/env-yaml-file/environment-yaml-file.md
+[env-file]: ../../concepts/authentication/authn-authz.md
