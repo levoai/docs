@@ -26,6 +26,10 @@ This command generates static content into the `build` directory and can be serv
 
 ### Deployment
 
+The deployment for our docs is handled by a GitHub Action. The website is built and pushed to the `gh-pages` branch whenever the `main` branch is updated.
+
+The following command can be used to manually deploy the website, but it should not be needed normally.
+
 ```
 $ GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
 ```
