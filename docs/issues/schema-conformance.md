@@ -22,16 +22,31 @@ These tests will work on both authenticated and unauthenticated API endpoints.
 
 ## Test case FAQs
 ### What are the type of schema conformance tests?
-##### Status Code Conformance Test
+
+#### Status Code Conformance Test
     This test checks to see if the API implementation returns any undocumented response status codes.
-##### Response Headers Schema Conformance Test
+
+Please refer to [CWE-394: Unexpected Status Code or Return Value][CWE-394], for additional information.
+
+#### Response Headers Schema Conformance Test
     This test checks to see if the API implementation returns all the `required` response headers documented in the schema.
-##### Content Type Schema Conformance Test
+
+Please refer to [CWE-838: Inappropriate Encoding for Output Context][CWE-838], for additional information.
+
+#### Content Type Schema Conformance Test
     This test checks to see if the API implementation returns the appropriate `content types` documented in the schema.
-##### Response Schema Conformance Test
+
+Please refer to [CWE-838: Inappropriate Encoding for Output Context][CWE-838], for additional information.
+
+#### Response Schema Conformance Test
     This test checks to see if the response body returned by API implementation conforms to the JSON structure documented in the schema.
-##### Unexpected Server Error Schema Conformance Test
-    This test checks to see if `500 Server Error` response codes are returned by the API implementation. `500` errors are unexpected errors.
+
+Please refer to [CWE-838: Inappropriate Encoding for Output Context][CWE-838], for additional information.
+
+#### Unexpected Server Error Schema Conformance Test
+    This test checks to see if `5XX Server Error` response codes are returned by the API implementation. `5XX` errors are unexpected errors.
+
+Please refer to [CWE-600: Uncaught Exception in Servlet][CWE:600], for additional information.
 
 
 ## What is the solution?
@@ -43,3 +58,8 @@ These tests will work on both authenticated and unauthenticated API endpoints.
 
 [1]: https://swagger.io/specification/
 [contract-driven-testing]: https://www.ibm.com/garage/method/practices/code/contract-driven-testing/
+
+[CWE-1215]: https://cwe.mitre.org/data/definitions/1215.html
+[CWE:600]: https://cwe.mitre.org/data/definitions/600.html
+[CWE-394]: https://cwe.mitre.org/data/definitions/394.html
+[CWE-838]: https://cwe.mitre.org/data/definitions/838.html
