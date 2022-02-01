@@ -14,7 +14,7 @@ jobs:
           node-version: '14.x'
       - uses: webfactory/ssh-agent@v0.5.0
         with:
-          ssh-private-key: ${{ secrets.LEVOBOT_TOKEN }}
+          ssh-private-key: ${{ secrets.LEVOBOT_SSH_KEY }}
       - name: Release to GitHub Pages
         env:
           USE_SSH: true
