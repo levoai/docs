@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# OWASP API 1: Broken Object Level Authorization
+# OWASP API A1 - Broken Object Level Authorization
 ![IDOR / BOLA](../../assets/IDOR.svg)
 
 ## What is it?

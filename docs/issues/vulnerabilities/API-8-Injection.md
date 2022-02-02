@@ -1,4 +1,4 @@
-# OWASP API 8 - Injection
+# OWASP API A8 - Injection
 ![A8](../../assets/API-8-Injection.svg)
 
 ## What is it?
