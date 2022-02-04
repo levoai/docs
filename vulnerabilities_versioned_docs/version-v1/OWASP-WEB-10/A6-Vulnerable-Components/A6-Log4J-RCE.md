@@ -28,7 +28,9 @@ If this malicious string is logged via a vulnerable Log4J library, the library i
 Levo's remote responder provides confirmation that the attack launched by the test case was successful.
 
 ## What is the solution?
-* Upgrade all Log4J libraries to the latest version that has all security patches for this vulnerability.
+* Upgrade Log4j2 to version 2.15.0 or newer. 
+
+* In previous releases (>2.10) this behavior can be mitigated by setting the system property "log4j2.formatMsgNoLookups" to "true", or by removing the JndiLookup class from the classpath (example: zip -q -d log4j-core-*.jar org/apache/logging/log4j/core/lookup/JndiLookup.class).
 
 * Whitelist outbound traffic from your services to only legitimate destinations (URLs).
 
