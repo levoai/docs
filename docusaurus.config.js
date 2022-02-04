@@ -46,9 +46,10 @@ const config = {
         sidebarPath: require.resolve('./sidebars.js'),
         versions: {
           
-          current: {
+          "v1": {
             label: 'v1',
             path: 'v1',
+            badge: false
           },
         },
       },
