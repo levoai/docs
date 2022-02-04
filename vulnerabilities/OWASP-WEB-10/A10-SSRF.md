@@ -1,5 +1,5 @@
-# OWASP Web A10 - Server Side Request Forgery
-![SSRF](../../assets/SSRF.svg)
+# Web A10 - Server Side Request Forgery
+![SSRF](../assets/Web-Top-10/A10-SSRF.svg)
 
 ## What is it?
 Server-side request forgery (also known as SSRF) is a security vulnerability that allows an attacker to induce the server-side application to make HTTP requests to an arbitrary domain of the attacker's choosing.

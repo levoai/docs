@@ -14,4 +14,7 @@ A Test Plan is structured as show below.
 
 A Test plan is comprised of `Test Suites`. A Test Suite is focussed on a single API endpoint, and comprises of a set of `Test Cases`.
 
-A `Test Case` has a singular objective, and tests the specific API endpoint for a specific vulnerability. For example, test the API endpoint for a [SSRF](../issues/vulnerabilities/SSRF) vulnerability, or an authorization bypass vulnerability.
+A `Test Case` has a singular objective, and tests the specific API endpoint for a specific vulnerability. For example, test the API endpoint for a [SSRF][SSRF-lnk] vulnerability, or an authorization bypass vulnerability.
+
+
+[SSRF-lnk]: /vulnerabilities/v1/OWASP-WEB-10/A10-SSRF

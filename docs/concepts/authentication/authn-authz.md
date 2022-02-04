@@ -59,7 +59,8 @@ The next section describes support for various standard and custom authenticatio
 
 [horizontal-priv-abuse]: https://en.wikipedia.org/wiki/Privilege_escalation#Horizontal
 [vertical-priv-abuse]: https://en.wikipedia.org/wiki/Privilege_escalation#Vertical
-[idor]: ../../issues/vulnerabilities/IDOR
+[idor]: /vulnerabilities/v1/OWASP-API-10/A1-BOLA
+
 
 [bearer-auth]: https://swagger.io/docs/specification/authentication/bearer-authentication/
 
