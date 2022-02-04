@@ -1,9 +1,9 @@
 ---
-sidebar_position: 1
+sidebar_position: 5
 ---
 
-# OWASP API A1 - Broken Object Level Authorization
-![IDOR / BOLA](../../assets/IDOR.svg)
+# API A1 - Broken Object Level Authorization
+![BOLA](../assets/API-Top-10/A1-BOLA.svg)
 
 ## What is it?
 Attackers substitute the ID of their own resource in the API call with an ID of a resource belonging to another user. The lack of proper authorization checks allows attackers to access the specified resource. This attack is also known as IDOR (Insecure Direct Object Reference).

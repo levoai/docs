@@ -1,5 +1,9 @@
-# OWASP API A8 - Injection
-![A8](../../assets/API-8-Injection.svg)
+---
+sidebar_position: 8
+---
+
+# API A8 - Injection
+![A8](../assets/API-Top-10/A8-Injection.svg)
 
 ## What is it?
 Attackers construct API calls that include SQL, NoSQL, OS, or other commands, that the API or the backend behind it blindly executes. Essentially this vulnerability arises from passing unsanitized user input directly to database queries or OS command interpreters.

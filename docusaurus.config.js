@@ -36,6 +36,25 @@ const config = {
     ],
   ],
 
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'vulnerabilities',
+        path: 'vulnerabilities',
+        routeBasePath: 'vulnerabilities',
+        sidebarPath: require.resolve('./sidebars.js'),
+        versions: {
+          
+          current: {
+            label: 'v1',
+            path: 'v1',
+          },
+        },
+      },
+    ],
+  ],
+
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
@@ -51,6 +70,11 @@ const config = {
             docId: 'welcome',
             position: 'left',
             label: 'Docs',
+          },
+          {
+            to: 'vulnerabilities/v1/guide',
+            position: 'left',
+            label: 'Vulnerability Guide',
           },
           {
             href: 'https://github.com/levoai/docs',
