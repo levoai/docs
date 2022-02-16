@@ -11,6 +11,7 @@ This section lists important vulnerabilities applicable to modern API driven app
 | Rank  | Vulnerability                               | CWE                                        |
 | ----- | ------------------------------------------- | ---------------                            |
 | A1    | [Broken Object Level Authorization][BOLA]   | [639][BOLA-CWE]                            |
+| A5    | [Broken Function Level Authorization][BFLA] | [1220][BFLA-CWE]
 | A8    | [Injection][INJECTION]                      | [89][SQLi-CWE], [77][CMDi-CWE]             |
 |       |                                             |                                            |
 
@@ -42,6 +43,9 @@ This section lists issues related to API security and resilience, but which cann
 
 [BOLA]: ./OWASP-API-10/A1-BOLA.md
 [BOLA-CWE]: https://cwe.mitre.org/data/definitions/639.html
+
+[BFLA]: ./OWASP-API-10/A5-BFLA.md
+[BFLA-CWE]: https://cwe.mitre.org/data/definitions/1220.html
 
 [SSRF]: ./OWASP-WEB-10/A10-SSRF.md
 [SSRF-CWE]: https://cwe.mitre.org/data/definitions/918.html
