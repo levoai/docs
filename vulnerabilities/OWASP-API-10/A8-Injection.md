@@ -14,6 +14,7 @@ Attackers construct API calls that include SQL, NoSQL, OS, or other commands, th
 - [OS Command Injection][CMDi]
 
 ## References
+- [OWASP API TOP-10 A8](https://owasp.org/www-project-api-security/)
 - [Command Injection - CWE 77](https://cwe.mitre.org/data/definitions/77.html)
 - [SQL Injection - CWE 89](https://cwe.mitre.org/data/definitions/89.html)
 - [NoSQL Injection - CAPEC 676](https://capec.mitre.org/data/definitions/676.html)

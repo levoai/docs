@@ -21,7 +21,7 @@ Compromising a system’s ability to identify the client/user, compromises API s
  - Unprotected APIs that are considered “internal”.
 
 ## References
-[OWASP API TOP-10 #1](https://owasp.org/www-project-api-security/)  
+[OWASP API TOP-10 A2](https://owasp.org/www-project-api-security/)  
 [Authentication Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/Authentication_Cheat_Sheet.html)
 
 ## Test case FAQs

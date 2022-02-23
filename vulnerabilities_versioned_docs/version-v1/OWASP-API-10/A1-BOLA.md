@@ -12,7 +12,7 @@ This attack is also known as Horizontal Authorization Bypass, and [IDOR][IDOR-HO
 In the above example Troy (who is an authenticated user) is able to access Scott's receipt! This is a serious vulnerability, that is a result of improper authorization checks at the `GET /receipts/{receipt_id}` API endpoint.
 
 ## References
-[OWASP API TOP-10 #1](https://owasp.org/www-project-api-security/)  
+[OWASP API TOP-10 A1](https://owasp.org/www-project-api-security/)  
 [BOLA / IDOR in API Security Encyclopedia](https://apisecurity.io/encyclopedia/content/owasp/api1-broken-object-level-authorization)
 
 ## Test case FAQs
