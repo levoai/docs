@@ -11,7 +11,7 @@ This section lists important vulnerabilities applicable to modern API driven app
 | Rank  | Vulnerability                               | CWE                                        |
 | ----- | ------------------------------------------- | ---------------                            |
 | A1    | [Broken Object Level Authorization][BOLA]   | [639][BOLA-CWE]                            |
-| A2    | [Broken Authentication][BUA]                | [287][BUA-CWE]                             |
+| A2    | [Broken Authentication][BUA]                | [425][BUA-CWE], [287][BUA-CWE-2]           |
 | A3    | [Excessive Data Exposure][EXPOSURE]         | [213][EXPOSURE-CWE]                        |
 | A4    | [Lack of Resources and Rate Limits][RATES]  | [770][RATES-CWE]                           |
 | A5    | [Broken Function Level Authorization][BFLA] | [1220][BFLA-CWE]                           |
@@ -50,7 +50,8 @@ This section lists issues related to API security and resilience, but which cann
 [BOLA-CWE]: https://cwe.mitre.org/data/definitions/639.html
 
 [BUA]: ./OWASP-API-10/A2-BUA.md
-[BUA-CWE]: https://cwe.mitre.org/data/definitions/287.html
+[BUA-CWE]: https://cwe.mitre.org/data/definitions/425.html
+[BUA-CWE-2]: https://cwe.mitre.org/data/definitions/287.html
 
 [EXPOSURE]: ./OWASP-API-10/A3-Excessive-Data-Exposure.md
 [EXPOSURE-CWE]: https://cwe.mitre.org/data/definitions/213.html
