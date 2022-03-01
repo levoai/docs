@@ -3,7 +3,7 @@ sidebar_position: 10
 ---
 
 # API A10 - Insufficient Logging & Monitoring
-![POOR-LOGGING](../assets/API-Top-10/A10-Insufficient-Logging.svg)
+![POOR-LOGGING](../assets/API-Top-10/A10-Insufficient-Logging-Monitoring.svg)
 
 ## What is it?
 Observability into who is using the API and how they are using it is the foundation of any security program.

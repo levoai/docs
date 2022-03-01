@@ -16,16 +16,17 @@ This section lists important vulnerabilities applicable to modern API driven app
 | A4    | [Lack of Resources and Rate Limits][RATES]  | [770][RATES-CWE]                           |
 | A5    | [Broken Function Level Authorization][BFLA] | [1220][BFLA-CWE]                           |
 | A6    | [Mass Assignment][MASS-ASSIGN]              | [915][MASS-ASSIGN-CWE]                     |
+| A7    | [Security Misconfiguration][MISCONFIG]      | [1349][MISCONFIG-CWE]                      |
 | A8    | [Injection][INJECTION]                      | [89][SQLi-CWE], [77][CMDi-CWE]             |
 | A9    | [Improper Asset Management][ASSETS]         | [1059][ASSETS-CWE]                         |
-|       |                                             |                                            |
+| A10   | [Insufficient Logging & Monitoring][NOLOG]  | [778][NOLOG-CWE]                           |
+
 
 ### OWASP Web Top 10
 
 | Rank  | Vulnerability                               | CWE                                        |
 | ----- | ------------------------------------------- | ---------------                            |
 | A10   | [Server Side Request Forgery][SSRF]         | [918][SSRF-CWE]                            |
-|       |                                             |                                            |
 
 
 
@@ -65,6 +66,9 @@ This section lists issues related to API security and resilience, but which cann
 [MASS-ASSIGN]: ./OWASP-API-10/A6-Mass-Assignment.md
 [MASS-ASSIGN-CWE]: https://cwe.mitre.org/data/definitions/915.html
 
+[MISCONFIG]: ./OWASP-API-10/A7-Security-Misconfiguration.md
+[MISCONFIG-CWE]: https://cwe.mitre.org/data/definitions/1349.html
+
 [SSRF]: ./OWASP-WEB-10/A10-SSRF.md
 [SSRF-CWE]: https://cwe.mitre.org/data/definitions/918.html
 
@@ -74,6 +78,9 @@ This section lists issues related to API security and resilience, but which cann
 
 [ASSETS]: ./OWASP-API-10/A9-Improper-Asset-Management.md
 [ASSETS-CWE]: https://cwe.mitre.org/data/definitions/1059.html
+
+[NOLOG]: ./OWASP-API-10/A10-Insufficient-Logging.md
+[NOLOG-CWE]: https://cwe.mitre.org/data/definitions/778.html
 
 
 [SC]: ./Miscellaneous/schema-conformance.md
