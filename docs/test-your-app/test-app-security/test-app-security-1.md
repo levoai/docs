@@ -4,7 +4,7 @@ sidebar_position: 1
 
 
 # Security test my App - Part I
-Soon Levo will very soon have capabilities to auto generate OpenAPI specifications from live traffic.
+Levo will very soon have capabilities to auto generate OpenAPI specifications from live traffic.
 Until then Levo requires OpenAPI specifications for security test generation.
 
 > If you don't have OpenAPI specifications, but still want to test your APIs, please email us at `support@levo.ai`.
