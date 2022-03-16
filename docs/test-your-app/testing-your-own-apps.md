@@ -36,5 +36,5 @@ First review the [Concepts][concepts] section. Then follow these steps:
 
 [use-my-app-for-schema-tests]: ./test-app-schema-conformance.md
 [use-my-app-for-security-tests]: ./test-app-security/test-app-security-1.md
-[onboarding]: ./trying-levo.md
+[onboarding]: ./quickstart.md
 [sample-apps]: ./test-sample-app/levo-sample-applications.md
