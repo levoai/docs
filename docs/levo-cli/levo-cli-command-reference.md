@@ -32,38 +32,24 @@ The login command stores authentication tokens in the $HOME/.config/configstore/
 Perform schema conformance tests against API endpoints specified in the target-url.
 
 Options:
-  --schema TEXT                   --schema must specify a valid URL or
-                                  file path that points to an Open API
-                                  / Swagger specification.  [required]
-
+  --schema TEXT                   --schema must specify a valid URL or file
+                                  path (accessible from the CLI container)
+                                  that points to an Open API / Swagger
+                                  specification.  [required]
   --target-url TEXT               --target-url must specify a valid URL
                                   pointing to a live host that implements the
                                   endpoints specified by --schema.  [required]
-
-  -a, --auth TEXT                 Use in conjunction with '--auth'. For basic
-                                  authentication this specifies the target
-                                  server's user and password. Example:
-                                  USER:PASSWORD .
-
-  -A, --auth-type [basic]         The authentication mechanism to be used.
-                                  Only 'basic' currently supported.  [default:
-                                  basic]
-
   --disable-reporting-to-saas     Do not send test reports to Levo's SaaS
                                   portal.
-
   -H, --header TEXT               Custom header that will be used in all
                                   requests to the target server. Example: -H
                                   "Authorization: Bearer 123" .
-
   --show-errors-tracebacks        Show full tracebacks for internal errors.
                                   [default: False]
-
   -v, --verbosity [NOTSET|DEBUG|INFO|WARNING|ERROR|CRITICAL]
                                   Accept all of the Python's log level values:
                                   CRITICAL, ERROR, WARNING, INFO, DEBUG, and
                                   NOTSET (all case insensitive).
-
   -h, --help                      Show this message and exit.
 ```
 
@@ -88,37 +74,21 @@ Options:
                                   pointing to a live host that implements the
                                   endpoints that are present in the test plan.
                                   [required]
-
-  -a, --auth TEXT                 Use in conjunction with '--auth'. For basic
-                                  authentication this specifies the target
-                                  server's user and password. Example:
-                                  USER:PASSWORD . For token and apikey
-                                  authentication this is the appropriate
-                                  key:value.
-
-  -A, --auth-type [basic|token|apikey]
-                                  The authentication mechanism to be used.
-                                  Defaults to 'basic'.  [default: basic]
-
   --disable-reporting-to-saas     Do not send test reports to Levo's SaaS
                                   portal.
-
   --test-plan TEXT                --test-plan must specify a valid Levo
-                                  Resource Name (LRN) or a path to a Levo
-                                  Test Plan folder.  This folder must be
-                                  accessible from the CLI container. [required]
-
+                                  Resource Name (LRN) or a path to a Levo Test
+                                  Plan folder (accessible from the CLI
+                                  container).  [required]
   -H, --header TEXT               Custom header that will be used in all
                                   requests to the target server. Example: -H
                                   "Authorization: Bearer 123" .
-
   --show-errors-tracebacks        Show full tracebacks for internal errors.
                                   [default: False]
-
   --env-file TEXT                 Path to YAML file with environment
-                                  definitions (AuthN/AuthZ info, etc.) This
-                                  file must be accessible from the CLI container.
-
+                                  definitions (AuthN/AuthZ info, etc.). This
+                                  file must be accessible from the CLI
+                                  container.
   -v, --verbosity [NOTSET|DEBUG|INFO|WARNING|ERROR|CRITICAL]
   -h, --help                      Show this message and exit.
 ```
@@ -156,44 +126,56 @@ Options:
                                   pointing to a live host that implements the
                                   endpoints that are present in the test plan.
                                   [required]
-
-  -a, --auth TEXT                 Use in conjunction with '--auth'. For basic
-                                  authentication this specifies the target
-                                  server's user and password. Example:
-                                  USER:PASSWORD . For token and apikey
-                                  authentication this is the appropriate
-                                  key:value.
-
-  -A, --auth-type [basic|token|apikey]
-                                  The authentication mechanism to be used.
-                                  Defaults to 'basic'.  [default: basic]
-
   --disable-reporting-to-saas     Do not send test reports to Levo's SaaS
                                   portal.
-
   --test-plan TEXT                --test-plan must specify a valid Levo
-                                  Resource Name (LRN) or an path to a
-                                  Levo Test Plan folder.  [required]
-
+                                  Resource Name (LRN) or a path to a Levo Test
+                                  Plan folder (accessible from the CLI
+                                  container).  [required]
   -H, --header TEXT               Custom header that will be used in all
                                   requests to the target server. Example: -H
                                   "Authorization: Bearer 123" .
-
   --show-errors-tracebacks        Show full tracebacks for internal errors.
                                   [default: False]
-
   --env-file TEXT                 Path to YAML file with environment
-                                  definitions (AuthN/AuthZ info, etc.).
-
+                                  definitions (AuthN/AuthZ info, etc.). This
+                                  file must be accessible from the CLI
+                                  container.
   -v, --verbosity [NOTSET|DEBUG|INFO|WARNING|ERROR|CRITICAL]
   -h, --help                      Show this message and exit.
 ```
 
 > This command is a functional equivalent of the `levo test` command. Please see constraints and examples outlined for that command.
 
+### export-env
 
+The environment file is used to specify authentication credentials, and optional role(s)
+information (for authorization tests). Please refer to [Authentication][env-yaml].
 
+`levo test-plan export-env [OPTIONS] <arguments>`
 
+```
+Export the environment file of a test plan from Levo SaaS to the local file system.
 
+Options:
+  --lrn TEXT                      The LRN of the test plan, whose environment
+                                  file you want to export.  [required]
+  --local-dir TEXT                Path to a local directory where the
+                                  environment file is to be exported. The
+                                  local directory must be accessible from the
+                                  CLI container. If not specified, the test
+                                  plan is exported to the current working
+                                  directory.
+  -v, --verbosity [NOTSET|DEBUG|INFO|WARNING|ERROR|CRITICAL]
+                                  Accept all of the Python's log level values:
+                                  CRITICAL, ERROR, WARNING, INFO, DEBUG, and
+                                  NOTSET (all case insensitive).
+  -h, --help                      Show this message and exit.
+```
+
+> Levo CLI runs as a Docker container and by default mounts the current working directory on the host file system as read/write.
+
+##### Usage Examples
+`levo test-plan export-env --lrn "acme-gizmo-org:ws/buchi:app/Demo_crAPI:tp/Demo_crAPI" --local-dir ./`
 
 [env-yaml]: ../concepts/authentication/authn-authz.md
