@@ -97,7 +97,7 @@ Options:
 
 > Do not use `127.0.0.1` or `localhost` as arguments of the `--target-url`, as these will not resolve correctly within the CLI container. Please use `host.docker.internal` instead.
 
-> Authentication credentials and user role information might be required by some `Test Plans` for proper execution. This is to be provided using the `--env-file` option. Please refer to details on [the Environment YAML file][env-yaml].
+> Authentication credentials and user role information might be required by some `Test Plans` for proper execution. This is to be provided using the `--env-file` option. Please refer to details on [Authentication/Authorization][env-yaml].
 
 ##### Usage Examples
 - Using a local test plan folder
@@ -150,7 +150,7 @@ Options:
 ### export-env
 
 The environment file is used to specify authentication credentials, and optional role(s)
-information (for authorization tests). Please refer to [Authentication][env-yaml].
+information (for authorization tests). Please refer to [Authentication/Authorization][env-yaml].
 
 `levo test-plan export-env [OPTIONS] <arguments>`
 
@@ -178,4 +178,4 @@ Options:
 ##### Usage Examples
 `levo test-plan export-env --lrn "acme-gizmo-org:ws/buchi:app/Demo_crAPI:tp/Demo_crAPI" --local-dir ./`
 
-[env-yaml]: ../concepts/authentication/authn-authz.md
+[env-yaml]: ../concepts/test-plans/env-yml.md

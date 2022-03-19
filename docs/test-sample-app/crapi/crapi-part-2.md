@@ -48,6 +48,6 @@ Inside `crAPI`, use the top level menu to navigate to `Hackpad`. Follow instruct
 ## Congratulations! You are done.
 
 
-[fixtures]: ../../concepts/fixtures/test-fixtures.md
+[fixtures]: ../../concepts/test-plans/fixtures/test-fixtures.md
 [levo-cli]: ../../levo-cli/levo-cli-intro.md
 [IDOR]: /vulnerabilities/v1/OWASP-API-10/A1-BOLA
