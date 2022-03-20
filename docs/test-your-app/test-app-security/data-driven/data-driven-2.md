@@ -24,7 +24,7 @@ sidebar_position: 2
 
 7. Depending on if you used `Auto-populate API parameters for this test plan`, in the previous step, and how comprehensive the provided examples are, your newly generated test plan with either be in the `Config Complete` or `Config in Progress` states.
 
-8. If your test plan is in the `Config Complete` state, it is immediately runnable, and you can proceed [here][download-env-step].
+8. If your test plan is in the `Config Complete` state, it is immediately runnable, and you can proceed to [step 5][download-env-step].
 
 9. If your test plan is in the `Config in Progress` state, you will need to configure values for API parameters using [test fixtures][fixtures].
 The next section describes the processing of configuring API parameter values via fixtures.
@@ -32,4 +32,4 @@ The next section describes the processing of configuring API parameter values vi
 
 [example-values]: https://swagger.io/docs/specification/adding-examples/
 [fixtures]: ../../../concepts/test-plans/fixtures/test-fixtures.md
-[download-env-step]: ./data-driven-2#download-the-environmentyml-file
+[download-env-step]: ./data-driven-3.md#download-the-environmentyml-file
