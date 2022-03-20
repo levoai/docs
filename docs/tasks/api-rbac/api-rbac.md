@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Association RBAC Information with APIs
+# Associating RBAC Information with APIs
 
 APIs specified in the API Catalog can be associated with `RBAC` information using the `metadata.yml` file.
 The association is made by importing a properly constructed `metadata.yml` into the specific API Catalog (Application or Service).
