@@ -25,7 +25,7 @@ We can work with you to find alternative means to generate OpenAPI specification
 ## 2. Upload a metadata.yml file to enable authorization bypass (RBAC) tests
 If you are trying Levo for the first time, we recommend you skip this step and proceed to the next step.
 
-If you have role based access controls (RBAC) for your APIs, and you wish to validate the proper configuration and functioning of the said controls, you will need to construct a metadata.yml file and upload load it to the catalog created in the previous step.
+If you have role based access controls (RBAC) for your APIs, and you wish to validate the proper configuration and functioning of the said controls, you will need to construct a metadata.yml file and upload it to the catalog created in the previous step.
 
 You can read more about authorization bypass tests and the metadata.yml file [here](../../../concepts/api-catalog/metadata-yml.md).
 
