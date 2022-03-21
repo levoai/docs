@@ -59,8 +59,94 @@ iam:
       authenticator: my_authenticator
 ```
 
-## Basic authentication
-Coming soon ...
+## Basic Authentication
+Below are format examples for `Basic Authentication` with and without `role` information.
+
+### Basic Authentication (no roles)
+```YAML
+iam:
+  authenticators:
+    - name: <your friendly name for this authenticator>
+      type: basic_auth # Use Basic Authentication for API calls
+  users:
+    # This section defines users and their respective credentials
+    # The credentials will be used in the Basic Authentication scheme
+    - name: user_1
+      username: <username for an actual user in your API's backend>
+      password: <password for the specified user>
+      # Below defines which authentication mechanism to use
+      authenticator: <friendly name of the authenticator specified above>
+```
+
+### Basic Authentication (with roles)
+```YAML
+iam:
+  authenticators:
+    - name: <your friendly name for this authenticator>
+      type: basic_auth # Use Basic Authentication for API calls
+  users:
+    # This section defines users and their respective credentials
+    # The credentials will be used in the Basic Authentication scheme
+    #
+    # `user_1` with role ROLE_USER
+    - name: user_1
+      default: true # Default user for `ROLE_USER`
+      username: <username for an actual user in your API's backend>
+      password: <password for the specified user>
+      # Below defines which authentication mechanism to use
+      authenticator: <friendly name of the authenticator specified above>
+      roles:
+        - ROLE_USER
+    #
+    # `user_2` with role ROLE_USER
+    - name: user_2
+      username: <username for an actual user in your API's backend>
+      password: <password for the specified user>
+      # Below defines which authentication mechanism to use
+      authenticator: <friendly name of the authenticator specified above>
+      roles:
+        - ROLE_USER
+    #
+    # `admin_1` with role ROLE_ADMIN
+    - name: admin_1
+      default: true # Default user for `ROLE_ADMIN`
+      username: <username for an actual user in your API's backend>
+      password: <password for the specified user>
+      # Below defines which authentication mechanism to use
+      authenticator: <friendly name of the authenticator specified above>
+      roles:
+        - ROLE_ADMIN
+    #
+    # `admin_2` with role ROLE_ADMIN
+    - name: admin_2
+      username: <username for an actual user in your API's backend>
+      password: <password for the specified user>
+      # Below defines which authentication mechanism to use
+      authenticator: <friendly name of the authenticator specified above>
+      roles:
+        - ROLE_ADMIN
+```
+
+## API key based authentication
+The OpenAPI specification file (in the API catalog), specifies if the API uses API keys for authentication, and the exact location of the API key (query parameter, header, etc).
+
+The environment.yml file provides specific values for the API key and can be specific for each user. Below is the format when using API keys.
+
+```YAML
+iam:
+  authenticators:
+    - name: <your friendly name for this authenticator>
+      type: api_key # Use API key authentication for API calls
+  users:
+    # This section defines users and their respective API keys
+    - name: user_1
+      api_keys:
+      - name: <friendly name for your API key for user_1>
+        value: <your api key value>
+      # Below defines which authentication mechanism to use
+      authenticator: <friendly name of the authenticator specified above>
+```
+If you using roles, the format is similar to the Basic Authentication example. You just need to use API key instead of username and password.
 
 ## Cookie based authentication
 Coming soon ...
