@@ -13,7 +13,7 @@ sidebar_position: 2
 - Do all of the above in CI/CD.
 
 #### For Security Engineering
-![](./assets/security-pros.png)
+![](./assets/security-pros.svg)
 - Automatically test all API endpoints for comprehensive security vulnerabilities in CI/CD.
 - Shift security left and prevent vulnerabilities from leaking into production.
 - Scale security coverage in agile environments by empowering developers to own & operate security testing.

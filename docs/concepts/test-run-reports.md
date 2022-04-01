@@ -3,7 +3,7 @@ sidebar_position: 7
 ---
 
 # Test Run Reports
-![](../assets/test-run-reports.png)
+![](../assets/test-run-reports.svg)
 
 The execution results of the Test Plans are reported to Levo SaaS by the CLI.
 

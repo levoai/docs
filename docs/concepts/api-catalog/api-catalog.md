@@ -9,8 +9,8 @@ These schemas can either be auto discovered (by observing runtime traffic) or im
 
 The API Catalog is a store and directory for the aforementioned schemas. 
 
-![](../../assets/api-catalog-structure-1.png)
-![](../../assets/api-catalog-structure-2.png)
+![](../../assets/api-catalog-structure-1.svg)
+![](../../assets/api-catalog-structure-2.svg)
 
 The catalog is comprised of `Applications`, and `Services`. An `Application` is a logical grouping of a set of API endpoints.
 
