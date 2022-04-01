@@ -45,7 +45,7 @@ const config = {
         routeBasePath: 'vulnerabilities',
         sidebarPath: require.resolve('./sidebars.js'),
         versions: {
-
+          
           "v1": {
             label: 'v1',
             path: 'v1',
@@ -54,7 +54,6 @@ const config = {
         },
       },
     ],
-    require.resolve('@cmfcmf/docusaurus-search-local'),
   ],
 
   themeConfig:
