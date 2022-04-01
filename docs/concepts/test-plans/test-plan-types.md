@@ -8,7 +8,7 @@ At a high level test plans come in two flavors:
 1. Zero Configuration (zero conf)
 2. Data Driven 
 
-![](../../assets/test-plan-types.png)
+![](../../assets/test-plan-types.svg)
 
 
 
