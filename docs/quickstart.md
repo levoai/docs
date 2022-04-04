@@ -5,7 +5,7 @@ sidebar_position: 4
 # Quickstart
 
 ![](./assets/forever-free.svg)
-* Sign up for a forever free account at [levo.ai][levo.ai] (no credit card required).
+* [Sign up][levo.ai] for a forever free account at [levo.ai][levo.ai] (no credit card required).
 * Follow the **`onboarding`** instructions to experience Levo's capabilities
 
 Levo provides fully hosted sample applications as part of the onboarding process. These sample applications are used to showcase Levo's security & resilience testing capabilities.
