@@ -25,7 +25,7 @@ Execute the following in the shell where you installed Levo CLI:
 ```
 # Use `host.docker.internal` instead of `localhost` or `127.0.0.1` if your API is running on your local machine.
 
-levo test --plan-lrn <LRN value copied to clipboard > --target-url <your live API's base URL> --env-file environment.yml
+levo test --test-plan <LRN value copied to clipboard > --target-url <your live API's base URL> --env-file environment.yml
 ```
 
 ## 10. View the test results in the `Test Runs` page
