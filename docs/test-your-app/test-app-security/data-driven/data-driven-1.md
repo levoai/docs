@@ -10,7 +10,7 @@ Until then Levo requires OpenAPI specifications for security test generation.
 > If you don't have OpenAPI specifications, but still want to test your APIs, please email us at `support@levo.ai`.
 We can work with you to find alternative means to generate OpenAPI specifications using HAR files etc.
 
-![](../../../assets/test-my-apis-flow-chart.png)
+![](../../../assets/test-my-apis-flow-chart.svg)
 
 ## 1. Import your APIs into Levo SaaS
 

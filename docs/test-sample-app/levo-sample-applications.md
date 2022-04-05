@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Sample Applications For Evaluating Levo
 
-![](../assets/sample-apps.png)
+![](../assets/sample-apps.svg)
 
 Levo provides sample applications that help you evaluate security and resilience testing capabilities.
 
