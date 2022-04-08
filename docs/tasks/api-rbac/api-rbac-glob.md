@@ -258,13 +258,3 @@ Glob string `/community/api/v?/coupon/*` will match:
 
 
 
-
-
-
-
-[GLOB]: https://github.com/begin/globbing#what-is-globbing
-
-
-
-
-
