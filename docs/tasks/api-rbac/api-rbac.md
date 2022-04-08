@@ -72,4 +72,7 @@ api:
         # No need to override the default_role here, as it is already ROLE_USER 
 ```
 
-If you have many API endpoints and have complex requirements for associating RBAC information, the next section will help simplify the association, via the usage of regular expressions, etc.
+If you have many API endpoints and have complex requirements for associating RBAC information, the next section will help simplify the association, via the usage of pattern matching [glob][GLOB], etc.
+
+
+[GLOB]: https://github.com/begin/globbing#what-is-globbing
