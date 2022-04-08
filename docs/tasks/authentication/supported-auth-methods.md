@@ -32,6 +32,7 @@ credentials, you can use the `http_call` method.
 
 This method requires you to provide the following:
 - The login URL
+- The HTTP method to use when fetching the URL. Only `POST` & `GET` supported. If unspecified will use `POST`.
 - The key names for both the username and password values that are sent in the login request's POST (JSON) body.
 - The location in the login URL's JSON response, where the authentication token is present.
 - The username and base64 encoded password values for the `user_1` used in security tests.
@@ -40,18 +41,28 @@ Below is the syntax to enable `http_call` based login.
 
 ```YAML
 iam:
-  authenticators: # This section specifies how to extract an authentication token
+  #
+  #
+  # This section specifies how to extract an authentication token
+  authenticators:
     - name: my_authenticator
-      type: http_call # Uses a POST request
-      login_url: /identity/api/auth/login # URL for POST request
-      username_key: <JSON key for username> # Key in POST request's JSON body that specifies the user value
-      password_key: <JSON key for password> # Key in POST request's JSON body that specifies the password value
-      session_credential_extractors: # This section specifies how to extract a token in the POST response
+      type: http_call # Makes a HTTP request using the specified method
+      method: <POST | GET> # Defaults to POST if unspecified
+      login_url: /identity/api/auth/login # URL for HTTP request
+      username_key: <JSON key for username> # Key in HTTP request's JSON body that specifies the user value
+      password_key: <JSON key for password> # Key in HTTP request's JSON body that specifies the password value
+      #
+      #
+      # This section specifies how to extract a token in the HTTP response
+      session_credential_extractors:
         - name: access_token
           type: bearer_token
           location: <header | body> # Specifies the location to extract the token. Header or Body.
-          path: <JSON path expression> # In case the location is `body`, aJSON path expression to token in the response body
-  users: # This section specifies actual user information the test plan will use
+          path: <JSON path expression> # In case the location is `body`, a JSON path expression to the token in the response body
+  #
+  #
+  # This section specifies actual user information the test plan will use
+  users:
     - name: user_1
       default: true # This user's credentials will be used to access all API endpoints requiring AuthN
       username: <user_id>
