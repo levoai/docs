@@ -1,11 +1,13 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 
-# Zero Conf Security Tests - Part 2
+# Auto Generate Test Plan
+![](../../../assets/zero-conf-flow-2.svg)
 
-## 3. Generate a security test plan for your APIs
+
+## 1. Generate a security test plan for your APIs
 
 1. Click on `Test Plans` in the side panel and proceed to create a test plan by clicking `New Test Plan`.
 
