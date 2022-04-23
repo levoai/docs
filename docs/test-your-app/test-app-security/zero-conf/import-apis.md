@@ -1,9 +1,11 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 
-# Zero Conf Security Tests - Part 1
+# Import API Specifications
+![](../../../assets/zero-conf-flow-1.svg)
+
 Levo will very soon have capabilities to auto generate OpenAPI specifications from live traffic.
 Until then Levo requires OpenAPI specifications for security test generation.
 

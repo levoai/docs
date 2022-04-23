@@ -4,7 +4,7 @@ sidebar_position: 1
 
 # Automatically test APIs for security vulnerabilities
 
-## [I want effortless and instant testing](./zero-conf/zero-conf-1.md)
+## [I want effortless and instant testing](./zero-conf/zero-conf.md)
     Does not require data provisioning or parameter configuration
    
     Runs instantly 
@@ -13,7 +13,7 @@ sidebar_position: 1
 
     Reduced efficacy of test results
 
-## [I want comprehensive test coverage and better efficacy](./data-driven/data-driven-1.md)
+## [I want comprehensive test coverage and better efficacy](./data-driven/data-driven.md)
     Best security test coverage
 
     Best efficacy of test results

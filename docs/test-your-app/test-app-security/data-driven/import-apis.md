@@ -1,16 +1,16 @@
 ---
-sidebar_position: 1
+sidebar_position: 2
 ---
 
 
-# Data Driven Security Tests - Part 1
+# Import API Specifications
+![](../../../assets/data-driven-flow-1.svg)
+
 Levo will very soon have capabilities to auto generate OpenAPI specifications from live traffic.
 Until then Levo requires OpenAPI specifications for security test generation.
 
 > If you don't have OpenAPI specifications, but still want to test your APIs, please email us at `support@levo.ai`.
 We can work with you to find alternative means to generate OpenAPI specifications using HAR files etc.
-
-![](../../../assets/test-my-apis-flow-chart.svg)
 
 ## 1. Import your APIs into Levo SaaS
 
