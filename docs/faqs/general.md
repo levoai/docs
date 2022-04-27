@@ -1,8 +1,8 @@
 ---
-sidebar_position: 11
+sidebar_position: 2
 ---
 
-# FAQs
+# General FAQs
 
 #### Why do you need Levo?
 Automated security testing of microservices, which uncovers sophisticated [business logic][biz-logic-flaws] and access control-based attacks, is a significant gap today. Continuous Security Assurance from Levo.ai provides fully automated and effortless (runtime) security testing for Microservices in CI/CD.
