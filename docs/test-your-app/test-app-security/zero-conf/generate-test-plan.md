@@ -4,6 +4,8 @@ sidebar_position: 3
 
 
 # Auto Generate Test Plan
+![](../../../assets/zero-conf-test-plan.svg)
+
 ![](../../../assets/zero-conf-flow-2.svg)
 
 

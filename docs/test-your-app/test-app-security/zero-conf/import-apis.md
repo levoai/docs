@@ -4,6 +4,8 @@ sidebar_position: 2
 
 
 # Import API Specifications
+![](../../../assets/zero-conf-test-plan.svg)
+
 ![](../../../assets/zero-conf-flow-1.svg)
 
 Levo will very soon have capabilities to auto generate OpenAPI specifications from live traffic.

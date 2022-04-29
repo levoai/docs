@@ -3,6 +3,8 @@ sidebar_position: 6
 ---
 
 # Execute Test Plan
+![](../../../assets/data-driven-test-plan.svg)
+
 ![](../../../assets/data-driven-flow-5.svg)
 
 ## 1. Copy the test plan's Levo Resource Name (LRN)

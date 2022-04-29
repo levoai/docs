@@ -3,10 +3,12 @@ sidebar_position: 4
 ---
 
 # Configure Test Plan Fixtures
+![](../../../assets/data-driven-test-plan.svg)
+
 ![](../../../assets/data-driven-flow-3.svg)
 
 
-## 1. Configure your 'Config in Progress` test plan
+## 1. Configure your `Config in Progress` test plan
 Levo uses [test fixtures][fixtures] to provide proper values to API parameters prior to sending test traffic to the live API endpoints.
 
 This test plan requires configuration of these test fixtures prior to execution. Proper configuration of the test plan will make it runnable.
