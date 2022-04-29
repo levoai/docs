@@ -8,6 +8,7 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 const config = {
   title: 'Levo.ai Documentation',
   tagline: 'Fully Automated API Security Testing in CI/CD',
+  staticDirectories: ['static'],
   url: 'https://docs.levo.ai',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -54,6 +55,12 @@ const config = {
         },
       },
     ],
+    [
+      require.resolve("@cmfcmf/docusaurus-search-local"),
+      {
+        indexDocSidebarParentCategories: 0
+      }
+      ]
   ],
 
   themeConfig:
