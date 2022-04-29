@@ -3,6 +3,8 @@ sidebar_position: 5
 ---
 
 # Configure `environment.yml`
+![](../../../assets/data-driven-test-plan.svg)
+
 ![](../../../assets/data-driven-flow-4.svg)
 
 ***Note: If your test plan does not have a `environment.yml` file associated with it you can skip this step, and proceed to the next.***

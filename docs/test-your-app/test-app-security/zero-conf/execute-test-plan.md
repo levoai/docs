@@ -3,6 +3,8 @@ sidebar_position: 5
 ---
 
 # Execute Test Plan
+![](../../../assets/zero-conf-test-plan.svg)
+
 ![](../../../assets/zero-conf-flow-4.svg)
 
 ## 1. Copy the test plan's Levo Resource Name (LRN)

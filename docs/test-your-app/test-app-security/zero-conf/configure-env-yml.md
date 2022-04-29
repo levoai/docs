@@ -3,6 +3,8 @@ sidebar_position: 4
 ---
 
 # Configure `environment.yml`
+![](../../../assets/zero-conf-test-plan.svg)
+
 ![](../../../assets/zero-conf-flow-3.svg)
 
 ***Note: If your test plan does not have a `environment.yml` file associated with it you can skip this step.***

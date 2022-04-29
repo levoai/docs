@@ -4,6 +4,8 @@ sidebar_position: 3
 
 
 # Auto Generate Test Plan
+![](../../../assets/data-driven-test-plan.svg)
+
 ![](../../../assets/data-driven-flow-2.svg)
 
 ## 1. Generate a security test plan for your APIs
