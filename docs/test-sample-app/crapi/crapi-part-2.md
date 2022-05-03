@@ -35,7 +35,7 @@ Execute the following in the shell where you installed Levo CLI:
 export TEST_PLAN_LRN="<LRN value copied to your clipboard in previous steps>"
 
 # Execute security tests against crAPI 
-levo test --plan-lrn $TEST_PLAN_LRN --target-url http://host.docker.internal:8888 --env-file environment.yml
+levo test --test-plan $TEST_PLAN_LRN --target-url http://host.docker.internal:8888 --env-file environment.yml
 ```
 
 ## View the test results in the `Test Runs` page
