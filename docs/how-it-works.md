@@ -38,8 +38,8 @@ Levo provides Test Runner plugins for popular CI/CD vendors. The Test Runner is 
 Results from the test plan execution are emitted to both CI/CD logs and Levo SaaS.
 
 ## Actionable Insights
-Levo's provides high fidelity, low noise, and jargon free (vulnerability) findings that are targeted for direct consumption by development teams.
+Levo provides high fidelity, low noise, and jargon free (vulnerability) findings that are targeted for direct consumption by development teams.
 
 Findings have detailed API traffic logs that aid in better comprehension, and problem reproduction.
 
-Levo's provides contextual remediation help for development teams to address issues via self service.
+Levo provides contextual remediation help for development teams to address issues via self service.
