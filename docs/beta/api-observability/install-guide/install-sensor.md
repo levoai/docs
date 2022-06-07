@@ -92,11 +92,13 @@ sudo apt-get install levo-ebpf-sensor
 
 ### 4. Configure Satellite Address
 TBD
+cat /etc/default/levo-ebpf-sensor
 
 ### 5. Start the Sensor
-TBD
+sudo systemctl start levo-ebpf-sensor
 
 ### 6. Verify connectivity with Satellite
 TBD
+journalctl -u levo-ebpf-sensor.service -b -f
 
 Please proceed to the next step.
