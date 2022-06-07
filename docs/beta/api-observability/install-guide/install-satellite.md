@@ -112,12 +112,12 @@ Execute the following to check for connectivity health:
 
 ```bash
 # Please specify the actual pod name for levoai-tagger below
-kubectl -n levoai logs -f <levoai-tagger pod name> | grep "TBD"
+kubectl -n levoai logs <levoai-tagger pod name> | grep "Ready to process; waiting for messages."
 ```
 If connectivity is healthy, you will see output similar to below.
 
 ```bash
-TBD
+{"level": "info", "time": "2022-06-07 08:07:22,439", "line": "rabbitmq_client.py:155", "version": "fc628b50354bf94e544eef46751d44945a2c55bc", "module": "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py", "message": "Ready to process; waiting for messages."}
 ```
 
 **Please contact `support@levo.ai` if you notice health/connectivity related errors.**
@@ -180,12 +180,12 @@ f74524d02fbd   bitnami/rabbitmq:3.10     "/opt/bitnami/script…"   10 seconds a
 Execute the following to check for connectivity health:
 
 ```bash
-docker logs -f levoai-tagger
+docker logs levoai-tagger | grep "Ready to process; waiting for messages." 
 ```
 If connectivity is healthy, you will see output similar to below.
 
 ```bash
-TBD
+{"level": "info", "time": "2022-06-07 08:07:22,439", "line": "rabbitmq_client.py:155", "version": "fc628b50354bf94e544eef46751d44945a2c55bc", "module": "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py", "message": "Ready to process; waiting for messages."}
 ```
 
 ### 4. Note down `Host:Port` information
