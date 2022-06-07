@@ -6,7 +6,7 @@ sidebar_position: 1
 
 [Signup](https://levo.ai/levo-signup/) for a forever free account on Levo, and then follow the instructions below.
 
-### 1. [OS Platform Compatibility Check](./os-compat-check.md)
+### 1. [OS Platform Compatibility Check](./os-compat-check.mdx)
 
 ### 2. [Install Satellite](./install-satellite.md)
 
