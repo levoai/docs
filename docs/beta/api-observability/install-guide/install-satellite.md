@@ -38,6 +38,7 @@ The Satellite uses an authorization key to access Levo.ai. Follow instructions b
 - Click on your user profile.
 - Click on `User Settings`
 - Click on `Keys` on the left navigation panel
+TBD TBD
 - Now copy your authorization key. This key is required in a subsequent step below.
 
 ### c. Pick an `Application Name`
@@ -54,7 +55,7 @@ Pick a descriptive name which will be used in the subsequent step below. For exa
 ## Install on Kubernetes
 
 ### Prerequisites
-- Kubernetes version `xx.xx.xx` and above.
+- Kubernetes version `TBD xx.xx.xx` and above.
 - [Helm v3](https://helm.sh/docs/intro/install/) installed and working.
 - The Kubernetes cluster API endpoint should be reachable from the machine you are running Helm.
 - `kubectl` access to the cluster, with `cluster-admin` permissions.

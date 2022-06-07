@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 5
 ---
 
 # FAQs
@@ -25,6 +25,9 @@ sidebar_position: 3
 - [AKS](https://azure.microsoft.com/en-us/services/kubernetes-service/#overview)
 - [GKE (Debian Nodes Only. No Container-Optimized OS)](https://cloud.google.com/kubernetes-engine)
 - [EKS](https://aws.amazon.com/eks/)
+
+### Is Docker Desktop or minikube on Mac OSX, supported?
+Support for Docker Desktop, Docker Desktop based Kubernetes, and minikube on MacOS is on the roadmap.
 
 ### Is Windows OS supported?
 Microsoft is currently building support for [eBPF in Windows](https://github.com/microsoft/ebpf-for-windows). Windows support will be added subsequent to the completion of that effort.

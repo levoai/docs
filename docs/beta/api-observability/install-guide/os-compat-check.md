@@ -3,17 +3,23 @@ sidebar_position: 2
 ---
 
 # Compatibility Check
-The Sensor is currently supported on Linux Hosts & Kubernetes running on Linux.
+The Sensor is currently supported on Linux Hosts & Kubernetes running *directly* on Linux.
 
 Levo provides a simple bash script that *checks* your Linux host for compatibility.
 
 Execute the following on the Linux host you want instrument:
-```bash
-# write command here
-TBD
-```
 
-If you want to audit the script prior to running, you can download it [here](../../../../static/scripts/Sensor/check-compatibility.sh).
+export const CurlScript = () => (
+  <pre>
+    <code>
+        curl -s {window.location.protocol + '//' + window.location.host + '/scripts/sensor/check-compatibility.sh'} | bash
+    </code>
+  </pre>
+);
+
+<CurlScript/>
+
+If you want to **audit** the script prior to running, you can download it <a href={window.location.protocol + '//' + window.location.host + '/scripts/sensor/check-compatibility.sh'}> here </a>.
 
 ## Host is compatible!
 
@@ -41,3 +47,5 @@ please contact `support@levo.ai` with the diagnostic information provided by the
 - [AKS](https://azure.microsoft.com/en-us/services/kubernetes-service/#overview)
 - [GKE (Debian Nodes Only. No Container-Optimized OS)](https://cloud.google.com/kubernetes-engine)
 - [EKS](https://aws.amazon.com/eks/)
+
+Support for Docker Desktop, Docker Desktop based Kubernetes, and minikube on MacOS is on the roadmap.
