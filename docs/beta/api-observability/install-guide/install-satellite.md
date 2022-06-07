@@ -4,13 +4,13 @@ sidebar_position: 3
 
 # Install Satellite
 
-## Prerequisites
+## 1. Prerequisites
 - You have an account on [Levo.ai](https://app.levo.ai/login)
 - Compatibility script (from step 1) indicates the Linux host (that you want to instrument) is compatible.
 
-## 1. Planning
+## 2. Planning
 
-### a. Locating the Satellite
+### a. Location of the Satellite
 There are two options for the Satellite location. Chose what best works for you.
 
 #### i. Same Host/Cluster as Sensor
@@ -46,9 +46,11 @@ Auto discovered API endpoints and their OpenAPI specifications are show in the [
 
 Pick a descriptive name which will be used in the subsequent step below. For example: `My Test App`.
 
-## 2. Follow instructions for your platform
+## 3. Follow instructions for your platform
 - [Install on Kubernetes](install-satellite.md#install-on-kubernetes)
 - [Install on Linux host via Docker Compose](./install-satellite.md#install-on-linux-host-via-docker-compose)
+
+<br></br>
 
 -------------------------------------------------
 
@@ -135,6 +137,8 @@ Run the below command and note the `external` address/port of the the Collector 
 kubectl get service levoai-collector -n levoai
 ```
 Please proceed to install the Sensor.
+
+<br></br>
 
 -------------------------------------------------
 
