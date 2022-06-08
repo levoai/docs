@@ -6,9 +6,17 @@ sidebar_position: 5
 
 ## Table of Contents
 
-### [Sensor](./faqs.md#sensor)
-### [Satellite](./faqs.md#satellite)
-### [API Catalog](./faqs.md#api-catalog)
+- [Getting Help](./faqs.md#getting-help)
+- [Sensor](./faqs.md#sensor)
+- [Satellite](./faqs.md#satellite)
+- [API Catalog](./faqs.md#api-catalog)
+
+------------------------------------------------------------------------------
+
+## Getting Help
+Please email `support@levo.ai` for assistance with installation, product questions, roadmap, etc.
+
+Please provide as much details as possible in your support request.
 
 ------------------------------------------------------------------------------
 
@@ -74,6 +82,7 @@ Levo's eBPF sensor uses [probes](https://ebpf.io/what-is-ebpf/#hook-overview) to
 ### Do Linux distributions ship with pre-built BTF info?
 Most modern Linux distributions contain pre-built BTF info. If BTF is missing for your specific version of Linux, Levo Support can build a Sensor that contains a custom BTF for your version of Linux.
 
+------------------------------------------------------------------------------
 
 ## Satellite
 
@@ -95,6 +104,7 @@ Levo provides updated Docker images for the Satellite. You can upgrade the Satel
 ### What is the resource consumption of the Satellite?
 It depends on your traffic patterns. This is usually not a concern, as the Satellite can be run on a dedicated host/cluster and will not contend with your production workloads.
 
+------------------------------------------------------------------------------
 
 ## API Catalog
 
