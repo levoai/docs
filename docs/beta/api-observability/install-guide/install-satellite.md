@@ -10,27 +10,13 @@ sidebar_position: 3
 
 ## 2. Planning
 
-### a. Location of the Satellite
-There are two options for the Satellite location. Chose what best works for you.
+### a. Placement of the Satellite
+There are two options for the Satellite placement. Chose what best works for you.
 
-#### i. Same Host/Cluster as Sensor
-The Satellite can be colocated on the same host/cluster (that you are trying to instrument) alongside the Sensor.
-
-##### Pros
-- Simpler installation.
-- Easy to get started
-
-##### Cons
-- Satellite consumes resources on the host/cluster where your application workloads are located, which might lead to some resource contention based on traffic load.
-
-#### ii. Dedicated Host/Cluster
-
-##### Pros
-- A dedicated host/cluster for the Satellite eliminates are resource contention issues for your application workloads.
-- The Satellite can service traffic from multiple hosts/clusters that are instrumented
-
-##### Cons
-- Requires a dedicated host/cluster
+| Placement Type              | Pros                | Cons                |
+| :---------------------------| :----------         | :-------------      |
+| Same Host/Cluster as Sensor | <ul><li> Simpler installation.</li> <li>Easy to get started.</li></ul> | Satellite consumes resources on the host/cluster where your application workloads are located. <br> This might lead to some resource contention based on traffic load. |
+| Dedicated Host/Cluster      | <ul><li> Eliminates any resource contention issues with your application workloads.</li> <li> The Satellite can service traffic from multiple hosts/clusters that are instrumented.</li></ul> | Requires a dedicated host/cluster. |
 
 ### b. Copy `Authorization Key` from Levo.ai
 The Satellite uses an authorization key to access Levo.ai. Follow instructions below to copy the key.
