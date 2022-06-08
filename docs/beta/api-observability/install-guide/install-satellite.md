@@ -57,7 +57,7 @@ Pick a descriptive name which will be used in the subsequent step below. For exa
 ## Install on Kubernetes
 
 ### Prerequisites
-- Kubernetes version >v1.21.9
+- Kubernetes version `v1.21.9` and above
 - [Helm v3](https://helm.sh/docs/intro/install/) installed and working.
 - The Kubernetes cluster API endpoint should be reachable from the machine you are running Helm.
 - `kubectl` access to the cluster, with `cluster-admin` permissions.
