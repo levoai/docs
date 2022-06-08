@@ -24,7 +24,7 @@ The Satellite uses an authorization key to access Levo.ai. Follow instructions b
 - Click on your user profile.
 - Click on `User Settings`
 - Click on `Keys` on the left navigation panel
-TBD TBD
+- Click on `Get Satellite Authorization Key`
 - Now copy your authorization key. This key is required in a subsequent step below.
 
 ### c. Pick an `Application Name`
