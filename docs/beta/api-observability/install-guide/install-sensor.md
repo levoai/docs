@@ -66,7 +66,7 @@ Please proceed to the next step.
 
 ## Install on Debian based Linux via `apt`
 
-### 1. Install tools curl and gnupg
+### 1. Install `curl` and `gnupg`
 
 ```bash
 sudo apt install gnupg
@@ -74,7 +74,7 @@ sudo apt install gnupg
 sudo apt install curl
 ```
 
-### 2. Configure Linux host to access Google Artifact Registry and levo apt repo
+### 2. Configure Linux host to access `Google Artifact Registry` and `Levo apt repo`
 
 ```bash
 curl -fsSL https://us-apt.pkg.dev/doc/repo-signing-key.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/us-apt-repo-signing-key.gpg >/dev/null
@@ -104,9 +104,12 @@ sudo apt-get install levo-ebpf-sensor
 
 ### 4. Configure Satellite Address
 ```bash
-# To change the satellite address, set OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=localhost:4317
-# or any other host IP
-# Note: If you change the collector location, you have to restart the sensor since
+# The Satellite address is configured in '/etc/default/levo-ebpf-sensor'.
+# Refer to the 'host:port' values you noted down from the Satellite install.
+# Edit '/etc/default/levo-ebpf-sensor', and set 'OTEL_EXPORTER_OTLP_TRACES_ENDPOINT' to
+# 'host:port' address, noted down from the Satellite install.
+#
+# Note: If you change the Satellite address, you have to restart the Sensor since
 # it's not a hot property
 sudo vi /etc/default/levo-ebpf-sensor
 ```
