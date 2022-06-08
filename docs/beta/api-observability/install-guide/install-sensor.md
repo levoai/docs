@@ -66,33 +66,50 @@ Please proceed to the next step.
 
 ## Install on Debian based Linux via `apt`
 
-### 1. Configure Linux host to access Google Artifact Registry
+### 1. Install tools curl and gnupg
 
 ```bash
-echo 'deb http://packages.cloud.google.com/apt apt-transport-artifact-registry-stable main' | sudo tee -a /etc/apt/sources.list.d/artifact-registry.list
+sudo apt install gnupg
+
+sudo apt install curl
+```
+
+### 2. Configure Linux host to access Google Artifact Registry and levo apt repo
+
+```bash
+curl -fsSL https://us-apt.pkg.dev/doc/repo-signing-key.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/us-apt-repo-signing-key.gpg >/dev/null
+
+curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/gcloud-packages-key.gpg >/dev/null
+
+echo \
+"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gcloud-packages-key.gpg] \
+ https://packages.cloud.google.com/apt apt-transport-artifact-registry-stable main" \
+| sudo tee -a /etc/apt/sources.list.d/artifact-registry.list > /dev/null
+
+echo \
+"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/us-apt-repo-signing-key.gpg] \
+ https://us-apt.pkg.dev/projects/levo-platform apt-levo main" \
+| sudo tee -a /etc/apt/sources.list.d/artifact-registry.list > /dev/null
 
 sudo apt update
+```
 
+### 3. Download/install sensor artifacts
+
+```bash
 sudo apt install apt-transport-artifact-registry
-```
 
-### 2. Configure levo apt repo to download/install sensor artifacts
-
-```bash
-echo "deb https://us-apt.pkg.dev/projects/levo-platform apt-levo main" | sudo tee -a /etc/apt/sources.list.d/artifact-registry.list
-
-sudo apt update
-```
-
-### 3. Install Sensor
-
-```bash
 sudo apt-get install levo-ebpf-sensor
 ```
 
 ### 4. Configure Satellite Address
-TBD
-cat /etc/default/levo-ebpf-sensor
+```bash
+# To change the satellite address, set OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=localhost:4317
+# or any other host IP
+# Note: If you change the collector location, you have to restart the sensor since
+# it's not a hot property
+sudo vi /etc/default/levo-ebpf-sensor
+```
 
 ### 5. Start the Sensor
 sudo systemctl start levo-ebpf-sensor
@@ -100,5 +117,8 @@ sudo systemctl start levo-ebpf-sensor
 ### 6. Verify connectivity with Satellite
 TBD
 journalctl -u levo-ebpf-sensor.service -b -f
+
+# If journalctl isn't giving logs, check this
+sudo cat syslog | grep 'levo-ebpf-sensor'
 
 Please proceed to the next step.
