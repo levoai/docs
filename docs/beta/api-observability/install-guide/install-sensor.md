@@ -16,6 +16,7 @@ Follow instructions for your specific platform/method below:
 - [Install on Linux host via Docker](./install-sensor.md#install-on-linux-host-via-docker)
 - [Install on Debian based Linux via `apt`](./install-sensor.md#install-on-debian-based-linux-via-apt)
 
+<br></br>
 
 -----------------------------------------------------------------------
 
@@ -34,13 +35,20 @@ helm repo add levoai https://charts.levo.ai
 
 ### 2. Create `levoai` namespace & install Sensor
 ```bash
-helm upgrade --install -n levoai levoai-sensor levoai/levoai-ebpf-sensor --create-namespace
+# Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
+# If Sensor is installed on same cluster as Satellite, use 'levoai-collector.levoai:4317'
+helm upgrade --install -n levoai --create-namespace \
+  --set sensor.otel.grpcEndpoint=<hostname|IP:port> \
+  levoai-sensor levoai/levoai-ebpf-sensor
 ```
+
 
 ### 3. Verify connectivity with Satellite
 TBD
 
 Please proceed to the next step.
+
+<br></br>
 
 -----------------------------------------------------------------------
 
@@ -53,7 +61,7 @@ Please proceed to the next step.
 ### 1. Install Sensor
 
 ```bash
-# Replace `hostname|IP` with the values you noted down from the Satellite install`
+# Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
 sudo docker run --restart unless-stopped -e OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<hostname|IP:port> -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc  --privileged levoai/ebpf_sensor:0.6.6 -c python -d
 ```
 
@@ -61,6 +69,8 @@ sudo docker run --restart unless-stopped -e OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<
 TBD
 
 Please proceed to the next step.
+
+<br></br>
 
 -----------------------------------------------------------------------
 
