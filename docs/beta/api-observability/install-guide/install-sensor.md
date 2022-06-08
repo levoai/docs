@@ -112,13 +112,17 @@ sudo vi /etc/default/levo-ebpf-sensor
 ```
 
 ### 5. Start the Sensor
+```bash
 sudo systemctl start levo-ebpf-sensor
+```
 
 ### 6. Verify connectivity with Satellite
+```bash
 TBD
 journalctl -u levo-ebpf-sensor.service -b -f
 
 # If journalctl isn't giving logs, check this
 sudo cat syslog | grep 'levo-ebpf-sensor'
+```
 
 Please proceed to the next step.
