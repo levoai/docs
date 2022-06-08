@@ -15,13 +15,29 @@ sidebar_position: 1
 ## Kubernetes based installation
 
 ### Upgrade Satellite
-TBD
+```bash
+# Setup environment variables
+export LEVOAI_AUTH_KEY=<'Authorization Key' from the original installation> 
+export APP_NAME=<'Application Name' chosen during installation>
+
+# Update heml repo and upgrade installation
+helm repo update
+
+helm upgrade -n levoai \
+  --set global.levoai.app_name=$APP_NAME \
+  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+  levoai-satellite levoai/satellite
+```
+
 
 ### Uninstall Satellite
-TBD
+```bash
+helm uninstall levoai-satellite -n levoai
+```
 
 ### Change the `Authorization Key` used to communicate with Levo.ai
-TBD
+- Uninstall the Satellite.
+- Reinstall the Satellite with the new `Authorization Key`.
 
 ### List Satellite's pods
 ```bash
@@ -44,12 +60,12 @@ Ensure you are in the same directory where you downloaded the [Docker Compose fi
 
 Execute the below command:
 ```bash
-docker compose down
+docker compose down --remove-orphans -v
 ```
 
 ### Upgrade the Satellite
 1. Uninstall the Sensor
-2. Re install the Sensor TBD TBD ???
+2. Reinstall the Sensor. The install always *pulls* the latest Docker images for the Satellite.
 
 ### List Satellite's containers
 TBD

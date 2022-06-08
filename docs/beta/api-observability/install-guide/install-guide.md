@@ -6,6 +6,10 @@ sidebar_position: 1
 
 [Signup](https://levo.ai/levo-signup/) for a forever free account on Levo, and then follow the instructions below.
 
+Your estimated completion time is *10 minutes*.
+
+![Install Steps](../../../assets/api-observability-install.svg)
+
 ### 1. [OS Platform Compatibility Check](./os-compat-check.mdx)
 
 ### 2. [Install Satellite](./install-satellite.md)
