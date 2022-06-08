@@ -15,7 +15,7 @@ There are two options for the Satellite placement. Chose what best works for you
 
 | Placement Type              | Pros                | Cons                |
 | :---------------------------| :----------         | :-------------      |
-| Same Host/Cluster as Sensor | <ul><li> Simpler installation.</li> <li>Easy to get started.</li></ul> | Satellite consumes resources on the host/cluster where your application workloads are located. <br> This might lead to some resource contention based on traffic load. |
+| Same Host/Cluster as Sensor | <ul><li> Simpler installation.</li> <li>Easy to get started.</li></ul> | Satellite consumes resources on the host/cluster where your application workloads are located. <br></br> This might lead to resource contention based on traffic load. |
 | Dedicated Host/Cluster      | <ul><li> Eliminates any resource contention issues with your application workloads.</li> <li> The Satellite can service traffic from multiple hosts/clusters that are instrumented.</li></ul> | Requires a dedicated host/cluster. |
 
 ### b. Copy `Authorization Key` from Levo.ai
