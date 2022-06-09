@@ -37,7 +37,7 @@ sensor:
       default-policy: accept
       entries:
         ### Host Ports ###
-        # Host Port is a server listening port, where client connections are accepted
+        # Host Port is the server listening port, where client connections are accepted
         - policy: drop
           host-ports: 53 # DNS
         - policy: drop
@@ -75,7 +75,7 @@ sensor:
         - policy: drop
           host-ports: [2181, 3888, 3888] # ZooKeeper
         ### Peer Ports ###
-        # Peer Port is client port used in communication with the server listening port
+        # Peer Port is the client port used in communication with the server listening port
         - policy: drop
           peer-ports: 53 # DNS
         - policy: drop
