@@ -14,15 +14,15 @@ At a high level test plans come in two flavors:
 
 ## Zero Configuration vs. Data Driven
 
-|                                                              | *Zero Configuration* | *Data Driven*                                                |
-| :----------------------------------------------------------- | -------------------- | ------------------------------------------------------------ |
-| ***Time to Value***                                          | Instant              | Requires One Time Configuration                              |
-| ***Test Category Coverage***                                 | Reduced              | Comprehensive                                                |
-| ***Efficacy of Test Results***                               | Moderate             | Superior                                                     |
-| ***Horizontal Authorization Abuse Coverage (BOLA / IDOR)***  | No                   | Yes                                                          |
-| ***Vertical Authorization Abuse Coverage (Privilege Escalation)*** | Yes                  | Yes                                                          |
-| ***Coverage for API Methods (GET, POST, etc.)***             | All Methods          | All Methods. <br />PUT, POST, PATCH, & DELETE require some additional configuration to support stateful operations on resources |
-| ***Primary Use Case***                                       | Rapid Assessments    | Deep / Comprehensive Assessments                             |
+|                                                              | Zero Configuration | Data Driven                                                |
+| :----------------------------------------------------------- | :-------------------- | :------------------------------------------------------------ |
+| **Time to Value**                                         | Instant              | Requires One Time Configuration                              |
+| **Test Category Coverage**                                 | Reduced              | Comprehensive                                                |
+| **Efficacy of Test Results**                               | Moderate             | Superior                                                     |
+| **Horizontal Authorization Abuse Coverage (BOLA / IDOR)**  | No                   | Yes                                                          |
+| **Vertical Authorization Abuse Coverage (Privilege Escalation)** | Yes                  | Yes                                                          |
+| **Coverage for API Methods (GET, POST, etc.)**             | All Methods          | <ul><li>All Methods.</li> <li>PUT, POST, PATCH, & DELETE require additional configuration to support stateful operations on resources.</li></ul> |
+| **Primary Use Case**                                       | Rapid Assessments    | Deep / Comprehensive Assessments                             |
 
 ## Zero Configuration
 
