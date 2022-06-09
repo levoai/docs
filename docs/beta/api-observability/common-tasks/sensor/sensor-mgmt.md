@@ -30,7 +30,7 @@ kubectl logs -n levoai <pod name>
 - Uninstall Sensor
 - Reinstall Sensor
 
-### Configure Sensor Properties
+### Manage Sensor Configuration
 TBD
 
 <br></br>
@@ -65,7 +65,7 @@ docker pull levoai/ebpf_sensor:stable
 ```
 - Reinstall Sensor
 
-### Configure Sensor Properties
+### Manage Sensor Configuration
 TBD
 
 <br></br>
@@ -76,15 +76,18 @@ TBD
 ## Installed on Linux Host
 
 ### Configure Satellite Address (`host:port` information)
+
+Satellite address is configured in `/etc/default/levo-ebpf-sensor`. Default port for Satellite is `4317`.
+
 ```bash
 # The Satellite address is configured in '/etc/default/levo-ebpf-sensor'.
 # Edit '/etc/default/levo-ebpf-sensor', and set 'OTEL_EXPORTER_OTLP_TRACES_ENDPOINT' to
-# 'host:port' address of the Satellite.
-#
-# Note: If you change the Satellite address, you have to restart the Sensor since
-# it's not a hot property
-sudo vi /etc/default/levo-ebpf-sensor
+# 'host:port' address of the Satellite, as shown below.
+
+OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<host|IP:port>
 ```
+**A Sensor *restart* is required for this to take effect.**
+
 
 ### Start Sensor
 ```bash
@@ -114,8 +117,12 @@ sudo cat syslog | grep 'levo-ebpf-sensor'
 ```bash
 cat /etc/levo/sensor/config.yaml
 ```
+
 ### Uninstall Sensor
 ```bash
 sudo apt remove -purge levo-ebpf-sensor
 sudo apt clean
 ```
+
+### Manage Sensor Configuration
+TBD
