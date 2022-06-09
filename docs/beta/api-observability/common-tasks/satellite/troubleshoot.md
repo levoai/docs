@@ -34,17 +34,27 @@ The `Tagger` component authenticates with Levo.ai using the `Authorization Key`.
 Check for authentication errors in the `Tagger` logs:
 ```bash
 
-kubectl -n levoai logs -f levoai-tagger-799db4d9cc-89jm8 | grep "Exception: Failed to refresh access token"
+kubectl -n levoai logs levoai-tagger-799db4d9cc-89jm8 | grep "Exception: Failed to refresh access token"
 ```
 
-If there are excepion messages, you have an incorrect or stale `Authorization Key`. Please contact support@levo.ai for further assistance.
+If there are exception messages, you have an incorrect or stale `Authorization Key`. Please contact support@levo.ai for further assistance.
 
 ### Connectivity Errors
-TBD
 
+Check for connectivity errors in the `Tagger` logs:
+```bash
+
+kubectl -n levoai logs levoai-tagger-799db4d9cc-89jm8 | grep "ConnectionRefusedError: [Errno 111] Connection refused"
+```
+
+If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries. Please contact support@levo.ai for further assistance.
 <br></br>
 
 --------------------------------------
 # Docker Compose Based
 
-TBD
+<br></br>
+Rabbitmq container is not up if you see following warning. Please contact support@levo.ai for further assistance.
+```bash
+container for service "levoai-rabbitmq" is unhealthy
+```

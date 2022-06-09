@@ -68,9 +68,8 @@ docker compose down --remove-orphans -v
 2. Reinstall the Sensor. The install always *pulls* the latest Docker images for the Satellite.
 
 ### List Satellite's containers
-TBD
 ```bash
-docker ps | grep -E '^levoai/collector|^bitnami/rabbitmq|^levoai/satellite|^levoai/tagger'
+docker ps | grep -E 'levoai/collector|bitnami/rabbitmq|levoai/satellite|levoai/tagger'
 ```
 
 ### Get logs of a specific container
