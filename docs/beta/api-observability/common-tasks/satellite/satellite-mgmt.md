@@ -56,7 +56,7 @@ kubectl -n levoai logs -f <pod name>
 ## Docker based installation
 
 ### Uninstall the Satellite
-Ensure you are in the same directory where you downloaded the [Docker Compose file](../../../../../static/scripts/satellite/docker-compose.yml).
+Ensure you are in the same directory where you downloaded the [Docker Compose file](../../../../../static/artifacts/satellite/docker-compose.yml).
 
 Execute the below command:
 ```bash

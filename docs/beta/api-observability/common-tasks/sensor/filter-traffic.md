@@ -2,14 +2,14 @@
 sidebar_position: 2
 ---
 
-# Filter API Traffic Capture
+# API Traffic Capture Filters
 
-The Sensor allows capturing API (HTTP) traffic based on filter (include/exclude) criteria. These filters are specified in a configuration file. Please refer to [Sensor Management](./sensor-mgmt.md) for details on the configuring Sensor properties.
+The Sensor allows capturing API (HTTP) traffic based on filter (include/exclude) criteria. These filters are specified in a configuration file. Please refer to [Sensor Configuration](./sensor-configuration.md) for high level structure of the file.
 
 ## Default Excluded Ports
 The Sensor excludes capturing traffic from the below ports (TCP & UDP) by default.
 
-If your API Traffic (HTTP) uses one of these ports, please see section below on how the port can bed included for capture. 
+If your API Traffic (HTTP) uses one of these ports, please see section below on how the port can be included for capture. 
 
 | Standard Protocol | Port  |
 | :-                | :-    |

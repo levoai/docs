@@ -3,6 +3,7 @@ sidebar_position: 5
 ---
 
 # FAQs
+![FAQs](../../assets/FAQs.svg)
 
 ## Table of Contents
 

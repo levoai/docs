@@ -136,7 +136,7 @@ Please proceed to install the Sensor.
 
 ### 1. Download Docker Compose file
 Levo provides pre-built Docker images for the Satellite that can be installed via Docker Compose.
-[Download](../../../../static/scripts/satellite/docker-compose.yml) the Docker Compose file to your desktop.
+[Download](../../../../static/artifacts/satellite/docker-compose.yml) the Docker Compose file to your desktop.
 
 ### 2. Install Satellite
 Execute the following from the directory where the Docker Compose file was downloaded.

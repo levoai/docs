@@ -1,0 +1,114 @@
+##############################################################################################
+# eBPF Sensor Configuration Settings (Helm Values)
+# Copyright: Levo Inc, 2022
+#
+# Helm Values file to configure eBPF Sensor. Uses multi-line scalars
+# See https://helm.sh/docs/chart_template_guide/values_files/ and
+# https://yaml-multiline.info/ for more information.
+#
+##############################################################################################
+
+sensor:
+  config: |
+    ##########################################################################################
+    ## Factory Settings: Do Not Modify ##
+    ##########################################################################################
+    single-threaded-mode: true
+    #
+    ##########################################################################################
+    ## Process Filters: process command names/IDs to monitor & capture API traffic ##
+    ##########################################################################################
+    # Uncomment and modify appropriately to limit capture to specific process names or IDs.
+    # Both monitored-commands and monitored-pids support list of names & IDs respectively.
+    # NOTE: monitored-commands and monitored-pids settings are mutually exclusive
+    #
+    #monitored-commands:
+    #- <process command name. Example: nginx>
+    #- <process command name. Example: python3>
+    #
+    #monitored-pids:
+    #- <pid. Example: 123>
+    #- <pid. Example: 45>
+    #
+    ##########################################################################################
+    ## IP Filters: IP/Port/Network address based granular filtering of API traffic. ##
+    ##########################################################################################
+    ip-filter-list:
+      default-policy: accept
+      entries:
+        ### Host Ports ###
+        # Host Port is a server listening port, where client connections are accepted
+        - policy: drop
+          host-ports: 53 # DNS
+        - policy: drop
+          host-ports: 2379-2380 # etcd
+        - policy: drop
+          host-ports: 9092-9093 # kafka
+        - policy: drop
+          host-ports: 27017-27019 # mongodb
+        - policy: drop
+          host-ports: 28017 # mongodb
+        - policy: drop
+          host-ports: 135 # SQL Server
+        - policy: drop
+          host-ports: 1433-1434 # SQL Server
+        - policy: drop
+          host-ports: 4022 # SQL Server
+        - policy: drop
+          host-ports: 3306 # MySQL
+        - policy: drop
+          host-ports: 33060-33062 # MySQL
+        - policy: drop
+          host-ports: 5432-5433 # Postgres
+        - policy: drop
+          host-ports: 5671-5672 # RabbitMQ
+        - policy: drop
+          host-ports: 15672-15675 # RabbitMQ
+        - policy: drop
+          host-ports: 25672 # RabbitMQ
+        - policy: drop
+          host-ports: 35672-35682 # RabbitMQ
+        - policy: drop
+          host-ports: 61613-61614 # RabbitMQ
+        - policy: drop
+          host-ports: 6379 # Redis
+        - policy: drop
+          host-ports: [2181, 3888, 3888] # ZooKeeper
+        ### Peer Ports ###
+        # Peer Port is client port used in communication with the server listening port
+        - policy: drop
+          peer-ports: 53 # DNS
+        - policy: drop
+          peer-ports: 2379-2380 # etcd
+        - policy: drop
+          peer-ports: 9092-9093 # kafka
+        - policy: drop
+          peer-ports: 27017-27019 # mongodb
+        - policy: drop
+          peer-ports: 28017 # mongodb
+        - policy: drop
+          peer-ports: 135 # SQL Server
+        - policy: drop
+          peer-ports: 1433-1434 # SQL Server
+        - policy: drop
+          peer-ports: 4022 # SQL Server
+        - policy: drop
+          peer-ports: 3306 # MySQL
+        - policy: drop
+          peer-ports: 33060-33062 # MySQL
+        - policy: drop
+          peer-ports: 5432-5433 # Postgres
+        - policy: drop
+          peer-ports: 5671-5672 # RabbitMQ
+        - policy: drop
+          peer-ports: 15672-15675 # RabbitMQ
+        - policy: drop
+          peer-ports: 25672 # RabbitMQ
+        - policy: drop
+          peer-ports: 35672-35682 # RabbitMQ
+        - policy: drop
+          peer-ports: 61613-61614 # RabbitMQ
+        - policy: drop
+          peer-ports: 6379 # Redis
+        - policy: drop
+          peer-ports: [2181, 3888, 3888] # ZooKeeper

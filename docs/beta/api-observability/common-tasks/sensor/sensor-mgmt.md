@@ -31,7 +31,7 @@ kubectl logs -n levoai <pod name>
 - Reinstall Sensor
 
 ### Manage Sensor Configuration
-TBD
+Please refer to [Sensor Configuration](./sensor-configuration.md), and [Applying Configuration Changes](./sensor-configuration.md#running-on-kubernetes).
 
 <br></br>
 
@@ -66,7 +66,7 @@ docker pull levoai/ebpf_sensor:stable
 - Reinstall Sensor
 
 ### Manage Sensor Configuration
-TBD
+Please refer to [Sensor Configuration](./sensor-configuration.md), and [Applying Configuration Changes](./sensor-configuration.md#running-via-docker).
 
 <br></br>
 
@@ -125,4 +125,4 @@ sudo apt clean
 ```
 
 ### Manage Sensor Configuration
-TBD
+Please refer to [Sensor Configuration](./sensor-configuration.md), and [Applying Configuration Changes](./sensor-configuration.md#running-on-linux-host).

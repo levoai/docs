@@ -4,12 +4,12 @@ sidebar_position: 1
 
 # Common Tasks
 
-## [Sensor Management](./sensor/sensor-mgmt.md)
+## [Sensor Lifecycle Management](./sensor/sensor-mgmt.md)
 
-## [Sensor - Filter API Traffic](./sensor/filter-traffic.md)
+## [Sensor Configuration](./sensor/sensor-configuration.md)
 
 ## [Sensor Troubleshooting](./sensor/sensor-troubleshoot.md)
 
-## [Satellite Management](./satellite/satellite-mgmt.md)
+## [Satellite Lifecycle Management](./satellite/satellite-mgmt.md)
 
 ## [Satellite Troubleshooting](./satellite/troubleshoot.md)
