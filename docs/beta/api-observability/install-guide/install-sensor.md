@@ -88,19 +88,27 @@ sudo apt install curl
 
 ```bash
 curl -fsSL https://us-apt.pkg.dev/doc/repo-signing-key.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/us-apt-repo-signing-key.gpg >/dev/null
+```
 
+```bash
 curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/gcloud-packages-key.gpg >/dev/null
+```
 
+```bash
 echo \
 "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gcloud-packages-key.gpg] \
  https://packages.cloud.google.com/apt apt-transport-artifact-registry-stable main" \
 | sudo tee -a /etc/apt/sources.list.d/artifact-registry.list > /dev/null
+```
 
+```bash
 echo \
 "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/us-apt-repo-signing-key.gpg] \
  https://us-apt.pkg.dev/projects/levo-platform apt-levo main" \
 | sudo tee -a /etc/apt/sources.list.d/artifact-registry.list > /dev/null
+```
 
+```bash
 sudo apt update
 ```
 
