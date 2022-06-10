@@ -30,7 +30,7 @@ Follow instructions for your specific platform/method below:
 
 ### 1. Install levoai Helm repo
 ```bash
-helm repo add levoai https://charts.levo.ai
+helm repo add levoai https://charts.levo.ai && helm repo update
 ```
 
 ### 2. Create `levoai` namespace & install Sensor
@@ -146,7 +146,12 @@ sudo journalctl -u levo-ebpf-sensor.service -b -f
 # If 'journalctl' isn't tailing logs, use syslog:
 sudo cat /var/log/syslog | grep 'levo-ebpf-sensor'
 
+#### Connection Success
 TBD TBD
-```
+
+#### Connection Failures
+If the Sensor is unable to connect with the Satellite, you will notice log entries similar to the one below. Please contact `support@levo.ai` for assistance.
+
+TBD
 
 Please proceed to the next step.

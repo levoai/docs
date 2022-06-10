@@ -9,7 +9,7 @@ You can read more about *crAPI* [here](https://github.com/levoai/demo-apps/blob/
 
 1. First follow instructions in the [Install Guide](../api-observability/install-guide/install-guide.md) to install the Satellite, and Sensor components successfully.
 
-2. Now install the crAPI demo application by following instructions [here][install-crapi].
+2. Now install the crAPI demo application by following instructions [here](https://github.com/levoai/demo-apps/blob/main/crAPI/docs/quick-start.md).
 
 3. Generate traffic for crAPI by browsing it's web UI for at least five minutes.
 

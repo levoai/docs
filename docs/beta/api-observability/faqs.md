@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 # FAQs
@@ -24,16 +24,10 @@ Please provide as much details as possible in your support request.
 ## Sensor
 
 ### What OS platforms are supported?
-
-- Linux running on bare metal, virtual machine, and container formats.
-- Linux Kernel versions 4.14 and above.
-- Debian, Fedora, OpenSUSE, and Amazon Linux based distributions
+Please see [OS Platforms](./supported-platforms.md#what-os-platforms-are-supported).
 
 ### What Kubernetes platforms are supported?
-- [minikube on Linux](https://minikube.sigs.k8s.io/docs/)
-- [AKS](https://azure.microsoft.com/en-us/services/kubernetes-service/#overview)
-- [GKE (Debian Nodes Only. No Container-Optimized OS)](https://cloud.google.com/kubernetes-engine)
-- [EKS](https://aws.amazon.com/eks/)
+Please see [K8s Platforms](./supported-platforms.md#what-kubernetes-platforms-are-supported).
 
 ### Is Docker Desktop or minikube on Mac OSX, supported?
 Support for Docker Desktop, Docker Desktop based Kubernetes, and minikube on MacOS is on the roadmap.

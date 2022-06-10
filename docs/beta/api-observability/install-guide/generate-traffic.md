@@ -10,3 +10,11 @@ Please ensure you exercise your API endpoints several times using tools like [Po
 
 API endpoints that are TLS based should be picked up by the Sensor, albeit with some caveats. Please see [FAQs](../faqs.md) for more information. 
 
+## Verify API Traffic Capture
+Refer to [platform specific instructions](../common-tasks/satellite/satellite-mgmt.md), for accessing logs of Satellite's `Collector` sub-component.
+
+If API Traffic is correctly being processed, you will see log entries similar to below:
+
+```bash
+2022-06-10T17:04:56.494Z	INFO	loggingexporter/logging_exporter.go:43	TracesExporter	{"#spans": 20}
+```
