@@ -116,7 +116,9 @@ sudo apt update
 
 ```bash
 sudo apt install apt-transport-artifact-registry
+```
 
+```bash
 sudo apt-get install levo-ebpf-sensor
 ```
 
@@ -139,11 +141,12 @@ sudo systemctl start levo-ebpf-sensor
 
 ### 6. Verify connectivity with Satellite
 ```bash
-TBD
-journalctl -u levo-ebpf-sensor.service -b -f
+sudo journalctl -u levo-ebpf-sensor.service -b -f
 
-# If journalctl isn't giving logs, check this
-sudo cat syslog | grep 'levo-ebpf-sensor'
+# If 'journalctl' isn't tailing logs, use syslog:
+sudo cat /var/log/syslog | grep 'levo-ebpf-sensor'
+
+TBD TBD
 ```
 
 Please proceed to the next step.

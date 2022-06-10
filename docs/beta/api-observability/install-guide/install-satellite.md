@@ -142,7 +142,7 @@ Levo provides pre-built Docker images for the Satellite that can be installed vi
 Execute the following from the directory where the Docker Compose file was downloaded.
 
 ```bash
-LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier> LEVOAI_APP_NAME=<'Application Name' chosen earlier> docker compose pull && docker compose up -d
+(export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier>; export LEVOAI_APP_NAME=<'Application Name' chosen earlier>; docker compose pull && docker compose up -d)
 ```
 
 ### 3. Verify connectivity with Levo.ai

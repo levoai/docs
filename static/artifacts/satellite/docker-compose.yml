@@ -28,7 +28,7 @@ services:
     environment:
       LEVOAI_MODE: docker-compose
       LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
-      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}", "refresh-token": "${LEVOAI_AUTH_KEY}", "org-prefix": "${LEVOAI_ORG_PREFIX:-Buchi}"}}'
+      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}", "refresh-token": "${LEVOAI_AUTH_KEY}", "org-prefix": "${LEVOAI_ORG_PREFIX}"}}'
     depends_on:
       - levoai-rabbitmq
 
