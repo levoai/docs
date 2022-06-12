@@ -27,10 +27,6 @@ The Satellite uses an authorization key to access Levo.ai. Follow instructions b
 - Click on `Get Satellite Authorization Key`
 - Now copy your authorization key. This key is required in a subsequent step below.
 
-### c. Pick an `Application Name`
-Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../../../concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different environments, similar to how file folders work in an operating system.
-
-Pick a descriptive name which will be used in the subsequent step below. For example: `My Test App`.
 
 ## 3. Follow instructions for your platform
 - [Install on Kubernetes](install-satellite.md#install-on-kubernetes)
@@ -52,7 +48,6 @@ Pick a descriptive name which will be used in the subsequent step below. For exa
 
 ```bash
 export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier> 
-export APP_NAME=<'Application Name' chosen earlier>
 ```
 
 ### 2. Install levoai Helm repo
@@ -64,7 +59,9 @@ helm repo add levoai https://charts.levo.ai && helm repo update
 
 #### If locating Satellite on the same cluster alongside Sensor
 ```bash
-helm install -n levoai levoai-satellite levoai/satellite --create-namespace --set global.levoai.app_name=$APP_NAME  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY
+helm install -n levoai --create-namespace \
+    --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+    levoai-satellite levoai/satellite
 ```
 
 #### If locating Satellite on a dedicated cluster
@@ -72,7 +69,10 @@ You will need to expose the Satellite via either a `LoadBalancer` or `NodePort`,
 
 ```bash
 # Please modify this command template and choose either 'LoadBalancer' or 'NodePort', prior to execution
-helm install -n levoai levoai-satellite levoai/satellite --create-namespace --set global.levoai.app_name=$APP_NAME  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY --set levoai-collector.service.type=<LoadBalancer | NodePort>
+helm install -n levoai --create-namespace \
+    --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+    --set levoai-collector.service.type=<LoadBalancer | NodePort> \
+    levoai-satellite levoai/satellite
 ```
 
 ### 4. Verify connectivity with Levo.ai
@@ -142,7 +142,7 @@ Levo provides pre-built Docker images for the Satellite that can be installed vi
 Execute the following from the directory where the Docker Compose file was downloaded.
 
 ```bash
-(export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier>; export LEVOAI_APP_NAME=<'Application Name' chosen earlier>; docker compose pull && docker compose up -d)
+(export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier>; docker compose pull && docker compose up -d)
 ```
 
 ### 3. Verify connectivity with Levo.ai

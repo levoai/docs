@@ -4,13 +4,18 @@ sidebar_position: 4
 
 # Install Sensor
 
-## Prerequisites
+## i. Prerequisites
 - Compatibility script (from step 1) indicates the Linux host (that you want to instrument) is compatible.
 - Satellite has been successfully installed.
 - You have noted down the Satellite's `hostname:port` or `ip-address:port` information.
 - The Satellite is reachable (via HTTP/s) from the location where you are going to install the Sensor.
 
-## Follow instructions for your platform
+## ii. Pick an `Application Name`
+Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../../../concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different environments, similar to how file folders work in an operating system.
+
+Pick a descriptive name which will be used in the subsequent step below. For example: `my-test-app`.
+
+## iii. Follow instructions for your platform
 Follow instructions for your specific platform/method below:
 - [Install on Kubernetes](./install-sensor.md#install-on-kubernetes)
 - [Install on Linux host via Docker](./install-sensor.md#install-on-linux-host-via-docker)
@@ -37,16 +42,49 @@ helm repo add levoai https://charts.levo.ai && helm repo update
 ```bash
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
 # If Sensor is installed on same cluster as Satellite, use 'levoai-collector.levoai:4317'
+#
+# Specify below the 'Application Name' chosen earlier. Do not quote the 'Application Name'
+# Example: sensor.args={--default-service-name,my-test-app}
+#
 helm upgrade --install -n levoai --create-namespace \
   --set sensor.otel.grpcEndpoint=<hostname|IP:port> \
-  levoai-sensor levoai/levoai-ebpf-sensor
+  --set "sensor.args={--default-service-name,<'Application Name' chosen earlier>}" \
+  levoai-sensor levoai/levoai-ebpf-sensor 
 ```
 
 
 ### 3. Verify connectivity with Satellite
-TBD
 
-Please proceed to the next step.
+#### i. Check Sensor health
+
+Check the health of the Sensor by executing the following:
+
+```bash
+kubectl -n levoai get pods | grep levoai-sensor
+```                              
+If the Sensor is healthy, you should see output similar to below. 
+
+```bash
+levoai-sensor-747fb4aaa9-gv8g9   1/1     Running   0             1m8s
+```
+
+#### ii. Check connectivity
+
+Execute the following to check for connectivity health:
+
+```bash
+# Please specify the actual pod name for levoai-sensor below
+kubectl -n levoai logs <levoai-sensor pod name> | grep "TBD"
+```
+If connectivity is healthy, you will see output similar to below.
+
+```bash
+TBD
+```
+
+**Please contact `support@levo.ai` if you notice health/connectivity related errors.**
+
+Please proceed to the next step, if there are no errors.
 
 <br></br>
 
@@ -62,13 +100,20 @@ Please proceed to the next step.
 
 ```bash
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
-sudo docker run --restart unless-stopped -e OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<hostname|IP:port> -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc  --privileged levoai/ebpf_sensor:0.6.6 -c python -d
+#
+# Specify below the 'Application Name' chosen earlier. Do not quote the 'Application Name'
+#
+sudo docker run --restart unless-stopped \
+  -e OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<hostname|IP:port> \
+  -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
+  --privileged levoai/ebpf_sensor:stable \
+  --default-service-name <'Application Name' chosen earlier> -d
 ```
 
 ### 2. Verify connectivity with Satellite
 TBD
 
-Please proceed to the next step.
+Please proceed to the next step, if there are no errors.
 
 <br></br>
 
@@ -123,35 +168,58 @@ sudo apt-get install levo-ebpf-sensor
 ```
 
 ### 4. Configure Satellite Address
+The Satellite address is configured in `/etc/default/levo-ebpf-sensor`. 
+
+Edit `/etc/default/levo-ebpf-sensor`, and set `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` to `host:port` address, noted down from the Satellite install.
+
 ```bash
-# The Satellite address is configured in '/etc/default/levo-ebpf-sensor'.
-# Refer to the 'host:port' values you noted down from the Satellite install.
-# Edit '/etc/default/levo-ebpf-sensor', and set 'OTEL_EXPORTER_OTLP_TRACES_ENDPOINT' to
-# 'host:port' address, noted down from the Satellite install.
+# Environment Variables for levo-ebpf-sensor.service
+
+# host:port_number of endpoint receiving data from the sensor
+OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<host:port>
+```
+Note: If you change the Satellite address, you have to restart the Sensor, since it's not a hot property.
+
+
+### 5. Configure Application Name
+The `Application Name` is configured in `/etc/levo/sensor/config.yaml`.
+
+Edit `/etc/levo/sensor/config.yaml`, and set `default-service-name` to the `Application Name` chosen earlier.
+
+```bash
+# --------------------------------------------------------------------------------------------
+# Default Application Name:
 #
-# Note: If you change the Satellite address, you have to restart the Sensor since
-# it's not a hot property
-sudo vi /etc/default/levo-ebpf-sensor
+# Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
+# grouped under this application name. The application name helps segregate and group API
+# endpoints from different environments.
+# --------------------------------------------------------------------------------------------
+#
+default-service-name: <'Application Name' chosen earlier>
+# --------------------------------------------------------------------------------------------
+
 ```
 
-### 5. Start the Sensor
+
+### 6. Start the Sensor
 ```bash
 sudo systemctl start levo-ebpf-sensor
 ```
 
-### 6. Verify connectivity with Satellite
+### 7. Verify connectivity with Satellite
 ```bash
 sudo journalctl -u levo-ebpf-sensor.service -b -f
 
 # If 'journalctl' isn't tailing logs, use syslog:
 sudo cat /var/log/syslog | grep 'levo-ebpf-sensor'
+```
 
 #### Connection Success
-TBD TBD
+TBD
 
 #### Connection Failures
 If the Sensor is unable to connect with the Satellite, you will notice log entries similar to the one below. Please contact `support@levo.ai` for assistance.
 
 TBD
 
-Please proceed to the next step.
+Please proceed to the next step, if there are no errors.

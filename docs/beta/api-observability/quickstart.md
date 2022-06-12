@@ -184,7 +184,7 @@ TBD
 
 **Please contact `support@levo.ai` if you notice health/connectivity related errors.**
 
-Please proceed to the next step.
+Please proceed to the next step, if there are no errors.
 
 ## 5. Generate Application Traffic
 

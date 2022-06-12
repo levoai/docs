@@ -14,6 +14,16 @@ single-threaded-mode: true
 #worker-threads: 4
 # --------------------------------------------------------------------------------------------
 
+# --------------------------------------------------------------------------------------------
+# Default Application Name:
+#
+# Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
+# grouped under this application name. The application name helps segregate and group API
+# endpoints from different environments.
+# --------------------------------------------------------------------------------------------
+#
+default-service-name: my-api-application
+# --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
 # Process Filters: process command names/IDs to monitor & capture API traffic.
