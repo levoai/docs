@@ -20,7 +20,7 @@ The Sensor can be customized via a [YAML configuration file](../../../../../stat
 
 ## Configuration File Format
 
-The YAML configuration file (shown below) has three major sections: 1) Factory Settings, 2) Process Filters, & 3) IP Filters
+The YAML configuration file (shown below) has four major sections: 1) Factory Settings, 2) Default Application Name, 3) Process Filters, & 4) IP Filters
 
 ```yaml
 ##############################################################################################
@@ -32,6 +32,17 @@ The YAML configuration file (shown below) has three major sections: 1) Factory S
 # Factory Settings: DO NOT MODIFY
 # --------------------------------------------------------------------------------------------
 
+# --------------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------------------------
+# Default Application Name:
+#
+# Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
+# grouped under this application name. The application name helps segregate and group API
+# endpoints from different environments.
+# --------------------------------------------------------------------------------------------
+#
+default-service-name: my-api-application
 # --------------------------------------------------------------------------------------------
 
 
@@ -65,6 +76,13 @@ default-policy: <accept|drop> # Specifies default behavior which can be overridd
 
 ## Factory Settings
 These settings control logging, debugging, and performance tuning functions. ***DO NOT*** modify these settings, unless specifically asked by Levo Support. 
+
+<br></br>
+
+--------------------------------------------------------------------------------
+
+## Default Application Name
+Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../../../../concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different environments, similar to how file folders work in an operating system. 
 
 <br></br>
 
@@ -111,7 +129,11 @@ Please check the Sensor logs to ensure the configuration file does not have any 
 
 ```bash
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
-sudo docker run --restart unless-stopped -e OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<hostname|IP:port> -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc  -v $PWD/config.yml:/home/levo/config.yml:ro --privileged levoai/ebpf_sensor:0.6.6 -c python -d
+sudo docker run --restart unless-stopped \
+  -e OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<hostname|IP:port> \
+  -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
+  -v $PWD/config.yml:/home/levo/config.yml:ro \
+  --privileged levoai/ebpf_sensor:stable -d
 ```
 Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.
 
