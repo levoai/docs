@@ -1,0 +1,144 @@
+---
+sidebar_position: 2
+---
+
+# Manage Sensor Configuration
+
+The Sensor comes pre-configured with appropriate defaults to capture API Traffic (HTTP) from your applications.
+
+The Sensor can be customized via a [YAML configuration file](../../../../../static/artifacts/sensor/config.yml). Examples of customization include, a) granular filtering of API traffic being captured, b) enabling debugging, c) performance tuning, etc.
+
+- [Configuration File Format](#configuration-file-format)
+- [Factory Settings](#factory-settings)
+- [Process & IP Filters](#process--ip-filters)
+- [Applying Configuration Settings](#applying-configuration-settings)
+
+<br></br>
+
+--------------------------------------------------------------------------------
+
+
+## Configuration File Format
+
+The YAML configuration file (shown below) has four major sections: 1) Factory Settings, 2) Default Application Name, 3) Process Filters, & 4) IP Filters
+
+```yaml
+##############################################################################################
+# eBPF Sensor Configuration Settings (YAML Format)
+# Copyright: Levo Inc, 2022
+##############################################################################################
+
+# --------------------------------------------------------------------------------------------
+# Factory Settings: DO NOT MODIFY
+# --------------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------------------------
+# Default Application Name:
+#
+# Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
+# grouped under this application name. The application name helps segregate and group API
+# endpoints from different environments.
+# --------------------------------------------------------------------------------------------
+#
+default-service-name: my-api-application
+# --------------------------------------------------------------------------------------------
+
+
+# --------------------------------------------------------------------------------------------
+# Process Filters: process command names/IDs to monitor & capture API traffic.
+# --------------------------------------------------------------------------------------------
+## Restrict API traffic capture to specific processes identified by their command names below
+monitored-commands:
+#  - <process command name. Example: nginx>
+#  - <process command name. Example: python3>
+
+## Restrict API traffic capture to specific processes identified by their PIDs below
+monitored-pids:
+- <pid. Example: 123>
+- <pid. Example: 45>
+# --------------------------------------------------------------------------------------------
+
+
+# --------------------------------------------------------------------------------------------
+# IP Filters: IP/Port/Network address based granular filtering of API traffic.
+# --------------------------------------------------------------------------------------------
+default-policy: <accept|drop> # Specifies default behavior which can be overridden by 'entries' below
+  entries: # Specific 'entries' can override the default policy
+    - policy: <accept|drop>
+      <host-ports|peer-ports|host-network|peer-network>: <appropriate value>
+```
+
+<br></br>
+
+--------------------------------------------------------------------------------
+
+## Factory Settings
+These settings control logging, debugging, and performance tuning functions. ***DO NOT*** modify these settings, unless specifically asked by Levo Support. 
+
+<br></br>
+
+--------------------------------------------------------------------------------
+
+## Default Application Name
+Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../../../../concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different environments, similar to how file folders work in an operating system. 
+
+<br></br>
+
+--------------------------------------------------------------------------------
+
+## Process & IP Filters
+These settings allow granular control over what API traffic is captured by the Sensor. Please see detailed section on [API Traffic Capture Filters](./filter-traffic.md). 
+
+<br></br>
+
+--------------------------------------------------------------------------------
+
+## Applying Configuration Settings
+
+- [Running on Kubernetes](#running-on-kubernetes)
+- [Running via Docker](#running-via-docker)
+- [Running on Linux Host](#running-on-linux-host)
+
+### Running on Kubernetes
+Configuration is specified via a [Helm Values](https://helm.sh/docs/chart_template_guide/values_files/) file.
+
+- Modify the default [Configuration Values](../../../../../static/artifacts/sensor/config-values.yml) file to suit your requirements.
+- Save the configuration values file to your current working directory.
+- Note down the Satellite's `host:port` address information.
+- Apply the new configuration by executing the below command from the directory where you saved the `config-values.yml`.
+
+```bash
+# Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
+# If Sensor is installed on same cluster as Satellite, use 'levoai-collector.levoai:4317'
+helm upgrade --install -n levoai --create-namespace \
+  --set sensor.otel.grpcEndpoint=<hostname|IP:port> \
+  levoai-sensor levoai/levoai-ebpf-sensor \
+  -f config-values.yml
+```
+
+Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.
+
+### Running via Docker
+- Modify the default [YAML configuration file](../../../../../static/artifacts/sensor/config.yml) to suit your requirements.
+- Save the configuration file to your current working directory.
+- Shutdown/Uninstall the Sensor if running.
+- Note down the Satellite's `host:port` address information.
+- Reinstall the Sensor by executing the below command from the directory where you saved `config.yml`. `config.yml` is mounted into the Sensor container as read only.
+
+```bash
+# Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
+sudo docker run --restart unless-stopped \
+  -e OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<hostname|IP:port> \
+  -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
+  -v $PWD/config.yml:/home/levo/config.yml:ro \
+  --privileged levoai/ebpf_sensor:stable -d
+```
+Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.
+
+### Running on Linux Host
+Make your modifications to `/etc/levo/sensor/config.yaml` and save the file. The settings should take effect immediately.
+
+Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.
+

@@ -1,0 +1,58 @@
+version: "2.0"
+services:
+  levoai-rabbitmq:
+    image: 'bitnami/rabbitmq:3.10'
+    container_name: levoai-rabbitmq
+    restart: always
+    ports:
+      - '4369:4369'
+      - '5672:5672'
+      - '25672:25672'
+      - '15672:15672'
+    environment:
+      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME:-levoai}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-levoailevoai}
+
+  levoai-satellite:
+    image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-stable}'
+    container_name: levoai-satellite
+    restart: always
+    ports:
+      - '9999:9999'
+    command:
+      - "-w"
+      - "1"
+      - "-b"
+      - "0.0.0.0:9999"
+      - "levoai_e7s.satellite.satellite:create_server()"
+    environment:
+      LEVOAI_MODE: docker-compose
+      LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
+      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}", "refresh-token": "${LEVOAI_AUTH_KEY}", "org-prefix": "${LEVOAI_ORG_PREFIX}"}}'
+    depends_on:
+      - levoai-rabbitmq
+
+  levoai-tagger:
+    image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-stable}'
+    container_name: levoai-tagger
+    restart: always
+    entrypoint: ['python', '-OO']
+    command:
+      - /opt/levoai/e7s/src/python/levoai_e7s/tag_server.py
+    environment:
+      LEVOAI_MODE: docker-compose
+      LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
+      PI_DETECTOR_DATA_DIR: /opt/levoai/datasets/
+      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}", "refresh-token": "${LEVOAI_AUTH_KEY}", "org-prefix": "${LEVOAI_ORG_PREFIX}"}, "tagger_batch_interval_minutes":5}'
+      LAYER9_PROTOSET_DISABLED: 'yes'
+    depends_on:
+      - levoai-rabbitmq
+
+  levoai-collector:
+    image: 'levoai/collector:${LEVOAI_COLLECTOR_VERSION:-stable}'
+    container_name: levoai-collector
+    restart: always
+    ports:
+      - '4317:4317'
+    depends_on:
+      - levoai-satellite
