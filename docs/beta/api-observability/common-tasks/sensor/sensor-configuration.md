@@ -10,6 +10,7 @@ The Sensor can be customized via a [YAML configuration file](../../../../../stat
 
 - [Configuration File Format](#configuration-file-format)
 - [Factory Settings](#factory-settings)
+- [Default Application Name](#default-application-name)
 - [Process & IP Filters](#process--ip-filters)
 - [Applying Configuration Settings](#applying-configuration-settings)
 
