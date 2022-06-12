@@ -16,6 +16,7 @@ single-threaded-mode: true
 
 # --------------------------------------------------------------------------------------------
 # Default Application Name:
+# --------------------------------------------------------------------------------------------
 #
 # Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
 # grouped under this application name. The application name helps segregate and group API
