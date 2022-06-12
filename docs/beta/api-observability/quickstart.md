@@ -77,30 +77,26 @@ The Satellite uses an authorization key to access Levo.ai. Follow instructions b
 - Click on `Get Satellite Authorization Key`
 - Now copy your authorization key. This key is required in a subsequent step below.
 
-### b. Pick an `Application Name`
-Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../../concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different environments, similar to how file folders work in an operating system.
-
-Pick a descriptive name which will be used in the subsequent step below. For example: `My Test App`.
-
-### c. Setup environment variables
+### b. Setup environment variables
 
 ```bash
 export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier> 
-export APP_NAME=<'Application Name' chosen earlier>
 ```
 
-### d. Install levoai Helm repo
+### c. Install levoai Helm repo
 ```bash
 helm repo add levoai https://charts.levo.ai && helm repo update
 ```
 
-### e. Create `levoai` namespace & install Satellite
+### d. Create `levoai` namespace & install Satellite
 
 ```bash
-helm install -n levoai levoai-satellite levoai/satellite --create-namespace --set global.levoai.app_name=$APP_NAME  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY
+helm install -n levoai --create-namespace \
+  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+  levoai-satellite levoai/satellite
 ```
 
-### f. Verify connectivity with Levo.ai
+### e. Verify connectivity with Levo.ai
 
 #### i. Check Satellite health
 
@@ -138,23 +134,55 @@ If connectivity is healthy, you will see output similar to below.
 
 ## 4. Install Sensor
 
-### a. Install levoai Helm repo
+### a. Pick an `Application Name`
+Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../../concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different Kubernetes clusters, similar to how file folders work in an operating system.
+
+Pick a descriptive name which will be used in the subsequent step below. For example: `my-test-app-k8s-c101`.
+
+### b. Install levoai Helm repo
 ```bash
 helm repo add levoai https://charts.levo.ai && helm repo update
 ```
 
-### b. Create `levoai` namespace & install Sensor
+### c. Create `levoai` namespace & install Sensor
 ```bash
-helm upgrade --install -n levoai levoai-sensor levoai/levoai-ebpf-sensor --create-namespace
+# Specify below the 'Application Name' chosen earlier. Do not quote the 'Application Name'
+# Example: sensor.args={--default-service-name,my-test-app-k8s-c101}
+#
+helm upgrade --install -n levoai --create-namespace \
+  --set "sensor.args={--default-service-name,<'Application Name' chosen earlier>}" \
+  levoai-sensor levoai/levoai-ebpf-sensor 
 ```
 
-### c. Verify connectivity with Satellite
+### d. Verify connectivity with Satellite
+
+#### i. Check Sensor health
+
+Check the health of the Sensor by executing the following:
+
+```bash
+kubectl -n levoai get pods | grep levoai-sensor
+```                              
+If the Sensor is healthy, you should see output similar to below. 
+
+```bash
+levoai-sensor-747fb4aaa9-gv8g9   1/1     Running   0             1m8s
+```
+#### ii. Check connectivity
+
+Execute the following to check for connectivity health:
+
+```bash
+# Please specify the actual pod name for levoai-sensor below
+kubectl -n levoai logs <levoai-sensor pod name> | grep "TBD"
+```
+If connectivity is healthy, you will see output similar to below.
+
+```bash
 TBD
-```bash
-sudo journalctl -u levo-ebpf-sensor.service -b | grep "failed to connect to all addresses"
-
-sudo cat /var/log/syslog
 ```
+
+**Please contact `support@levo.ai` if you notice health/connectivity related errors.**
 
 Please proceed to the next step.
 
