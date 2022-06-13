@@ -174,12 +174,12 @@ Execute the following to check for connectivity health:
 
 ```bash
 # Please specify the actual pod name for levoai-sensor below
-kubectl -n levoai logs <levoai-sensor pod name> | grep "TBD"
+kubectl -n levoai logs <levoai-sensor pod name> | grep "Initial connection with Collector"
 ```
-If connectivity is healthy, you will see output similar to below.
+If connectivity is healthy, you should see output similar to below::
 
 ```bash
-TBD
+2022/06/13 21:15:40 729071	INFO [ebpf_sensor.cpp->main:120]	Initial connection with Collector was successful.
 ```
 
 **Please contact `support@levo.ai` if you notice health/connectivity related errors.**

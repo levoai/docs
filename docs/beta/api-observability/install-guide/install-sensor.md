@@ -70,16 +70,16 @@ levoai-sensor-747fb4aaa9-gv8g9   1/1     Running   0             1m8s
 
 #### ii. Check connectivity
 
-Execute the following to check for connectivity health:
+Execute the following command to check for connectivity health:
 
 ```bash
 # Please specify the actual pod name for levoai-sensor below
-kubectl -n levoai logs <levoai-sensor pod name> | grep "TBD"
+kubectl -n levoai logs <levoai-sensor pod name> | grep "Initial connection with Collector"
 ```
-If connectivity is healthy, you will see output similar to below.
+If connectivity is healthy, you should see output similar to below::
 
-```bash
-TBD
+```
+2022/06/13 21:15:40 729071	INFO [ebpf_sensor.cpp->main:120]	Initial connection with Collector was successful.
 ```
 
 **Please contact `support@levo.ai` if you notice health/connectivity related errors.**
@@ -111,7 +111,17 @@ sudo docker run --restart unless-stopped \
 ```
 
 ### 2. Verify connectivity with Satellite
-TBD
+Execute the following command to check for connectivity health:
+
+```bash
+# Please specify the actual container name for levoai-sensor below
+docker logs <levoai-sensor container name> | grep "Initial connection with Collector"
+```
+If connectivity is healthy, you should see output similar to below::
+
+```bash
+2022/06/13 21:15:40 729071	INFO [ebpf_sensor.cpp->main:120]	Initial connection with Collector was successful.
+```
 
 Please proceed to the next step, if there are no errors.
 
@@ -215,11 +225,19 @@ sudo cat /var/log/syslog | grep 'levo-ebpf-sensor'
 ```
 
 #### Connection Success
-TBD
+If connectivity is healthy, you should see output similar to below::
+
+```bash
+2022/06/13 21:15:40 729071	INFO [ebpf_sensor.cpp->main:120]	Initial connection with Collector was successful.
+```
 
 #### Connection Failures
 If the Sensor is unable to connect with the Satellite, you will notice log entries similar to the one below. Please contact `support@levo.ai` for assistance.
 
-TBD
+```
+Initial connection with Collector failed. However, the sensor will keep attempting to send future traces.
+
+[OTLP TRACE GRPC Exporter] Export() failed: failed to connect to all addresses
+```
 
 Please proceed to the next step, if there are no errors.
