@@ -20,13 +20,13 @@ sidebar_position: 1
 export LEVOAI_AUTH_KEY=<'Authorization Key' from the original installation> 
 export APP_NAME=<'Application Name' chosen during installation>
 
-# Update heml repo and upgrade installation
+# Update helm repo and upgrade installation
 helm repo update
 
 helm upgrade -n levoai \
   --set global.levoai.app_name=$APP_NAME \
   --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
-  levoai-satellite levoai/satellite
+  levoai-satellite levoai/levoai-satellite
 ```
 
 
