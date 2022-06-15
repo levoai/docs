@@ -93,7 +93,7 @@ helm repo add levoai https://charts.levo.ai && helm repo update
 ```bash
 helm install -n levoai --create-namespace \
   --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
-  levoai-satellite levoai/satellite
+  levoai-satellite levoai/levoai-satellite
 ```
 
 ### e. Verify connectivity with Levo.ai
