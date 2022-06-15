@@ -6,7 +6,7 @@ sidebar_position: 3
 
 ## 1. Prerequisites
 - You have an account on [Levo.ai](https://app.levo.ai/login)
-- Compatibility script (from step 1) indicates the Linux host (that you want to instrument) is compatible.
+- Compatibility script (from step 1) indicates the Linux host (that you want to instrument with the Sensor) is compatible.
 
 ## 2. Planning
 
