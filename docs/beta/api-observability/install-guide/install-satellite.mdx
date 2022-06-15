@@ -29,8 +29,8 @@ The Satellite uses an authorization key to access Levo.ai. Follow instructions b
 
 
 ## 3. Follow instructions for your platform
-- [Install on Kubernetes](install-satellite.md#install-on-kubernetes)
-- [Install on Linux host via Docker Compose](./install-satellite.md#install-on-linux-host-via-docker-compose)
+- [Install on Kubernetes](install-satellite.mdx#install-on-kubernetes)
+- [Install on Linux host via Docker Compose](./install-satellite.mdx#install-on-linux-host-via-docker-compose)
 
 <br></br>
 
@@ -130,13 +130,25 @@ Please proceed to install the Sensor.
 
 ## Install on Linux host via Docker Compose
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+export function DownloadDockerComposeLink() {
+  return (
+    <BrowserOnly fallback={<div>Loading...</div>}>
+      {() => (
+        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/docker-compose.yml'} download> Download</a>
+      )}
+    </BrowserOnly>
+  );
+}
+
 ### Prerequisites
 - Docker version `18.03.0` and above
 - Admin privileges on the Docker host
 
 ### 1. Download Docker Compose file
 Levo provides pre-built Docker images for the Satellite that can be installed via Docker Compose.
-[Download](../../../../static/artifacts/satellite/docker-compose.yml) the Docker Compose file to your desktop.
+<DownloadDockerComposeLink/> the Docker Compose file to your desktop.
 
 ### 2. Install Satellite
 Execute the following from the directory where the Docker Compose file was downloaded.
@@ -144,6 +156,8 @@ Execute the following from the directory where the Docker Compose file was downl
 ```bash
 (export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier>; docker compose pull && docker compose up -d)
 ```
+
+> If `docker compose ...` complains with *"docker: 'compose' is not a docker command."*, you have can try **`docker-compose`** instead.
 
 ### 3. Verify connectivity with Levo.ai
 
