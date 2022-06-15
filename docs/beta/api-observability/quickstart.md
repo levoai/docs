@@ -176,7 +176,7 @@ Execute the following to check for connectivity health:
 # Please specify the actual pod name for levoai-sensor below
 kubectl -n levoai logs <levoai-sensor pod name> | grep "Initial connection with Collector"
 ```
-If connectivity is healthy, you should see output similar to below::
+If connectivity is healthy, you should see output similar to below.
 
 ```bash
 2022/06/13 21:15:40 729071	INFO [ebpf_sensor.cpp->main:120]	Initial connection with Collector was successful.

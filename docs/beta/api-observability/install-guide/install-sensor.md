@@ -76,7 +76,7 @@ Execute the following command to check for connectivity health:
 # Please specify the actual pod name for levoai-sensor below
 kubectl -n levoai logs <levoai-sensor pod name> | grep "Initial connection with Collector"
 ```
-If connectivity is healthy, you should see output similar to below::
+If connectivity is healthy, you should see output similar to below.
 
 ```
 2022/06/13 21:15:40 729071	INFO [ebpf_sensor.cpp->main:120]	Initial connection with Collector was successful.
@@ -98,6 +98,8 @@ Please proceed to the next step, if there are no errors.
 
 ### 1. Install Sensor
 
+> If you are installing the Satellite and Sensor on the ***same*** Linux host, please do ***NOT*** use `localhost` as the hostname below. Use the Linux host's `IP address`, or `domain name` instead. This is required as the Sensor runs inside a Docker container, and `localhost` resolves to the Sensor container's IP address, instead of the Linux host.
+
 ```bash
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
 #
@@ -117,7 +119,7 @@ Execute the following command to check for connectivity health:
 # Please specify the actual container name for levoai-sensor below
 docker logs <levoai-sensor container name> | grep "Initial connection with Collector"
 ```
-If connectivity is healthy, you should see output similar to below::
+If connectivity is healthy, you should see output similar to below.
 
 ```bash
 2022/06/13 21:15:40 729071	INFO [ebpf_sensor.cpp->main:120]	Initial connection with Collector was successful.
@@ -225,7 +227,7 @@ sudo cat /var/log/syslog | grep 'levo-ebpf-sensor'
 ```
 
 #### Connection Success
-If connectivity is healthy, you should see output similar to below::
+If connectivity is healthy, you should see output similar to below.
 
 ```bash
 2022/06/13 21:15:40 729071	INFO [ebpf_sensor.cpp->main:120]	Initial connection with Collector was successful.

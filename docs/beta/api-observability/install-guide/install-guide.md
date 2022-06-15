@@ -4,7 +4,9 @@ sidebar_position: 1
 
 # Install Guide
 
-This guide provides comprehensive instructions for installing the Satellite, and Sensor on a supported platform of your choice (Kubernetes, Docker, or Linux Virtual Machine).
+This guide provides *comprehensive instructions* for installing the Satellite, and Sensor on a supported platform of your choice (Kubernetes, Docker, or Linux Virtual Machine).
+
+Platform specific instructions are described in the steps below.
 
 Your estimated completion time is *10 minutes*.
 
