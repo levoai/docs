@@ -88,7 +88,7 @@ Yes, Levo certainly can host the Satellite for you. Please contact `support@levo
 Yes. Multiple sensors from different hosts/clusters can be configured to send API Traces to the same Satellite.
 
 ### Can the Satellite be deployed in a different host/cluster?
-Yes. Please see [Install Satellite](./install-guide/install-satellite.md).
+Yes. Please see [Install Satellite](./install-guide/install-satellite.mdx).
 
 ### How does the Satellite detect sensitive data in API Traffic?
 The Satellite has a pre-trained ML model that is used to detect sensitive data such as PII, PSI, etc.

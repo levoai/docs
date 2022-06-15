@@ -10,6 +10,6 @@ sidebar_position: 1
 
 ## [Sensor Troubleshooting](./sensor/sensor-troubleshoot.md)
 
-## [Satellite Lifecycle Management](./satellite/satellite-mgmt.md)
+## [Satellite Lifecycle Management](./satellite/satellite-mgmt.mdx)
 
 ## [Satellite Troubleshooting](./satellite/troubleshoot.md)

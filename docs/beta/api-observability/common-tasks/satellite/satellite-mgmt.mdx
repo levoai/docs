@@ -4,9 +4,9 @@ sidebar_position: 1
 
 # Satellite Lifecycle Management
 
-## [1. Kubernetes based installation](./satellite-mgmt.md#kubernetes-based-installation)
+## [1. Kubernetes based installation](./satellite-mgmt.mdx#kubernetes-based-installation)
 
-## [2. Docker based installation](./satellite-mgmt.md#docker-based-installation)
+## [2. Docker based installation](./satellite-mgmt.mdx#docker-based-installation)
 
 <br></br>
 
@@ -56,7 +56,19 @@ kubectl -n levoai logs -f <pod name>
 ## Docker based installation
 
 ### Uninstall the Satellite
-Ensure you are in the same directory where you downloaded the [Docker Compose file](../../../../../static/artifacts/satellite/docker-compose.yml).
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+export function DockerComposeFile() {
+  return (
+    <BrowserOnly fallback={<div>Loading...</div>}>
+      {() => (
+        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/docker-compose.yml'} download> Docker Compose file</a>
+      )}
+    </BrowserOnly>
+  );
+}
+
+Ensure you are in the same directory where you downloaded the <DockerComposeFile/>.
 
 Execute the below command:
 ```bash

@@ -29,7 +29,7 @@ export function DownloadLink() {
   return (
     <BrowserOnly fallback={<div>Loading...</div>}>
       {() => (
-        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/check-compatibility.sh'}> here </a>
+        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/check-compatibility.sh'}> here</a>
       )}
     </BrowserOnly>
   );
