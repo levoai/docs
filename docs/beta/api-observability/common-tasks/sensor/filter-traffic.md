@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # API Traffic Capture Filters
 
-The Sensor allows capturing API (HTTP) traffic based on filter (include/exclude) criteria. These filters are specified in a configuration file. Please refer to [Sensor Configuration](./sensor-configuration.md) for high level structure of the file.
+The Sensor allows capturing API (HTTP) traffic based on filter (include/exclude) criteria. These filters are specified in a configuration file. Please refer to [Sensor Configuration](./sensor-configuration.mdx) for high level structure of the file.
 
 - [Default Excluded Ports](#default-excluded-ports)
 - [Configure IP Filters](#configure-ip-filters)

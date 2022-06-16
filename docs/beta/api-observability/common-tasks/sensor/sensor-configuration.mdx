@@ -1,12 +1,33 @@
 ---
 sidebar_position: 2
 ---
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+export function SensorConfigFile() {
+  return (
+    <BrowserOnly fallback={<div>Loading...</div>}>
+      {() => (
+        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/config.yml'} download> YAML configuration file</a>
+      )}
+    </BrowserOnly>
+  );
+}
+
+export function ConfigurationValues() {
+  return (
+    <BrowserOnly fallback={<div>Loading...</div>}>
+      {() => (
+        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/config-values.yml'} download> Configuration Values</a>
+      )}
+    </BrowserOnly>
+  );
+}
 
 # Manage Sensor Configuration
 
 The Sensor comes pre-configured with appropriate defaults to capture API Traffic (HTTP) from your applications.
 
-The Sensor can be customized via a [YAML configuration file](../../../../../static/artifacts/sensor/config.yml). Examples of customization include, a) granular filtering of API traffic being captured, b) enabling debugging, c) performance tuning, etc.
+The Sensor can be customized via a <SensorConfigFile/>. Examples of customization include, a) granular filtering of API traffic being captured, b) enabling debugging, c) performance tuning, etc.
 
 - [Configuration File Format](#configuration-file-format)
 - [Factory Settings](#factory-settings)
@@ -105,7 +126,7 @@ These settings allow granular control over what API traffic is captured by the S
 ### Running on Kubernetes
 Configuration is specified via a [Helm Values](https://helm.sh/docs/chart_template_guide/values_files/) file.
 
-- Modify the default [Configuration Values](../../../../../static/artifacts/sensor/config-values.yml) file to suit your requirements.
+- Modify the default <ConfigurationValues/> file to suit your requirements.
 - Save the configuration values file to your current working directory.
 - Note down the Satellite's `host:port` address information.
 - Apply the new configuration by executing the below command from the directory where you saved the `config-values.yml`.
@@ -113,8 +134,13 @@ Configuration is specified via a [Helm Values](https://helm.sh/docs/chart_templa
 ```bash
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
 # If Sensor is installed on same cluster as Satellite, use 'levoai-collector.levoai:4317'
+#
+# Specify below the 'Application Name' chosen earlier. Do not quote the 'Application Name'
+# Example: sensor.args={--default-service-name,my-test-app}
+#
 helm upgrade --install -n levoai --create-namespace \
   --set sensor.otel.grpcEndpoint=<hostname|IP:port> \
+  --set "sensor.args={--default-service-name,<'Application Name' chosen earlier>}" \
   levoai-sensor levoai/levoai-ebpf-sensor \
   -f config-values.yml
 ```
@@ -122,7 +148,7 @@ helm upgrade --install -n levoai --create-namespace \
 Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.
 
 ### Running via Docker
-- Modify the default [YAML configuration file](../../../../../static/artifacts/sensor/config.yml) to suit your requirements.
+- Modify the default <SensorConfigFile/> to suit your requirements.
 - Save the configuration file to your current working directory.
 - Shutdown/Uninstall the Sensor if running.
 - Note down the Satellite's `host:port` address information.
@@ -134,7 +160,8 @@ sudo docker run --restart unless-stopped \
   -e OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<hostname|IP:port> \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
   -v $PWD/config.yml:/home/levo/config.yml:ro \
-  --privileged levoai/ebpf_sensor:stable -d
+  --privileged --detach \
+  levoai/ebpf_sensor:stable -f /home/levo/config.yml --default-service-name <'Application Name' chosen earlier>
 ```
 Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.
 

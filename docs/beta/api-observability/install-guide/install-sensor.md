@@ -108,8 +108,8 @@ Please proceed to the next step, if there are no errors.
 sudo docker run --restart unless-stopped \
   -e OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<hostname|IP:port> \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
-  --privileged levoai/ebpf_sensor:stable \
-  --default-service-name <'Application Name' chosen earlier> -d
+  --privileged --detach levoai/ebpf_sensor:stable \
+  --default-service-name <'Application Name' chosen earlier>
 ```
 
 ### 2. Verify connectivity with Satellite

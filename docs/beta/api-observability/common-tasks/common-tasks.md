@@ -6,7 +6,7 @@ sidebar_position: 1
 
 ## [Sensor Lifecycle Management](./sensor/sensor-mgmt.md)
 
-## [Sensor Configuration](./sensor/sensor-configuration.md)
+## [Sensor Configuration](./sensor/sensor-configuration.mdx)
 
 ## [Sensor Troubleshooting](./sensor/sensor-troubleshoot.md)
 
