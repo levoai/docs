@@ -6,6 +6,7 @@ sidebar_position: 5
 
 ## What OS platforms are supported?
 
+- x86-64 Processors only.
 - Linux running on bare metal, virtual machine, and container formats.
 - Linux Kernel versions 4.14 and above.
 - Debian, Fedora, OpenSUSE, and Amazon Linux based distributions
