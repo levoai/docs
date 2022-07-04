@@ -1,22 +1,20 @@
 version: "2.1"
 services:
   levoai-rabbitmq:
-    image: 'bitnami/rabbitmq:3.8.7-debian-10-r0'
+    image: 'rabbitmq:3.10.5-management'
     container_name: levoai-rabbitmq
     restart: always
     healthcheck:
-      test: rabbitmq-diagnostics -q ping
+      test: rabbitmq-diagnostics -q check_running && rabbitmq-diagnostics -q check_local_alarms
       interval: 10s
       timeout: 10s
       retries: 10
     ports:
-      - '4369:4369'
       - '5672:5672'
-      - '25672:25672'
       - '15672:15672'
     environment:
-      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME:-levoai}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-levoailevoai}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME:-levoai}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-levoailevoai}
 
   levoai-satellite:
     image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-stable}'
@@ -33,7 +31,7 @@ services:
     environment:
       LEVOAI_MODE: docker-compose
       LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
-      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}", "refresh-token": "${LEVOAI_AUTH_KEY}", "org-prefix": "${LEVOAI_ORG_PREFIX:-}"}}'
+      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}", "refresh-token": "${LEVOAI_AUTH_KEY}", "org-id": "${LEVOAI_ORG_ID:-}", "org-prefix": "${LEVOAI_ORG_PREFIX:-}"}}'
     depends_on:
       levoai-rabbitmq:
         condition: service_healthy
@@ -49,7 +47,7 @@ services:
       LEVOAI_MODE: docker-compose
       LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
       PI_DETECTOR_DATA_DIR: /opt/levoai/datasets/
-      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}", "refresh-token": "${LEVOAI_AUTH_KEY}", "org-prefix": "${LEVOAI_ORG_PREFIX}"}, "tagger_batch_interval_minutes":5}'
+      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}", "refresh-token": "${LEVOAI_AUTH_KEY}", "org-id": "${LEVOAI_ORG_ID:-}", "org-prefix": "${LEVOAI_ORG_PREFIX:-}"}, "tagger_batch_interval_minutes":1}'
       LAYER9_PROTOSET_DISABLED: 'yes'
     depends_on:
       levoai-rabbitmq:
