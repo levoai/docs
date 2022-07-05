@@ -61,7 +61,7 @@ sudo docker logs <container id from docker ps step above>
 - Uninstall Sensor
 - Pull new Sensor image
 ```bash
-docker pull levoai/ebpf_sensor:stable
+docker pull levoai/ebpf_sensor:latest
 ```
 - Reinstall Sensor
 
