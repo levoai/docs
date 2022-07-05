@@ -1,7 +1,7 @@
 version: "2.1"
 services:
   levoai-rabbitmq:
-    image: 'bitnami/rabbitmq:3.8.7-debian-10-r0'
+    image: 'rabbitmq:3.10.5-management'
     container_name: levoai-rabbitmq
     restart: always
     healthcheck:
@@ -10,13 +10,11 @@ services:
       timeout: 10s
       retries: 10
     ports:
-      - '4369:4369'
       - '5672:5672'
-      - '25672:25672'
       - '15672:15672'
     environment:
-      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME:-levoai}
-      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD:-levoailevoai}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME:-levoai}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-levoailevoai}
 
   levoai-satellite:
     image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-latest}'
