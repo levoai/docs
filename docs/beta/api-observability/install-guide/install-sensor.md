@@ -108,7 +108,7 @@ Please proceed to the next step, if there are no errors.
 sudo docker run --restart unless-stopped \
   -e OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<hostname|IP:port> \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
-  --privileged --detach levoai/ebpf_sensor:stable \
+  --privileged --pid=host --detach levoai/ebpf_sensor:stable \
   --default-service-name <'Application Name' chosen earlier>
 ```
 
