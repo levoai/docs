@@ -36,8 +36,10 @@ if [[ -f "/sys/kernel/btf/vmlinux" ]]; then
 fi
 
 available_btf_kernels=(
+  "4.14.106-79.86.amzn1.x86_64"
   "4.14.165-mikep"
   "4.14.248-129.473.amzn1.x86_64"
+  "4.14.281-144.502.amzn1.x86_64"
   "4.15.0-1084-fips"
   "5.4.0-1029-aws"
   "5.4.0-1065-gke"
