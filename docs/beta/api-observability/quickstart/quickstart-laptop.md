@@ -9,12 +9,11 @@ import TabItem from '@theme/TabItem';
 
 Quickstart instructions for evaluating *API Observability* on Laptops/Desktops running **Mac OSX** or **Windows**.
 
-**Your estimated completion time is *10 minutes*.**
+![Levo Sensor Package for OSX/Windows](../../../assets/api-observability-laptops.svg)
 
 Since Mac OSX and Windows do not support [eBPF](https://ebpf.io), Levo provides a Sensor package (Docker based install), to enable quick evaluation on these platforms. This Sensor package gets visibility into your API traffic, by proxying traffic between your *API Client* and *API Server*.
 
-![Levo Sensor Package for OSX/Windows](../../../assets/api-observability.svg)
-
+**Your estimated completion time is *10 minutes*.**
 
 ## 1. Prerequisites
 <Tabs groupId="operating-systems">
