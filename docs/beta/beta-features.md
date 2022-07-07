@@ -17,7 +17,7 @@ Levo’s frictionless & privacy-preserving API observability solution, auto disc
 
 - [Supported Platforms](./api-observability/supported-platforms.md)
 
-- [Quickstart](./api-observability/quickstart.md)
+- [Quickstart](./api-observability/quickstart/quickstart.md)
 
 - [Install Guide](./api-observability/install-guide/install-guide.md)
 

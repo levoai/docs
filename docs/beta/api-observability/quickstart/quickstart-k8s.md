@@ -2,17 +2,17 @@
 sidebar_position: 2
 ---
 
-# Quickstart
+# Quickstart - Kubernetes
 
 Quickstart instructions for installing the Satellite, and Sensor on the same Kubernetes cluster via Helm Charts.
 
 Your estimated completion time is *10 minutes*.
 
-![Install Steps](../../assets/api-observability-install.svg)
+![Install Steps](../../../assets/api-observability-install.svg)
 
 
 ## 1. Prerequisites
-- A supported Kubernetes platform. See [Platforms](./supported-platforms.md).
+- A supported Kubernetes platform. See [Platforms](../supported-platforms.md).
 - [Helm v3](https://helm.sh/docs/intro/install/) installed and working.
 - The Kubernetes cluster API endpoint should be reachable from the machine you are running Helm.
 - `kubectl` access to the cluster, with `cluster-admin` permissions.
@@ -135,7 +135,7 @@ If connectivity is healthy, you will see output similar to below.
 ## 4. Install Sensor
 
 ### a. Pick an `Application Name`
-Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../../concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different Kubernetes clusters, similar to how file folders work in an operating system.
+Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../../../concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different Kubernetes clusters, similar to how file folders work in an operating system.
 
 Pick a descriptive name which will be used in the subsequent step below. For example: `my-test-app-k8s-c101`.
 
@@ -192,7 +192,7 @@ The Sensor picks up API traffic that is HTTP\1.x based, on the instrumented host
 
 Please ensure you exercise your API endpoints several times using tools like [Postman](https://www.postman.com/), [curl](https://curl.se/), etc. Alternatively use a load generator script that consistently exercises your API endpoints.
 
-API endpoints that are TLS based should be picked up by the Sensor, albeit with some caveats. Please see [FAQs](./faqs.md) for more information. 
+API endpoints that are TLS based should be picked up by the Sensor, albeit with some caveats. Please see [FAQs](../faqs.md) for more information. 
 
 ### Verify API Traffic Capture
 Check the logs of Satellite's `Collector` sub-component.
@@ -209,7 +209,7 @@ If API Traffic is correctly being processed, you will see log entries similar to
 ```
 
 ## 6. View Auto-discovered OpenAPI Specifications
-The [API Catalog](../../concepts/api-catalog/api-catalog.md) in Levo.ai should be auto populated in a matter of minutes (after your API endpoints are being exercised consistently).
+The [API Catalog](../../../concepts/api-catalog/api-catalog.md) in Levo.ai should be auto populated in a matter of minutes (after your API endpoints are being exercised consistently).
 
 The API Catalog will contain your auto discovered API endpoints and their OpenAPI schemas, all grouped under the `Application Name` you chose earlier.
 
