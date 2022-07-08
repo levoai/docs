@@ -44,7 +44,11 @@ API Observability auto discovers APIs and generates OpenAPI specifications for a
 If you do not have a test *API Service*/*Application*, you can use the [sample application](../sample-app.md) provided by Levo.
 
 - a. Note down the base URL for your test *API Server*/*Service*.
-> For example, if you are running the sample application (crAPI) on your laptop, the base URL would be `http://localhost:8888`. If your test *API Server* uses HTTPs the base URL for example, would be `https://localhost/`.
+> For example, if you are running the sample application (crAPI) on your laptop, the base URL would be `http://localhost:8888`. If your local test *API Server* uses HTTPs the base URL for example, would be `https://localhost/`.
+
+  > Since the Sensor package runs in a container, addresses like `localhost`, `127.0.0.1`, etc., that refer to the Docker host, must be translated to ones, that can be resolved correctly to point to the Docker host inside the container. Please specify `host.docker.internal` instead of `localhost` or `127.0.0.1` in the base URL.
+
+  > In essence, if your base URL is `http://localhost:<port>` or `http://127.0.0.1:<port>`, you will need to specify `http://host.docker.internal:<port>` instead below.
 
 - b. Export your *API Server*/*Service* URL in your terminal.
 <Tabs groupId="operating-systems">
@@ -199,11 +203,11 @@ docker ps -f name=levoai
 If the Satellite is healthy, you should see output similar to below.
 
 ```bash
-CONTAINER ID   IMAGE                     COMMAND                  CREATED             STATUS                  PORTS                                                                                                                                    NAMES
-2b32cd6b9ced   levoai/collector:stable   "/usr/local/bin/levo…"   10 seconds ago      Up 8 seconds            0.0.0.0:4317->4317/tcp, 9411/tcp                                                                                                         levoai-collector
-06f3c597cad0   levoai/satellite:stable   "gunicorn --capture-…"   10 seconds ago      Up 9 seconds            0.0.0.0:9999->9999/tcp                                                                                                                   levoai-satellite
-89026034c567   levoai/satellite:stable   "python -OO /opt/lev…"   10 seconds ago      Up Less than a second                                                                                                                                            levoai-tagger
-f74524d02fbd   bitnami/rabbitmq:3.10     "/opt/bitnami/script…"   10 seconds ago      Up 9 seconds            5551-5552/tcp, 0.0.0.0:4369->4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 0.0.0.0:15672->15672/tcp, 0.0.0.0:25672->25672/tcp, 15671/tcp   levoai-rabbitmq
+CONTAINER ID   IMAGE                        COMMAND                  CREATED          STATUS                    PORTS                                                                                                         NAMES
+5a54d8efe672   levoai/proxy:latest          "docker-entrypoint.s…"   50 seconds ago   Up 37 seconds             0.0.0.0:8080-8081->8080-8081/tcp                                                                              levoai-proxy
+8767c62db6cb   levoai/satellite:latest      "python -OO /opt/lev…"   50 seconds ago   Up 37 seconds                                                                                                                           levoai-tagger
+dcb187e00ff2   levoai/satellite:latest      "gunicorn --capture-…"   50 seconds ago   Up 37 seconds             0.0.0.0:9999->9999/tcp                                                                                        levoai-satellite
+169ceecf0263   rabbitmq:3.10.5-management   "docker-entrypoint.s…"   50 seconds ago   Up 49 seconds (healthy)   4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp   levoai-rabbitmq
 ```
 
 #### b. Check Connectivity
@@ -234,21 +238,16 @@ The Sensor's proxy listens on `http://127.0.0.1:8080`. Please point your API Cli
 
 ### b. Generate Traffic
 
-Please ensure you exercise your API endpoints several times using using your *API Client*.
+Please ensure you exercise your API endpoints several times using using your *API Client*. Use a load generator to generate consistent traffic, if necessary.
 
 ### c. Verify API Traffic Capture
-Check the logs of Satellite's `Collector` sub-component.
+Check the logs of Satellite's `Tagger` sub-component.
 
 ```bash
-# Please specify the actual pod name for levoai-collector below
-docker logs levoai-collector | grep "TracesExporter"
+docker logs levoai-tagger | grep "Consuming the span"  
 ```
 
-If API Traffic is correctly being processed, you will see log entries similar to below:
-
-```bash
-2022-06-10T17:04:56.494Z	INFO	loggingexporter/logging_exporter.go:43	TracesExporter	{"#spans": 20}
-```
+If API Traffic is correctly being processed, you will see a lot of log entries containing the term `Consuming the span`.
 
 
 
@@ -257,5 +256,5 @@ The [API Catalog](../../../concepts/api-catalog/api-catalog.md) in Levo.ai shoul
 
 The API Catalog will contain your auto discovered API endpoints and their OpenAPI schemas, all grouped under the `Application Name` you chose earlier.
 
-Congratulations! You have successfully auto discovered and auto documented API endpoints in your application.
+**Congratulations! You have successfully auto discovered and auto documented API endpoints in your application.**
 
