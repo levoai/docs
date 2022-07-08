@@ -11,7 +11,7 @@ Quickstart instructions for evaluating *API Observability* on Laptops/Desktops r
 
 ![Levo Sensor Package for OSX/Windows](../../../assets/api-observability-laptops.svg)
 
-Since Mac OSX and Windows do not support [eBPF](https://ebpf.io), Levo provides a Sensor package (Docker based install), to enable quick evaluation on these platforms. This Sensor package gets visibility into your API traffic, by proxying traffic between your *API Client* and *API Server*.
+Since Mac OSX and Windows do not support [eBPF](https://ebpf.io), Levo provides a Sensor package (Docker based install), to enable quick evaluation on these platforms. This Sensor package gets visibility into your API traffic, by **[reverse proxying](https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/)** traffic between your *API Client* and *API Server*.
 
 **Your estimated completion time is *10 minutes*.**
 
@@ -230,11 +230,15 @@ If connectivity is healthy, you will see output similar to below.
 
 The Sensor picks up API traffic that is HTTP\1.x based. There has to be some consistent load on your API endpoints for them to be auto discovered and documented.
 
-### a. Point Your *API Client* to the Sensor's Proxy
+### a. Point Your *API Client* to the Sensor
 
-You will need to point your *API Client* to the Sensor's Proxy. The Sensor will proxy the traffic to your test *API Server*/*Service*.
+The Sensor acts as a **[reverse proxy](https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/)** for your *API Server*. You will need to point your *API Client* to the Sensor. The Sensor will proxy the traffic to your test *API Server*/*Service*.
 
-The Sensor's proxy listens on `http://127.0.0.1:8080`. Please point your API Client (Web Browser, [Postman](https://www.postman.com/), [curl](https://curl.se/), etc.) to this address.
+The Sensor listens on `http://127.0.0.1:8080`. Please point your API Client (Web Browser, [Postman](https://www.postman.com/), [curl](https://curl.se/), etc.) to this address (instead of the *API Server's* address).
+
+> If your *API Server* uses HTTP/s (TLS), the Sensor will use HTTP/s when proxying traffic to it. However your *API Client* will need to use **HTTP** when talking to the Sensor.
+
+> If you are using `/etc/hosts` (or equivalent in Windows) to resolve the IP address of your *API Server*, please edit the appropriate `/etc/hosts` entry to point to `127.0.0.1` (IP address of the Sensor).
 
 ### b. Generate Traffic
 
@@ -257,4 +261,37 @@ The [API Catalog](../../../concepts/api-catalog/api-catalog.md) in Levo.ai shoul
 The API Catalog will contain your auto discovered API endpoints and their OpenAPI schemas, all grouped under the `Application Name` you chose earlier.
 
 **Congratulations! You have successfully auto discovered and auto documented API endpoints in your application.**
+<br/>
+
+---------------------------------
+## Common Tasks
+
+### Shutdown Sensor
+Execute the following in the directory where you downloaded the Docker Compose file:
+```bash
+docker compose -f proxy-docker-compose.yml down
+```
+
+### Change Sensor Listen Port
+The Sensor by default listens on TCP port 8080 (interface address 127.0.0.1). If this conflicts with a port being used by another application, you can change it by following the instructions below.
+
+- [Shutdown](./quickstart-laptop.md#shutdown-sensor) the Sensor (if running)
+- Export your desired port in your terminal
+<Tabs groupId="operating-systems">
+  <TabItem value="mac" label="Mac OSX">
+    <pre>
+      <code>
+        export LEVOAI_PROXY_PORT=&lt;Your desired port number&gt;
+      </code>
+    </pre>
+  </TabItem>
+  <TabItem value="win" label="Windows">
+    <pre>
+      <code>
+        $env:LEVOAI_PROXY_PORT="&lt;Your desired port number&gt;"
+      </code>
+    </pre>
+  </TabItem>
+</Tabs>
+- [Start](./quickstart-laptop.md#6-install-sensor-package-via-docker-compose) the Sensor
 
