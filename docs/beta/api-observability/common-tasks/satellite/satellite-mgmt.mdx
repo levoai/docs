@@ -45,7 +45,7 @@ To detect an API endpoint, Satellite waits for at least '10' URLs to match that 
 This number may cause delays in detecting API endpoints when there is not enough load.
 
 If you want to change this number to suit your environment:
-- Export an environment variable 'LEVOAI_MIN_URLS_PER_PATTERN', and
+- Export an environment variable `LEVOAI_MIN_URLS_PER_PATTERN`, and
 - Restart the Satellite with 'min_urls_required_per_pattern' helm config override option
 
 For example, to set this to 3:
@@ -54,6 +54,7 @@ For example, to set this to 3:
 export LEVOAI_AUTH_KEY=<'Authorization Key' from the original installation>
 export APP_NAME=<'Application Name' chosen during installation>
 export LEVOAI_MIN_URLS_PER_PATTERN=3
+
 # Update helm repo and upgrade installation
 helm repo update
 
@@ -110,7 +111,7 @@ To detect an API endpoint, Satellite waits for at least '10' URLs to match that 
 This number may cause delays in detecting API endpoints when there is not enough load.
 
 If you want to change this number to suit your environment:
- - export an environment variable 'LEVOAI_MIN_URLS_PER_PATTERN' - for example :
+ - export the environment variable `LEVOAI_MIN_URLS_PER_PATTERN` - for example :
       `export LEVOAI_MIN_URLS_PER_PATTERN=3`
 
  - Reinstall the Satellite to pickup the new configuration
