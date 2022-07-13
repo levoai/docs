@@ -1,50 +1,64 @@
-##############################################################################################
+##################################################################################################
 # eBPF Sensor Configuration Settings (Helm Values)
-# Copyright: Levo Inc, 2022
+# Copyright: Levo Inc., 2022
 #
-# Helm Values file to configure eBPF Sensor. Uses multi-line scalars
-# See https://helm.sh/docs/chart_template_guide/values_files/ and
-# https://yaml-multiline.info/ for more information.
+# Helm Values file to configure eBPF Sensor.
+# See https://helm.sh/docs/chart_template_guide/values_files/ for more information.
 #
-##############################################################################################
+##################################################################################################
 
 sensor:
-  config: |
-    ##########################################################################################
-    ## Factory Settings: Do Not Modify ##
-    ##########################################################################################
+  config: 
+    # --------------------------------------------------------------------------------------------
+    # Factory Settings: DO NOT MODIFY
+    # --------------------------------------------------------------------------------------------
+    #bpf-object-file: /opt/levo/libexec/levo/ebpf-sensor/bpf_progs.bpf.o
+    #debug: false
+    #legacy-kernel-btf-path: ""
     single-threaded-mode: true
-    #
-    #
-    ##########################################################################################
-    ## Application Name ##
-    ##########################################################################################
-    default-service-name: my-api-application
-    #
-    #
-    ##########################################################################################
-    ## Process Filters: process command names/IDs to monitor & capture API traffic ##
-    ##########################################################################################
+    #worker-threads: 4
+    # --------------------------------------------------------------------------------------------
+    
+    
+    # --------------------------------------------------------------------------------------------
+    # Default Application Name:
+    # --------------------------------------------------------------------------------------------
+    # Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
+    # grouped under this application name. The application name helps segregate and group API
+    # endpoints from different environments.
+    # --------------------------------------------------------------------------------------------
+    default-service-name: default
+    # --------------------------------------------------------------------------------------------
+    
+    
+    # --------------------------------------------------------------------------------------------
+    # Process Filters: process command names/IDs to monitor & capture API traffic.
+    # --------------------------------------------------------------------------------------------
     # Uncomment and modify appropriately to limit capture to specific process names or IDs.
     # Both monitored-commands and monitored-pids support list of names & IDs respectively.
     # NOTE: monitored-commands and monitored-pids settings are mutually exclusive
-    #
+    
     #monitored-commands:
-    #- <process command name. Example: nginx>
-    #- <process command name. Example: python3>
-    #
+    #  - <process command name. Example: nginx>
+    #  - <process command name. Example: python3>
+    
     #monitored-pids:
-    #- <pid. Example: 123>
-    #- <pid. Example: 45>
-    #
-    ##########################################################################################
-    ## IP Filters: IP/Port/Network address based granular filtering of API traffic. ##
-    ##########################################################################################
+    #  - <pid. Example: 123>
+    #  - <pid. Example: 45>
+    # --------------------------------------------------------------------------------------------
+    
+    
+    # --------------------------------------------------------------------------------------------
+    # IP Filters: IP/Port/Network address based granular filtering of API traffic.
+    # --------------------------------------------------------------------------------------------
+    # IP Filters enable granular capture of API traffic based on various criteria.
+    # Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+    # Refer to documentation on how these can be customized to suit your environment.
     ip-filter-list:
-      default-policy: accept
-      entries:
+      default-policy: accept # Default policy is to capture all traffic
+      entries: # Specific 'entries' can override the default policy
         ### Host Ports ###
-        # Host Port is the server listening port, where client connections are accepted
+        # Host Port is the server listening port, where client connections are accepted.
         - policy: drop
           host-ports: 53 # DNS
         - policy: drop
@@ -81,8 +95,10 @@ sensor:
           host-ports: 6379 # Redis
         - policy: drop
           host-ports: [2181, 3888, 3888] # ZooKeeper
+        - policy: drop
+          host-ports: [4317, 9999] # Levo's Satellite services
         ### Peer Ports ###
-        # Peer Port is the client port used in communication with the server listening port
+        # Peer Port is the client port used in communication with the server listening port.
         - policy: drop
           peer-ports: 53 # DNS
         - policy: drop
@@ -119,3 +135,6 @@ sensor:
           peer-ports: 6379 # Redis
         - policy: drop
           peer-ports: [2181, 3888, 3888] # ZooKeeper
+        - policy: drop
+          peer-ports: [4317, 9999] # Levo's Satellite services
+    # --------------------------------------------------------------------------------------------
