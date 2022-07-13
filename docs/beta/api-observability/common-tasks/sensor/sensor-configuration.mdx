@@ -137,17 +137,28 @@ Configuration is specified via a [Helm Values](https://helm.sh/docs/chart_templa
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
 # If Sensor is installed on same cluster as Satellite, use 'levoai-collector.levoai:4317'
 #
-# Specify below the 'Application Name' chosen earlier. Do not quote the 'Application Name'
-# Example: sensor.args={--default-service-name,my-test-app}
+# Specify the 'Application Name' chosen earlier in the config-values.yml file.
 #
-helm upgrade --install -n levoai --create-namespace \
+helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
+  --install \
+  --namespace levoai \
+  --create-namespace \
   --set sensor.otel.grpcEndpoint=<hostname|IP:port> \
-  --set "sensor.args={--default-service-name,<'Application Name' chosen earlier>}" \
-  levoai-sensor levoai/levoai-ebpf-sensor \
-  -f config-values.yml
+  --values config-values.yml
 ```
 
-Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.
+You may also specify specific configuration values using `helm --set`. For example,
+
+```bash
+helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
+  --install \
+  --namespace levoai \
+  --create-namespace \
+  --set sensor.config.default-service-name="my-test-app-k8s-c101" \
+  --set "sensor.config.monitored-commands={python3,java}"
+```
+
+Please check the Sensor logs to ensure that the specified configuration values do not have any syntax errors, and the Sensor is running with the applied configuration.
 
 ### Running via Docker
 - Modify the default <SensorConfigFile/> to suit your requirements.
