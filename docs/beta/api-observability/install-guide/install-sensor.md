@@ -43,13 +43,14 @@ helm repo add levoai https://charts.levo.ai && helm repo update
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
 # If Sensor is installed on same cluster as Satellite, use 'levoai-collector.levoai:4317'
 #
-# Specify below the 'Application Name' chosen earlier. Do not quote the 'Application Name'
-# Example: sensor.args={--default-service-name,my-test-app}
+# Specify below the 'Application Name' chosen earlier.
 #
-helm upgrade --install -n levoai --create-namespace \
-  --set sensor.otel.grpcEndpoint=<hostname|IP:port> \
-  --set "sensor.args={--default-service-name,<'Application Name' chosen earlier>}" \
-  levoai-sensor levoai/levoai-ebpf-sensor 
+helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
+  --install \
+  --namespace levoai \
+  --create-namespace \
+  --set sensor.config.default-service-name=<'Application Name' chosen earlier> \
+  --set sensor.otel.grpcEndpoint=<hostname|IP:port>
 ```
 
 

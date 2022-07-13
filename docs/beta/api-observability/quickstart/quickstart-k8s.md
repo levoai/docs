@@ -146,12 +146,13 @@ helm repo add levoai https://charts.levo.ai && helm repo update
 
 ### c. Create `levoai` namespace & install Sensor
 ```bash
-# Specify below the 'Application Name' chosen earlier. Do not quote the 'Application Name'
-# Example: sensor.args={--default-service-name,my-test-app-k8s-c101}
+# Specify below the 'Application Name' chosen earlier.
 #
-helm upgrade --install -n levoai --create-namespace \
-  --set "sensor.args={--default-service-name,<'Application Name' chosen earlier>}" \
-  levoai-sensor levoai/levoai-ebpf-sensor 
+helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
+  --install \
+  --namespace levoai \
+  --create-namespace \
+  --set sensor.config.default-service-name=<'Application Name' chosen earlier>
 ```
 
 ### d. Verify connectivity with Satellite
