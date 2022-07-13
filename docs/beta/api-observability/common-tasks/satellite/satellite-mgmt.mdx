@@ -18,13 +18,11 @@ sidebar_position: 1
 ```bash
 # Setup environment variables
 export LEVOAI_AUTH_KEY=<'Authorization Key' from the original installation> 
-export APP_NAME=<'Application Name' chosen during installation>
 
 # Update helm repo and upgrade installation
 helm repo update
 
 helm upgrade -n levoai \
-  --set global.levoai.app_name=$APP_NAME \
   --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
   levoai-satellite levoai/levoai-satellite
 ```
@@ -52,14 +50,12 @@ For example, to set this to 3:
 ```bash
 # Setup environment variables
 export LEVOAI_AUTH_KEY=<'Authorization Key' from the original installation>
-export APP_NAME=<'Application Name' chosen during installation>
 export LEVOAI_MIN_URLS_PER_PATTERN=3
 
 # Update helm repo and upgrade installation
 helm repo update
 
 helm upgrade -n levoai \
-  --set global.levoai.app_name=$APP_NAME \
   --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
   --set global.levoai_config_override.min_urls_required_per_pattern=$LEVOAI_MIN_URLS_PER_PATTERN \
   levoai-satellite levoai/levoai-satellite
