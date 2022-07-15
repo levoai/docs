@@ -19,7 +19,7 @@ Since Mac OSX and Windows do not support [eBPF](https://ebpf.io), Levo provides 
 <Tabs groupId="operating-systems">
   <TabItem value="mac" label="Mac OSX">
     <ul>
-      <li> Docker version `18.03.0` and above </li>
+      <li> Docker Engine version `18.03.0` and above </li>
       <li> Admin (or `sudo`) privileges on the Docker host </li>
       <li> <a href="https://levo.ai/levo-signup/">Forever Free Account on Levo.ai</a> </li>
       <li> Command line terminal with Bash or Bash compatible shell </li>
@@ -27,7 +27,7 @@ Since Mac OSX and Windows do not support [eBPF](https://ebpf.io), Levo provides 
   </TabItem>
   <TabItem value="win" label="Windows">
     <ul>
-      <li> Docker version `18.03.0` and above </li>
+      <li> Docker Engine version `18.03.0` and above </li>
       <li> Admin privileges on the Docker host </li>
       <li> <a href="https://levo.ai/levo-signup/">Forever Free Account on Levo.ai</a> </li>
       <li> PowerShell terminal </li>
@@ -129,13 +129,17 @@ Execute the following in your terminal:
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
-export function CurlScript() {
+export function CurlScript(props) {
+  var curlCmd = "curl";
+  if (props.curlCmd) {
+    curlCmd = props.curlCmd;
+  }
   return (
     <BrowserOnly fallback={<div>Loading...</div>}>
       {() => (
         <pre>
           <code>
-              curl -s -o proxy-docker-compose.yml {window.location.protocol + '//' + window.location.host + '/artifacts/satellite/proxy-docker-compose.yml'}
+              {curlCmd} -s -o proxy-docker-compose.yml {window.location.protocol + '//' + window.location.host + '/artifacts/satellite/proxy-docker-compose.yml'}
           </code>
         </pre>
       )}
@@ -153,7 +157,14 @@ export function DownloadLink() {
   );
 }
 
-<CurlScript/>
+<Tabs groupId="operating-systems">
+  <TabItem value="mac" label="Mac OSX">
+    <CurlScript/>
+  </TabItem>
+  <TabItem value="win" label="Windows">
+    <CurlScript curlCmd="curl.exe"/>
+  </TabItem>
+</Tabs>
 
 If prefer to download the Docker Compose file via your browser, you can download it <DownloadLink/>.
 
@@ -213,14 +224,44 @@ dcb187e00ff2   levoai/satellite:latest      "gunicorn --capture-…"   50 second
 #### b. Check Connectivity
 Execute the following to check for connectivity health:
 
-```bash
-docker logs levoai-tagger | grep "Ready to process; waiting for messages." 
-```
-If connectivity is healthy, you will see output similar to below.
+<Tabs groupId="operating-systems">
+  <TabItem value="mac" label="Mac OSX">
+    <pre>
+      <code>
+        docker logs levoai-tagger | grep "Ready to process; waiting for messages." 
+      </code>
+    </pre>
+  </TabItem>
+  <TabItem value="win" label="Windows">
+    <pre>
+      <code>
+        docker logs levoai-tagger 2>&1 | findstr /C:"Ready to process;" 
+      </code>
+    </pre>
+  </TabItem>
+</Tabs>
 
-```bash
-{"level": "info", "time": "2022-06-07 08:07:22,439", "line": "rabbitmq_client.py:155", "version": "fc628b50354bf94e544eef46751d44945a2c55bc", "module": "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py", "message": "Ready to process; waiting for messages."}
-```
+<br/>
+
+If connectivity is **healthy**, you will see output similar to below:
+
+<Tabs groupId="operating-systems">
+  <TabItem value="mac" label="Mac OSX">
+    <pre>
+      &#123; <br/>
+      &ensp; "level": "info", "time": "2022-06-07 08:07:22,439", "line": "rabbitmq_client.py:155",<br/>
+      &ensp; "version": "fc628b50354bf94e544eef46751d44945a2c55bc",<br/> 
+      &ensp; "module": "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py",<br/> 
+      &ensp; "message": "Ready to process; waiting for messages."<br/>
+      &#125;
+    </pre>
+  </TabItem>
+  <TabItem value="win" label="Windows">
+    <pre>
+      &ensp; "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py", "message": "Ready to process; waiting for
+    </pre>
+  </TabItem>
+</Tabs>
 
 **Please contact `support@levo.ai` if you notice health/connectivity related errors.**
 
@@ -247,9 +288,22 @@ Please ensure you exercise your API endpoints several times using using your *AP
 ### c. Verify API Traffic Capture
 Check the logs of Satellite's `Tagger` sub-component.
 
-```bash
-docker logs levoai-tagger | grep "Consuming the span"  
-```
+<Tabs groupId="operating-systems">
+  <TabItem value="mac" label="Mac OSX">
+    <pre>
+      <code>
+        docker logs levoai-tagger | grep "Consuming the span" 
+      </code>
+    </pre>
+  </TabItem>
+  <TabItem value="win" label="Windows">
+    <pre>
+      <code>
+        docker logs levoai-tagger 2>&1 | findstr /C:"Consuming the span" 
+      </code>
+    </pre>
+  </TabItem>
+</Tabs>
 
 If API Traffic is correctly being processed, you will see a lot of log entries containing the term `Consuming the span`.
 

@@ -94,7 +94,7 @@ Please proceed to the next step, if there are no errors.
 ## Install on Linux host via Docker
 
 ### Prerequisites
-- Docker version `18.03.0` and above
+- Docker Engine version `18.03.0` and above
 - Admin (or `sudo`) privileges on the Docker host
 
 ### 1. Install Sensor
