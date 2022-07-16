@@ -235,7 +235,7 @@ Execute the following to check for connectivity health:
   <TabItem value="win" label="Windows">
     <pre>
       <code>
-        docker logs levoai-tagger 2>&1 | findstr /C:"Ready to process;" 
+        docker logs levoai-tagger 2>&1 | sls "Ready to process; waiting for messages." 
       </code>
     </pre>
   </TabItem>
@@ -245,23 +245,12 @@ Execute the following to check for connectivity health:
 
 If connectivity is **healthy**, you will see output similar to below:
 
-<Tabs groupId="operating-systems">
-  <TabItem value="mac" label="Mac OSX">
-    <pre>
-      &#123; <br/>
-      &ensp; "level": "info", "time": "2022-06-07 08:07:22,439", "line": "rabbitmq_client.py:155",<br/>
-      &ensp; "version": "fc628b50354bf94e544eef46751d44945a2c55bc",<br/> 
-      &ensp; "module": "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py",<br/> 
-      &ensp; "message": "Ready to process; waiting for messages."<br/>
-      &#125;
-    </pre>
-  </TabItem>
-  <TabItem value="win" label="Windows">
-    <pre>
-      &ensp; "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py", "message": "Ready to process; waiting for
-    </pre>
-  </TabItem>
-</Tabs>
+```json
+{"level": "info", "time": "2022-06-07 08:07:22,439",
+"line": "rabbitmq_client.py:155", "version": "fc628b50354bf94e544eef46751d44945a2c55bc", 
+"module": "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py", 
+"message": "Ready to process; waiting for messages."}
+```
 
 **Please contact `support@levo.ai` if you notice health/connectivity related errors.**
 
@@ -275,7 +264,7 @@ The Sensor picks up API traffic that is HTTP\1.x based. There has to be some con
 
 The Sensor acts as a **[reverse proxy](https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/)** for your *API Server*. You will need to point your *API Client* to the Sensor. The Sensor will proxy the traffic to your test *API Server*/*Service*.
 
-The Sensor listens on `http://127.0.0.1:8080`. Please point your API Client (Web Browser, [Postman](https://www.postman.com/), [curl](https://curl.se/), etc.) to this address (instead of the *API Server's* address).
+The Sensor listens on [http://127.0.0.1:8080](http://127.0.0.1:8080). Please point your API Client (Web Browser, [Postman](https://www.postman.com/), [curl](https://curl.se/), etc.) to this address (instead of the *API Server's* address).
 
 > If your *API Server* uses HTTP/s (TLS), the Sensor will use HTTP/s when proxying traffic to it. However your *API Client* will need to use **HTTP** when talking to the Sensor.
 
@@ -299,7 +288,7 @@ Check the logs of Satellite's `Tagger` sub-component.
   <TabItem value="win" label="Windows">
     <pre>
       <code>
-        docker logs levoai-tagger 2>&1 | findstr /C:"Consuming the span" 
+        docker logs levoai-tagger 2>&1 | sls "Consuming the span" 
       </code>
     </pre>
   </TabItem>
