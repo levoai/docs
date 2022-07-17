@@ -137,7 +137,7 @@ const config = {
         content:
           'Frictionless API Observability - <a target="_blank" rel="noopener noreferrer" href="beta/beta-features">Available Now!</a>',
         backgroundColor: '#fafbfc',
-        textColor: '#3349FF',
+        textColor: '#700be3',
         isCloseable: true,
       },
     }),

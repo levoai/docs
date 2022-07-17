@@ -11,6 +11,8 @@ sidebar_position: 5
 - Linux Kernel versions 4.14 and above.
 - Debian, Fedora, OpenSUSE, and Amazon Linux based distributions
 
+> macOS & Windows Laptops are supported via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](./quickstart/quickstart-laptop.md).
+
 ## What Kubernetes platforms are supported?
 - [minikube on Linux](https://minikube.sigs.k8s.io/docs/)
 - [AKS](https://azure.microsoft.com/en-us/services/kubernetes-service/#overview)

@@ -30,6 +30,7 @@ Since Mac OSX and Windows do not support [eBPF](https://ebpf.io), Levo provides 
       <li> Docker Engine version `18.03.0` and above </li>
       <li> Admin privileges on the Docker host </li>
       <li> <a href="https://levo.ai/levo-signup/">Forever Free Account on Levo.ai</a> </li>
+      <li> Docker containers MUST be allowed to connect to the internet. Please check Firewall settings </li>
       <li> PowerShell terminal </li>
     </ul>
   </TabItem>
