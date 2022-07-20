@@ -229,7 +229,7 @@ Execute the following to check for connectivity health:
   <TabItem value="mac" label="Mac OSX">
     <pre>
       <code>
-        docker logs levoai-tagger | grep "Ready to process; waiting for messages." 
+        docker logs levoai-tagger 2>&1 | grep "Ready to process; waiting for messages." 
       </code>
     </pre>
   </TabItem>
@@ -282,7 +282,7 @@ Check the logs of Satellite's `Tagger` sub-component.
   <TabItem value="mac" label="Mac OSX">
     <pre>
       <code>
-        docker logs levoai-tagger | grep "Consuming the span" 
+        docker logs levoai-tagger 2>&1 | grep "Consuming the span" 
       </code>
     </pre>
   </TabItem>
