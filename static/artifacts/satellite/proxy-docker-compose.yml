@@ -30,6 +30,10 @@ services:
       - "1"
       - "-b"
       - "0.0.0.0:9999"
+      - "--worker-class"
+      - "gevent"
+      - "--worker-connections"
+      - "1000"
       - "levoai_e7s.satellite.satellite:create_server()"
     environment:
       LEVOAI_MODE: docker-compose
@@ -52,7 +56,13 @@ services:
       LEVOAI_MODE: docker-compose
       LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
       PI_DETECTOR_DATA_DIR: /opt/levoai/datasets/
-      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}", "refresh-token": "${LEVOAI_AUTH_KEY}", "org-id": "${LEVOAI_ORG_ID:-}", "org-prefix": "${LEVOAI_ORG_PREFIX:-}"}, "min_urls_required_per_pattern": "${LEVOAI_MIN_URLS_PER_PATTERN:-3}", "tagger_batch_interval_minutes":1}'
+      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}",
+                "refresh-token": "${LEVOAI_AUTH_KEY}", "org-id": "${LEVOAI_ORG_ID:-}",
+                "org-prefix": "${LEVOAI_ORG_PREFIX:-}"},
+                "send_sample_payloads": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-False}",
+                "max_samples_per_end_point": "${MAX_SAMPLES_PER_END_POINT:-2}",
+                "min_urls_required_per_pattern": "${LEVOAI_MIN_URLS_PER_PATTERN:-3}",
+                "tagger_batch_interval_minutes":1}'
     depends_on:
       levoai-rabbitmq:
         condition: service_healthy
