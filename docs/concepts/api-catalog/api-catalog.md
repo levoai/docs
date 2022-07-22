@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+keywords: [API Catalog, OpenAPI Specifications]
 ---
 
 # API Catalog

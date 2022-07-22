@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+keywords: [API Security, eBPF, Kubernetes, API Observability]
 ---
 
 # Quickstart - Kubernetes

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+keywords: [API Security, eBPF, API Observability]
 ---
 
 # Key Concepts
