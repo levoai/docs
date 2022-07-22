@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 description: Benefits of API Security Testing, API Contract Testing, and API Observability.
 ---
 
