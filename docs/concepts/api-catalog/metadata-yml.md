@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+keywords: [API Authorization, Roles, Scopes]
 ---
 
 # Metadata.yml file

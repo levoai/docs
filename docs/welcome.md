@@ -1,4 +1,5 @@
 ---
+description: API Security Testing in CI/CD. Purpose built for modern development teams.
 sidebar_position: 1
 slug: /
 ---

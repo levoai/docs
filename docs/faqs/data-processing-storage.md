@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+keywords: [Security, Privacy, Data Processing, Data Storage]
 ---
 
 # Data Processing & Storage - FAQ

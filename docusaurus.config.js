@@ -50,7 +50,7 @@ const config = {
           "v1": {
             label: 'v1',
             path: 'v1',
-            badge: false
+            badge: true
           },
         },
       },
@@ -66,6 +66,7 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
+      metadata: [{name: 'keywords', content: 'API Observability, API Security Testing, API Contract Testing, DAST for APIs'}],
       navbar: {
         // title: 'Levo.ai',
         logo: {

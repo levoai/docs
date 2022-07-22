@@ -11,7 +11,7 @@ You can read more about *crAPI* [here](https://github.com/levoai/demo-apps/blob/
 
 2. Now install the crAPI demo application by following instructions [here](https://github.com/levoai/demo-apps/blob/main/crAPI/docs/quick-start.md).
 
-3. Generate traffic for crAPI by browsing it's web UI for at least five minutes.
+3. Generate traffic for crAPI by browsing its web UI for at least five minutes.
 
 4. Go to the API Catalog in the Levo web console to see auto discovered OpenAPI specifications for crAPI. The specifications will be grouped under the `Application Name` you specified when installing the Sensor.
 
