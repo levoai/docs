@@ -11,7 +11,7 @@ Build resilient APIs and prevent disruptions to critical customer/partner integr
 
 ## Contract Tests are Isolated, Fast, & Cheap
 
-Contract testing is a lightweight form of API testing that strictly checks the content and format of requests/responses. Unlike functional tests, contract tests do not validate the logic or consumer flows of APIs.
+Contract testing (**aka Schema Conformance**) is a lightweight form of API testing that strictly checks the content and format of requests/responses. Unlike functional tests, contract tests do not validate the logic or consumer flows of APIs.
 
 Contract testing really focuses on ensuring that spec files such as Swagger or OpenAPI, properly fulfill contracts between API consumers and producers.
 

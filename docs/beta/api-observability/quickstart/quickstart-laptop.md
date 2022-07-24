@@ -57,14 +57,14 @@ If you do not have a test *API Service*/*Application*, you can use the [sample a
   <TabItem value="mac" label="Mac OSX">
     <pre>
       <code>
-        export SERVICE_ADDRESS=&lt;base URL noted above&gt;
+        export SERVICE_ADDRESS=&lt;http://host:port/base-path&gt;
       </code>
     </pre>
   </TabItem>
   <TabItem value="win" label="Windows">
     <pre>
       <code>
-        $env:SERVICE_ADDRESS="&lt;base URL noted above&gt;"
+        $env:SERVICE_ADDRESS="&lt;http://host:port/base-path&gt;"
       </code>
     </pre>
   </TabItem>
