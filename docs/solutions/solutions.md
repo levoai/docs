@@ -4,6 +4,15 @@ sidebar_position: 1
 
 # Solutions
 
+- [Frictionless API Observability](#frictionless-api-observability)
+- [Codeless API Contract Testing](#codeless-api-contract-testing)
+- [Codeless API Security Testing](#codeless-api-security-testing)
+
+<br/>
+
+---------------------------------------
+
+
 ## [Frictionless API Observability](./api-observability.md)
 
 Levo’s frictionless & privacy-preserving *API Observability* solution, auto discovers and auto documents all your APIs.
@@ -22,7 +31,7 @@ Below are the high level benefits:
 ## [Codeless API Contract Testing](./api-contract-testing.md)
 API endpoints have a defined schema (aka contract), that is often described in OpenAPI Specifications. The contract allows clients of the API endpoint to interact with it, without knowledge of the underlying implementation.
 
-Schema / Contract conformance testing ensures that said contract matches the actual implementation of the API endpoint. Contract testing is a critical tool to detect breaking changes before they are deployed to production.
+Contract testing (**aka Schema Conformance**) ensures that said contract matches the actual implementation of the API endpoint. Contract testing is a critical tool to detect breaking changes before they are deployed to production.
 
 ![API Contract Testing](../assets/api-contract-testing.svg)
 
