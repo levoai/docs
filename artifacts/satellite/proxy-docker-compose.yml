@@ -1,4 +1,4 @@
-version: "2.1"
+version: "2.2"
 services:
   levoai-rabbitmq:
     image: 'rabbitmq:3.10.5-management'
@@ -36,7 +36,10 @@ services:
       - "1000"
       - "levoai_e7s.satellite.satellite:create_server()"
     environment:
+      LEVOAI_DEBUG_ENABLED: ${LEVOAI_SATELLITE_DEBUG_ENABLED:-false}
+      LEVOAI_DEBUG_PORT: ${LEVOAI_SATELLITE_DEBUG_PORT:-12345}
       LEVOAI_MODE: docker-compose
+      LEVOAI_DEBUG_SERVER_HOST: ${LEVOAI_DEBUG_SERVER_HOST:-host.docker.internal}
       LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
       LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}", "refresh-token": "${LEVOAI_AUTH_KEY}", "org-id": "${LEVOAI_ORG_ID:-}", "org-prefix": "${LEVOAI_ORG_PREFIX:-}"}}'
     depends_on:
@@ -53,7 +56,10 @@ services:
     command:
       - /opt/levoai/e7s/src/python/levoai_e7s/tag_server.py
     environment:
+      LEVOAI_DEBUG_ENABLED: ${LEVOAI_TAGGER_DEBUG_ENABLED:-false}
+      LEVOAI_DEBUG_PORT: ${LEVOAI_TAGGER_DEBUG_PORT:-12345}
       LEVOAI_MODE: docker-compose
+      LEVOAI_DEBUG_SERVER_HOST: ${LEVOAI_DEBUG_SERVER_HOST:-host.docker.internal}
       LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
       PI_DETECTOR_DATA_DIR: /opt/levoai/datasets/
       LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}",
@@ -62,6 +68,7 @@ services:
                 "send_sample_payloads": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-False}",
                 "max_samples_per_end_point": "${MAX_SAMPLES_PER_END_POINT:-2}",
                 "min_urls_required_per_pattern": "${LEVOAI_MIN_URLS_PER_PATTERN:-3}",
+                "cookie_auth_keys": "${LEVOAI_COOKIE_AUTH_KEYS:-}",
                 "tagger_batch_interval_minutes":1}'
     depends_on:
       levoai-rabbitmq:
