@@ -1,4 +1,4 @@
-version: "2.1"
+version: "2.2"
 services:
   levoai-rabbitmq:
     image: 'rabbitmq:3.10.5-management'
