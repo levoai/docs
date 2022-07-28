@@ -67,7 +67,7 @@ The below sections describe common filtering scenarios with examples. In all cas
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Default policy is to drop all traffic
@@ -83,7 +83,7 @@ Host Port is the server listening port, where client/peer connections are accept
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Default policy is to capture all traffic
@@ -104,7 +104,7 @@ Peer Port is a client port used in communication with the server listening port.
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Default policy is to capture all traffic
@@ -127,7 +127,7 @@ Host Port is the server listening port, where client/peer connections are accept
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Drop all traffic except ones below
@@ -148,7 +148,7 @@ Peer Port is a client port used in communication with the server listening port.
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Drop all traffic except ones below
@@ -172,7 +172,7 @@ Host implies the binding IP addresses of the Server servicing the API endpoints.
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Accept all traffic except ones below
@@ -192,7 +192,7 @@ Peer implies the IP addresses of clients connecting to the Server/Host servicing
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Accept all traffic except ones below
@@ -214,7 +214,7 @@ Host implies the binding IP addresses of the Server servicing the API endpoints.
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Drop all traffic except ones below
@@ -234,7 +234,7 @@ Peer implies the IP addresses of clients connecting to the Server/Host servicing
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Drop all traffic except ones below
@@ -256,7 +256,7 @@ The examples below are for `host-network` subnets. The same technique is applica
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Accept all traffic except ones below
@@ -272,7 +272,7 @@ ip-filter-list:
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Accept all traffic except ones below
@@ -292,7 +292,7 @@ The examples below are for `host-network` subnets. The same technique is applica
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Drop all traffic except ones below
@@ -308,7 +308,7 @@ ip-filter-list:
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Drop all traffic except ones below
@@ -338,7 +338,7 @@ monitored-commands:
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Default policy is to capture all traffic
@@ -362,7 +362,7 @@ monitored-pids:
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Default policy is to capture all traffic
