@@ -27,6 +27,7 @@ The Sensor allows capturing API (HTTP) traffic based on filter (include/exclude)
     - [Only Trace `GET/POST` API Endpoints](#only-trace-getpost-api-endpoints)
     - [Only Trace `payments.com:8888` APIs](#only-trace-paymentscom8888-apis)
     - [Only Trace `payments.com:8888/credit/` APIs Doing `GET`](#only-trace-paymentscom8888credit-apis-doing-get)
+    - [Trace APIs on All Subdomains of `api.acme.com`](#trace-apis-on-all-subdomains-of-apiacmecom)
 
 <br/>
 
@@ -66,7 +67,7 @@ The below sections describe common filtering scenarios with examples. In all cas
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Default policy is to drop all traffic
@@ -82,7 +83,7 @@ Host Port is the server listening port, where client/peer connections are accept
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Default policy is to capture all traffic
@@ -103,7 +104,7 @@ Peer Port is a client port used in communication with the server listening port.
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Default policy is to capture all traffic
@@ -126,7 +127,7 @@ Host Port is the server listening port, where client/peer connections are accept
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Drop all traffic except ones below
@@ -147,7 +148,7 @@ Peer Port is a client port used in communication with the server listening port.
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Drop all traffic except ones below
@@ -171,7 +172,7 @@ Host implies the binding IP addresses of the Server servicing the API endpoints.
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Accept all traffic except ones below
@@ -191,7 +192,7 @@ Peer implies the IP addresses of clients connecting to the Server/Host servicing
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Accept all traffic except ones below
@@ -213,7 +214,7 @@ Host implies the binding IP addresses of the Server servicing the API endpoints.
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Drop all traffic except ones below
@@ -233,7 +234,7 @@ Peer implies the IP addresses of clients connecting to the Server/Host servicing
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Drop all traffic except ones below
@@ -255,7 +256,7 @@ The examples below are for `host-network` subnets. The same technique is applica
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Accept all traffic except ones below
@@ -271,7 +272,7 @@ ip-filter-list:
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Accept all traffic except ones below
@@ -291,7 +292,7 @@ The examples below are for `host-network` subnets. The same technique is applica
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Drop all traffic except ones below
@@ -307,7 +308,7 @@ ip-filter-list:
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: drop # Drop all traffic except ones below
@@ -337,7 +338,7 @@ monitored-commands:
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Default policy is to capture all traffic
@@ -361,7 +362,7 @@ monitored-pids:
 # IP Filters: IP/Port/Network address based granular filtering of API traffic.
 # --------------------------------------------------------------------------------------------
 # IP Filters enable granular capture of API traffic based on various criteria.
-# Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+# Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
 # Refer to documentation on how these can be customized to suit your environment.
 ip-filter-list:
   default-policy: accept # Default policy is to capture all traffic
@@ -410,8 +411,8 @@ The `rules` sub section defines the override behavior using a YAML array list. E
 - `action`: mandatory parameter that accepts either `trace` or `ignore` as values
 - At least one, and optionally all of the below additional parameters:
   - `methods`: YAML array list of one or more (API operations) methods as values: GET, POST, PUT, PATCH, DELETE
-  - `request-uri`: URI of the API endpoint as the value. Can be a (Perl format) regex pattern. Example: /foo/bar, or /bar/*
-  - `host`: Hostname of the API endpoint and optionally the port as values. Example: levo.ai:8888, or levo.ai
+  - `request-uri`: URI of the API endpoint as the value. Can be a (Perl format) regex pattern. Example: `/foo/bar`, or `/bar/*`
+  - `host`: Hostname of the API endpoint and optionally the port as values. Can be a (Perl format) regex pattern. Example: `levo.ai:8888`, or `levo.ai`, or a regex such as `.*\.levo\.ai` to handle all subdomains of levo.ai
 
 **Rule entries are evaluated in the order in which they were specified**. Further evaluation stops, as soon as a single rule entry matches.
 
@@ -524,5 +525,22 @@ url-filter:
       host: payments.com:8888
       methods: [GET]
       request-uri: /credit/.*
+# --------------------------------------------------------------------------------------------
+```
+
+#### Trace APIs on All Subdomains of `api.acme.com`
+The below filter will ONLY trace API endpoints belonging to all subdomains of API host *acme.com*. For example API endpoints belonging to *payments.api.acme.com*, and *orders.api.acme.com*, will be traced, but *catalog.acme.com* will be ignored.
+
+The Host header is expressed as a Perl format regular expression.
+
+```yaml
+# --------------------------------------------------------------------------------------------
+# URL Filters: API parameter based granular filtering of API traffic.
+# --------------------------------------------------------------------------------------------
+url-filter:
+  default-url-action: ignore # Ignore all API endpoints by default
+  rules:
+    - action: trace
+      host: .*\.api\.acme\.com # '.' has been escaped as we are using a regex
 # --------------------------------------------------------------------------------------------
 ```
