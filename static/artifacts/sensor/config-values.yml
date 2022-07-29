@@ -52,7 +52,7 @@ sensor:
     # IP Filters: IP/Port/Network address based granular filtering of API traffic.
     # --------------------------------------------------------------------------------------------
     # IP Filters enable granular capture of API traffic based on various criteria.
-    # Default values ignore traffic from standard ports that normally do not care HTTP traffic.
+    # Default values ignore traffic from standard ports that normally do not carry HTTP traffic.
     # Refer to documentation on how these can be customized to suit your environment.
     ip-filter-list:
       default-policy: accept # Default policy is to capture all traffic
@@ -137,4 +137,22 @@ sensor:
           peer-ports: [2181, 3888, 3888] # ZooKeeper
         - policy: drop
           peer-ports: [4317, 9999] # Levo's Satellite services
+    # --------------------------------------------------------------------------------------------
+    
+    
+    # --------------------------------------------------------------------------------------------
+    # URL Filters: API parameter based granular filtering of API traffic.
+    # --------------------------------------------------------------------------------------------
+    # URL filters allow granular filtering of API traffic based on the 'API endpoint Method' (operation),
+    # the 'API Host' (Host Header), and the 'API endpoint's URI'.
+    # Refer to the documentation for instructions on configuring URL filters.
+    #
+    # Example: Ignore API endpoints with URI path beginning with '/static/'
+    #url-filter:
+    #  default-url-action: trace # Trace all API endpoints by default
+    #  rules:
+    #    - action: ignore
+    #      request-uri: /static/.*
+    #
+    
     # --------------------------------------------------------------------------------------------
