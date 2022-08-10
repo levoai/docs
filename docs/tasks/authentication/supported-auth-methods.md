@@ -27,8 +27,7 @@ iam:
 ```
 
 ## Login API / form based login (aka http_call)
-If you use an API (or HTTP JSON forms) to acquire a authentication token (bearer token) in exchange for user
-credentials, you can use the `http_call` method.
+If you use an API (or HTTP JSON forms) to acquire a authentication token (bearer token) in exchange for user credentials, you can use the `http_call` method.
 
 This method requires you to provide the following:
 - The login URL
@@ -45,10 +44,10 @@ iam:
   #
   # This section specifies how to extract an authentication token
   authenticators:
-    - name: my_authenticator
+    - name:  <your friendly name for this authenticator. E.g. my_authenticator>
       type: http_call # Makes a HTTP request using the specified method
       method: <POST | GET> # Defaults to POST if unspecified
-      login_url: /identity/api/auth/login # URL for HTTP request
+      login_url: <Enter URL value. E.g. /identity/api/auth/login> # URL for HTTP request
       username_key: <JSON key for username> # Key in HTTP request's JSON body that specifies the user value
       password_key: <JSON key for password> # Key in HTTP request's JSON body that specifies the password value
       #
@@ -67,7 +66,7 @@ iam:
       default: true # This user's credentials will be used to access all API endpoints requiring AuthN
       username: <user_id>
       password_base64: <base64 password> # Passwords need to be base64 encoded
-      authenticator: my_authenticator
+      authenticator: <friendly name of the authenticator specified above. E.g. my_authenticator>
 ```
 
 ## Basic Authentication
@@ -160,7 +159,164 @@ iam:
 If you using roles, the format is similar to the Basic Authentication example. You just need to use API key instead of username and password.
 
 ## Cookie based authentication
-Coming soon ...
+Below examples are applicable, when cookies are being used for user authentication.
+
+### Use existing cookie values
+Below example is applicable, when the cookie values are known *a priori*.
+
+```YAML
+iam:
+  users:
+  - name: user_1
+    default: true # This user's credentials will be used for all authentication
+    cookies:
+    - name: <Enter cookie name. E.g. JSESSIONID> # Cookie is a JSESSION ID
+      value: <Enter the cookie value>
+```
+
+### Extract cookie via API call (aka http_call)
+If you use an API (or HTTP JSON forms) to acquire a authentication cookie in exchange for user credentials, you can use the `http_call` method.
+
+This method requires you to provide the following:
+- The HTTP URL of the API endpoint that returns the authentication cookie.
+- The HTTP method to use when fetching the URL. Only `POST` & `GET` supported. If unspecified will use `POST`.
+- The name/location of the username field that is sent in the login request's (JSON) body. This needs to be a JSON path expression.
+- The name/location of the password field that is sent in the login request's (JSON) body. This needs to be a JSON path expression.
+- The name of the cookie header in the JSON response, where the cookie is present.
+- The username and base64 encoded password values for the `user_1` used in security tests.
+
+Below is the syntax to extract cookies using a `http_call`.
+```YAML
+iam:
+  authenticators:
+    - name: <your friendly name for this authenticator. E.g. my_auth_cookie_extractor>
+      type: http_call
+      method: <POST | GET> # Defaults to POST if unspecified
+      login_url: <Enter URL value. E.g. /login> # URL for HTTP request
+      request_params:
+        - name: username
+          value: <JSON path expression. E.g. $$.user.username> #JSON path of username field.
+        - name: password
+          value: <JSON path expression. E.g. $$.user.password> #JSON path of password field
+      #
+      # JSON path expressions in the example shown above is representative of the
+      # below JSON
+      # {
+      #   "user": {
+      #             "username":"<value>",
+      #             "password":"<value>"
+      #           }
+      # }
+      #
+      #
+      # This section specifies how to extract the cookie from the HTTP response
+      session_credential_extractors:
+        - name: <your friendly name for this cookie extractor. E.g. my-cookies>
+          type: cookies # Use cookie based authentication 
+          location: headers # Location of the cookie is in the response headers
+          header_name: Set-Cookie # Case sensitive name of the header. TBD cookie name??
+  #
+  #
+  # This section specifies actual user information the test plan will use
+  users:
+    - name: user_1
+      default: true # This user's credentials will be used to access all API endpoints requiring AuthN
+      username: <user_id> # Specify the actual user id
+      password: <base64 password> # Specify the user's base64 encoded password. TBD ??
+      # Below defines which authentication mechanism to use
+      authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
+```
+
+### Use existing cookie values (usage with roles)
+Below example is applicable when you are running tests that involve multiple users belonging to different roles. 
+
+There are two roles and three users in the below example, that require cookie values to be specified.
+
+```YAML
+iam:
+  users:
+  # This section defines users and their respective cookie based credentials
+  #
+  # `admin_1` with role ROLE_ADMIN
+  - name: admin_1
+    default: true # Default user for `ROLE_ADMIN`
+    roles:
+    - ROLE_ADMIN
+    # Use the below cookie header for authentication
+    cookies:
+    - name: JSESSIONID # Cookie is a JSESSION ID
+      value: <Enter the cookie value>
+  #
+  # `user_1` with role ROLE_USER
+  - name: user_1
+    default: true # Default user for `ROLE_USER`
+    roles:
+    - ROLE_USER
+    cookies:
+    - name: JSESSIONID # Cookie is a JSESSION ID
+      value: <Enter the cookie value>
+  #
+  # `user_2` with role ROLE_USER
+  - name: user_2
+    roles:
+    - ROLE_USER
+    cookies:
+    - name: JSESSIONID # Cookie is a JSESSION ID
+      value: <Enter the cookie value>
+```
+
+### Extract cookie via API call (usage with roles)
+Below example is applicable when you are running tests that involve multiple users belonging to different roles, and you want to extract authentication cookies for them
+
+There are two roles and three users in the below example, that require cookie values to be extracted using the http_call.
+
+```YAML
+iam:
+  authenticators:
+    - name: <your friendly name for this authenticator. E.g. my_auth_cookie_extractor>
+      type: http_call
+      method: <POST | GET> # Defaults to POST if unspecified
+      login_url: <Enter URL value. E.g. /login> # URL for HTTP request
+      request_params:
+        - name: username
+          value: <JSON path expression. E.g. $$.user.username> #JSON path of username field.
+        - name: password
+          value: <JSON path expression. E.g. $$.user.password> #JSON path of password field
+      #
+      # This section specifies how to extract the cookie from the HTTP response
+      session_credential_extractors:
+        - name: <your friendly name for this cookie extractor. E.g. my-cookies>
+          type: cookies # Use cookie based authentication 
+          location: headers # Location of the cookie is in the response headers
+          header_name: Set-Cookie # Case sensitive name of the header. TBD cookie name??
+  #
+  #
+  # This section specifies actual user information the test plan will use
+  users:
+    # `admin_1` with role ROLE_ADMIN
+    - name: admin_1
+      default: true # Default user for `ROLE_ADMIN`
+      username: <user_id> # Specify the actual user id
+      password: <base64 password> # Specify the user's base64 encoded password. TBD ??
+      # Below defines which authentication mechanism to use
+      authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
+    #
+    # `user_1` with role ROLE_USER
+    - name: user_1
+      default: true # Default user for `ROLE_USER`
+      username: <user_id> # Specify the actual user id
+      password: <base64 password> # Specify the user's base64 encoded password. TBD ??
+      # Below defines which authentication mechanism to use
+      authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
+    #
+    # `user_2` with role ROLE_USER
+    - name: user_2
+      username: <user_id> # Specify the actual user id
+      password: <base64 password> # Specify the user's base64 encoded password. TBD ??
+      # Below defines which authentication mechanism to use
+      authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
+```
+
 
 ## OAuth
 Coming soon ...
