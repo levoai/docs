@@ -317,9 +317,98 @@ iam:
       authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
 ```
 
-
 ## OAuth
-Coming soon ...
+Below methods describe how [access tokens](https://www.oauth.com/oauth2-servers/access-tokens/) can be extracted using the OAuth protocol.
+
+### Password Grant
+The [Password grant](https://www.oauth.com/oauth2-servers/access-tokens/password-grant/) enables Levo's Test Plans to exchange the user’s username and password for an access token.
+
+This method requires you to provide the following:
+- The URL of the token generation API endpoint
+- The URL of the refresh token generation API endpoint (optional)
+- The *username* of the user, for whom the token is being generated
+- The base64 encoded *password* of the user, for whom the token is being generated
+- A list of *scopes* for the user (optional)
+- The *Client ID*, if it is required by your OAuth server (optional)
+- The *Client Secret*, if it is required by your OAuth server (optional)
+
+Below is the syntax to enable *Password Grant*.
+
+```YAML
+iam:
+  authenticators:
+    - name: <Friendly name for this authenticator. E.g. oauth_2>
+      type: oauth2 # Use OAuth protocol
+      grant_type: password
+      token_url: <Enter the URL for the token generation endpoint. E.g. https://my-oauth/oauth/access_token>
+      method: POST
+      client_id: <Enter your client ID. E.g. 23lkjlekfjlskd90> # Optional field
+      client_secret: <Enter your client secret. E.g. UYT9239FRE> # Optional field
+      #
+      # This section specifies how to extract the access token from the HTTP response
+      session_credential_extractors:
+        - name: access-token
+          type: bearer_token
+          location: body
+          path: $$.access_token # JSON path expression to the location of the access token in the response. Do not modify unless different from OAuth defaults
+  #
+  #
+  # This section specifies actual user information the test plan will use
+  users:
+    - name: user_1
+      default: true # This user's credentials will be used for all authentication
+      username: <Enter the username for whom you want to extract the access token>
+      password_base64: <base64 password> # Passwords need to be base64 encoded
+      scopes: # Optional field with a list of scopes
+      #  E.g. - api.read
+      #  E.g. - api.write
+      authenticator: <friendly name of the authenticator specified above. E.g. oauth_2>
+```
+
+If using roles, please follow the [cookie extractor with roles](#extract-cookie-via-api-call-usage-with-roles) example above, and modify appropriately.
+
+### Client Credentials Grant
+The [Client Credentials Grant](https://www.oauth.com/oauth2-servers/access-tokens/client-credentials/) is used for service-to-service API authentication. Use this method when testing internal APIs that do not require end-user authentication, but require service-to-service authentication.
+
+This method requires you to provide the following:
+- The URL of the token generation API endpoint
+- The URL of the refresh token generation API endpoint (optional)
+- The *Client ID*, if it is required by your OAuth server
+- The *Client Secret*, if it is required by your OAuth server
+- A list of *scopes* for the user (optional)
+
+Below is the syntax to enable *Client Credentials Grant*.
+
+```YAML
+iam:
+  authenticators:
+    - name: <Friendly name for this authenticator. E.g. oauth_2>
+      type: oauth2 # Use OAuth protocol
+      token_url: <Enter the URL for the token generation endpoint. E.g. https://my-oauth/oauth/access_token>
+      grant_type: client_credential
+      method: POST
+      client_id: <Enter your client ID. E.g. 23lkjlekfjlskd90>
+      client_secret: <Enter your client secret. E.g. UYT9239FRE>
+      #
+      # This section specifies how to extract the access token from the HTTP response
+      session_credential_extractors:
+        - name: access-token
+          type: bearer_token
+          location: body
+          path: $$.access_token # JSON path expression to the location of the access token in the response. Do not modify unless different from OAuth defaults
+  #
+  #
+  # This section specifies actual user information the test plan will use
+  users:
+    - name: user_1
+      default: true # This user's credentials will be used for all authentication
+      scopes: # Optional field with a list of scopes
+      #  E.g. - api.read
+      #  E.g. - api.write
+      authenticator: <friendly name of the authenticator specified above. E.g. oauth_2>
+```
+
+If using roles, please follow the [cookie extractor with roles](#extract-cookie-via-api-call-usage-with-roles) example above, and modify appropriately.
 
 
 
