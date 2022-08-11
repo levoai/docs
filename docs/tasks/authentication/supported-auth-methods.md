@@ -83,7 +83,7 @@ iam:
     # The credentials will be used in the Basic Authentication scheme
     - name: user_1
       username: <username for an actual user in your API's backend>
-      password: <password for the specified user>
+      password_base64: <password for the specified user> # Passwords need to be base64 encoded
       # Below defines which authentication mechanism to use
       authenticator: <friendly name of the authenticator specified above>
 ```
@@ -102,7 +102,7 @@ iam:
     - name: user_1
       default: true # Default user for `ROLE_USER`
       username: <username for an actual user in your API's backend>
-      password: <password for the specified user>
+      password_base64: <password for the specified user> # Passwords need to be base64 encoded
       # Below defines which authentication mechanism to use
       authenticator: <friendly name of the authenticator specified above>
       roles:
@@ -111,7 +111,7 @@ iam:
     # `user_2` with role ROLE_USER
     - name: user_2
       username: <username for an actual user in your API's backend>
-      password: <password for the specified user>
+      password_base64: <password for the specified user> # Passwords need to be base64 encoded
       # Below defines which authentication mechanism to use
       authenticator: <friendly name of the authenticator specified above>
       roles:
@@ -121,7 +121,7 @@ iam:
     - name: admin_1
       default: true # Default user for `ROLE_ADMIN`
       username: <username for an actual user in your API's backend>
-      password: <password for the specified user>
+      password_base64: <password for the specified user> # Passwords need to be base64 encoded
       # Below defines which authentication mechanism to use
       authenticator: <friendly name of the authenticator specified above>
       roles:
@@ -130,7 +130,7 @@ iam:
     # `admin_2` with role ROLE_ADMIN
     - name: admin_2
       username: <username for an actual user in your API's backend>
-      password: <password for the specified user>
+      password_base64: <password for the specified user> # Passwords need to be base64 encoded
       # Below defines which authentication mechanism to use
       authenticator: <friendly name of the authenticator specified above>
       roles:
@@ -170,7 +170,7 @@ iam:
   - name: user_1
     default: true # This user's credentials will be used for all authentication
     cookies:
-    - name: <Enter cookie name. E.g. JSESSIONID> # Cookie is a JSESSION ID
+    - name: <Enter exact cookie name. E.g. JSESSIONID> # Cookie is case sensitive
       value: <Enter the cookie value>
 ```
 
@@ -214,7 +214,7 @@ iam:
         - name: <your friendly name for this cookie extractor. E.g. my-cookies>
           type: cookies # Use cookie based authentication 
           location: headers # Location of the cookie is in the response headers
-          header_name: Set-Cookie # Case sensitive name of the header. TBD cookie name??
+          header_name: Set-Cookie # Case sensitive name of the header. All cookies in the Set-Cookie header are extracted
   #
   #
   # This section specifies actual user information the test plan will use
@@ -222,7 +222,7 @@ iam:
     - name: user_1
       default: true # This user's credentials will be used to access all API endpoints requiring AuthN
       username: <user_id> # Specify the actual user id
-      password: <base64 password> # Specify the user's base64 encoded password. TBD ??
+      password_base64: <base64 password> # Specify the user's base64 encoded password.
       # Below defines which authentication mechanism to use
       authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
 ```
@@ -244,7 +244,7 @@ iam:
     - ROLE_ADMIN
     # Use the below cookie header for authentication
     cookies:
-    - name: JSESSIONID # Cookie is a JSESSION ID
+    - name: <Enter exact cookie name. E.g. JSESSIONID> # Cookie is case sensitive
       value: <Enter the cookie value>
   #
   # `user_1` with role ROLE_USER
@@ -253,7 +253,7 @@ iam:
     roles:
     - ROLE_USER
     cookies:
-    - name: JSESSIONID # Cookie is a JSESSION ID
+    - name: <Enter exact cookie name. E.g. JSESSIONID> # Cookie is case sensitive
       value: <Enter the cookie value>
   #
   # `user_2` with role ROLE_USER
@@ -261,7 +261,7 @@ iam:
     roles:
     - ROLE_USER
     cookies:
-    - name: JSESSIONID # Cookie is a JSESSION ID
+    - name: <Enter exact cookie name. E.g. JSESSIONID> # Cookie is case sensitive
       value: <Enter the cookie value>
 ```
 
@@ -288,7 +288,7 @@ iam:
         - name: <your friendly name for this cookie extractor. E.g. my-cookies>
           type: cookies # Use cookie based authentication 
           location: headers # Location of the cookie is in the response headers
-          header_name: Set-Cookie # Case sensitive name of the header. TBD cookie name??
+          header_name: Set-Cookie # Case sensitive name of the header. All cookies in the Set-Cookie header are extracted.
   #
   #
   # This section specifies actual user information the test plan will use
@@ -297,7 +297,7 @@ iam:
     - name: admin_1
       default: true # Default user for `ROLE_ADMIN`
       username: <user_id> # Specify the actual user id
-      password: <base64 password> # Specify the user's base64 encoded password. TBD ??
+      password_base64: <base64 password> # Specify the user's base64 encoded password.
       # Below defines which authentication mechanism to use
       authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
     #
@@ -305,14 +305,14 @@ iam:
     - name: user_1
       default: true # Default user for `ROLE_USER`
       username: <user_id> # Specify the actual user id
-      password: <base64 password> # Specify the user's base64 encoded password. TBD ??
+      password_base64: <base64 password> # Specify the user's base64 encoded password.
       # Below defines which authentication mechanism to use
       authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
     #
     # `user_2` with role ROLE_USER
     - name: user_2
       username: <user_id> # Specify the actual user id
-      password: <base64 password> # Specify the user's base64 encoded password. TBD ??
+      password_base64: <base64 password> # Specify the user's base64 encoded password.
       # Below defines which authentication mechanism to use
       authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
 ```
