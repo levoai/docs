@@ -120,7 +120,7 @@ cat /etc/levo/sensor/config.yaml
 
 ### Uninstall Sensor
 ```bash
-sudo apt remove -purge levo-ebpf-sensor
+sudo apt remove --purge levo-ebpf-sensor
 sudo apt clean
 ```
 
