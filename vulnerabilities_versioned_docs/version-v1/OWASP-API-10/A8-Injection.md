@@ -25,10 +25,10 @@ Attackers construct API calls that include SQL, NoSQL, OS, or other commands, th
 ### When is this test case applicable?
 Applies to all API endpoints that consume user supplied input
 
-## How does it work?
+### How does it work?
 The input parameter(s) within the API endpoint, are injected with malicious data (injection strings). The malicious data tries to trick the API's backend query interpreter, to execute unauthorized commands, which cause leakage of sensitive data, or even a complete denial of service.
 
-## What is the solution?
+### What is the solution?
 - Strictly define all API input data, such as schemas, types, and string patterns, and enforce them at runtime.
 - Validate, filter, and sanitize all incoming data.
 - Define, limit, and enforce API outputs to prevent data leaks.

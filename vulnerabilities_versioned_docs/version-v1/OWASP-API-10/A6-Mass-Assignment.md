@@ -37,13 +37,13 @@ This was clearly not the intent of the API developer.
 ### When is this test case applicable?
 * Applicable to all API endpoints that accept query and/or body parameters.
 
-## How does it work?
+### How does it work?
 - For query and body parameters expected in the API endpoint's request, additional (extraneous) parameters are added iteratively, before making the request.
 - Primitive, array, and dictionary JSON elements are subject to this treatment.
 - If the API endpoint is robust, it should reject these malicious requests outright.
 - Vulnerable API endpoints will serve a normal successful response, or a variant of the normal successful response, or fail in unexpected ways (exceptions, etc.)
 
-## What is the solution?
+### What is the solution?
 - Do not automatically bind all incoming parameter data to internal variables/objects.
 - Based on the business context of the API endpoint, explicitly define what incoming parameters should be automatically bound.
 - If certain internal variables/objects of the API endpoint are readonly, annotate them as readonly in the framework's auto bind.

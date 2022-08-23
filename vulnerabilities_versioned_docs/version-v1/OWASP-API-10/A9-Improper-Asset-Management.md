@@ -25,15 +25,14 @@ This is a serious privilege escalation vulnerability as details of all users inc
 ### When is this test case applicable?
 * Applicable to all API endpoints.
 
-## How does it work?
+### How does it work?
 - For the API endpoint under test, multiple version routes (/v1/, /v2/), are automatically probed and accessed without the proper authentication credentials. The test case will raise appropriate alerts if these routes respond positively.
 
 - Similarly the presence of an admin route (/admin/) is probed, and accessed without the proper authentication credentials. Appropriate alerts are raised, if the route responds positively.
 
 - Route word lists are all used to probe for the presence of commonly used administrative routes. Appropriate alerts are raised, if the route responds positively.
 
-
-## What is the solution?
+### What is the solution?
 - Keep an up-to-date inventory all API hosts.
 - Limit access to API endpoints that should not be public.
 - Limit access to production data, and segregate access to production and non-production data.
