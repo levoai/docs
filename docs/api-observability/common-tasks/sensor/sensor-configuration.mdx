@@ -34,6 +34,7 @@ The Sensor can be customized via a <SensorConfigFile/>. Examples of customizatio
 - [Configuration File Format](#configuration-file-format)
 - [Factory Settings](#factory-settings)
 - [Default Application Name](#default-application-name)
+- [Satellite Settings](#satellite-settings)
 - [Process & IP Filters](#process--ip-filters)
 - [URL Filters](#url-filters)
 - [Applying Configuration Settings](#applying-configuration-settings)
@@ -45,7 +46,7 @@ The Sensor can be customized via a <SensorConfigFile/>. Examples of customizatio
 
 ## Configuration File Format
 
-The YAML configuration file (shown below) has five major sections: 1) Factory Settings, 2) Default Application Name, 3) Process Filters, 4) IP Filters, & 5) URL Filters.
+The YAML configuration file (shown below) has six major sections: 1) Factory Settings, 2) Default Application Name, 3) Satellite Settings, 4) Process Filters, 5) IP Filters, & 6) URL Filters.
 
 ```yaml
 ##############################################################################################
@@ -61,13 +62,20 @@ The YAML configuration file (shown below) has five major sections: 1) Factory Se
 
 # --------------------------------------------------------------------------------------------
 # Default Application Name:
-#
+# --------------------------------------------------------------------------------------------
 # Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
 # grouped under this application name. The application name helps segregate and group API
 # endpoints from different environments.
-# --------------------------------------------------------------------------------------------
 #
 default-service-name: my-api-application
+# --------------------------------------------------------------------------------------------
+
+
+# --------------------------------------------------------------------------------------------
+# Satellite Settings:
+# --------------------------------------------------------------------------------------------
+# host:port for the collector service receiving the Sensor's API traces.
+collector-endpoint: localhost:4317
 # --------------------------------------------------------------------------------------------
 
 
@@ -142,6 +150,13 @@ Auto discovered API endpoints and their OpenAPI specifications are show in the [
 
 --------------------------------------------------------------------------------
 
+## Satellite Settings
+These are settings related to the Satellite, such as the Satellite's listen port, etc.
+
+<br></br>
+
+--------------------------------------------------------------------------------
+
 ## Process & IP Filters
 These settings allow granular control over what API traffic is captured by the Sensor. Please see detailed section on [API Traffic Capture Filters](./filter-traffic.md). 
 
@@ -207,16 +222,17 @@ Please check the Sensor logs to ensure that the specified configuration values d
 ```bash
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
 sudo docker run --restart unless-stopped \
-  -e OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<hostname|IP:port> \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
   -v $PWD/config.yml:/etc/levo/sensor/config.yaml:ro \
   --privileged --detach \
-  levoai/ebpf_sensor:latest --default-service-name <'Application Name' chosen earlier>
+  levoai/ebpf_sensor:latest \
+  --collector-endpoint <hostname|IP:port> \
+  --default-service-name <'Application Name' chosen earlier>
 ```
 Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.
 
 ### Running on Linux Host
-Make your modifications to `/etc/levo/sensor/config.yaml` and save the file. The settings should take effect immediately.
+Make your modifications to `/etc/levo/sensor/config.yaml` and save the file. **Restart** the sensor for the settings to take effect.
 
 Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.
 

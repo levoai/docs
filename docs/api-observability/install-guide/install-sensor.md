@@ -107,9 +107,9 @@ Please proceed to the next step, if there are no errors.
 # Specify below the 'Application Name' chosen earlier. Do not quote the 'Application Name'
 #
 sudo docker run --restart unless-stopped \
-  -e OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<hostname|IP:port> \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
   --privileged --detach levoai/ebpf_sensor:latest \
+  --collector-endpoint <hostname|IP:port> \
   --default-service-name <'Application Name' chosen earlier>
 ```
 
@@ -181,17 +181,21 @@ sudo apt-get install levo-ebpf-sensor
 ```
 
 ### 4. Configure Satellite Address
-The Satellite address is configured in `/etc/default/levo-ebpf-sensor`. 
+The Satellite address is configured in `/etc/levo/sensor/config.yaml`. The default `host:port` for Satellite is `localhost:4317`.
 
-Edit `/etc/default/levo-ebpf-sensor`, and set `OTEL_EXPORTER_OTLP_TRACES_ENDPOINT` to `host:port` address, noted down from the Satellite install.
+Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satellite Settings) to the `host:port` address, noted down from the Satellite install.
 
 ```bash
-# Environment Variables for levo-ebpf-sensor.service
-
-# host:port_number of endpoint receiving data from the sensor
-OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<host:port>
+...
+# --------------------------------------------------------------------------------------------
+# Satellite Settings:
+# --------------------------------------------------------------------------------------------
+# host:port for the collector service receiving the sensor's API traces.
+collector-endpoint: <set to host:port value noted from the Satellite install>
+# --------------------------------------------------------------------------------------------
+...
 ```
-Note: If you change the Satellite address, you have to restart the Sensor, since it's not a hot property.
+**Note**: If you change the Satellite address later, you have to restart the Sensor, since it's not a hot property.
 
 
 ### 5. Configure Application Name
@@ -210,8 +214,8 @@ Edit `/etc/levo/sensor/config.yaml`, and set `default-service-name` to the `Appl
 #
 default-service-name: <'Application Name' chosen earlier>
 # --------------------------------------------------------------------------------------------
-
 ```
+**Note**: If you change the `Application Name` later, you have to restart the Sensor, since it's not a hot property.
 
 
 ### 6. Start the Sensor

@@ -77,14 +77,19 @@ Please refer to [Sensor Configuration](./sensor-configuration.mdx), and [Applyin
 
 ### Configure Satellite Address (`host:port` information)
 
-Satellite address is configured in `/etc/default/levo-ebpf-sensor`. Default port for Satellite is `4317`.
+The Satellite address is configured in `/etc/levo/sensor/config.yaml`. The default `host:port` for Satellite is `localhost:4317`.
+
+Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satellite Settings) to the desired `host:port` value.
 
 ```bash
-# The Satellite address is configured in '/etc/default/levo-ebpf-sensor'.
-# Edit '/etc/default/levo-ebpf-sensor', and set 'OTEL_EXPORTER_OTLP_TRACES_ENDPOINT' to
-# 'host:port' address of the Satellite, as shown below.
-
-OTEL_EXPORTER_OTLP_TRACES_ENDPOINT=<host|IP:port>
+...
+# --------------------------------------------------------------------------------------------
+# Satellite Settings:
+# --------------------------------------------------------------------------------------------
+# host:port for the collector service receiving the sensor's API traces.
+collector-endpoint: <set to desired host:port value>
+# --------------------------------------------------------------------------------------------
+...
 ```
 **A Sensor *restart* is required for this to take effect.**
 
