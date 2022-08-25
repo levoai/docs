@@ -14,4 +14,4 @@ If you prefer to use your own applications to evaluate Levo, follow the instruct
 
 
 [levo.ai]: https://levo.ai/levo-signup/
-[test-your-own-app]: ./test-your-app/testing-your-own-apps.md
+[test-your-own-app]: ./security-contract-testing/test-your-app/testing-your-own-apps.md

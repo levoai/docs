@@ -8,4 +8,6 @@ sidebar_position: 1
 
 ## [Data Processing & Storage](data-processing-storage.md)
 
+## [API Observability](../api-observability/faqs.md)
+
 ## [Sample Applications](sample-apps.md)
