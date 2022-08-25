@@ -136,7 +136,7 @@ const config = {
       announcementBar: {
         id: 'api_observability',
         content:
-          'Frictionless API Observability - <a target="_blank" rel="noopener noreferrer" href="beta/beta-features">Available Now!</a>',
+          'Frictionless API Observability - <a target="_blank" rel="noopener noreferrer" href="api-observability">Available Now!</a>',
         backgroundColor: '#fafbfc',
         textColor: '#700be3',
         isCloseable: true,
