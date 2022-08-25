@@ -56,7 +56,7 @@ If your API Traffic (HTTP) uses one of these ports, please see section below on 
 -------------------------------------------------------------
 
 ## Configure IP Filters
-The below sections describe common filtering scenarios with examples. In all cases the examples show the relevant snippet of the configuration file. Adapt these examples to the [Helm Values config file](../../../../static//artifacts/sensor/config-values.yml), if running on Kubernetes.
+The below sections describe common filtering scenarios with examples. In all cases the examples show the relevant snippet of the configuration file. Adapt these examples to the [Helm Values config file](../../../../static/artifacts/sensor/config-values.yml), if running on Kubernetes.
 
 ### IP Filter Examples
 
