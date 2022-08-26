@@ -226,6 +226,7 @@ sudo docker run --restart unless-stopped \
   -v $PWD/config.yml:/etc/levo/sensor/config.yaml:ro \
   --privileged --detach \
   levoai/ebpf_sensor:latest \
+  --host-proc-path /host/proc \
   --collector-endpoint <hostname|IP:port> \
   --default-service-name <'Application Name' chosen earlier>
 ```
