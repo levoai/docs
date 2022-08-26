@@ -109,6 +109,7 @@ Please proceed to the next step, if there are no errors.
 sudo docker run --restart unless-stopped \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
   --privileged --detach levoai/ebpf_sensor:latest \
+  --host-proc-path /host/proc/ \
   --collector-endpoint <hostname|IP:port> \
   --default-service-name <'Application Name' chosen earlier>
 ```
