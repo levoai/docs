@@ -15,8 +15,8 @@ sensor:
     #bpf-object-file: /opt/levo/libexec/levo/ebpf-sensor/bpf_progs.bpf.o
     #debug: false
     #legacy-kernel-btf-path: ""
-    single-threaded-mode: true
-    #worker-threads: 4
+    #single-threaded-mode: false
+    #worker-threads: 3 # Defaults to 3, or the number of CPUs in the system, whichever is greater
     # --------------------------------------------------------------------------------------------
     
     
