@@ -21,8 +21,17 @@ single-threaded-mode: true
 # Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
 # grouped under this application name. The application name helps segregate and group API
 # endpoints from different environments.
-# --------------------------------------------------------------------------------------------
+
 default-service-name: default
+# --------------------------------------------------------------------------------------------
+
+
+# --------------------------------------------------------------------------------------------
+# Satellite Settings:
+# --------------------------------------------------------------------------------------------
+# host:port for the collector service receiving the Sensor's API traces.
+
+collector-endpoint: localhost:4317
 # --------------------------------------------------------------------------------------------
 
 
