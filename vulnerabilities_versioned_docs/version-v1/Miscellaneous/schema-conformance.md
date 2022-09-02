@@ -49,7 +49,7 @@ Please refer to [CWE-838: Inappropriate Encoding for Output Context][CWE-838], f
 Please refer to [CWE-600: Uncaught Exception in Servlet][CWE:600], for additional information.
 
 
-## What is the solution?
+### What is the solution?
 * Document all expected response codes in the API schema.
 * Only document all the `required` headers in the response section of the schema.
 * Document all expected `content-type` that is returned in the response section of the schema.

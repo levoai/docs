@@ -23,10 +23,10 @@ sidebar_position: 7
 ### When is this test case applicable?
 * Applicable to all API endpoints.
 
-## How does it work?
+### How does it work?
 The test case does active probing for common API misconfigurations similar to a how a code linter checks for common flaws.
 
-## What is the solution?
+### What is the solution?
 - Ensure all APIs are only accessible via TLS.
 - Disable API operations (HTTP methods) that are not required to satisfy business functionality.
 - Configure CORS headers in a secure manner.

@@ -22,7 +22,7 @@ In the above example Troy (who is an authenticated user) is able to access Scott
 * Requires the use of fixtures to provide valid object/resource IDs, that the test case can access using two different users who have the same privileges.
 * Currently only for non state changing operations like `GET`. Coverage for state changing operations (POST, PUT, DELETE, etc.) will follow soon.
 
-## How does it work?
+### How does it work?
 1. Expects authentication credentials of two different users, `victim` and `attacker`, to be configured via the environment file.
 2. Expects all other endpoint params (query or path params) to be configured via fixtures.
 3. Sends a request using victim's credentials, and stores the response.
@@ -30,7 +30,7 @@ In the above example Troy (who is an authenticated user) is able to access Scott
 5. The two responses from the above two requests are compared
 6. If the **comparison is a match**, this is raised as an BOLA/IDOR vulnerability
 
-## What is the solution?
+### What is the solution?
 * Implement granular authorization checks, that tests for proper ownership of the requested resource(s) by the user making the request.
 * Authorize every request made by the user.
 * Do not rely on resource IDs that the client sends. Use IDs stored in the session object instead.

@@ -24,12 +24,12 @@ Lack of such controls lead to Denial of Service (DoS), degraded performance, and
 ### When is this test case applicable?
 * Applicable to all API endpoints.
 
-## How does it work?
+### How does it work?
 - The endpoint is accessed at increasingly high frequencies to test for the absence of rate limit controls.
 - Based on the structure of the endpoint, certain strategic fields (e.g. page key, limit key, etc.) are set to large values, attempting to cause degraded performance or complete Denial of Service.
 
 
-## What is the solution?
+### What is the solution?
 - Define proper rate limiting for all endpoints by using industry standard frameworks.
 - Limit payload sizes.
 - Limit maximum values for strategic query fields like `page size`, `limit`, etc.
