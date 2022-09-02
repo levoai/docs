@@ -16,11 +16,11 @@ In a typical SSRF attack, the attacker might cause the server to make a connecti
 * API endpoints that take client-supplied input specifying URLs, files, or other API endpoints
 
 
-## How does it work?
+### How does it work?
 1. The parameter(s) within the API endpoint, which take URLs (or files, or other API endpoints) as input, are injected with malicious data. The malicious data is typically a URL, that references an internal resource that should not be exposed externally (e.g. AWS instance meta data).
 2. If the API endpoint returns the internal resource, the API is deemed vulnerable to SSRF.
 
-## What is the solution?
+### What is the solution?
 * Sanitize all client-supplied input by creating a list of trusted URLs (lists of hosts or a regex). Use a whitelist approach to limit what URLs (or files, or other API endpoints) can be specified as inputs.
 * Restrict supported protocols in your web application. Disable any unused URL schemas. For example ftp://, dict://, file://, gopher://, etc.
 * With microservice architectures, communication between all internal services should be authenticated.

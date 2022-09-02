@@ -29,11 +29,11 @@ Compromising a system’s ability to identify the client/user, compromises API s
 ### When is this test case applicable?
 * Only for API endpoints that require authentication.
 
-## How does it work?
+### How does it work?
 The endpoint is subjected to a battery of authentication related tests, that probe for common weaknesses.
 
 
-## What is the solution?
+### What is the solution?
 - Maintain a clear inventory of your API endpoints.
 - Clearly itemize APIs that require authentication and those that don't.
 - Use industry standard libraries for authentication, token generation, and password storage. Do not build your own.

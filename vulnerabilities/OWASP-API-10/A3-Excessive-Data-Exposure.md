@@ -41,11 +41,11 @@ This results in excessive data exposure that can be easily mined and exploited b
 ### When is this test case applicable?
 * Applicable to all API endpoints that return JSON data.
 
-## How does it work?
+### How does it work?
 - The response returned from the endpoint is screened for classified/sensitive data using trained machine learning model.
 - The density of sensitive data (PII/PSI) present in the response is computed, and the response is assigned an appropriate risk level.
 
-## What is the solution?
+### What is the solution?
 - Never rely on the client-side to filter sensitive data; this should be done at the API level.
 - Cherry-pick the specific properties of the response you want to return. Avoid using generic methods such as to_json() and to_string().
 - Classify sensitive and personally identifiable information (PII) that your application works with. Review all API endpoints that return such information to see if these responses pose a security issue.

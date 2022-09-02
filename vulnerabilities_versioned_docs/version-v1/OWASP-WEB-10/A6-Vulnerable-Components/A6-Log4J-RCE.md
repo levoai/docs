@@ -18,7 +18,7 @@ The exact steps of this attack is described in the diagram above.
 Applies to all API endpoints that consume user supplied input.
 
 
-## How does it work?
+### How does it work?
 The input parameter(s) within the API endpoint, are injected with malicious strings (Log4J injection strings. See diagram above).
 
 This malicious string refers to a remote server controlled by Levo. This remote server is called the `remote responder`.
@@ -27,7 +27,7 @@ If this malicious string is logged via a vulnerable Log4J library, the library i
 
 Levo's remote responder provides confirmation that the attack launched by the test case was successful.
 
-## What is the solution?
+### What is the solution?
 * Upgrade Log4j2 to version 2.15.0 or newer. 
 
 * In previous releases (>2.10) this behavior can be mitigated by setting the system property "log4j2.formatMsgNoLookups" to "true", or by removing the JndiLookup class from the classpath (example: zip -q -d log4j-core-*.jar org/apache/logging/log4j/core/lookup/JndiLookup.class).
