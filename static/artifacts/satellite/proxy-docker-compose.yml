@@ -71,7 +71,7 @@ services:
                 "min_token_threshold": "${LEVOAI_MIN_TOKEN_THRESHOLD:-1}",
                 "max_token_threshold": "${LEVOAI_MAX_TOKEN_THRESHOLD:-1}",
                 "cookie_auth_keys": "${LEVOAI_COOKIE_AUTH_KEYS:-}",
-                "service_naming": {"strategies": "HOST_HEADER"},
+                "service_naming": {"strategies": "HOST_HEADER,DEFAULT"},
                 "tagger_batch_interval_minutes":2}'
     depends_on:
       levoai-rabbitmq:
