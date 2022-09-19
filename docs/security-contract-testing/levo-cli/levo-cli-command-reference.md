@@ -77,11 +77,14 @@ Options:
                                   requests to the target server. Example: -H
                                   "Authorization: Bearer 123" .
   --show-errors-tracebacks        Show full tracebacks for internal errors.
-                                  [default: False]
+  --ignore-ssl-verify TEXT        Controls whether the test run verifies the
+                                  server's SSL certificate.
   -v, --verbosity [NOTSET|DEBUG|INFO|WARNING|ERROR|CRITICAL]
-                                  Accept all of the Python's log level values:
-                                  CRITICAL, ERROR, WARNING, INFO, DEBUG, and
-                                  NOTSET (all case insensitive).
+                                  OPTIONAL Accept all of the Python's log
+                                  level values: CRITICAL, ERROR, WARNING,
+                                  INFO, DEBUG, and NOTSET (all case
+                                  insensitive).
+  --export-junit-xml FILENAME     Export test results as JUnit XML
   -h, --help                      Show this message and exit.
 ```
 
@@ -116,12 +119,17 @@ Options:
                                   requests to the target server. Example: -H
                                   "Authorization: Bearer 123" .
   --show-errors-tracebacks        Show full tracebacks for internal errors.
-                                  [default: False]
   --env-file TEXT                 Path to YAML file with environment
                                   definitions (AuthN/AuthZ info, etc.). This
                                   file must be accessible from the CLI
                                   container.
+  --ignore-ssl-verify TEXT        Controls whether the test run verifies the
+                                  server's SSL certificate.
   -v, --verbosity [NOTSET|DEBUG|INFO|WARNING|ERROR|CRITICAL]
+  -d, --suite-execution-delay INTEGER
+                                  Adds a delay between test suite execution
+  --request-timeout INTEGER       Timeout for the http request made to the API
+  --export-junit-xml FILENAME     Export test results as JUnit XML
   -h, --help                      Show this message and exit.
 ```
 
@@ -168,12 +176,17 @@ Options:
                                   requests to the target server. Example: -H
                                   "Authorization: Bearer 123" .
   --show-errors-tracebacks        Show full tracebacks for internal errors.
-                                  [default: False]
   --env-file TEXT                 Path to YAML file with environment
                                   definitions (AuthN/AuthZ info, etc.). This
                                   file must be accessible from the CLI
                                   container.
+  --ignore-ssl-verify TEXT        Controls whether the test run verifies the
+                                  server's SSL certificate.
   -v, --verbosity [NOTSET|DEBUG|INFO|WARNING|ERROR|CRITICAL]
+  -d, --suite-execution-delay INTEGER
+                                  Adds a delay between test suite execution
+  --request-timeout INTEGER       Timeout for the http request made to the API
+  --export-junit-xml FILENAME     Export test results as JUnit XML
   -h, --help                      Show this message and exit.
 ```
 

@@ -20,7 +20,7 @@ AST tools like [SCA][sca] & [SAST][sast] statically analyze source code for secu
 Levo is the only purpose-built security solution for APIs & microservices that provides comprehensive detection of both business logic, and OWASP Top 10 vulnerabilities.
 
 #### What CI/CD environments are supported?
-Levo supports all popular CI/CD environments.
+Levo supports all popular CI/CD environments. Please refer to [Integrations](../integrations/integrations.md) for more information.
 
 
 [biz-logic-flaws]: https://www.hackerone.com/company-news/rise-idor
