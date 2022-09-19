@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+keywords: [CI/CD Integrations, API Integrations, Continuous Security Testing]
 ---
 
 # Integrations
