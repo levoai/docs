@@ -8,7 +8,7 @@
 ##################################################################################################
 
 sensor:
-  config: 
+  config:
     # --------------------------------------------------------------------------------------------
     # Factory Settings: DO NOT MODIFY
     # --------------------------------------------------------------------------------------------
@@ -39,6 +39,13 @@ sensor:
     collector-endpoint: levoai-collector:4317
     # --------------------------------------------------------------------------------------------
     
+    # --------------------------------------------------------------------------------------------
+    # Metrics Settings:
+    # --------------------------------------------------------------------------------------------
+    # Uncomment and modify to enable the printing of sensor metrics alongside other sensor logging
+    # messages.
+    
+    # export-metrics-to-log: false
     
     # --------------------------------------------------------------------------------------------
     # Process Filters: process command names/IDs to monitor & capture API traffic.
@@ -164,4 +171,35 @@ sensor:
     #      request-uri: /static/.*
     #
     
+    # --------------------------------------------------------------------------------------------
+
+    # --------------------------------------------------------------------------------------------
+    # Kubernetes Factory Settings: DO NOT MODIFY
+    # --------------------------------------------------------------------------------------------
+    #trace-non-k8s-traffic: false
+    # --------------------------------------------------------------------------------------------
+
+
+    # --------------------------------------------------------------------------------------------
+    # Kubernetes Pod Filters: Kubernetes pod properties based granular filtering of API traffic.
+    # --------------------------------------------------------------------------------------------
+    # Pod Filters enable granular capture of API traffic based on Kubernetes Pod attributes.
+    # Rules should ideally be in decreasing order of specificity.
+    # The first rule to match a pod's properties will be used.
+    # --------------------------------------------------------------------------------------------
+    #
+    k8s-pod-filter-list:
+      default-policy: trace
+      rules:
+        - policy: ignore
+          namespace: kube-.*
+        - policy: ignore
+          namespace: istio-.*
+        - policy: ignore
+          namespace: levoai
+        - policy: ignore
+          namespace: .*
+          owner-reference:
+            kind: Node
+            name: .*
     # --------------------------------------------------------------------------------------------

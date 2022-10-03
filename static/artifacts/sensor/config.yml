@@ -34,6 +34,13 @@ default-service-name: default
 collector-endpoint: localhost:4317
 # --------------------------------------------------------------------------------------------
 
+# --------------------------------------------------------------------------------------------
+# Metrics Settings:
+# --------------------------------------------------------------------------------------------
+# Uncomment and modify to enable the printing of sensor metrics alongside other sensor logging
+# messages.
+
+# export-metrics-to-log: false
 
 # --------------------------------------------------------------------------------------------
 # Process Filters: process command names/IDs to monitor & capture API traffic.
