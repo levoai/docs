@@ -61,7 +61,9 @@ services:
       LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
       LEVOAI_DEBUG_SERVER_HOST: ${LEVOAI_DEBUG_SERVER_HOST:-host.docker.internal}
       PI_DETECTOR_DATA_DIR: /opt/levoai/datasets/
-      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}",
+      LEVOAI_CONF_OVERRIDES: >
+        {
+          "onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}",
           "refresh-token": "${LEVOAI_AUTH_KEY}", "org-id": "${LEVOAI_ORG_ID:-}",
           "org-prefix": "${LEVOAI_ORG_PREFIX:-}"},
           "send_sample_payloads": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-False}",
@@ -71,7 +73,11 @@ services:
           "dynamic_url_threshold_factor": "${DYNAMIC_URL_THRESHOLD_FACTOR:-0.5}",
           "cookie_auth_keys": "${LEVOAI_COOKIE_AUTH_KEYS:-}",
           "service_naming": {"strategies": "HOST_HEADER"},
-          "tagger_batch_interval_minutes":5}'
+          "user_resolvers": [{"name": "cookie_resolver", "type": "cookie", "key_names": ["PHPSESSID"]}],
+          "users": {"testing_user": {"user_resolvers": ["cookie_resolver"],
+                                     "cookies": {"PHPSESSID": "${LEVOAI_SAMPLES_USER:-}"}}},
+          "tagger_batch_interval_minutes": ${LEVOAI_TAGGER_INTERVAL:-5}
+        }
     depends_on:
       levoai-rabbitmq:
         condition: service_healthy
