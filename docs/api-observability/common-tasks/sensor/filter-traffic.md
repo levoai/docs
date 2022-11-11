@@ -6,6 +6,16 @@ sidebar_position: 3
 
 The Sensor allows capturing API (HTTP) traffic based on filter (include/exclude) criteria. These filters are specified in a configuration file. Please refer to [Sensor Configuration](./sensor-configuration.mdx) for high level structure of the file.
 
+The sensor's fundamental unit at which filtering criteria are applied is a `Linux Process`.
+
+The sensor can filter traffic based on Linux Process names, Linux Process IDs, IP address tuples associated with a Linux Process's TCP/UDP traffic, Kubernetes Pod metadata associated with the Linux Process (when running on Kubernetes), and HTTP URL/header information in traffic being processed by the Linux Process.
+
+Below diagram shows the outcomes and precedence, when the various filtering criteria mentioned above are combined together.
+
+![API Filter Precedence](../../../assets/Sensor-API-Traffic-Filters-Precedence.svg)
+
+Below are details on the supported filtering criteria.
+
 - [**Default Excluded Ports**](#default-excluded-ports) <br/>
 - [**Configure IP Filters**](#configure-ip-filters) <br/>
   - [**IP Filter Examples**](#ip-filter-examples) <br/>
@@ -17,6 +27,16 @@ The Sensor allows capturing API (HTTP) traffic based on filter (include/exclude)
       - [Exclude IP Subnets](#exclude-ip-subnets)
       - [Include IP Subnets](#include-ip-subnets)
       - [Capture Traffic for Specific Processes](#capture-traffic-for-specific-processes)
+
+- [**Configure Kubernetes Pod Filters**](#configure-kubernetes-pod-filters) <br/>
+  - [**K8s Pod Filter Examples**](#k8s-pod-filter-examples) <br/>
+    - [Trace A Single Deployment In A Specific Namespace](#trace-a-single-deployment-in-a-specific-namespace)
+    - [Ignore All Traffic Belonging To A Specific Namespace](#ignore-all-traffic-belonging-to-a-specific-namespace)
+    - [Trace Multiple Deployments In A Specific Namespace](#trace-multiple-deployments-in-a-specific-namespace)
+    - [Trace A Specific Deployment In A Namespace, And Trace All Other Namespaces](#trace-a-specific-deployment-in-a-namespace-and-trace-all-other-namespaces)
+    - [Trace All Deployments and Statefulsets From Any Namespace](#trace-all-deployments-and-statefulsets-from-any-namespace)
+    - [Ignore Traffic From K8s System Level Services](#ignore-traffic-from-k8s-system-level-services)
+    
     
 - [**Configure URL Filters**](#configure-url-filters) <br/>
   - [**URL Filter Examples**](#url-filter-examples) <br/>
@@ -367,6 +387,142 @@ monitored-pids:
 ip-filter-list:
   default-policy: accept # Default policy is to capture all traffic
 ```
+
+
+## Configure Kubernetes Pod Filters
+The sensor allows filtering of API traffic based on the Kubernetes Pod's metadata. Examples are including/excluding API traffic from a Pod belonging to specific `namespaces`, `deployments`, `statefulsets`, etc.
+
+### K8s Pod Filter Configuration Section
+
+K8s Pod filters are configured in the `k8s-pod-filter-list` section of the [Helm Values config file](../../../../static/artifacts/sensor/config-values.yml) as shown below.
+
+```yaml
+sensor:
+  config:
+  # --------------------------------------------------------------------------------------------
+    # Kubernetes Pod Filters: Kubernetes pod properties based granular filtering of API traffic.
+    # --------------------------------------------------------------------------------------------
+    # Pod Filters enable granular capture of API traffic based on Kubernetes Pod attributes.
+    # Rules should ideally be in decreasing order of specificity.
+    # The first rule to match a pod's properties will be used.
+    # --------------------------------------------------------------------------------------------
+    #
+    k8s-pod-filter-list:
+      default-policy: <trace|ignore>
+      rules:
+        - policy: <trace|ignore>
+          namespace: <name or regex pattern>
+          # Optional owner reference of the Pod
+          owner-reference:
+            kind: <Node|Deployment>
+            name: <name or regex pattern>
+  # --------------------------------------------------------------------------------------------
+```
+
+### K8s Pod Filter Examples
+Below are common filtering scenarios with examples. In all cases the examples show the relevant snippet of the configuration file. Adapt these examples to the [Helm Values config file](../../../../static/artifacts/sensor/config-values.yml).
+
+#### Trace A Single Deployment In A Specific Namespace
+
+Below example will only trace all API traffic belonging to `entity-service` Deployment in the `levoai` Namespace, and ignore all other API traffic in the K8s cluster.
+
+```yaml
+k8s-pod-filter-list:  
+  default-policy: ignore
+  rules:  
+    - policy: trace
+      namespace: levoai
+      owner-reference:
+        kind: Deployment
+        name: entity-service
+
+```
+
+#### Ignore All Traffic Belonging To A Specific Namespace
+
+Below example will trace all API traffic in a K8s cluster, except traffic belonging to Pods in the `levoai` namespace.
+
+```yaml
+k8s-pod-filter-list:  
+  default-policy: trace
+  rules:  
+    - policy: ignore
+      namespace: levoai
+```
+
+#### Trace Multiple Deployments In A Specific Namespace
+
+Below example will only trace all API traffic belonging to `entity-service`, and `onboarding-service` Deployments in the `levoai` Namespace, and ignore all other API traffic in the K8s cluster.
+
+```yaml
+k8s-pod-filter-list:  
+  default-policy: ignore
+  rules:  
+    - policy: trace
+      namespace: levoai
+      owner-reference:
+        kind: Deployment
+        name: (entity|onboarding)-service
+
+```
+
+#### Trace A Specific Deployment In A Namespace, And Trace All Other Namespaces
+
+The below example does the following:
+- Traces all API traffic in all namespaces, except traffic within the `crapi` namespace
+- Trace traffic belonging to `crapi-identity` Deployment in the `crapi` namespace
+
+```yaml
+k8s-pod-filter-list:  
+  default-policy: trace  
+  rules:  
+    - policy: trace  
+      namespace: crapi  
+      owner-reference:  
+        kind: Deployment  
+        name: crapi-identity  
+    - policy: ignore  
+      namespace: crapi
+```
+
+#### Trace All Deployments and Statefulsets From Any Namespace
+
+```yaml
+k8s-pod-filter-list:  
+  default-policy: ignore
+  rules:  
+    - policy: trace
+      owner-reference:
+        kind: Deployment
+        namespace: .*
+    - policy: trace
+      owner-reference:
+        kind: StatefulSet
+        name: .*
+```
+
+#### Ignore Traffic From K8s System Level Services
+
+Below example ignores all API traffic from kube, istio and levoai namespaces. It also ignores pods created by the K8s Nodes. All other traffic is traced.
+
+```yaml
+k8s-pod-filter-list:  
+  default-policy: trace
+  rules:  
+    - policy: ignore
+      namespace: kube-.*
+    - policy: ignore
+      namespace: istio.*
+    - policy: ignore
+      namespace: levoai
+    - policy: ignore
+      namespace: .*
+      owner-reference:
+        kind: Node
+        name: .*
+```
+
+
 
 ## Configure URL Filters
 The sensor allows filtering of API traffic based on the *API endpoint Method (operation)*, the *API Host* (Host Header), and the *API endpoint's URI*. The endpoint's URI can be a [(Perl format)](https://perldoc.perl.org/perlre) regex pattern.

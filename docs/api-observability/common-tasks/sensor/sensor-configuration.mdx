@@ -37,6 +37,7 @@ The Sensor can be customized via a <SensorConfigFile/>. Examples of customizatio
 - [Satellite Settings](#satellite-settings)
 - [Process & IP Filters](#process--ip-filters)
 - [URL Filters](#url-filters)
+- [Kubernetes Pod Filters](#kubernetes-pod-filters)
 - [Applying Configuration Settings](#applying-configuration-settings)
 
 <br></br>
@@ -47,6 +48,8 @@ The Sensor can be customized via a <SensorConfigFile/>. Examples of customizatio
 ## Configuration File Format
 
 The YAML configuration file (shown below) has six major sections: 1) Factory Settings, 2) Default Application Name, 3) Satellite Settings, 4) Process Filters, 5) IP Filters, & 6) URL Filters.
+
+Sensors running on Kubernetes have an additional section called `Kubernetes Pod Filters`.
 
 ```yaml
 ##############################################################################################
@@ -66,6 +69,11 @@ The YAML configuration file (shown below) has six major sections: 1) Factory Set
 # Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
 # grouped under this application name. The application name helps segregate and group API
 # endpoints from different environments.
+#
+# In Kubernetes and other container orchestration systems, where meta data about applications
+# (that have been deployed) is readily available, auto discovered API endpoints are attributed
+# to the appropriate services automatically. The default application will be used as a fallback,
+# if the service name meta data in unavailable.
 #
 default-service-name: my-api-application
 # --------------------------------------------------------------------------------------------
@@ -130,6 +138,26 @@ url-filter:
       host: <hostname[:port]>
       #
 # --------------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------------------------
+# Kubernetes Pod Filters: Kubernetes pod properties based granular filtering of API traffic.
+# --------------------------------------------------------------------------------------------
+# Pod Filters enable granular capture of API traffic based on Kubernetes Pod attributes.
+# Rules should ideally be in decreasing order of specificity.
+# The first rule to match a pod's properties will be used.
+#
+# --------------------------------------------------------------------------------------------
+#
+k8s-pod-filter-list:
+  default-policy: <trace|ignore>
+  rules:
+    - policy: <trace|ignore>
+      namespace: <name or regex pattern>
+      # Optional owner reference of the Pod
+      owner-reference:
+        kind: <Node|Deployment>
+        name: <name or regex pattern>
+# --------------------------------------------------------------------------------------------
 ```
 
 <br></br>
@@ -166,6 +194,16 @@ These settings allow granular control over what API traffic is captured by the S
 
 ## URL Filters
 These settings allow granular control over what API traffic is captured by the Sensor, based on API parameter filters. Please see detailed section on [API Traffic Capture Filters](./filter-traffic.md#configure-url-filters). 
+
+<br></br>
+
+--------------------------------------------------------------------------------
+
+## Kubernetes Pod Filters
+These settings allow granular control over what API traffic is captured by the Sensor,
+based on Kubernetes meta data (e.g. namespace name, deployment name, etc).
+
+Please see detailed section on [API Traffic Capture Filters](./filter-traffic.md#configure-kubernetes-pod-filters). 
 
 <br></br>
 
