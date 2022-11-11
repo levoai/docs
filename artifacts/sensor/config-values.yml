@@ -8,15 +8,19 @@
 ##################################################################################################
 
 sensor:
-  config: 
+  config:
     # --------------------------------------------------------------------------------------------
     # Factory Settings: DO NOT MODIFY
     # --------------------------------------------------------------------------------------------
     #bpf-object-file: /opt/levo/libexec/levo/ebpf-sensor/bpf_progs.bpf.o
-    #debug: false
+    #debug: []
     #legacy-kernel-btf-path: ""
     #single-threaded-mode: false
     #worker-threads: 3 # Defaults to 3, or the number of CPUs in the system, whichever is greater
+    #metadata-resolution-failure-policy: ignore # policy for handling metadata resolution failures
+    # Enable tracing of non-kubernetes traffic when sensor is deployed within a kubernetes
+    # DaemonSet
+    #trace-non-k8s-traffic: false
     # --------------------------------------------------------------------------------------------
     
     
@@ -39,6 +43,13 @@ sensor:
     collector-endpoint: levoai-collector:4317
     # --------------------------------------------------------------------------------------------
     
+    # --------------------------------------------------------------------------------------------
+    # Metrics Settings:
+    # --------------------------------------------------------------------------------------------
+    # Uncomment and modify to enable the printing of sensor metrics alongside other sensor logging
+    # messages.
+    
+    # export-metrics-to-log: false
     
     # --------------------------------------------------------------------------------------------
     # Process Filters: process command names/IDs to monitor & capture API traffic.
@@ -164,4 +175,37 @@ sensor:
     #      request-uri: /static/.*
     #
     
+    # --------------------------------------------------------------------------------------------
+
+
+    # --------------------------------------------------------------------------------------------
+    # Kubernetes Pod Filters: Kubernetes pod properties based granular filtering of API traffic.
+    # --------------------------------------------------------------------------------------------
+    # Pod Filters enable granular capture of API traffic based on Kubernetes Pod attributes.
+    # Rules should ideally be in decreasing order of specificity.
+    # The first rule to match a pod's properties will be used.
+    #
+    # The settings below filter out traffic for common Kubernetes infrastructure namespaces
+    # --------------------------------------------------------------------------------------------
+    #
+    k8s-pod-filter-list:
+      default-policy: trace
+      rules:
+        - policy: ignore
+          namespace: kube-.*
+        - policy: ignore
+          namespace: istio-.*
+        - policy: ignore
+          namespace: levoai
+        - policy: ignore
+          namespace: calico-.*
+        - policy: ignore
+          namespace: tigera-.*
+        - policy: ignore
+          namespace: openebs
+        - policy: ignore
+          namespace: .*
+          owner-reference:
+            kind: Node
+            name: .*
     # --------------------------------------------------------------------------------------------

@@ -8,10 +8,14 @@
 # Factory Settings: DO NOT MODIFY
 # --------------------------------------------------------------------------------------------
 #bpf-object-file: /opt/levo/libexec/levo/ebpf-sensor/bpf_progs.bpf.o
-#debug: false
+#debug: []
 #legacy-kernel-btf-path: ""
 #single-threaded-mode: false
 #worker-threads: 3 # Defaults to 3, or the number of CPUs in the system, whichever is greater
+#metadata-resolution-failure-policy: ignore # policy for handling metadata resolution failures
+# Enable tracing of non-kubernetes traffic when sensor is deployed within a kubernetes
+# DaemonSet
+#trace-non-k8s-traffic: false
 # --------------------------------------------------------------------------------------------
 
 
@@ -34,6 +38,13 @@ default-service-name: default
 collector-endpoint: localhost:4317
 # --------------------------------------------------------------------------------------------
 
+# --------------------------------------------------------------------------------------------
+# Metrics Settings:
+# --------------------------------------------------------------------------------------------
+# Uncomment and modify to enable the printing of sensor metrics alongside other sensor logging
+# messages.
+
+# export-metrics-to-log: false
 
 # --------------------------------------------------------------------------------------------
 # Process Filters: process command names/IDs to monitor & capture API traffic.
