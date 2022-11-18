@@ -74,6 +74,7 @@ services:
           "url_clusterer_id_len": "${LEVOAI_URL_CLUSTERER_ID_LEN:-1}",
           "max_token_threshold": "${LEVOAI_MAX_TOKEN_THRESHOLD:-1}",
           "cookie_auth_keys": "${LEVOAI_COOKIE_AUTH_KEYS:-}",
+          "disable_ml_detector": "${LEVOAI_DISABLE_ML_DETECTOR:-true}",
           "service_naming": {"strategies": "HOST_HEADER,DEFAULT"},
           "user_resolvers": [{"name": "cookie_resolver", "type": "cookie", "key_names": ["PHPSESSID"]}],
           "users": {"testing_user": {"user_resolvers": ["cookie_resolver"],
