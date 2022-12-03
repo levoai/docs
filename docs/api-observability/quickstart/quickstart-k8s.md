@@ -3,7 +3,7 @@ sidebar_position: 2
 keywords: [API Security, eBPF, Kubernetes, API Observability]
 ---
 
-# Quickstart - Kubernetes
+# Quickstart with Kubernetes (on Linux Nodes)
 
 Quickstart instructions for installing the Satellite, and Sensor on the same Kubernetes cluster via Helm Charts.
 

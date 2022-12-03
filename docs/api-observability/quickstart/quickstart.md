@@ -6,8 +6,9 @@ sidebar_position: 1
 
 ![Quickstart for API Observability](../../assets/quickstart.svg)
 
-## [Quickstart for *Kubernetes* (on Linux Nodes)](./quickstart-k8s.md)
-## [Quickstart for *Mac OSX* / *Windows*](./quickstart-laptop.md)
+## [Quickstart with *Kubernetes* (on Linux Nodes)](./quickstart-k8s.md)
+## [Quickstart with MITM proxy in Docker](./quickstart-laptop.md)
+## [Quickstart with OWASP ZAP](./quickstart-zap-addon.md)
 
 <br/>
 
