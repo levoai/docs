@@ -6,7 +6,7 @@ keywords: [API Security, eBPF, macOS, Windows, API Observability]
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-# Quickstart - Mac OSX / Windows
+# Quickstart with MITM proxy in Docker
 
 Quickstart instructions for evaluating *API Observability* on Laptops/Desktops running **Mac OSX** or **Windows**.
 
