@@ -32,7 +32,7 @@ services:
       - "--worker-class"
       - "gevent"
       - "--worker-connections"
-      - "1000"
+      - "30"
       - "levoai_e7s.satellite.satellite:create_server()"
     environment:
       LEVOAI_DEBUG_ENABLED: ${LEVOAI_SATELLITE_DEBUG_ENABLED:-false}
