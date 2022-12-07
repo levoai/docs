@@ -19,7 +19,7 @@ sidebar_position: 3
 ```bash
 mkdir -p $HOME/.config/configstore
  
-alias levo='docker run --rm --add-host=host.docker.internal:`ip route|awk '\''/docker0/ { print $9 }'\''` --mount type=bind,source=$HOME/.config/configstore,target=/home/levo/.config/configstore -v $PWD:/home/levo/work:rw -e LOCAL_USER_ID=$(id -u) -e LOCAL_GROUP_ID=$(id -g) -e TERM=xterm-256color -ti levoai/levo:stable'
+alias levo='docker run --rm --add-host=host.docker.internal:`ip route|awk '\''/docker0/ { print $9 }'\''` --mount type=bind,source=$HOME/.config/configstore,target=/home/levo/.config/configstore -v $HOME/.aws:/home/levo/.aws -v $PWD:/home/levo/work:rw -e LOCAL_USER_ID=$(id -u) -e LOCAL_GROUP_ID=$(id -g) -e TERM=xterm-256color -ti levoai/levo:stable'
 ```
 
 *   Now signup and create an account on [Levo.ai](https://Levo.ai) via the CLI:

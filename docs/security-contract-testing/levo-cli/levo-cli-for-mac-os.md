@@ -15,7 +15,7 @@ sidebar_position: 2
 * Open a terminal (zsh) window and type the following commands to setup an alias:
 
 ```bash
-alias levo='docker run --rm -v $HOME/.config/configstore:/home/levo/.config/configstore:rw -v $PWD:/home/levo/work:rw -e TERM=xterm-256color -ti levoai/levo:stable'
+alias levo='docker run --rm -v $HOME/.config/configstore:/home/levo/.config/configstore:rw -v $HOME/.aws:/home/levo/.aws -v $PWD:/home/levo/work:rw -e TERM=xterm-256color -ti levoai/levo:stable'
 ```
 
 * Now signup and create an account on [Levo.ai](https://Levo.ai) via the CLI:
