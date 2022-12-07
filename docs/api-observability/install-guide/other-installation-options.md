@@ -21,14 +21,14 @@ In order to create the traffic mirroring in aws you have to run:
 foo@bar:~$ levo mirror create
 ```
 
-The CLI will ask for some inputs. First it will ask for the Elastic Network Interfeace resource id of the source instance from which you want to mirror the traffic.
+The CLI will ask for some inputs. First it will ask for the Elastic Network Interface resource id of the source instance from which you want to mirror the traffic.
 
 ```bash
 ? What is the source Network Interface resource id? [your-source-eni-for-traffic-mirroring]
 Getting source mirroring details...
 ```
 
-Then CLI will as for the Elastic Network Interfeace resource id of the target satellite instance you want to mirror the traffic to.
+Then CLI will as for the Elastic Network Interface resource id of the target satellite instance you want to mirror the traffic to.
 
 ```bash
 ? What is the target Network Interface resource id? [eni-for-satellite-running-traffic-listener]
