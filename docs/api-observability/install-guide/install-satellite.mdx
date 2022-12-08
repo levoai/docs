@@ -214,10 +214,10 @@ Levo provides pre-built AMIs for Satellite. You can launch an EC2 instance using
 <Tabs groupId="satellite-ami">
   <TabItem value="mac" label="Mac OSX">
     <ul>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-1#LaunchInstances:ami=ami-0e7e16a896387d53e;instanceType=c6a.xlarge">us-west-1 (N. California)</a> </li>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#LaunchInstances:ami=ami-01179c55c0bd2a6af;instanceType=c6a.xlarge">us-west-2 (Oregon)</a> </li>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-east-1#LaunchInstances:ami=ami-0ec6df39e74076054;instanceType=c6a.xlarge">us-east-1 (N. Virginia)</a> </li>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-east-2#LaunchInstances:ami=ami-0b1d5b219834fb78a;instanceType=c6a.xlarge">us-east-2 (Ohio)</a> </li>
+      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-1#LaunchInstances:ami=ami-022130e5f693e8e58;instanceType=c6a.xlarge">us-west-1 (N. California)</a> </li>
+      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#LaunchInstances:ami=ami-0b57973e6100c27ee;instanceType=c6a.xlarge">us-west-2 (Oregon)</a> </li>
+      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-east-1#LaunchInstances:ami=ami-07b2abafca0bd3b86;instanceType=c6a.xlarge">us-east-1 (N. Virginia)</a> </li>
+      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-east-2#LaunchInstances:ami=ami-0f8f3abccef57ef97;instanceType=c6a.xlarge">us-east-2 (Ohio)</a> </li>
     </ul>
   </TabItem>
 </Tabs>
@@ -237,9 +237,9 @@ Under Advanced details > User Data, add the following (pick the appropriate valu
 ```bash
 #!/bin/bash
 echo "LEVOAI_AUTH_KEY=xxx" > /opt/levoai/.env
-/opt/levoai/levo_satellite.sh start >> satellite-start.log 2>&1
+sudo /opt/levoai/levo_satellite.sh start >> satellite-start.log 2>&1
 # Uncomment the following line to enable the traffic mirroring listener
-# /opt/levoai/levo_traffic_listener.sh start >> traffic-listener-start.log 2>&1
+# sudo /opt/levoai/levo_traffic_listener.sh start >> traffic-listener-start.log 2>&1
 ```
 
 #### Traffic Mirroring
