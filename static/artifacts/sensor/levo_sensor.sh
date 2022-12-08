@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
-# Script to start/stop/restart Levo's eBPF sensor.
-# Usage:
-#   levo_sensor.sh --collector-endpoint IP:4317 [sensor options..] start|stop|restart|logs
+
+SCRIPT_NAME="$(basename "$0")"
+
+USAGE_PREFIX="$SCRIPT_NAME start [sensor options...] | stop | restart | logs
+
+Sensor options:
+"
 
 set -e
 
@@ -9,6 +13,7 @@ sensor_version=0.18.8
 
 # Print Sensor help message and exit
 show_help_and_exit() {
+  echo "$USAGE_PREFIX"
   docker run --rm levoai/ebpf_sensor:${sensor_version} --help
   exit
 }
@@ -21,16 +26,19 @@ set_abs_filename() {
     echo "$1: No such file"
     exit
   fi
-  abs_path="$(cd "$(dirname "$1")" && pwd)/$(basename "$1")"
+  abs_path="$(realpath "$1")"
 }
 
+declare -a SENSOR_ARGS CONFIG_FILE_MAPPING
+
 cmd="start"
+
 while [ $# -gt 0 ]
 do
     if [ "$1" = "-f" ] || [ "$1" = "--config-file-path" ]; then
       set_abs_filename "$2"
-      config_file_mapping="-v $abs_path:/home/levo/config.yml"
-      arg="${arg} --config-file-path /home/levo/config.yml"
+      CONFIG_FILE_MAPPING=(-v "$abs_path:/home/levo/config.yml")
+      SENSOR_ARGS+=(--config-file-path /home/levo/config.yml)
       shift
 
     elif [ "$1" = "-h" ] ||  [ "$1" = "--help" ]; then
@@ -46,19 +54,41 @@ do
       cmd="$1"
 
     else
-      arg="${arg} $1"
+      SENSOR_ARGS+=("$1")
     fi
     shift
 done
 
 start() {
-  echo "Starting Levo's Sensor with version: ${sensor_version} args: ${arg}"
+  set +e
+  if ! mount | grep -q debugfs; then
+    if [[ $(id -u) != 0 ]]; then
+      >&2 echo "$SCRIPT_NAME must be run with root privileges.  Exiting."
+      exit 1
+    fi
+    echo "Mounting debugfs"
+    mount -t debugfs none /sys/kernel/debug
+    mount_rc=$?
+
+    if [ $mount_rc != 0 ] ; then
+      echo "Failed to mount debugfs. Sensor cannot run without debugfs."
+      if [ $mount_rc == 32 ] ; then
+        echo "Please run the below command to verify that the running kernel built with debugfs enabled:"
+        echo "  grep CONFIG_DEBUG_FS /boot/config-`uname -r`"
+      fi
+      echo "Exiting."
+      exit 1
+    fi
+  fi
+  set -e
+
+  echo "Starting the Levo.ai eBPF Sensor.  Version: ${sensor_version}, args: ${SENSOR_ARGS[*]}"
   docker rm levoai-ebpf-sensor 2>/dev/null || true
   docker run --name=levoai-ebpf-sensor --restart unless-stopped \
-    -e OUTSIDE_HOSTNAME=$(hostname) \
-    -v /sys/kernel/debug:/sys/kernel/debug:rw -v /proc:/host/proc:ro $config_file_mapping \
+    -e OUTSIDE_HOSTNAME="$(hostname)" \
+    -v /sys/kernel/debug:/sys/kernel/debug:rw -v /proc:/host/proc:ro "${CONFIG_FILE_MAPPING[@]}" \
     --privileged --detach levoai/ebpf_sensor:${sensor_version} \
-    --host-proc-path /host/proc $arg
+    --host-proc-path /host/proc "${SENSOR_ARGS[@]}"
 }
 
 stop() {
