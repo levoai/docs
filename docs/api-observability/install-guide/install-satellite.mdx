@@ -229,6 +229,8 @@ Pick the following appropriately for your instance. Make sure that this instance
 1. Instance Name & tags
 2. Key pair
 3. The security group
+   - Make sure to add rules to allow https traffic.
+   - Allow UDP port 4789 if you are using traffic mirroring.
 4. Disk storage. Choose at least 40GB
 
 ### 3. Add User Metadata to the EC2 instance
@@ -284,7 +286,7 @@ f74524d02fbd   bitnami/rabbitmq:3.10     "/opt/bitnami/script…"   10 seconds a
 Execute the following to check for connectivity health:
 
 ```bash
-sudo docker logs levoai-tagger | grep "Ready to process; waiting for messages."
+sudo docker logs levoai-tagger  2>&1 | grep "Ready to process; waiting for messages."
 ```
 If connectivity is healthy, you will see output similar to below.
 
