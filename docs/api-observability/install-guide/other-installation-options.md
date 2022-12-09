@@ -18,7 +18,7 @@ sidebar_position: 7
 In order to create the traffic mirroring in aws you have to run:
 
 ```bash
-foo@bar:~$ levo mirror create
+levo mirror create
 ```
 
 The CLI will ask for some inputs. First it will ask for the Elastic Network Interface resource id of the source instance from which you want to mirror the traffic.

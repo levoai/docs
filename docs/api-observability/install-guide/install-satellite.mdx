@@ -214,10 +214,10 @@ Levo provides pre-built AMIs for Satellite. You can launch an EC2 instance using
 <Tabs groupId="satellite-ami">
   <TabItem value="mac" label="Mac OSX">
     <ul>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-1#LaunchInstances:ami=ami-0b4a2b33d8dc96ed1;instanceType=c6a.xlarge">us-west-1 (N. California)</a> </li>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#LaunchInstances:ami=ami-06a1891b0b1b78b95;instanceType=c6a.xlarge">us-west-2 (Oregon)</a> </li>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-east-1#LaunchInstances:ami=ami-058387827f0fd17fe;instanceType=c6a.xlarge">us-east-1 (N. Virginia)</a> </li>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-east-2#LaunchInstances:ami=ami-02b4dd4ec2a89c7d4;instanceType=c6a.xlarge">us-east-2 (Ohio)</a> </li>
+      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-1#LaunchInstances:ami=ami-0ec177c0ccbbb1667;instanceType=c6a.xlarge">us-west-1 (N. California)</a> </li>
+      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#LaunchInstances:ami=ami-0316a8fe88eb8db35;instanceType=c6a.xlarge">us-west-2 (Oregon)</a> </li>
+      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-east-1#LaunchInstances:ami=ami-0af0b9c43c329cd3d;instanceType=c6a.xlarge">us-east-1 (N. Virginia)</a> </li>
+      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-east-2#LaunchInstances:ami=ami-095940b401533e6cf;instanceType=c6a.xlarge">us-east-2 (Ohio)</a> </li>
     </ul>
   </TabItem>
 </Tabs>
@@ -229,6 +229,8 @@ Pick the following appropriately for your instance. Make sure that this instance
 1. Instance Name & tags
 2. Key pair
 3. The security group
+   - Make sure to add rules to allow https traffic.
+   - Allow UDP port 4789 if you are using traffic mirroring.
 4. Disk storage. Choose at least 40GB
 
 ### 3. Add User Metadata to the EC2 instance
@@ -284,7 +286,7 @@ f74524d02fbd   bitnami/rabbitmq:3.10     "/opt/bitnami/script…"   10 seconds a
 Execute the following to check for connectivity health:
 
 ```bash
-sudo docker logs levoai-tagger | grep "Ready to process; waiting for messages."
+sudo docker logs levoai-tagger  2>&1 | grep "Ready to process; waiting for messages."
 ```
 If connectivity is healthy, you will see output similar to below.
 
