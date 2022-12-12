@@ -15,6 +15,8 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME:-levoai}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-levoailevoai}
+      # send logs to stdout, ref: https://www.rabbitmq.com/logging.html#log-file-location
+      RABBITMQ_LOGS: '-'
     mem_reservation: 512m
     cpus: 0.5
 
