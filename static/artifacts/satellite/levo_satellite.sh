@@ -25,29 +25,29 @@ start() {
   fi
 
   export LEVOAI_AUTH_KEY=$LEVOAI_AUTH_KEY
-  docker compose up -d
+  docker compose -f "$DIR"/docker-compose.yml up -d
   echo "Levo Satellite started Successfully!!!"
 }
 
 stop() {
   echo "Stopping Levo Satellite..."
-  docker compose stop
+  docker compose -f "$DIR"/docker-compose.yml stop
   echo "Levo Satellite stopped Successfully!!!"
 }
 
 restart() {
   echo "Restarting Levo Satellite..."
-  docker compose stop
-  docker compose up -d
+  stop
+  start
   echo "Levo Satellite restarted Successfully!!!"
 }
 
 upgrade() {
   echo "Upgrading Levo Satellite..."
   curl https://docs.levo.ai/artifacts/satellite/docker-compose.yml -o "$DIR"/docker-compose.yml
-  docker compose down -v --remove-orphans
-  docker compose pull
-  docker compose up -d --force-recreate
+  docker compose -f "$DIR"/docker-compose.yml down -v --remove-orphans
+  docker compose -f "$DIR"/docker-compose.yml pull
+  docker compose -f "$DIR"/docker-compose.yml up -d --force-recreate
   echo "Levo Satellite upgraded Successfully!!!"
 }
 
