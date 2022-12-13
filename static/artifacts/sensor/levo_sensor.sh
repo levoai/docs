@@ -9,7 +9,7 @@ Sensor options:
 
 set -e
 
-sensor_version=0.18.8
+sensor_version=0.18.12
 
 # Print Sensor help message and exit
 show_help_and_exit() {
@@ -82,10 +82,17 @@ start() {
   fi
   set -e
 
+  # Default to 0.5 CPUs but let the user override with env variable
+  cpus=${LEVO_SENSOR_CPUS:-0.5}
+
+  # Default to 1GB of memory but let the user override with env variable
+  memory=${LEVO_SENSOR_MEMORY:-1g}
+
   echo "Starting the Levo.ai eBPF Sensor.  Version: ${sensor_version}, args: ${SENSOR_ARGS[*]}"
   docker rm levoai-ebpf-sensor 2>/dev/null || true
   docker run --name=levoai-ebpf-sensor --restart unless-stopped \
     -e OUTSIDE_HOSTNAME="$(hostname)" \
+    --cpus="${cpus}" --memory="${memory}" \
     -v /sys/kernel/debug:/sys/kernel/debug:rw -v /proc:/host/proc:ro "${CONFIG_FILE_MAPPING[@]}" \
     --privileged --detach levoai/ebpf_sensor:${sensor_version} \
     --host-proc-path /host/proc "${SENSOR_ARGS[@]}"
