@@ -1,4 +1,4 @@
-version: "2.2"
+version: "3.9"
 services:
   levoai-rabbitmq:
     image: 'rabbitmq:3.10.5-management'
@@ -15,8 +15,14 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME:-levoai}
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-levoailevoai}
-    mem_reservation: 512m
-    cpus: 0.5
+    deploy:
+      resources:
+        limits:
+          cpus: '0.75'
+          memory: 1024M
+        reservations:
+          cpus: '0.50'
+          memory: 512M
 
   levoai-satellite:
     image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-stable}'
@@ -44,8 +50,14 @@ services:
     depends_on:
       levoai-rabbitmq:
         condition: service_healthy
-    mem_reservation: 256m
-    cpus: 0.3
+    deploy:
+      resources:
+        limits:
+          cpus: '0.50'
+          memory: 521M
+        reservations:
+          cpus: '0.30'
+          memory: 256M
 
   levoai-tagger:
     image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-stable}'
@@ -82,8 +94,14 @@ services:
     depends_on:
       levoai-rabbitmq:
         condition: service_healthy
-    mem_reservation: 1024m
-    cpus: 0.5
+    deploy:
+      resources:
+        limits:
+          cpus: '3.00'
+          memory: 2048M
+        reservations:
+          cpus: '0.50'
+          memory: 512M
 
   levoai-collector:
     image: 'levoai/collector:${LEVOAI_COLLECTOR_VERSION:-stable}'
@@ -93,5 +111,11 @@ services:
       - '4317:4317'
     depends_on:
       - levoai-satellite
-    mem_reservation: 256m
-    cpus: 0.3
+    deploy:
+      resources:
+        limits:
+          cpus: '1.00'
+          memory: 1024M
+        reservations:
+          cpus: '0.50'
+          memory: 512M
