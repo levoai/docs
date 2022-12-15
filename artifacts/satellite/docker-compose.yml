@@ -17,15 +17,14 @@ services:
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-levoailevoai}
       # send logs to stdout, ref: https://www.rabbitmq.com/logging.html#log-file-location
       RABBITMQ_LOGS: '-'
-
     deploy:
       resources:
         limits:
-          cpus: '0.75'
-          memory: 1024M
+          cpus: '${LEVOAI_RABBITMQ_CPU_LIMIT:-1.0}'
+          memory: '${LEVOAI_RABBITMQ_MEM_LIMIT:-1024m}'
         reservations:
-          cpus: '0.50'
-          memory: 512M
+          cpus: '${LEVOAI_RABBITMQ_CPU_REQ:-0.50}'
+          memory: '${LEVOAI_RABBITMQ_MEM_REQ:-512m}'
 
   levoai-satellite:
     image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-stable}'
@@ -56,11 +55,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '0.50'
-          memory: 521M
+          cpus: '${LEVOAI_SATELLITE_CPU_LIMIT:-0.60}'
+          memory: '${LEVOAI_SATELLITE_MEM_LIMIT:-1024m}'
         reservations:
-          cpus: '0.30'
-          memory: 256M
+          cpus: '${LEVOAI_SATELLITE_CPU_REQ:-0.30}'
+          memory: '${LEVOAI_SATELLITE_MEM_REQ:-256m}'
 
   levoai-tagger:
     image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-stable}'
@@ -100,11 +99,11 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '3.00'
-          memory: 2048M
+          cpus: '${LEVOAI_TAGGER_CPU_LIMIT:-2.0}'
+          memory: '${LEVOAI_TAGGER_MEM_LIMIT:-2048m}'
         reservations:
-          cpus: '0.50'
-          memory: 512M
+          cpus: '${LEVOAI_TAGGER_CPU_REQ:-0.50}'
+          memory: '${LEVOAI_TAGGER_MEM_REQ:-512m}'
 
   levoai-collector:
     image: 'levoai/collector:${LEVOAI_COLLECTOR_VERSION:-stable}'
@@ -117,8 +116,8 @@ services:
     deploy:
       resources:
         limits:
-          cpus: '1.00'
-          memory: 1024M
+          cpus: '${LEVOAI_COLLECTOR_CPU_LIMIT:-0.60}'
+          memory: '${LEVOAI_COLLECTOR_MEM_LIMIT:-1024m}'
         reservations:
-          cpus: '0.50'
-          memory: 512M
+          cpus: '${LEVOAI_COLLECTOR_CPU_REQ:-0.30}'
+          memory: '${LEVOAI_COLLECTOR_MEM_REQ:-256m}'
