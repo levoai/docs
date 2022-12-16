@@ -1,4 +1,4 @@
-version: "3.9"
+version: "2.2"
 services:
   levoai-rabbitmq:
     image: 'rabbitmq:3.10.5-management'
@@ -17,14 +17,8 @@ services:
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-levoailevoai}
       # send logs to stdout, ref: https://www.rabbitmq.com/logging.html#log-file-location
       RABBITMQ_LOGS: '-'
-    deploy:
-      resources:
-        limits:
-          cpus: '${LEVOAI_RABBITMQ_CPU_LIMIT:-1.0}'
-          memory: '${LEVOAI_RABBITMQ_MEM_LIMIT:-1024m}'
-        reservations:
-          cpus: '${LEVOAI_RABBITMQ_CPU_REQ:-0.50}'
-          memory: '${LEVOAI_RABBITMQ_MEM_REQ:-512m}'
+    mem_reservation: 512m
+    cpus: 0.5
 
   levoai-satellite:
     image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-stable}'
@@ -52,14 +46,8 @@ services:
     depends_on:
       levoai-rabbitmq:
         condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          cpus: '${LEVOAI_SATELLITE_CPU_LIMIT:-0.60}'
-          memory: '${LEVOAI_SATELLITE_MEM_LIMIT:-1024m}'
-        reservations:
-          cpus: '${LEVOAI_SATELLITE_CPU_REQ:-0.30}'
-          memory: '${LEVOAI_SATELLITE_MEM_REQ:-256m}'
+    mem_reservation: 256m
+    cpus: 0.3
 
   levoai-tagger:
     image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-stable}'
@@ -96,14 +84,8 @@ services:
     depends_on:
       levoai-rabbitmq:
         condition: service_healthy
-    deploy:
-      resources:
-        limits:
-          cpus: '${LEVOAI_TAGGER_CPU_LIMIT:-2.0}'
-          memory: '${LEVOAI_TAGGER_MEM_LIMIT:-2048m}'
-        reservations:
-          cpus: '${LEVOAI_TAGGER_CPU_REQ:-0.50}'
-          memory: '${LEVOAI_TAGGER_MEM_REQ:-512m}'
+    mem_reservation: 1024m
+    cpus: 0.5
 
   levoai-collector:
     image: 'levoai/collector:${LEVOAI_COLLECTOR_VERSION:-stable}'
@@ -113,11 +95,5 @@ services:
       - '4317:4317'
     depends_on:
       - levoai-satellite
-    deploy:
-      resources:
-        limits:
-          cpus: '${LEVOAI_COLLECTOR_CPU_LIMIT:-0.60}'
-          memory: '${LEVOAI_COLLECTOR_MEM_LIMIT:-1024m}'
-        reservations:
-          cpus: '${LEVOAI_COLLECTOR_CPU_REQ:-0.30}'
-          memory: '${LEVOAI_COLLECTOR_MEM_REQ:-256m}'
+    mem_reservation: 256m
+    cpus: 0.3
