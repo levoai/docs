@@ -15,7 +15,8 @@ echo "DIR: $DIR"
 if [ -r "$DIR"/.levoenv ]
 then
     echo "Loading environment variables from $DIR/.levoenv"
-    source "$DIR"/.levoenv
+    # export these env variables so that docker compose can pick them
+    export $(grep -v '^#' "$DIR"/.levoenv | xargs)
 fi
 
 set_resource_limits() {
