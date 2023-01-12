@@ -1,6 +1,6 @@
 ##################################################################################################
 # eBPF Sensor Configuration Settings (Helm Values)
-# Copyright: Levo Inc., 2022
+# Copyright: Levo Inc., 2023
 #
 # Helm Values file to configure eBPF Sensor.
 # See https://helm.sh/docs/chart_template_guide/values_files/ for more information.
@@ -37,9 +37,12 @@ sensor:
     # --------------------------------------------------------------------------------------------
     # Satellite Settings:
     # --------------------------------------------------------------------------------------------
-    # host:port for the collector service receiving the Sensor's API traces.
     
-    collector-endpoint: levoai-collector:4317
+    # host:port for the collector service receiving the Sensor's API traces.
+    collector-traces-endpoint: levoai-collector:4317
+    
+    # host:port for receiving the sensor's metrics
+    collector-metrics-endpoint: 
     # --------------------------------------------------------------------------------------------
     
     # --------------------------------------------------------------------------------------------
