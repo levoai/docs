@@ -50,7 +50,7 @@ helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --namespace levoai \
   --create-namespace \
   --set sensor.config.default-service-name=<'Application Name' chosen earlier> \
-  --set sensor.otel.grpcEndpoint=<hostname|IP:port>
+  --set sensor.config.collector-traces-endpoint=<hostname|IP:port>
 ```
 
 
@@ -110,7 +110,7 @@ sudo docker run --restart unless-stopped \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
   --privileged --detach levoai/ebpf_sensor:latest \
   --host-proc-path /host/proc/ \
-  --collector-endpoint <hostname|IP:port> \
+  --collector-traces-endpoint <hostname|IP:port> \
   --default-service-name <'Application Name' chosen earlier>
 ```
 
@@ -184,7 +184,7 @@ sudo apt-get install levo-ebpf-sensor
 ### 4. Configure Satellite Address
 The Satellite address is configured in `/etc/levo/sensor/config.yaml`. The default `host:port` for Satellite is `localhost:4317`.
 
-Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satellite Settings) to the `host:port` address, noted down from the Satellite install.
+Edit `/etc/levo/sensor/config.yaml`, and set `collector-traces-endpoint` (under Satellite Settings) to the `host:port` address, noted down from the Satellite install.
 
 ```bash
 ...
@@ -192,7 +192,7 @@ Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satelli
 # Satellite Settings:
 # --------------------------------------------------------------------------------------------
 # host:port for the collector service receiving the sensor's API traces.
-collector-endpoint: <set to host:port value noted from the Satellite install>
+collector-traces-endpoint: <set to host:port value noted from the Satellite install>
 # --------------------------------------------------------------------------------------------
 ...
 ```
