@@ -1,6 +1,6 @@
 ##############################################################################################
 # eBPF Sensor Configuration Settings (YAML Format)
-# Copyright: Levo Inc., 2022
+# Copyright: Levo Inc., 2023
 ##############################################################################################
 
 
@@ -32,9 +32,12 @@ default-service-name: default
 # --------------------------------------------------------------------------------------------
 # Satellite Settings:
 # --------------------------------------------------------------------------------------------
-# host:port for the collector service receiving the Sensor's API traces.
 
-collector-endpoint: localhost:4317
+# host:port for the collector service receiving the Sensor's API traces.
+collector-traces-endpoint: localhost:4317
+
+# host:port for receiving the sensor's metrics
+collector-metrics-endpoint: 
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
