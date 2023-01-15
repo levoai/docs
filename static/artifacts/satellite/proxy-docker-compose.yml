@@ -69,8 +69,6 @@ services:
           "onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}",
           "refresh-token": "${LEVOAI_AUTH_KEY}", "org-id": "${LEVOAI_ORG_ID:-}",
           "org-prefix": "${LEVOAI_ORG_PREFIX:-}"},
-          "send_sample_payloads": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-False}",
-          "max_samples_per_end_point": "${MAX_SAMPLES_PER_END_POINT:-2}",
           "min_urls_required_per_pattern": "${LEVOAI_MIN_URLS_PER_PATTERN:-3}",
           "min_token_threshold": "${LEVOAI_MIN_TOKEN_THRESHOLD:-1}",
           "url_clusterer_id_len": "${LEVOAI_URL_CLUSTERER_ID_LEN:-1}",
@@ -78,9 +76,12 @@ services:
           "cookie_auth_keys": "${LEVOAI_COOKIE_AUTH_KEYS:-}",
           "disable_ml_detector": "${LEVOAI_DISABLE_ML_DETECTOR:-true}",
           "service_naming": {"strategies": "HOST_HEADER,DEFAULT"},
-          "user_resolvers": [{"name": "cookie_resolver", "type": "cookie", "key_names": ["PHPSESSID"]}],
-          "users": {"testing_user": {"user_resolvers": ["cookie_resolver"],
-                                     "cookies": {"PHPSESSID": "${LEVOAI_SAMPLES_USER:-}"}}},
+          "user_resolvers": [],
+          "sample_collection": {
+              "enabled": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-False}",
+              "max_samples_per_end_point": "${MAX_SAMPLES_PER_END_POINT:-2}",
+              "users": [ { "name": "User1", "match_type": "user", "user_id": "user1" } ]
+          },
           "tagger_batch_interval_minutes": 2
         }
     depends_on:
@@ -94,13 +95,13 @@ services:
     container_name: levoai-proxy
     restart: always
     ports:
-      - "${LEVOAI_PROXY_PORT:-8080}:${LEVOAI_PROXY_PORT:-8080}"
+      - "${LEVOAI_PROXY_PORT:-9080}:8080"
       - '8081:8081'
     environment:
       LEVOAI_PROXY_MODE: ${LEVOAI_PROXY_MODE:-reverse}
-      LEVOAI_PROXY_PORT: ${LEVOAI_PROXY_PORT:-8080}
+      LEVOAI_PROXY_PORT: ${LEVOAI_PROXY_PORT:-9080}
       LEVOAI_SERVICE_NAME: ${LEVOAI_SERVICE_NAME:-default}
-      SERVICE_ADDRESS: ${SERVICE_ADDRESS:-http://host.docker.internal:8090}
+      SERVICE_ADDRESS: ${SERVICE_ADDRESS:-http://host.docker.internal:8010}
       LEVOAI_SATELLITE_ADDRESS: ${LEVOAI_SATELLITE_ADDRESS:-http://levoai-satellite:9999}
     depends_on:
       - levoai-satellite
