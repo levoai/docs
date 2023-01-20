@@ -249,3 +249,32 @@ Initial connection with Collector failed. However, the sensor will keep attempti
 ```
 
 Please proceed to the next step, if there are no errors.
+
+
+### 8. Sensor's resource limits
+By default, sensor is restricted to use up to 50% of CPU and 2GB memory.
+
+If you ever need to change these limits, you need to modify `CPUQuota` and `MemoryMax` in the below systemd config file under `[Service]` section:
+
+#### #1. Open the config file `/usr/lib/systemd/system/levo-ebpf-sensor.service` and modify `CPUQuota` and `MemoryMax`
+
+```
+sudo vi /usr/lib/systemd/system/levo-ebpf-sensor.service
+```
+For example,
+
+If you want to limit sensor's CPU usage to 75% of CPU, then set `CPUQuota=75%`.
+
+If you want to limit sensor's memory usage to 3GB, then set `MemoryMax=3G` 
+
+#### #2. Reload the config
+
+```
+systemctl daemon-reload
+```
+
+#### #3. Restart the sensor
+
+```
+sudo systemctl restart levo-ebpf-sensor
+```
