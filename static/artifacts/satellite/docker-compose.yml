@@ -86,6 +86,7 @@ services:
           "cookie_auth_keys": "${LEVOAI_COOKIE_AUTH_KEYS:-}",
           "disable_ml_detector": "${LEVOAI_DISABLE_ML_DETECTOR:-true}",
           "service_naming": {"strategies": "HOST_HEADER,DEFAULT"},
+          "ignore_user_agents": [],
           "user_resolvers": [],
           "sample_collection": {
               "enabled": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-False}",
