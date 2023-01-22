@@ -86,7 +86,6 @@ services:
           "cookie_auth_keys": "${LEVOAI_COOKIE_AUTH_KEYS:-}",
           "disable_ml_detector": "${LEVOAI_DISABLE_ML_DETECTOR:-true}",
           "service_naming": {"strategies": "HOST_HEADER,DEFAULT"},
-          "ignore_user_agents": [],
           "user_resolvers": [],
           "sample_collection": {
               "enabled": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-False}",
@@ -123,3 +122,10 @@ services:
         reservations:
           cpus: '${LEVOAI_COLLECTOR_CPU_REQ:-0.30}'
           memory: '${LEVOAI_COLLECTOR_MEM_REQ:-256m}'
+
+  levoai-ion:
+    image: 'levoai/ion:latest'
+    container_name: levoai-ion
+    restart: always
+    ports:
+      - '8000:8000'
