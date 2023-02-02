@@ -217,7 +217,7 @@ If the Satellite is healthy, you should see output similar to below.
 
 ```bash
 CONTAINER ID   IMAGE                        COMMAND                  CREATED          STATUS                    PORTS                                                                                                         NAMES
-5a54d8efe672   levoai/proxy:latest          "docker-entrypoint.s…"   50 seconds ago   Up 37 seconds             0.0.0.0:9080-8081->8080-8081/tcp                                                                              levoai-proxy
+5a54d8efe672   levoai/proxy:latest          "docker-entrypoint.s…"   50 seconds ago   Up 37 seconds              0.0.0.0:8081->8081/tcp, 0.0.0.0:9080->8080/tcp                                                                              levoai-proxy
 8767c62db6cb   levoai/satellite:latest      "python -OO /opt/lev…"   50 seconds ago   Up 37 seconds                                                                                                                           levoai-tagger
 dcb187e00ff2   levoai/satellite:latest      "gunicorn --capture-…"   50 seconds ago   Up 37 seconds             0.0.0.0:9999->9999/tcp                                                                                        levoai-satellite
 169ceecf0263   rabbitmq:3.10.5-management   "docker-entrypoint.s…"   50 seconds ago   Up 49 seconds (healthy)   4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp   levoai-rabbitmq
