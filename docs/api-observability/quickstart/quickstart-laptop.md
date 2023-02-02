@@ -217,7 +217,7 @@ If the Satellite is healthy, you should see output similar to below.
 
 ```bash
 CONTAINER ID   IMAGE                        COMMAND                  CREATED          STATUS                    PORTS                                                                                                         NAMES
-5a54d8efe672   levoai/proxy:latest          "docker-entrypoint.s…"   50 seconds ago   Up 37 seconds             0.0.0.0:8080-8081->8080-8081/tcp                                                                              levoai-proxy
+5a54d8efe672   levoai/proxy:latest          "docker-entrypoint.s…"   50 seconds ago   Up 37 seconds             0.0.0.0:9080-8081->8080-8081/tcp                                                                              levoai-proxy
 8767c62db6cb   levoai/satellite:latest      "python -OO /opt/lev…"   50 seconds ago   Up 37 seconds                                                                                                                           levoai-tagger
 dcb187e00ff2   levoai/satellite:latest      "gunicorn --capture-…"   50 seconds ago   Up 37 seconds             0.0.0.0:9999->9999/tcp                                                                                        levoai-satellite
 169ceecf0263   rabbitmq:3.10.5-management   "docker-entrypoint.s…"   50 seconds ago   Up 49 seconds (healthy)   4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 15671/tcp, 15691-15692/tcp, 25672/tcp, 0.0.0.0:15672->15672/tcp   levoai-rabbitmq
@@ -266,7 +266,7 @@ The Sensor picks up API traffic that is HTTP\1.x based. There has to be some con
 
 The Sensor acts as a **[reverse proxy](https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/)** for your *API Server*. You will need to point your *API Client* to the Sensor. The Sensor will proxy the traffic to your test *API Server*/*Service*.
 
-The Sensor listens on [http://127.0.0.1:8080](http://127.0.0.1:8080). Please point your API Client (Web Browser, [Postman](https://www.postman.com/), [curl](https://curl.se/), etc.) to this address (instead of the *API Server's* address).
+The Sensor listens on [http://127.0.0.1:9080](http://127.0.0.1:9080). Please point your API Client (Web Browser, [Postman](https://www.postman.com/), [curl](https://curl.se/), etc.) to this address (instead of the *API Server's* address).
 
 > If your *API Server* uses HTTP/s (TLS), the Sensor will use HTTP/s when proxying traffic to it. However your *API Client* will need to use **HTTP** when talking to the Sensor.
 
@@ -318,7 +318,7 @@ docker compose -f proxy-docker-compose.yml down
 ```
 
 ### Change Sensor Listen Port
-The Sensor by default listens on TCP port 8080 (interface address 127.0.0.1). If this conflicts with a port being used by another application, you can change it by following the instructions below.
+The Sensor by default listens on TCP port 9080 (interface address 127.0.0.1). If this conflicts with a port being used by another application, you can change it by following the instructions below.
 
 - [Shutdown](./quickstart-laptop.md#shutdown-sensor) the Sensor (if running)
 - Export your desired port in your terminal
