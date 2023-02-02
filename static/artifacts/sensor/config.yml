@@ -187,3 +187,10 @@ ip-filter-list:
 #
 
 # --------------------------------------------------------------------------------------------
+# Memory-related settings
+# --------------------------------------------------------------------------------------------
+# The maximum request or response body size the sensor will parse.  Request or response bodies
+# larger than this limit will be ignored by the sensor.
+# max-msg-body-size-bytes: 5000000
+
+# --------------------------------------------------------------------------------------------
