@@ -92,7 +92,13 @@ services:
               "max_samples_per_end_point": "${MAX_SAMPLES_PER_END_POINT:-2}",
               "users": [ { "name": "User1", "match_type": "user", "user_id": "user1" } ]
           },
-          "tagger_batch_interval_minutes": ${LEVOAI_TAGGER_INTERVAL:-5}
+          "tagger_batch_interval_minutes": ${LEVOAI_TAGGER_INTERVAL:-5},
+          "api_rule_evaluation": {
+              "enabled": "${LEVOAI_EVALUATE_API_RULES:-True}"
+          },
+          "ion": {
+            "url": "${LEVOAI_ION_URL:-http://levoai-ion:8000}"
+          }
         }
     depends_on:
       levoai-rabbitmq:
@@ -127,5 +133,7 @@ services:
     image: 'levoai/ion:latest'
     container_name: levoai-ion
     restart: always
-    ports:
-      - '8000:8000'
+    expose:
+      - '8000'
+    # volumes:
+    #  - ./path/to/rules:/etc/ion/rules/custom
