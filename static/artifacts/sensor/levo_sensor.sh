@@ -9,7 +9,7 @@ Sensor options:
 
 set -e
 
-sensor_version=0.18.12
+sensor_version=0.18.34
 
 # Print Sensor help message and exit
 show_help_and_exit() {
