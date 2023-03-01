@@ -22,14 +22,14 @@ show_help_and_exit() {
 # mapped into the sensor container as '/home/levo/config.yml'.
 set_abs_filename() {
   # $1 : relative filename
-  if [ ! -f $1 ]; then
+  if [ ! -f "$1" ]; then
     echo "$1: No such file"
     exit
   fi
   abs_path="$(realpath "$1")"
 }
 
-declare -a SENSOR_ARGS CONFIG_FILE_MAPPING
+declare -a SENSOR_ARGS CONFIG_FILE_MAPPING USERID
 
 cmd="start"
 
@@ -43,6 +43,10 @@ do
 
     elif [ "$1" = "-h" ] ||  [ "$1" = "--help" ]; then
       show_help_and_exit
+
+    elif [ "$1" = "-u" ] ||  [ "$1" = "--user" ]; then
+      USERID=(-u "$2")
+      shift
 
     # This script should not be invoked with --host-proc-path option.
     elif [ "$1" = "-P" ] ||  [ "$1" = "--host-proc-path" ]; then
@@ -91,10 +95,11 @@ start() {
   echo "Starting the Levo.ai eBPF Sensor.  Version: ${sensor_version}, args: ${SENSOR_ARGS[*]}"
   docker rm levoai-ebpf-sensor 2>/dev/null || true
   docker run --name=levoai-ebpf-sensor --restart unless-stopped \
-    -e OUTSIDE_HOSTNAME="$(hostname)" \
+    -e OUTSIDE_HOSTNAME="$(hostname)" "${USERID[@]}"\
+    --cap-drop=all --cap-add=SYS_ADMIN --cap-add=SYS_RESOURCE --cap-add=DAC_OVERRIDE\
     --cpus="${cpus}" --memory="${memory}" \
-    -v /sys/kernel/debug:/sys/kernel/debug:rw -v /proc:/host/proc:ro "${CONFIG_FILE_MAPPING[@]}" \
-    --privileged --detach levoai/ebpf_sensor:${sensor_version} \
+    -v /sys/kernel/debug/tracing:/sys/kernel/tracing:rw -v /proc:/host/proc:ro "${CONFIG_FILE_MAPPING[@]}" \
+    --detach levoai/ebpf_sensor:${sensor_version} \
     --host-proc-path /host/proc "${SENSOR_ARGS[@]}"
 }
 
