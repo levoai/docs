@@ -77,8 +77,9 @@ services:
           "disable_ml_detector": "${LEVOAI_DISABLE_ML_DETECTOR:-true}",
           "service_naming": {"strategies": "HOST_HEADER,DEFAULT"},
           "user_resolvers": [],
+          "api_rule_evaluation": {"enabled": true},
           "sample_collection": {
-              "enabled": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-False}",
+              "enabled": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-True}",
               "max_samples_per_end_point": "${MAX_SAMPLES_PER_END_POINT:-2}",
               "users": [ { "name": "User1", "match_type": "user", "user_id": "user1" } ]
           },
@@ -107,3 +108,11 @@ services:
       - levoai-satellite
     mem_reservation: 256m
     cpus: 0.5
+
+  levoai-ion:
+    image: 'levoai/ion:latest'
+    command: [ "-verbose" ]
+    container_name: levoai-ion
+    restart: always
+    ports:
+      - '9990:8000'
