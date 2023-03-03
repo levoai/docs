@@ -60,9 +60,9 @@ helm repo add levoai https://charts.levo.ai && helm repo update
 
 #### If locating Satellite on the same cluster alongside Sensor
 ```bash
-helm install -n levoai --create-namespace \
-    --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
-    levoai-satellite levoai/levoai-satellite
+helm upgrade --install -n levoai --create-namespace \
+  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+  levoai-satellite levoai/levoai-satellite --force
 ```
 
 #### If locating Satellite on a dedicated cluster
@@ -70,7 +70,7 @@ You will need to expose the Satellite via either a `LoadBalancer` or `NodePort`,
 
 ```bash
 # Please modify this command template and choose either 'LoadBalancer' or 'NodePort', prior to execution
-helm install -n levoai --create-namespace \
+helm upgrade --install -n levoai --create-namespace \
     --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
     --set levoai-collector.service.type=<LoadBalancer | NodePort> \
     levoai-satellite levoai/levoai-satellite
