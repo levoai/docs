@@ -38,6 +38,9 @@ sensor:
     # Satellite Settings:
     # --------------------------------------------------------------------------------------------
     
+    # Levo Organization ID. This must be specified when the collector is hosted by Levo.
+    # organization-id: ""
+    
     # host:port for the collector service receiving the Sensor's API traces.
     collector-traces-endpoint: levoai-collector:4317
     
