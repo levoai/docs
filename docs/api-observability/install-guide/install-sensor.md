@@ -143,21 +143,10 @@ sudo apt install gnupg
 sudo apt install curl
 ```
 
-### 2. Configure Linux host to access `Google Artifact Registry` and `Levo apt repo`
+### 2. Configure Linux host to access `Levo apt repo`
 
 ```bash
 curl -fsSL https://us-apt.pkg.dev/doc/repo-signing-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/us-apt-repo-signing-key.gpg
-```
-
-```bash
-curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo gpg --dearmor -o /usr/share/keyrings/gcloud-packages-key.gpg
-```
-
-```bash
-echo \
-"deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/gcloud-packages-key.gpg] \
- https://packages.cloud.google.com/apt apt-transport-artifact-registry-stable main" \
-| sudo tee -a /etc/apt/sources.list.d/artifact-registry.list > /dev/null
 ```
 
 ```bash
@@ -174,11 +163,7 @@ sudo apt update
 ### 3. Download/install sensor artifacts
 
 ```bash
-sudo apt install apt-transport-artifact-registry
-```
-
-```bash
-sudo apt-get install levo-ebpf-sensor
+sudo apt install levo-ebpf-sensor
 ```
 
 ### 4. Configure Satellite Address
