@@ -98,7 +98,8 @@ services:
           },
           "ion": {
             "url": "${LEVOAI_ION_URL:-http://levoai-ion:8000}"
-          }
+          },
+          "enable_ssl_cert_checks": "${LEVOAI_ENABLE_SSL_CERT_CHECKS:-True}"
         }
     depends_on:
       levoai-rabbitmq:

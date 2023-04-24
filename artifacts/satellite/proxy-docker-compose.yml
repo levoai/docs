@@ -83,6 +83,7 @@ services:
               "max_samples_per_end_point": "${MAX_SAMPLES_PER_END_POINT:-2}",
               "users": [ { "name": "User1", "match_type": "user", "user_id": "user1" } ]
           },
+          "enable_ssl_cert_checks": "${LEVOAI_ENABLE_SSL_CERT_CHECKS:-True}",
           "tagger_batch_interval_minutes": 2
         }
     depends_on:
