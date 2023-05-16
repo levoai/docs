@@ -19,7 +19,8 @@ Pick a descriptive name which will be used in the subsequent step below. For exa
 Follow instructions for your specific platform/method below:
 - [Install on Kubernetes](./install-sensor.md#install-on-kubernetes)
 - [Install on Linux host via Docker](./install-sensor.md#install-on-linux-host-via-docker)
-- [Install on Debian based Linux via `apt`](./install-sensor.md#install-on-debian-based-linux-via-apt)
+- [Install on Debian based Linux Distributions via `apt`](./install-sensor.md#install-on-debian-based-linux-via-apt)
+- [Install on RPM based Linux Distributions via `yum`](./install-sensor.md#sensor-yum-install)
 
 <br></br>
 
@@ -160,16 +161,61 @@ echo \
 sudo apt update
 ```
 
-### 3. Download/install sensor artifacts
+### 3. Download/install Sensor artifacts
 
 ```bash
 sudo apt install levo-ebpf-sensor
 ```
 
-### 4. Configure Satellite Address
-The Satellite address is configured in `/etc/levo/sensor/config.yaml`. The default `host:port` for Satellite is `localhost:4317`.
+### 4. Start the Sensor
+Please take a look at the [Running the Sensor as a Systemd Service](#running-sensor-systemd) section for further instructions.
 
-Edit `/etc/levo/sensor/config.yaml`, and set `collector-traces-endpoint` (under Satellite Settings) to the `host:port` address, noted down from the Satellite install.
+---
+
+## Install on RPM based Linux Distributions via `yum` {#sensor-yum-install}
+
+### 1. Configure the package manager
+
+Configure `yum` to access Levo's RPM packages using the following command:
+
+```shell
+sudo tee -a /etc/yum.repos.d/levo.repo << EOF
+[levo]
+name=Levo.ai
+baseurl=https://us-yum.pkg.dev/projects/levoai/yum-levo
+enabled=1
+repo_gpgcheck=0
+gpgcheck=0
+EOF
+```
+
+### 2. Install the eBPF Sensor
+
+Install the eBPF Sensor from Levo's RPM repository.
+
+1. Update the list of available packages:
+  ```shell
+  sudo yum makecache
+  ```
+
+1. Install the package in your repository.
+  ```shell
+  sudo yum install levo-ebpf-sensor
+  ```
+
+Enter `y` when prompted.
+
+### 3. Start the Sensor
+Please take a look at the [Running the Sensor as a Systemd Service](#running-sensor-systemd) section for further instructions.
+
+---
+
+## Running the Sensor as a Systemd Service {#running-sensor-systemd}
+
+### 1. Configure Satellite Address
+The Satellite address is configured in `/etc/levo/sensor/config.yaml`. The default address for Satellite is `https://collector.levo.ai`.
+
+Edit `/etc/levo/sensor/config.yaml`, and set `collector-traces-endpoint` (under Satellite Settings) to the address noted from the Satellite install.
 
 ```bash
 ...
@@ -183,8 +229,9 @@ collector-traces-endpoint: <set to host:port value noted from the Satellite inst
 ```
 **Note**: If you change the Satellite address later, you have to restart the Sensor, since it's not a hot property.
 
+If you want to use the default (Levo-hosted) collector address, you must also specify your organization ID in the configuration.
 
-### 5. Configure Application Name
+### 2. Configure Application Name
 The `Application Name` is configured in `/etc/levo/sensor/config.yaml`.
 
 Edit `/etc/levo/sensor/config.yaml`, and set `default-service-name` to the `Application Name` chosen earlier.
@@ -204,12 +251,12 @@ default-service-name: <'Application Name' chosen earlier>
 **Note**: If you change the `Application Name` later, you have to restart the Sensor, since it's not a hot property.
 
 
-### 6. Start the Sensor
+### 3. Start the Sensor
 ```bash
 sudo systemctl start levo-ebpf-sensor
 ```
 
-### 7. Verify connectivity with Satellite
+### 4. Verify connectivity with Satellite
 ```bash
 sudo journalctl -u levo-ebpf-sensor.service -b -f
 
@@ -236,7 +283,7 @@ Initial connection with Collector failed. However, the sensor will keep attempti
 Please proceed to the next step, if there are no errors.
 
 
-### 8. Sensor's resource limits
+### 5. Sensor's resource limits
 By default, sensor is restricted to use up to 50% of CPU and 2GB memory.
 
 If you ever need to change these limits, you need to modify `CPUQuota` and `MemoryMax` in the below systemd config file under `[Service]` section:
