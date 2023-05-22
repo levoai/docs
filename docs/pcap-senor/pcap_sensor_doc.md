@@ -1,4 +1,4 @@
-# Install as a Sidecar on AWS Fargate!
+# Install Levo pcap-sensor
 
 ## Prerequisites
 
@@ -7,7 +7,14 @@
  - AWS profile access key and secret access key saved at path  ~/.aws/credentials file
  - The profile should have all the required permissions as listed [here](#aws-permissions)
 
-## Install Sensor 
+## Install Sensor as sidecar on AWS Fargate
+
+### Prerequisites
+
+ - Docker Engine version  `18.03.0`  and above
+ - Admin (or  `sudo`) privileges on the Docker host
+ - AWS profile access key and secret access key saved at path  ~/.aws/credentials file
+ - The profile should have all the required permissions as listed [here](#aws-permissions)
 
 ### Docker run command
 ```bash
@@ -38,6 +45,10 @@ Once confirmed, the CLI will generate a new version of the task definition, inco
 
 ## Install using JSON
 
+## Prerequisites
+
+ - The profile should have all the required permissions as listed [here](#aws-permissions)
+ 
 ### Copy this json to the Task Definition
 Replace the values in Entrypoint, Environment and LogConfiguration as per your requirement.
 
