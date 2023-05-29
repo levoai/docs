@@ -1,4 +1,4 @@
-# Install Levo pcap-sensor
+# Install as a Sidecar on AWS Fargate!
 
 ## Prerequisites
 
@@ -7,28 +7,14 @@
  - AWS profile access key and secret access key saved at path  ~/.aws/credentials file
  - The profile should have all the required permissions as listed [here](#aws-permissions)
 
-## Install Sensor as sidecar on AWS Fargate
-
-### Prerequisites
-
- - Docker Engine version  `18.03.0`  and above
- - Admin (or  `sudo`) privileges on the Docker host
- - AWS profile access key and secret access key saved at path  ~/.aws/credentials file
- - The profile should have all the required permissions as listed [here](#aws-permissions)
+## Install Sensor on Fargate
 
 ### Docker run command
 ```bash
 sudo docker run --rm -it -v ~/.aws:/aws:ro \
--e LEVO_SATELLITE_URL="your-satelliteurl-here" \
--e LEVO_FILTER="" \
--e LEVO_TRACE_EXPORT_INTERVAL=<export interval> \
--e LEVO_RATE_LIMIT_NUMBER=<rate limit> \
--e LEVO_HOST_ALLOW_RE="regex to allow hosts" \
--e LEVO_PATH_ALLOW_RE="regext to allow paths" \
--e LEVO_HOST_EXCLUSIONS_RE="regex to exclude hosts" \
--e LEVO_PATH_EXCLUSIONS_RE="regex to exclude paths" \
+-e LEVO_SATELLITE_URL="your-satelliteurl (http(s)://hostname|IP:port)" \
 -e LEVO_ORG_ID="Levo organization ID" \
-levoai/fargate_sensor
+levoai/pcap-sensor
 ```
 The option `-v ~/.aws:/aws:ro` maps the directory containing your AWS credentials into the container so that the Agent can use them to perform actions on your behalf.
 
@@ -43,12 +29,20 @@ Enter "Y" to proceed.
 
 Once confirmed, the CLI will generate a new version of the task definition, incorporating the Levo Sensor as a sidecar while keeping other settings unchanged. After updating the task definition, Levo will also update the selected service to utilise the updated task definition. Finally, the CLI will monitor the service's status to ensure a successful deployment of the new version, which includes the Levo sensor sidecar.
 
-## Install using JSON
 
-## Prerequisites
+### Additional Environment Variables
+```
+LEVO_FILTER -> Set the PCAP filter.
+LEVO_TRACE_EXPORT_INTERVAL -> Set the trace export interval (default 10s)
+LEVO_RATE_LIMIT_NUMBER -> Set rate limit for trace capturing (default 1000/min)
+LEVO_HOST_ALLOW_RE -> Regex for allowed hosts
+LEVO_PATH_ALLOW_RE -> Regex for allowed paths
+LEVO_HOST_EXCLUSIONS_RE -> Regex for excluded hosts
+LEVO_PATH_EXCLUSIONS_RE -> Regex for excluded paths
+```
 
- - The profile should have all the required permissions as listed [here](#aws-permissions)
- 
+### Install using JSON
+
 ### Copy this json to the Task Definition
 Replace the values in Entrypoint, Environment and LogConfiguration as per your requirement.
 
@@ -63,21 +57,7 @@ Replace the values in Entrypoint, Environment and LogConfiguration as per your r
                 "./bin/levo-pcap-sensor",
                 "apidump",
                 "--satellite-url",
-                "your satellite url here",
-                "--trace-export-interval",
-                "export interval here",
-                "--rate-limit",
-                "rate limit number here",
-                "--filter",
-                "Add the port and host filter here",
-                "--host-allow",
-                "host allow regex here",
-                "--path-allow",
-                "path allow regex here",
-                "--host-exclusions",
-                "host exclusion regex here",
-                "--path-exclusions",
-                "path exclusion regex here",
+                "your satellite url (http(s)://hostname|IP:port)",
                 "--levoai-org-id",
                 "Your Levo org Id here"
             ],
@@ -108,7 +88,79 @@ Replace the values in Entrypoint, Environment and LogConfiguration as per your r
             }
         }
 ```
+Specify additional flags in the entrypoint
+```bash
+--trace-export-interval
+--rate-limit
+--filter
+--host-allow
+--path-allow
+--host-exclusions
+--path-exclusions
+```
+## Install on Linux Host via Docker
 
+### Prerequisites
+-   Docker Engine version  `18.03.0`  and above
+-   Admin (or  `sudo`) privileges on the Docker host
+
+If you are running the satellite as a docker container on the host machine, use the satellite-url `http://host.docker.internal:9999`
+Do ***NOT *** use `localhost` as the hostname, since the sensor is running inside a container.
+```bash
+sudo docker run --net=host --rm -it levoai/pcap-sensor \
+./bin/levo-pcap-sensor apidump \
+--satellite-url "your satellite url (http(s)://hostname|IP:port)" \
+--levoai-org-id "your levo org id"
+```
+Specify additional flags in the command
+```bash
+--trace-export-interval	"trace export interval (default 10s)"
+--rate-limit "rate limit (default 1000/min)"
+--filter "pcap filter string"
+--host-allow "host allow regex"
+--path-allow "path allow regex"
+--host-exclusions "host exclude regex"
+--path-exclusions "path exclude regex"
+```
+
+## Install on Kubernetes
+
+### Prerequisites
+-   Kubernetes version >= v1.18.0
+-   [Helm v3](https://helm.sh/docs/intro/install/)  installed and working.
+-   The Kubernetes cluster API endpoint should be reachable from the machine you are running Helm.
+-   `kubectl`  access to the cluster, with  `cluster-admin`  permissions.
+
+### 1. Install levoai helm repo
+```
+helm repo add levoai https://charts.levo.ai && helm repo update
+```
+
+### 2. Create levoai namespace and install pcap-sensor
+
+```bash
+# Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
+# If Sensor is installed on same cluster as Satellite, use 'http://levoai-satellite:9999'
+# Specify below the 'Application Name' chosen earlier.
+#
+helm upgrade levoai-pcap-sensor levoai/levoai-pcap-sensor \
+  --install \
+  --namespace levoai \
+  --create-namespace \
+  --set sensor.config.levoaiOrgId="your Levo Org ID" \
+  --set sensor.config.satelliteUrl="htpp(s)://hostname|IP:port"
+```
+
+Set additional configs
+```bash
+sensor.config.traceExportInterval="trace export interval (default 10s)"
+sensor.config.rateLimit="rate limit number (default 1000/min)"
+sensor.config.fitler="pcap filter string"
+sensor.config.hostAllow="host allow regex"
+sensor.config.pathAllow="path allow regex"
+sensor.config.hostExclusions="host exclusion regex"
+sensor.config.pathExclusions="path exclusion regex"
+```
 <a id="aws-permissions"></a>
 ## AWS Permissions needed
 
@@ -125,4 +177,4 @@ Add the **AmazonECS_FullAccess** policy to get access to all the necessary permi
 | ecs:ListServices            | *                                                      | Find the available services.                                                                 |
 | ecs:DescribeServices        | *, or restricted to your account, or restricted to the cluster you selected | Identify which services are using the task definition you selected.                 |
 | ecs:UpdateService           | *, or restricted to your account, or restricted to the cluster you selected | Update and restart the service using the new task definition.                             |
-| ecs:TagResource             | *, or restricted to your account, or restricted to the cluster you selected | Mark the service as having been updated by Akita.                                           |
+| ecs:TagResource             | *, or restricted to your account, or restricted to the cluster you selected | Mark the service as having been updated by Levoai.
