@@ -1,4 +1,4 @@
-# Install as a Sidecar on AWS Fargate!
+# Install pcap-sensor
 
 ## Prerequisites
 
@@ -6,6 +6,14 @@
  - Admin (or  `sudo`) privileges on the Docker host
  - AWS profile access key and secret access key saved at path  ~/.aws/credentials file
  - The profile should have all the required permissions as listed [here](#aws-permissions)
+
+ ## Follow instructions for your platform
+
+ - [Install on Fargate](#install-fargate)
+ - [Install via Docker](#install-docker)
+ - [Install on Kuberenetes](#install-kubernetes)
+
+<a id="install-fargate"></a>
 
 ## Install Sensor on Fargate
 
@@ -43,50 +51,53 @@ LEVO_PATH_EXCLUSIONS_RE -> Regex for excluded paths
 
 ### Install using JSON
 
-### Copy this json to the Task Definition
-Replace the values in Entrypoint, Environment and LogConfiguration as per your requirement.
+ - Go to Task Definitions
+ - Select the required task definition
+ - Click on `Create revision with JSON`
+ - Add the given JSON object under ContainerDefinitions
+ - Replace the values in Entrypoint, Environment and LogConfiguration as per your requirement.
 
 ```json
 {
-            "name": "levo-pcap-sensor",
-            "image": "levoai/pcap-sensor",
-            "cpu": 0,
-            "portMappings": [],
-            "essential": false,
-            "entryPoint": [
-                "./bin/levo-pcap-sensor",
-                "apidump",
-                "--satellite-url",
-                "your satellite url (http(s)://hostname|IP:port)",
-                "--levoai-org-id",
-                "Your Levo org Id here"
-            ],
-            "environment": [
-                {
-                    "name": "LEVO_AWS_REGION",
-                    "value": "Region of your cluster"
-                },
-                {
-                    "name": "LEVO_ECS_SERVICE",
-                    "value": "The serivce name"
-                },
-                {
-                    "name": "LEVO_ECS_TASK",
-                    "value": "Task name"
-                }
-            ],
-            "mountPoints": [],
-            "volumesFrom": [],
-            "logConfiguration": {
-                "logDriver": "awslogs",
-                "options": {
-                    "awslogs-group": "Log group here",
-                    "awslogs-create-group": "true",
-                    "awslogs-region": "Log region here",
-                    "awslogs-stream-prefix": "ecs"
-                }
-            }
+    "name": "levo-pcap-sensor",
+    "image": "levoai/pcap-sensor",
+    "cpu": 0,
+    "portMappings": [],
+    "essential": false,
+    "entryPoint": [
+        "./bin/levo-pcap-sensor",
+        "apidump",
+        "--satellite-url",
+        "your satellite url (http(s)://hostname|IP:port)",
+        "--levoai-org-id",
+        "Your Levo org Id here"
+    ],
+    "environment": [
+        {
+            "name": "LEVO_AWS_REGION",
+            "value": "Region of your cluster"
+        },
+        {
+            "name": "LEVO_ECS_SERVICE",
+            "value": "The serivce name"
+        },
+        {
+            "name": "LEVO_ECS_TASK",
+            "value": "Task name"
         }
+    ],
+    "mountPoints": [],
+    "volumesFrom": [],
+    "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+            "awslogs-group": "Log group here",
+            "awslogs-create-group": "true",
+            "awslogs-region": "Log region here",
+            "awslogs-stream-prefix": "ecs"
+        }
+    }
+}
 ```
 Specify additional flags in the entrypoint
 ```bash
@@ -98,7 +109,9 @@ Specify additional flags in the entrypoint
 --host-exclusions
 --path-exclusions
 ```
-## Install on Linux Host via Docker
+<a id="install-docker"></a>
+
+## Install via Docker
 
 ### Prerequisites
 -   Docker Engine version  `18.03.0`  and above
@@ -122,6 +135,7 @@ Specify additional flags in the command
 --host-exclusions "host exclude regex"
 --path-exclusions "path exclude regex"
 ```
+<a id="install-kubernetes"></a>
 
 ## Install on Kubernetes
 
@@ -162,6 +176,7 @@ sensor.config.hostExclusions="host exclusion regex"
 sensor.config.pathExclusions="path exclusion regex"
 ```
 <a id="aws-permissions"></a>
+
 ## AWS Permissions needed
 
 Add the **AmazonECS_FullAccess** policy to get access to all the necessary permissions.
