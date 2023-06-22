@@ -1,3 +1,4 @@
+Could not change document to ignore md file. To add again and modify, remove this line, change file to .md and uncomment the path to this file in sensor/common-tasks.md
 ---
 sidebar_position: 4
 ---
@@ -31,3 +32,4 @@ TBD
 ## Installed on Linux Host
 
 TBD
+
