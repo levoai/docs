@@ -8,7 +8,7 @@ sidebar_position: 1
 
 ## [Sensor Configuration](./sensor/sensor-configuration.mdx)
 
-## [Sensor Troubleshooting](./sensor/sensor-troubleshoot.md)
+<!-- ## [Sensor Troubleshooting](./sensor/sensor-troubleshoot.md) -->
 
 ## [Satellite Lifecycle Management](./satellite/satellite-mgmt.mdx)
 
