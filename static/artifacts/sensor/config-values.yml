@@ -42,7 +42,7 @@ sensor:
     # organization-id: ""
     
     # host:port for the collector service receiving the Sensor's API traces.
-    collector-traces-endpoint: https://collector.levo.ai
+    collector-traces-endpoint: levoai-collector:4317
     
     # host:port for receiving the sensor's metrics
     collector-metrics-endpoint: 
