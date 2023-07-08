@@ -1,0 +1,119 @@
+version: "2.2"
+services:
+  levoai-rabbitmq:
+    image: 'rabbitmq:3.10.5-management'
+    container_name: levoai-rabbitmq
+    restart: always
+    healthcheck:
+      test: rabbitmq-diagnostics -q check_running && rabbitmq-diagnostics -q check_local_alarms
+      interval: 10s
+      timeout: 10s
+      retries: 10
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME:-levoai}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-levoailevoai}
+      # send logs to stdout, ref: https://www.rabbitmq.com/logging.html#log-file-location
+      RABBITMQ_LOGS: '-'
+    user: rabbitmq
+    mem_reservation: 512m
+    cpus: 0.5
+
+  levoai-satellite:
+    image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-latest}'
+    container_name: levoai-satellite
+    restart: always
+    ports:
+      - '9999:9999'
+    command:
+      - "-w"
+      - "1"
+      - "-b"
+      - "0.0.0.0:9999"
+      - "--worker-class"
+      - "gevent"
+      - "--worker-connections"
+      - "1000"
+      - "levoai_e7s.satellite.satellite:create_server()"
+    environment:
+      LEVOAI_DEBUG_ENABLED: ${LEVOAI_SATELLITE_DEBUG_ENABLED:-false}
+      LEVOAI_DEBUG_PORT: ${LEVOAI_SATELLITE_DEBUG_PORT:-12345}
+      LEVOAI_MODE: docker-compose
+      LEVOAI_DEBUG_SERVER_HOST: ${LEVOAI_DEBUG_SERVER_HOST:-host.docker.internal}
+      LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
+      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}", "refresh-token": "${LEVOAI_AUTH_KEY}", "org-id": "${LEVOAI_ORG_ID:-}", "org-prefix": "${LEVOAI_ORG_PREFIX:-}"}}'
+    depends_on:
+      levoai-rabbitmq:
+        condition: service_healthy
+    mem_reservation: 256m
+    cpus: 0.3
+
+  levoai-tagger:
+    image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-latest}'
+    container_name: levoai-tagger
+    restart: always
+    entrypoint: ['python', '-OO']
+    command:
+      - /opt/levoai/e7s/src/python/levoai_e7s/tag_server.py
+    environment:
+      LEVOAI_DEBUG_ENABLED: ${LEVOAI_TAGGER_DEBUG_ENABLED:-false}
+      LEVOAI_DEBUG_PORT: ${LEVOAI_TAGGER_DEBUG_PORT:-12345}
+      LEVOAI_MODE: docker-compose
+      LEVOAI_DEBUG_SERVER_HOST: ${LEVOAI_DEBUG_SERVER_HOST:-host.docker.internal}
+      LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
+      PI_DETECTOR_DATA_DIR: /opt/levoai/datasets/
+      LEVOAI_CONF_OVERRIDES: >
+        {
+          "onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}",
+          "refresh-token": "${LEVOAI_AUTH_KEY}", "org-id": "${LEVOAI_ORG_ID:-}",
+          "org-prefix": "${LEVOAI_ORG_PREFIX:-}"},
+          "min_urls_required_per_pattern": "${LEVOAI_MIN_URLS_PER_PATTERN:-3}",
+          "min_token_threshold": "${LEVOAI_MIN_TOKEN_THRESHOLD:-1}",
+          "url_clusterer_id_len": "${LEVOAI_URL_CLUSTERER_ID_LEN:-1}",
+          "max_token_threshold": "${LEVOAI_MAX_TOKEN_THRESHOLD:-1}",
+          "cookie_auth_keys": "${LEVOAI_COOKIE_AUTH_KEYS:-}",
+          "disable_ml_detector": "${LEVOAI_DISABLE_ML_DETECTOR:-true}",
+          "service_naming": {"strategies": "HOST_HEADER,DEFAULT"},
+          "user_resolvers": [],
+          "api_rule_evaluation": {"enabled": true},
+          "sample_collection": {
+              "enabled": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-True}",
+              "max_samples_per_end_point": "${MAX_SAMPLES_PER_END_POINT:-2}",
+              "users": [ { "name": "User1", "match_type": "user", "user_id": "user1" } ]
+          },
+          "enable_ssl_cert_checks": "${LEVOAI_ENABLE_SSL_CERT_CHECKS:-True}",
+          "tagger_batch_interval_minutes": 2
+        }
+    depends_on:
+      levoai-rabbitmq:
+        condition: service_healthy
+    mem_reservation: 1024m
+    cpus: 0.5
+
+  levoai-proxy:
+    image: 'levoai/proxy:${LEVOAI_PROXY_VERSION:-latest}'
+    container_name: levoai-proxy
+    restart: always
+    ports:
+      - "${LEVOAI_PROXY_PORT:-9080}:8080"
+      - '8081:8081'
+    environment:
+      LEVOAI_PROXY_MODE: ${LEVOAI_PROXY_MODE:-reverse}
+      LEVOAI_PROXY_PORT: ${LEVOAI_PROXY_PORT:-9080}
+      LEVOAI_SERVICE_NAME: ${LEVOAI_SERVICE_NAME:-default}
+      SERVICE_ADDRESS: ${SERVICE_ADDRESS:-http://host.docker.internal:8010}
+      LEVOAI_SATELLITE_ADDRESS: ${LEVOAI_SATELLITE_ADDRESS:-http://levoai-satellite:9999}
+    depends_on:
+      - levoai-satellite
+    mem_reservation: 256m
+    cpus: 0.5
+
+  levoai-ion:
+    image: 'levoai/ion:latest'
+    command: [ "-verbose" ]
+    container_name: levoai-ion
+    restart: always
+    ports:
+      - '9990:8000'
