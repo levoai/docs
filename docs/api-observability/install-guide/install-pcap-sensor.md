@@ -6,16 +6,21 @@
  - Admin (or  `sudo`) privileges on the Docker host
  - AWS profile access key and secret access key saved at path  ~/.aws/credentials file
  - The profile should have all the required permissions as listed [here](#aws-permissions)
+ - Refer [pcap-filter-guide](https://www.tcpdump.org/manpages/pcap-filter.7.html) to apply filters.
 
  ## Follow instructions for your platform
 
  - [Install on Fargate](#install-fargate)
+   - [Using Docker run command](#install-fargate-using-docker)
+   - [Using JSON](#install-fargate-using-json)
  - [Install via Docker](#install-docker)
  - [Install on Kuberenetes](#install-kubernetes)
 
 <a id="install-fargate"></a>
 
 ## Install Sensor on Fargate
+
+<a id="install-fargate-using-docker"></a>
 
 ### Docker run command
 ```bash
@@ -40,7 +45,7 @@ Once confirmed, the CLI will generate a new version of the task definition, inco
 
 ### Additional Environment Variables
 ```
-LEVO_FILTER -> Set the PCAP filter.
+LEVO_FILTER -> Set the PCAP filter. eg.  port 8080 and (not port 8081)
 LEVO_TRACE_EXPORT_INTERVAL -> Set the trace export interval (default 10s)
 LEVO_RATE_LIMIT_NUMBER -> Set rate limit for trace capturing (default 1000/min)
 LEVO_HOST_ALLOW_RE -> Regex for allowed hosts
@@ -49,13 +54,16 @@ LEVO_HOST_EXCLUSIONS_RE -> Regex for excluded hosts
 LEVO_PATH_EXCLUSIONS_RE -> Regex for excluded paths
 ```
 
+<a id="install-fargate-using-json"></a>
+
 ### Install using JSON
 
  - Go to Task Definitions
  - Select the required task definition
  - Click on `Create revision with JSON`
  - Add the given JSON object under ContainerDefinitions
- - Replace the values in Entrypoint, Environment and LogConfiguration as per your requirement.
+ - Replace the values for satellite-url and levoai-org-id in entrypoint.
+ - Replace the values for Environment and LogConfiguration as per your requirement.
 
 ```json
 {
@@ -101,13 +109,13 @@ LEVO_PATH_EXCLUSIONS_RE -> Regex for excluded paths
 ```
 Specify additional flags in the entrypoint
 ```bash
---trace-export-interval
---rate-limit
---filter
---host-allow
---path-allow
---host-exclusions
---path-exclusions
+--trace-export-interval     # default 10s
+--rate-limit                # default 1000/min
+--filter                    # eg. port 8080 and (not port 8081)
+--host-allow                # regex for allowed hosts
+--path-allow                # regex for allowed paths
+--host-exclusions           # regex for excluded hosts
+--path-exclusions           # regex for excluded paths
 ```
 <a id="install-docker"></a>
 
@@ -127,9 +135,9 @@ sudo docker run --net=host --rm -it levoai/pcap-sensor \
 ```
 Specify additional flags in the command
 ```bash
---trace-export-interval	"trace export interval (default 10s)"
---rate-limit "rate limit (default 1000/min)"
---filter "pcap filter string"
+--trace-export-interval	"trace export interval in seconds (default 10)"
+--rate-limit "rate limit in traces per min (default 1000)"
+--filter "pcap filter string, eg. port 8080 and (not port 8081)"
 --host-allow "host allow regex"
 --path-allow "path allow regex"
 --host-exclusions "host exclude regex"
@@ -167,9 +175,9 @@ helm upgrade levoai-pcap-sensor levoai/levoai-pcap-sensor \
 
 Set additional configs
 ```bash
-sensor.config.traceExportInterval="trace export interval (default 10s)"
-sensor.config.rateLimit="rate limit number (default 1000/min)"
-sensor.config.fitler="pcap filter string"
+sensor.config.traceExportInterval="trace export interval in seconds (default 10)"
+sensor.config.rateLimit="rate limit number in traces/min (default 1000)"
+sensor.config.fitler="pcap filter string, eg. port 8080 and (not port 8081)"
 sensor.config.hostAllow="host allow regex"
 sensor.config.pathAllow="path allow regex"
 sensor.config.hostExclusions="host exclusion regex"
