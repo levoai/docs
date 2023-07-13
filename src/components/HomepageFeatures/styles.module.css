@@ -1,11 +1,37 @@
 .features {
   display: flex;
+  flex-direction: row;
   align-items: center;
-  padding: 2rem 0;
+  padding: 1.5rem;
   width: 100%;
+  justify-content: space-around;
 }
 
 .featureSvg {
   height: 200px;
-  width: 200px;
+  width: 300px;
+}
+
+.featureCard{
+  padding: 1.0rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.2);
+  transition: 0.3s;
+  min-height: 430px;
+}
+
+.featureCard:hover {
+  transform: scale(1.005);
+  transition: 0.3s;
+  background-color: #d8d4d4;
+  cursor: pointer;
+}
+
+[data-theme='dark'] {
+  .featureCard:hover {
+    transform: scale(1.005);
+    transition: 0.3s;
+    background-color: #2f2f2f;
+    cursor: pointer;
+  } 
 }

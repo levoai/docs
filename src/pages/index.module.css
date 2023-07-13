@@ -22,6 +22,11 @@
   justify-content: center;
 }
 
+.buttons:hover {
+  transform: scale(1.05);
+  transition: 0.3s;
+}
+
 .heroTitle {
   font-size: 3rem;
   font-weight: 700;
@@ -36,6 +41,6 @@
   font-weight: 400;
   margin-bottom: 1rem;
   color: #f6f2f2;
-  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-width: 0.5px;
   -webkit-text-stroke-color: rgba(0, 0, 0, 0.492);
 }

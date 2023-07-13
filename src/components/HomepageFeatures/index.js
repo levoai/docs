@@ -1,49 +1,73 @@
 import React from 'react';
-import clsx from 'clsx';
 import styles from './styles.module.css';
 
 const FeatureList = [
   {
-    title: 'Easy to Use',
-    Svg: require('@site/static/img/undraw_docusaurus_mountain.svg').default,
+    title: 'For Developers',
+    Svg: require('@site/static/img/levo-value/developers.svg').default,
     description: (
-      <>
-        Docusaurus was designed from the ground up to be easily installed and
-        used to get your website up and running quickly.
-      </>
+      <ul>
+        <li>
+          <span>
+            Seamless API Exploration, Auto-documentation using <code><a href="https://swagger.io/specification/">OpenAPI Specifications</a></code>, 
+            and Testing.
+          </span>
+        </li>
+        <li>
+          <span>
+            Validation for conformance to their OpenAPI Schemas. Prevent breaking changes from impacting API deployments in production.
+          </span> 
+        </li>
+        <li>
+          <span>
+            Deploy regression free APIs to customers and partners.
+          </span> 
+        </li>
+      </ul>
     ),
   },
   {
-    title: 'Focus on What Matters',
-    Svg: require('@site/static/img/undraw_docusaurus_tree.svg').default,
+    title: 'For Security Engineers',
+    Svg: require('@site/static/img/levo-value/security-pros.svg').default,
     description: (
-      <>
-        Docusaurus lets you focus on your docs, and we&apos;ll do the chores. Go
-        ahead and move your docs into the <code>docs</code> directory.
-      </>
-    ),
-  },
-  {
-    title: 'Powered by React',
-    Svg: require('@site/static/img/undraw_docusaurus_react.svg').default,
-    description: (
-      <>
-        Extend or customize your website layout by reusing React. Docusaurus can
-        be extended while reusing the same header and footer.
-      </>
+      <ul>
+        <li>
+          <span>
+            Uncover, Protect, and Scale! Automatically test all API end points for comprehensive security 
+            vulnerabilities in CI/CD.
+          </span>
+        </li>
+        <li>
+          <span>
+            Shift security left and prevent vulnerabilities from leaking into production. 
+            Instant Visibility, Bulletproof Testing, Agile Security.
+          </span>
+        </li>
+        <li>
+          <span>
+            Accelerate compliance initiatives by providing proof of API security posture to auditors.
+          </span>
+        </li>
+      </ul>
     ),
   },
 ];
 
 function Feature({Svg, title, description}) {
   return (
-    <div className={clsx('col col--4')}>
-      <div className="text--center">
-        <Svg className={styles.featureSvg} role="img" />
-      </div>
-      <div className="text--center padding-horiz--md">
-        <h3>{title}</h3>
-        <p>{description}</p>
+    <div className='col'>
+      <div className={styles.featureCard}>
+        <div className="text--center">
+          <Svg className={styles.featureSvg} role="img" />
+        </div>
+        <div className="text--center padding-horiz--md">
+          <h3>{title}</h3>
+        </div>
+        <div className="flex">
+          <div className="text--left padding-horiz--md">
+            {description}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -52,13 +76,14 @@ function Feature({Svg, title, description}) {
 export default function HomepageFeatures() {
   return (
     <section className={styles.features}>
-      <div className="container">
-        <div className="row">
+      <div className='container-fluid'>
+        <div className='row'>
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}
+          <div class="w-100"></div>
+          </div>
         </div>
-      </div>
     </section>
   );
 }
