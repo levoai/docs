@@ -7,8 +7,8 @@ sidebar_position: 3
 ## 1. Prerequisites
 - You have an account on [Levo.ai](https://app.levo.ai/login)
 - Compatibility script (from step 1) indicates the Linux host (that you want to instrument with the Sensor) is compatible.
-- 4 CPUs
-- 8 GB RAM
+- At least 4 CPUs
+- At least 8 GB RAM
 
 ## 2. Planning
 
@@ -46,6 +46,8 @@ The Satellite uses an authorization key to access Levo.ai. Follow instructions b
 - [Helm v3](https://helm.sh/docs/intro/install/) installed and working.
 - The Kubernetes cluster API endpoint should be reachable from the machine you are running Helm.
 - `kubectl` access to the cluster, with `cluster-admin` permissions.
+- At least 4 CPUs
+- At least 8 GB RAM
 
 ### 1. Setup environment variables
 
@@ -149,6 +151,8 @@ export function DownloadDockerComposeLink() {
 - Docker Engine version `18.03.0` and above
 - Admin privileges on the Docker host
 - 'docker-compose' installed, if 'docker compose' is not supported on your OS
+- At least 4 CPUs
+- At least 8 GB RAM
 
 ### 1. Download Docker Compose file
 Levo provides pre-built Docker images for the Satellite that can be installed via Docker Compose.
