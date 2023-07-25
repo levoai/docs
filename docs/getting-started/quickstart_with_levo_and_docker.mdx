@@ -14,15 +14,49 @@ this guide to set up a quick testing environment in your local/personal machine,
 In this guide you'll learn how the Sensor package gets visibility into your API traffic, by reverse 
 proxying traffic between your API Client and API Server.
 
+Make sure you have a Levo account. You can sign up for a forever free account 
+[here](https://levo.ai/levo-signup/). If you want to know/learn more about the Dashboard, check 
+[this](/docs/getting-started/dashboard_introduction.mdx).
+
 ## Set Up Your API Service
 
 Levo provides you with frictionless [`API Observability`](/solutions/api-observability/), by observing 
-API traffic between your API Client and API Server.  
+API traffic between your API Client and API Server. 
 
-## Sign Up
+- Note down the base URL for your test API Server/Service. 
+  
+  **For Example**:
+  If you are running the API Server on your local machine, the base URL would be 
+  `http://localhost:<PORT>`. If your local test API Server uses HTTPs the base URL for example, would be 
+  `https://localhost/`. 
+  
+  Since the Sensor package runs in a container, please specify `host.docker.internal` 
+  instead of `localhost` or `127.0.0.1` in the base URL.
 
-Go to [`Levo.ai`](https://levo.ai/levo-signup/) and sign-up for a forever free 
-account. Easy! If you want to know more about the Dashboard, check [this](/docs/getting-started/dashboard_introduction.mdx).
+  This has to be done as addresses like `localhost`, `127.0.0.1`, etc., that refer
+  to the Docker host, must be translated to ones, that can be resolved correctly to point to the Docker 
+  host inside the container.
+
+- Export your API Server/Service URL in your terminal.
+
+<Tabs groupId="operating-systems">
+  <TabItem value="mac" label="Mac OSX">
+    <CodeBlock language="bash">
+        export SERVICE_ADDRESS=&lt;http://host:port/base-path&gt;
+    </CodeBlock>
+  </TabItem>
+  <TabItem value="linux" label="Linux (Ubuntu, Debian and Arch)">
+    <CodeBlock language="bash">
+        export SERVICE_ADDRESS=&lt;http://host:port/base-path&gt;
+    </CodeBlock>
+  </TabItem>
+  <TabItem value="win" label="Windows">
+    <CodeBlock language="powershell">
+        export SERVICE_ADDRESS=&lt;http://host:port/base-path&gt;
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
 
 ## Copy Authorization Key from Levo.ai
 
@@ -56,11 +90,42 @@ Export the copied Authorization Key in your terminal.
   </TabItem>
 </Tabs>
 
+## Name your Application
+
+Naming your application helps Levo uniquely identify your API endpoints.
+Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog], 
+grouped under an application name. 
+
+The application name helps segregate and group API endpoints 
+from different API servers, similar to how file folders work in an operating system.
+
+- Pick a descriptive name which will be used in the subsequent step below. For example: 
+  `my-test-api-server`.
+- Export the Application Name in your terminal.
+
+<Tabs groupId="operating-systems">
+  <TabItem value="mac" label="Mac OSX">
+    <CodeBlock language="bash">
+      export LEVOAI_SERVICE_NAME=&lt;'Application Name' chosen above&gt;
+    </CodeBlock>
+  </TabItem>
+  <TabItem value="linux" label="Linux (Ubuntu, Debian and Arch)">
+    <CodeBlock language="bash">
+      export LEVOAI_SERVICE_NAME=&lt;'Application Name' chosen above&gt;
+    </CodeBlock>
+  </TabItem>
+  <TabItem value="win" label="Windows">
+    <CodeBlock language="powershell">
+      $env:LEVOAI_SERVICE_NAME="&lt;'Application Name' chosen above&gt;"
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
 ## Install Sensor using Docker
 
 ### Prerequisites
 <Tabs groupId="operating-systems">
-  <TabItem value="mac" label="Mac OSX">
+  <TabItem value="mac" label="Mac OS/X">
     <ul>
       <li> Docker Engine version <code>18.03.0</code> and above. </li>
       <li> Admin (or <code>sudo</code>) privileges on the Docker host. </li>

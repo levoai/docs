@@ -149,11 +149,6 @@ const config = {
             to: '/vulnerability-guide/guide',
           },
           {
-            to: '/blog', 
-            label: 'Blog', 
-            position: 'right'
-          },
-          {
             href: 'https://github.com/levoai/docs',
             label: 'GitHub',
             position: 'right',
@@ -173,10 +168,6 @@ const config = {
               {
                 label: 'Docs',
                 to: '/docs/',
-              },
-              {
-                label: 'Blogs',
-                to: '/blog/',
               },
             ],
           },
@@ -200,10 +191,6 @@ const config = {
           {
             title: 'More',
             items: [
-              {
-                label: 'Blog',
-                to: '/blog',
-              },
               {
                 label: 'GitHub',
                 href: 'https://github.com/facebook/docusaurus',
