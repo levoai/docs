@@ -7,6 +7,7 @@ import HomepageFeatures from '@site/src/components/HomepageFeatures';
 
 import styles from './index.module.css';
 import HomepageWorking from '../components/HomepageWorking';
+import HomepageSolutions from '../components/HomepageSolutions';
 
 function HomepageHeader() {
   const {siteConfig} = useDocusaurusContext();
@@ -38,10 +39,19 @@ export default function Home() {
         <HomepageFeatures />
         <br></br>
         <div className='container'>
-          <h1 className={clsx(styles.heroTitle)}>How Levo Works ?</h1>
+          <div className={styles.heroBanner}>
+            <h1 className={clsx(styles.sectionTitle)}>How Levo Works ?</h1>
+          </div>
         </div>
         <br></br>
         <HomepageWorking />
+        <div className='container'>
+          <div className={styles.heroBanner}>
+            <h1 className={clsx(styles.sectionTitle)}>Solutions Levo Offers</h1>
+          </div>
+        </div>
+        <br></br>
+        <HomepageSolutions />
       </main>
     </Layout>
   );

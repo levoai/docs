@@ -5,7 +5,7 @@ import clsx from 'clsx';
 const WorkingList = [
     {
         title: 'Observe',
-        Svg: require('@site/static/img/levo-value/developers.svg').default,
+        Svg: require('@site/static/img/how-levo-works/observe.svg').default,
         description: (
             <ul>
                 <li>
@@ -44,7 +44,7 @@ const WorkingList = [
     },
     {
         title: 'Model',
-        Svg: require('@site/static/img/levo-value/security-pros.svg').default,
+        Svg: require('@site/static/img/how-levo-works/model.svg').default,
         description: (
             <ul>
                 <li>
@@ -67,7 +67,7 @@ const WorkingList = [
     },
     {
         title: 'Generate',
-        Svg: require('@site/static/img/levo-value/security-pros.svg').default,
+        Svg: require('@site/static/img/how-levo-works/generate.svg').default,
         description: (
             <ul>
                 <li>
@@ -85,7 +85,7 @@ const WorkingList = [
     },
     {
         title: 'Execute',
-        Svg: require('@site/static/img/levo-value/security-pros.svg').default,
+        Svg: require('@site/static/img/how-levo-works/execute.svg').default,
         description: (
             <ul>
                 <li>
@@ -109,7 +109,7 @@ const WorkingList = [
     }, 
     {
         title: 'Actionable Insights',
-        Svg: require('@site/static/img/levo-value/security-pros.svg').default,
+        Svg: require('@site/static/img/how-levo-works/actionable-insights.svg').default,
         description: (
             <ul>
                 <li>
@@ -156,8 +156,8 @@ function WorkingImage({Svg}) {
 function WorkingCard({idx, title, Svg, description}) {
     if (idx % 2 == 0) {
         return (
-            <div className='container'>
-                <div className="card">
+            <div className={clsx('container')}>
+                <div className={clsx('card', styles.featureCard)}>
                     <div className='row no-gutters'>
                         <WorkingImage Svg={Svg}/>
                         <WorkingText title={title} description={description}/>
@@ -168,8 +168,8 @@ function WorkingCard({idx, title, Svg, description}) {
         );
     } else {
         return (
-            <div className='container'>
-                <div className="card">
+            <div className={clsx('container')}>
+                <div className={clsx('card', styles.featureCard)}>
                     <div className="row no-gutters">
                         <WorkingText title={title} description={description}/>
                         <WorkingImage Svg={Svg}/>

@@ -1,0 +1,94 @@
+---
+title: Quick start
+description: Getting started with Levo and Docker (Bare Installation).
+sidebar_position: 1
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import CodeBlock from '@theme/CodeBlock';
+
+This quick start guide will help you get started with Levo in a few minutes using Docker. You can follow 
+this guide to set up a quick testing environment in your local/personal machine, or in a cloud instance.
+
+In this guide you'll learn how the Sensor package gets visibility into your API traffic, by reverse 
+proxying traffic between your API Client and API Server.
+
+## Set Up Your API Service
+
+Levo provides you with frictionless [`API Observability`](/solutions/api-observability/), by observing 
+API traffic between your API Client and API Server.  
+
+## Sign Up
+
+Go to [`Levo.ai`](https://levo.ai/levo-signup/) and sign-up for a forever free 
+account. Easy! If you want to know more about the Dashboard, check [this](/docs/getting-started/dashboard_introduction.mdx).
+
+## Copy Authorization Key from Levo.ai
+
+The Sensor package uses an authorization key to access Levo.ai. Follow instructions below to 
+copy & export the key.
+
+- Login to Levo.ai.
+- Click on your user profile on the top right of Levo.ai [```Dashboard```](https://www.example.com).
+- Click on User Settings
+- Click on Keys on the left navigation panel
+- Click on Get Satellite Authorization Key
+- Now copy your authorization key.
+
+Export the copied Authorization Key in your terminal.
+
+<Tabs groupId="operating-systems">
+  <TabItem value="mac" label="Mac OSX">
+    <CodeBlock language="bash">
+        export LEVOAI_AUTH_KEY=&lt;'Authorization Key' copied above&gt;
+    </CodeBlock>
+  </TabItem>
+  <TabItem value="linux" label="Linux (Ubuntu, Debian and Arch)">
+    <CodeBlock language="bash">
+        export LEVOAI_AUTH_KEY=&lt;'Authorization Key' copied above&gt;
+    </CodeBlock>
+  </TabItem>
+  <TabItem value="win" label="Windows">
+    <CodeBlock language="powershell">
+        $env:LEVOAI_AUTH_KEY="&lt;'Authorization Key' copied above&gt;"
+    </CodeBlock>
+  </TabItem>
+</Tabs>
+
+## Install Sensor using Docker
+
+### Prerequisites
+<Tabs groupId="operating-systems">
+  <TabItem value="mac" label="Mac OSX">
+    <ul>
+      <li> Docker Engine version <code>18.03.0</code> and above. </li>
+      <li> Admin (or <code>sudo</code>) privileges on the Docker host. </li>
+      <li> Command line terminal with Bash or Bash compatible shell </li>
+    </ul>
+  </TabItem>
+  <TabItem value="linux" label="Linux (Ubuntu, Debain and Arch)">
+    <ul>
+      <li> Docker Engine version <code>18.03.0</code> and above </li>
+      <li> Admin (or <code>sudo</code>) privileges on the Docker host </li>
+      <li> Command line terminal with Bash or Bash compatible shell </li>
+    </ul>
+  </TabItem>
+  <TabItem value="win" label="Windows">
+    <ul>
+      <li> 
+        Docker Engine version <code>18.03.0</code> and above.
+        Docker containers <strong>MUST</strong> be allowed to connect to the internet. 
+        Please check Firewall settings. 
+       </li>
+      <li> Administrator privileges on the Docker host </li>
+      <li> PowerShell terminal. </li>
+    </ul>
+  </TabItem>
+</Tabs>
+
+
+
+## Generate traffic for your application
+
+## View auto-discovered OpenAPI specifications

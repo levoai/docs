@@ -11,3 +11,21 @@
     height: inherit;
     width: inherit;
 }
+
+.featureCard:hover {
+    transform: scale(1.005);
+    transition: 0.3s;
+    background-color: #d8d4d4;
+    cursor: pointer;
+    border: 2px solid rgb(33, 60, 213);
+  }
+  
+[data-theme='dark'] {
+.featureCard:hover {
+    transform: scale(1.005);
+    transition: 0.3s;
+    background-color: #2f2f2f;
+    cursor: pointer;
+    border: 2px solid rgb(33, 60, 213);
+} 
+}

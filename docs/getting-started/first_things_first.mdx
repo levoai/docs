@@ -1,0 +1,25 @@
+---
+title: First Things First
+description: Introduction to Levo and it's components.
+sidebar_position: 0
+---
+
+## Sign Up
+
+## Dashboard Overview
+
+## Components
+
+Levo has two components: the Sensor and the Satellite. 
+
+The Sensor is a user-space process, that uses <code>Extended Berkeley Packet Filters (eBPF)</code> to 
+passively capture API traffic (full HTTP payloads) from Linux workloads. The sensor works on bare metal, 
+virtual machine, and container formats.
+
+The Satellite runs within the customer premises or VPC, and can be run alongside application workloads, 
+or in a separate host. It uses sampled API traffic (API Traces) from the Sensor to:
+- Auto discover API endpoints.
+- Derive (OpenAPI) schema for the discovered API endpoints.
+- Detect sensitive data (PII, PSI, etc.) present in API data.
+- Annotate the derived schema with sensitive data types.
+- Send the API schema to Levo SaaS for API Catalog building.
