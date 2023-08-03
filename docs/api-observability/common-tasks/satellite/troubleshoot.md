@@ -4,15 +4,15 @@ sidebar_position: 2
 
 # Troubleshooting
 
-[Running on Kubernetes](./troubleshoot.md#kubernetes-based)
-[Running via Docker Compose](./troubleshoot.md#docker-compose-based)
+- [Running on Kubernetes](#kubernetes-based)
+- [Running via Docker Compose](#docker-compose-based)
 
 <br></br>
 
 --------------------------------------
-# Kubernetes Based
+## Kubernetes Based
 
-## Tagger Errors
+### Tagger Errors
 
 The `Tagger` component sends API endpoint metadata information to Levo.ai. API Observability will not function if the Tagger is in an errored state.
 
@@ -53,9 +53,9 @@ If there are exception messages, Tagger is unable to connect to dependent servic
 
 --------------------------------------
 
-# Docker Compose Based
+## Docker Compose Based
 
-## Tagger Errors
+### Tagger Errors
 
 The `Tagger` component sends API endpoint metadata information to Levo.ai. API Observability will not function if the Tagger is in an errored state.
 
