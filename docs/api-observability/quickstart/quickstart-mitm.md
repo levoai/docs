@@ -43,7 +43,7 @@ Since Mac OSX and Windows do not support [eBPF](https://ebpf.io), Levo provides 
 
 API Observability auto discovers APIs and generates OpenAPI specifications for all API endpoints, by observing API traffic between your *API Client* and *API Server*.
 
-If you do not have a test *API Service*/*Application*, you can use the [sample application](../sample-app.md) provided by Levo.
+If you do not have a test *API Service*/*Application*, you can use the [sample application](sample-app.md) provided by Levo.
 
 - a. Note down the base URL for your test *API Server*/*Service*.
 > For example, if you are running the sample application (crAPI) on your laptop, the base URL would be `http://localhost:8888`. If your local test *API Server* uses HTTPs the base URL for example, would be `https://localhost/`.
@@ -320,7 +320,7 @@ docker compose -f proxy-docker-compose.yml down
 ### Change Sensor Listen Port
 The Sensor by default listens on TCP port 9080 (interface address 127.0.0.1). If this conflicts with a port being used by another application, you can change it by following the instructions below.
 
-- [Shutdown](./quickstart-laptop.md#shutdown-sensor) the Sensor (if running)
+- [Shutdown](./quickstart-mitm.md#shutdown-sensor) the Sensor (if running)
 - Export your desired port in your terminal
 <Tabs groupId="operating-systems">
   <TabItem value="mac" label="Mac OSX">
@@ -338,5 +338,5 @@ The Sensor by default listens on TCP port 9080 (interface address 127.0.0.1). If
     </pre>
   </TabItem>
 </Tabs>
-- [Start](./quickstart-laptop.md#6-install-sensor-package-via-docker-compose) the Sensor
+- [Start](./quickstart-mitm.md#6-install-sensor-package-via-docker-compose) the Sensor
 

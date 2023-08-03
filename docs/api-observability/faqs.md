@@ -32,12 +32,12 @@ Please see [K8s Platforms](./supported-platforms.md#what-kubernetes-platforms-ar
 ### Is Docker Desktop or minikube on Mac OSX, supported?
 Support for Docker Desktop, Docker Desktop based Kubernetes, and minikube on MacOS is on the roadmap.
 
-Developers can evaluate `API Observability` on their macOS Laptops, via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](./quickstart/quickstart-laptop.md).
+Developers can evaluate `API Observability` on their macOS Laptops, via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](./quickstart/quickstart-mitm.md).
 
 ### Is Windows OS supported?
 Microsoft is currently building support for [eBPF in Windows](https://github.com/microsoft/ebpf-for-windows). Windows support will be added subsequent to the completion of that effort.
 
-Developers can evaluate `API Observability` on their Windows Laptops, via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](./quickstart/quickstart-laptop.md).
+Developers can evaluate `API Observability` on their Windows Laptops, via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](./quickstart/quickstart-mitm.md).
 
 ### Is there a script that can assess if my OS platform is compatible?
 Yes. Please see [install guide](../api-observability/install-guide/install-guide.md).
