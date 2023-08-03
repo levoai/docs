@@ -2,13 +2,15 @@
 sidebar_position: 1
 ---
 
-# Quickstart 
+# Teaser
+
+Evaluate Levo's API Observability in Action with your favourite tools.
 
 ![Quickstart for API Observability](../../assets/quickstart.svg)
 
-## [Quickstart with *Kubernetes* (on Linux Nodes)](./quickstart-k8s.md)
-## [Quickstart with MITM proxy in Docker](./quickstart-laptop.md)
+## [Quickstart with Burp](./quickstart-burp-plugin.md)
 ## [Quickstart with OWASP ZAP](./quickstart-zap-addon.md)
+## [Quickstart with MITM proxy in Docker](./quickstart-mitm.md)
 
 <br/>
 
