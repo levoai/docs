@@ -36,6 +36,9 @@ default-service-name: default
 # Levo Organization ID. This must be specified when the collector is hosted by Levo.
 # organization-id: ""
 
+# Use HTTP/2 (gRPC) for communication with the collector. If this is disabled, HTTP/1.1 will be used.
+collector-grpc-transport: true
+
 # host:port for the collector service receiving the Sensor's API traces.
 collector-traces-endpoint: https://collector.levo.ai
 
@@ -130,7 +133,7 @@ ip-filter-list:
     - policy: drop
       host-ports: [2181, 3888, 3888] # ZooKeeper
     - policy: drop
-      host-ports: [4317, 9999] # Levo's Satellite services
+      host-ports: [4317, 4318, 9999] # Levo's Satellite services
     ### Peer Ports ###
     # Peer Port is the client port used in communication with the server listening port.
     - policy: drop
@@ -170,7 +173,7 @@ ip-filter-list:
     - policy: drop
       peer-ports: [2181, 3888, 3888] # ZooKeeper
     - policy: drop
-      peer-ports: [4317, 9999] # Levo's Satellite services
+      peer-ports: [4317, 4318, 9999] # Levo's Satellite services
 # --------------------------------------------------------------------------------------------
 
 
