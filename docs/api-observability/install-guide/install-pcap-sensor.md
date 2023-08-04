@@ -1,4 +1,4 @@
-# Install pcap-sensor
+# Install pcap-sensor as side-car
 
 ## Prerequisites
 
@@ -11,8 +11,9 @@
  ## Follow instructions for your platform
 
  - [Install on Fargate](#install-fargate)
-   - [Using Docker run command](#install-fargate-using-docker)
    - [Using JSON](#install-fargate-using-json)
+   - [Using Docker run command](#install-fargate-using-docker)
+
  - [Install via Docker](#install-docker)
  - [Install on Kuberenetes](#install-kubernetes)
 
@@ -20,8 +21,64 @@
 
 ## Install Sensor on Fargate
 
-<a id="install-fargate-using-docker"></a>
+<a id="install-fargate-using-json"></a>
 
+### Install using JSON
+
+ - Go to Task Definitions
+ - Select the required task definition
+ - Click on `Create revision with JSON`
+ - Add the given JSON object under ContainerDefinitions
+ - Replace the values for satellite-url and levoai-org-id in entrypoint.
+ - Replace the values for Environment and LogConfiguration as per your requirement.
+
+```json
+{
+    "name": "levo-pcap-sensor",
+    "image": "levoai/pcap-sensor",
+    "cpu": 0,
+    "portMappings": [],
+    "essential": false,
+    "entryPoint": [
+        "./bin/levo-pcap-sensor",
+        "apidump",
+        "--satellite-url",
+        "your satellite url (http(s)://hostname|IP:port)",
+        "--levoai-org-id",
+        "Your Levo org Id here"
+    ],
+    "environment": [
+        {
+            "name": "LEVO_AWS_REGION",
+            "value": "Region of your cluster"
+        }
+    ],
+    "mountPoints": [],
+    "volumesFrom": [],
+    "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": {
+            "awslogs-group": "Log group here",
+            "awslogs-create-group": "true",
+            "awslogs-region": "Log region here",
+            "awslogs-stream-prefix": "ecs"
+        }
+    }
+}
+```
+Specify additional flags in the entrypoint
+```bash
+--trace-export-interval     # default 10s
+--rate-limit                # default 1000/min
+--filter                    # eg. port 8080 and (not port 8081)
+--host-allow                # regex for allowed hosts
+--path-allow                # regex for allowed paths
+--host-exclusions           # regex for excluded hosts
+--path-exclusions           # regex for excluded paths
+```
+<a id="install-docker"></a>
+
+<a id="install-fargate-using-docker"></a>
 ### Docker run command
 ```bash
 sudo docker run --rm -it -v ~/.aws:/aws:ro \
@@ -54,71 +111,6 @@ LEVO_HOST_EXCLUSIONS_RE -> Regex for excluded hosts
 LEVO_PATH_EXCLUSIONS_RE -> Regex for excluded paths
 ```
 
-<a id="install-fargate-using-json"></a>
-
-### Install using JSON
-
- - Go to Task Definitions
- - Select the required task definition
- - Click on `Create revision with JSON`
- - Add the given JSON object under ContainerDefinitions
- - Replace the values for satellite-url and levoai-org-id in entrypoint.
- - Replace the values for Environment and LogConfiguration as per your requirement.
-
-```json
-{
-    "name": "levo-pcap-sensor",
-    "image": "levoai/pcap-sensor",
-    "cpu": 0,
-    "portMappings": [],
-    "essential": false,
-    "entryPoint": [
-        "./bin/levo-pcap-sensor",
-        "apidump",
-        "--satellite-url",
-        "your satellite url (http(s)://hostname|IP:port)",
-        "--levoai-org-id",
-        "Your Levo org Id here"
-    ],
-    "environment": [
-        {
-            "name": "LEVO_AWS_REGION",
-            "value": "Region of your cluster"
-        },
-        {
-            "name": "LEVO_ECS_SERVICE",
-            "value": "The serivce name"
-        },
-        {
-            "name": "LEVO_ECS_TASK",
-            "value": "Task name"
-        }
-    ],
-    "mountPoints": [],
-    "volumesFrom": [],
-    "logConfiguration": {
-        "logDriver": "awslogs",
-        "options": {
-            "awslogs-group": "Log group here",
-            "awslogs-create-group": "true",
-            "awslogs-region": "Log region here",
-            "awslogs-stream-prefix": "ecs"
-        }
-    }
-}
-```
-Specify additional flags in the entrypoint
-```bash
---trace-export-interval     # default 10s
---rate-limit                # default 1000/min
---filter                    # eg. port 8080 and (not port 8081)
---host-allow                # regex for allowed hosts
---path-allow                # regex for allowed paths
---host-exclusions           # regex for excluded hosts
---path-exclusions           # regex for excluded paths
-```
-<a id="install-docker"></a>
-
 ## Install via Docker
 
 ### Prerequisites
@@ -145,7 +137,7 @@ Specify additional flags in the command
 ```
 <a id="install-kubernetes"></a>
 
-## Install on Kubernetes
+## Install on Kubernetes as daemonset
 
 ### Prerequisites
 -   Kubernetes version >= v1.18.0
