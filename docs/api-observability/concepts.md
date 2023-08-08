@@ -8,7 +8,7 @@ keywords: [API Security, eBPF, API Observability]
 
 API Observability involves three components - a) Sensor, b) Satellite, and c) API Catalog.
 
-## Sensor
+## eBPF Sensor
 The sensor is a userspace process, that uses [Extended Berkeley Packet Filters (eBPF)](https://ebpf.io) to passively capture API traffic (full HTTP payloads) from Linux workloads. The sensor works on bare metal, virtual machine, and container formats.
 
 eBPF is used by all the modern observability & security vendors, including [DATADOG](https://www.datadoghq.com/product/network-monitoring/network-performance-monitoring/), [new relic](https://newrelic.com/platform/kubernetes-pixie), [paloalto networks](https://www.paloaltonetworks.com/prisma/cloud), [aqua](https://www.aquasec.com/products/tracee/), [sysdig](https://sysdig.com/), [Cilium](https://cilium.io/), etc.

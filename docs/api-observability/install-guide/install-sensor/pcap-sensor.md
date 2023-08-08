@@ -1,4 +1,8 @@
-# Install pcap-sensor as side-car
+---
+sidebar_position: 3
+---
+
+# Install pcap Sensor
 
 ## Prerequisites
 
@@ -66,6 +70,7 @@
     }
 }
 ```
+
 Specify additional flags in the entrypoint
 ```bash
 --trace-export-interval     # default 10s
@@ -79,13 +84,16 @@ Specify additional flags in the entrypoint
 <a id="install-docker"></a>
 
 <a id="install-fargate-using-docker"></a>
+
 ### Docker run command
+
 ```bash
 sudo docker run --rm -it -v ~/.aws:/aws:ro \
 -e LEVO_SATELLITE_URL="your-satelliteurl (http(s)://hostname|IP:port)" \
 -e LEVO_ORG_ID="Levo organization ID" \
 levoai/pcap-sensor
 ```
+
 The option `-v ~/.aws:/aws:ro` maps the directory containing your AWS credentials into the container so that the Agent can use them to perform actions on your behalf.
 
 ### CLI prompts

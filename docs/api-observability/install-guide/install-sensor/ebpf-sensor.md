@@ -1,8 +1,8 @@
 ---
-sidebar_position: 4
+sidebar_position: 2
 ---
 
-# Install Sensor
+# Install eBPF Sensor
 
 ## i. Prerequisites
 - Compatibility script (from step 1) indicates the Linux host (that you want to instrument) is compatible.
@@ -11,16 +11,16 @@ sidebar_position: 4
 - The Satellite is reachable (via HTTP/s) from the location where you are going to install the Sensor.
 
 ## ii. Pick an `Application Name`
-Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../../security-contract-testing/concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different environments, similar to how file folders work in an operating system.
+Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](/security-contract-testing/concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different environments, similar to how file folders work in an operating system.
 
 Pick a descriptive name which will be used in the subsequent step below. For example: `my-test-app`.
 
 ## iii. Follow instructions for your platform
 Follow instructions for your specific platform/method below:
-- [Install on Kubernetes](./install-sensor.md#install-on-kubernetes)
-- [Install on Linux host via Docker](./install-sensor.md#install-on-linux-host-via-docker)
-- [Install on Debian based Linux Distributions via `apt`](./install-sensor.md#install-on-debian-based-linux-via-apt)
-- [Install on RPM based Linux Distributions via `yum`](./install-sensor.md#sensor-yum-install)
+- [Install on Kubernetes](#install-on-kubernetes)
+- [Install on Linux host via Docker](#install-on-linux-host-via-docker)
+- [Install on Debian based Linux Distributions via `apt`](#install-on-debian-based-linux-via-apt)
+- [Install on RPM based Linux Distributions via `yum`](#sensor-yum-install)
 
 <br></br>
 
