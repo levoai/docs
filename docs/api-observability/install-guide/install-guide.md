@@ -18,7 +18,7 @@ Your estimated completion time is *10 minutes*.
 
 ### 3. [Install Satellite](./install-satellite.mdx)
 
-### 4. [Install Sensor](/api-observability/install-guide/install-sensor/choose.md)
+### 4. [Install Sensor](/api-observability/install-guide/install-sensor/install-sensor.md)
 
 ### 5. [Generate Traffic for Your Application](./generate-traffic.md)
 
