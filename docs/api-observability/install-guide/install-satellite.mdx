@@ -437,7 +437,7 @@ eksctl utils associate-iam-oidc-provider --cluster ${CLUSTER_NAME} --region ${RE
 
 This creates an OIDC Identity Provider.
 
-Next, to create a role in AWS for the EBS CSI Driver add-on ([Amazon Elastic Block Store CSI Driver](#https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) manages persistent volumes in EKS) we need to run these:
+Next, to create a role in AWS for the EBS CSI Driver add-on ([Amazon Elastic Block Store CSI Driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) manages persistent volumes in EKS) we need to run these:
 
 ```bash
 OIDC=$(aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4 | cut -d "\"" -f1)
