@@ -12,12 +12,11 @@ sidebar_position: 3
  - The profile should have all the required permissions as listed [here](#aws-permissions)
  - Refer [pcap-filter-guide](https://www.tcpdump.org/manpages/pcap-filter.7.html) to apply filters.
 
+> **_NOTE:_**  You need to have the satellite installed already to configure the sensor to point to it. If you haven't done it already, head over to [Install Satellite ](../install-satellite.mdx)
+
  ## Follow instructions for your platform
 
  - [Install on Fargate](#install-fargate)
-   - [Using JSON](#install-fargate-using-json)
-   - [Using Docker run command](#install-fargate-using-docker)
-
  - [Install via Docker](#install-docker)
  - [Install on Kuberenetes](#install-kubernetes)
 
@@ -25,9 +24,9 @@ sidebar_position: 3
 
 ## Install Sensor on Fargate
 
-<a id="install-fargate-using-json"></a>
+The pcap Sensor can be installed as a sidecar on a already present AWS task, and can be added to its task definition via the AWS Console.
 
-### Install using JSON
+The steps to add the sensor to your task are as follows
 
  - Go to Task Definitions
  - Select the required task definition
@@ -47,14 +46,14 @@ sidebar_position: 3
         "./bin/levo-pcap-sensor",
         "apidump",
         "--satellite-url",
-        "your satellite url (http(s)://hostname|IP:port)",
+        "< INSERT SATELLITE URL (http(s)://hostname|IP:port) >",
         "--levoai-org-id",
-        "Your Levo org Id here"
+        "< INSERT LEVO ORG ID >"
     ],
     "environment": [
         {
             "name": "LEVO_AWS_REGION",
-            "value": "Region of your cluster"
+            "value": "< INSERT AWS REGION (us-west-2) >"
         }
     ],
     "mountPoints": [],
@@ -62,10 +61,10 @@ sidebar_position: 3
     "logConfiguration": {
         "logDriver": "awslogs",
         "options": {
-            "awslogs-group": "Log group here",
+            "awslogs-group": "< INSERT LOGS IDENTIFIER (/ecs/your-application-pcap) >",
             "awslogs-create-group": "true",
-            "awslogs-region": "Log region here",
-            "awslogs-stream-prefix": "ecs"
+            "awslogs-region": "< INSERT AWS REGION (us-west-2) >",
+            "awslogs-stream-prefix": "ecs-pcap"
         }
     }
 }
@@ -80,43 +79,6 @@ Specify additional flags in the entrypoint
 --path-allow                # regex for allowed paths
 --host-exclusions           # regex for excluded hosts
 --path-exclusions           # regex for excluded paths
-```
-<a id="install-docker"></a>
-
-<a id="install-fargate-using-docker"></a>
-
-### Docker run command
-
-```bash
-sudo docker run --rm -it -v ~/.aws:/aws:ro \
--e LEVO_SATELLITE_URL="your-satelliteurl (http(s)://hostname|IP:port)" \
--e LEVO_ORG_ID="Levo organization ID" \
-levoai/pcap-sensor
-```
-
-The option `-v ~/.aws:/aws:ro` maps the directory containing your AWS credentials into the container so that the Agent can use them to perform actions on your behalf.
-
-### CLI prompts
-
-1.  Provide the AWS profile containing the credentials you wish to use. If you only have one profile in your .aws/credentials file, simply press Enter.
-2.  Select the region in which your FARGATE application runs.
-3.  Select the Task Definition on which you want to install the Levo Sensor as a sidecar
-4.  From the list of services running the Task Definition, select the service you want to restart after the Levo Sensor has been added to the Task Definition.
-
-Enter "Y" to proceed.
-
-Once confirmed, the CLI will generate a new version of the task definition, incorporating the Levo Sensor as a sidecar while keeping other settings unchanged. After updating the task definition, Levo will also update the selected service to utilise the updated task definition. Finally, the CLI will monitor the service's status to ensure a successful deployment of the new version, which includes the Levo sensor sidecar.
-
-
-### Additional Environment Variables
-```
-LEVO_FILTER -> Set the PCAP filter. eg.  port 8080 and (not port 8081)
-LEVO_TRACE_EXPORT_INTERVAL -> Set the trace export interval (default 10s)
-LEVO_RATE_LIMIT_NUMBER -> Set rate limit for trace capturing (default 1000/min)
-LEVO_HOST_ALLOW_RE -> Regex for allowed hosts
-LEVO_PATH_ALLOW_RE -> Regex for allowed paths
-LEVO_HOST_EXCLUSIONS_RE -> Regex for excluded hosts
-LEVO_PATH_EXCLUSIONS_RE -> Regex for excluded paths
 ```
 
 ## Install via Docker
