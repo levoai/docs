@@ -24,7 +24,7 @@ sidebar_position: 3
 
 ## Install Sensor on Fargate
 
-The pcap Sensor can be installed as a sidecar on a already present AWS task, and can be added to its task definition via the AWS Console.
+The pcap Sensor can be installed as a sidecar on an existing AWS task by adding to its task definition via the AWS Console.
 
 The steps to add the sensor to your task are as follows
 

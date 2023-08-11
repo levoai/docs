@@ -36,7 +36,7 @@ The Satellite uses an authorization key to access Levo.ai. Follow instructions b
 - [Install in AWS EC2 using Levo Satellite AMI](#install-in-aws-ec2-using-levo-satellite-ami)
 - [Install in AWS EKS](#install-in-aws-eks)
   - [Install in AWS EKS using EC2](#install-in-aws-eks-using-ec2)
-  - [Install in AWS EKS sing Fargate](#install-in-aws-eks-using-fargate)
+  - [Install in AWS EKS using Fargate](#install-in-aws-eks-using-fargate)
 - [Install in AWS ECS](#install-in-aws-ecs)
 
 <br></br>
@@ -95,15 +95,15 @@ Wait couple of minutes after the install, and check the health of the components
 ```bash
 kubectl -n levoai get pods
 ```                              
-If the Satellite is healthy, you should see output similar to below. Don't worry about the restarts of the levoai-tagger pod.
+If the Satellite is healthy, you should see output similar to below.
 
 ```bash
-NAME                                READY   STATUS    RESTARTS      AGE
-levoai-collector-848fb4fff9-gv8g9   1/1     Running   0             4m8s
-levoai-ion-65686bd9c6-k2vgc         1/1     Running   0             4m8s
-levoai-rabbitmq-0                   1/1     Running   0             4m8s
-levoai-satellite-54956ccb89-5s4h2   1/1     Running   0             4m8s
-levoai-tagger-799db4d9cc-89jm8      1/1     Running   3 (4m8s ago)  4m8s
+NAME                                READY   STATUS    RESTARTS   AGE
+levoai-collector-5b54df8dd6-55hq9   1/1     Running   0          5m0s
+levoai-ion-669c9c4fbc-vsmmr         1/1     Running   0          5m0s
+levoai-rabbitmq-0                   1/1     Running   0          5m0s
+levoai-satellite-8688b67c65-xppbn   1/1     Running   0          5m0s
+levoai-tagger-7bbf565b47-b572w      1/1     Running   0          5m0s
 ```
 
 
@@ -334,9 +334,9 @@ AWS EKS supports two compute types for its nodes, EC2 and Fargate. Depending on 
 
 ```bash
 export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier> 
-CLUSTER_NAME=< INSERT CLUSTER NAME >
-REGION=< INSERT AWS REGION >
-ACCOUNT_ID=<INSERT AWS ACCOUNT ID>
+export CLUSTER_NAME=<INSERT CLUSTER NAME>
+export REGION=<INSERT AWS REGION>
+export ACCOUNT_ID=<INSERT AWS ACCOUNT ID>
 ```
 
 
@@ -353,10 +353,10 @@ metadata:
 vpc:
   subnets:
     private:
-      < MENTION THE SUBNETS YOU WANT TO USE FOR YOUR SATELLITE >
-      < FOR EXAMPLE: >
-      < us-west-2a: { id: subnet-0d09e999a579234ea } >
-      < us-west-2b: { id: subnet-0d09e999a579234eb } >
+      # MENTION THE SUBNETS YOU WANT TO USE FOR YOUR SATELLITE
+      # FOR EXAMPLE:
+      # us-west-2a: { id: subnet-0d09e999a579234ea }
+      # us-west-2b: { id: subnet-0d09e999a579234eb }
 
 nodeGroups:
   - name: ng-e2e
@@ -369,8 +369,6 @@ EOF
 echo "${EKS_CLUSTER}" > eks-cluster.yaml
 
 eksctl create cluster -f ./configuration/eks-cluster.yaml
-
-rm eks-cluster.yaml
 ```
 
 
@@ -480,80 +478,13 @@ aws iam attach-role-policy \
   --role-name AmazonEKS_EBS_CSI_DriverRole
 
 eksctl create addon --name aws-ebs-csi-driver --cluster ${CLUSTER_NAME} --region ${REGION} --service-account-role-arn arn:aws:iam::${ACCOUNT_ID}:role/AmazonEKS_EBS_CSI_DriverRole —force
-
-rm aws-ebs-csi-driver-trust-policy.json
 ```
 
 ### 5. Install the satellite
 
-To install the satellite, first add our helm repository
-```bash
-helm repo add levoai https://charts.levo.ai && helm repo update
-```
+Please follow the instructions in the [Install on Kubernetes](#install-on-kubernetes) section to install the Satellite.
 
-Next, install the satellite from its helm chart
-
-```bash
-helm upgrade --install -n levoai --create-namespace \
-  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
-  levoai-satellite levoai/levoai-satellite
-```
-
-
-#### a. Check Satellite health
-
-The Satellite is comprised of five sub components 1) levoai-collector, 2) levoai-ion, 3) levoai-rabbitmq, 4)levoai-satellite, and 5) levoai-tagger.
-
-Wait couple of minutes after the install, and check the health of the components by executing the following:
-
-```bash
-kubectl -n levoai get pods
-```                              
-If the Satellite is healthy, you should see output similar to below. Don't worry about the restarts of the levoai-tagger pod.
-
-```bash
-NAME                                READY   STATUS    RESTARTS      AGE
-levoai-collector-848fb4fff9-gv8g9   1/1     Running   0             4m8s
-levoai-ion-65686bd9c6-k2vgc         1/1     Running   0             4m8s
-levoai-rabbitmq-0                   1/1     Running   0             4m8s
-levoai-satellite-54956ccb89-5s4h2   1/1     Running   0             4m8s
-levoai-tagger-799db4d9cc-89jm8      1/1     Running   3 (4m8s ago)  4m8s
-```
-
-#### b. Check connectivity
-Execute the following to check for connectivity health:
-
-```bash
-# Please specify the actual pod name for levoai-tagger below
-kubectl -n levoai logs <levoai-tagger pod name> | grep "Ready to process; waiting for messages."
-```
-If connectivity is healthy, you will see output similar to below.
-
-```bash
-{"level": "info", "time": "2022-06-07 08:07:22,439", "line": "rabbitmq_client.py:155", "version": "fc628b50354bf94e544eef46751d44945a2c55bc", "module": "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py", "message": "Ready to process; waiting for messages."}
-```
-
-**Please contact `support@levo.ai` if you notice health/connectivity related errors.**
-
-### 6. Note down `Host:Port` information
-
-The cluster IP can be checked by running
-
-```bash
-kubectl get service levoai-collector -n levoai
-```
-
-The output is something like this
-
-```bash
-NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
-levoai-collector   ClusterIP   10.100.254.104   <none>        4317/TCP       4m8s
-```
-The Collector can now be reached by the Sensors running in the same VPC in AWS at port `< CLUSTER IP >:4317`. Please note this, as it will be required to configure the Sensor.
-
-Please proceed to install the Sensor.
-
-<br></br>
+Please ensure that you note down the address of the collector.
 
 -------------------------------------------------
 
@@ -638,76 +569,9 @@ The `--role` argument sets the correct role and policies so that seemless access
 
 
 ### 4. Install the satellite
+Please follow the instructions in the [Install on Kubernetes](#install-on-kubernetes) section to install the Satellite.
 
-To install the satellite, first add our helm repository
-```bash
-helm repo add levoai https://charts.levo.ai && helm repo update
-```
-
-Next, install the satellite from its helm chart
-
-```bash
-helm upgrade --install -n levoai --create-namespace \
-  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
-  --set global.levoai_config_override.traces_queue.type="sqs" --set global.useRabbitmq=false \
-  levoai-satellite levoai/levoai-satellite 
-```
-
-
-#### a. Check Satellite health
-
-The Satellite is comprised of five sub components 1) levoai-collector, 2) levoai-ion, 3) levoai-rabbitmq, 4)levoai-satellite, and 5) levoai-tagger.
-
-Wait couple of minutes after the install, and check the health of the components by executing the following:
-
-```bash
-kubectl -n levoai get pods
-```                              
-If the Satellite is healthy, you should see output similar to below. Don't worry about the restarts of the levoai-tagger pod.
-
-```bash
-NAME                                READY   STATUS    RESTARTS      AGE
-levoai-collector-848fb4fff9-gv8g9   1/1     Running   0             4m8s
-levoai-ion-65686bd9c6-k2vgc         1/1     Running   0             4m8s
-levoai-rabbitmq-0                   1/1     Running   0             4m8s
-levoai-satellite-54956ccb89-5s4h2   1/1     Running   0             4m8s
-levoai-tagger-799db4d9cc-89jm8      1/1     Running   3 (4m8s ago)  4m8s
-```
-
-#### b. Check connectivity
-Execute the following to check for connectivity health:
-
-```bash
-# Please specify the actual pod name for levoai-tagger below
-kubectl -n levoai logs <levoai-tagger pod name> | grep "Ready to process; waiting for messages."
-```
-If connectivity is healthy, you will see output similar to below.
-
-```bash
-{"level": "info", "time": "2022-06-07 08:07:22,439", "line": "rabbitmq_client.py:155", "version": "fc628b50354bf94e544eef46751d44945a2c55bc", "module": "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py", "message": "Ready to process; waiting for messages."}
-```
-
-**Please contact `support@levo.ai` if you notice health/connectivity related errors.**
-
-### 5. Note down `Host:Port` information
-
-The cluster IP can be checked by running
-
-```bash
-kubectl get service levoai-collector -n levoai
-```
-
-The output is something like this
-
-```bash
-NAME               TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)        AGE
-levoai-collector   ClusterIP   10.100.254.104   <none>        4317/TCP       4m8s
-```
-The Collector can now be reached by the Sensors running in the same VPC in AWS at port `< CLUSTER IP >:4317`. Please note this, as it will be required to configure the Sensor.
-
-Please proceed to install the Sensor.
-
-<br></br>
+Please ensure that you note down the address of the collector.
 
 -------------------------------------------------
 
