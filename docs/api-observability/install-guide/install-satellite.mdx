@@ -808,12 +808,13 @@ Please ensure that you note down the address of the collector.
 ### 2. Run the Satellite
 
 Now that we have created a task definition, we will start our satellite up as a service in an ECS cluster.
+- Open the levo-satellite task definition, and click on the latest revision.
+- Head over to `deploy` and select `Create Service`.
+- Choose the cluster you want to deploy the satellite.
+- Under `Compute Options` select `Launch Type`.
+- Leave the other configurations on default settings, and start the service.
 
----- to add ----
-
-### 3. ---- to add -----
-
-### 4. Note down `Host:Port` information
+### 3. Note down `Host:Port` information
 
 The collector can be accessed over the internet and its IP can be checked from within the cluster.
 
