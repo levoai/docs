@@ -9,25 +9,19 @@ sidebar_position: 3
 - [OS Compatibility script](./os-compat-check.mdx) indicates the Linux host (that you want to instrument with the Sensor) is compatible.
 - At least 4 CPUs
 - At least 8 GB RAM
+- The Satellite URL should be reachable from the Sensor.
 
-## 2. Planning
+## 2. Copy `Authorization Key` from Levo.ai
 
-### a. Placement of the Satellite
-There are two options for the Satellite placement. Choose what best works for you.
+The Satellite uses an authorization key to access Levo.ai.
 
-| Placement Type              | Pros                | Cons                |
-| :---------------------------| :----------         | :-------------      |
-| Same Host/Cluster as Sensor | <ul><li> Simpler installation.</li> <li>Easy to get started.</li></ul> | Satellite consumes resources on the host/cluster where your application workloads are located. <br></br> This might lead to resource contention based on traffic load. |
-| Dedicated Host/Cluster      | <ul><li> Eliminates any resource contention issues with your application workloads.</li> <li> The Satellite can service traffic from multiple hosts/clusters that are instrumented.</li></ul> | Requires a dedicated host/cluster. |
-
-### b. Copy `Authorization Key` from Levo.ai
-The Satellite uses an authorization key to access Levo.ai. Follow instructions below to copy the key.
 - [Login](https://app.levo.ai/login) to Levo.ai.
 - Click on your user profile.
 - Click on `User Settings`
 - Click on `Keys` on the left navigation panel
 - Click on `Get Satellite Authorization Key`
-- Now copy your authorization key. This key is required in a subsequent step below.
+
+Copy your authorization key. This key is required in subsequent steps below.
 
 
 ## 3. Follow instructions for your platform
@@ -66,7 +60,7 @@ helm repo add levoai https://charts.levo.ai && helm repo update
 ```bash
 helm upgrade --install -n levoai --create-namespace \
   --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
-  levoai-satellite levoai/levoai-satellite --force
+  levoai-satellite levoai/levoai-satellite
 ```
 
 #### If locating Satellite on a dedicated cluster
@@ -77,7 +71,7 @@ You will need to expose the Satellite via either a `LoadBalancer` or `NodePort`,
 helm upgrade --install -n levoai --create-namespace \
     --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
     --set levoai-collector.service.type=<LoadBalancer | NodePort> \
-    levoai-satellite levoai/levoai-satellite --force
+    levoai-satellite levoai/levoai-satellite
 ```
 
 ### 4. Verify connectivity with Levo.ai
