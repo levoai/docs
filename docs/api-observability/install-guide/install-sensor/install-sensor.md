@@ -24,7 +24,7 @@ You should install the pcap sensor if:
 ## AWS Traffic Mirroring
 Use this if you want to use traffic mirroring to instrument your application workloads.
 
-[**Click here for the installation instructions**](/api-observability/install-guide/install-satellite.mdx#install-in-aws-using-levo-satellite-ami).
+[**Click here for the installation instructions**](/api-observability/install-guide/other-installation-options.md).
 
 ---
 

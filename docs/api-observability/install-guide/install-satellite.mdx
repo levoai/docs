@@ -25,9 +25,13 @@ Copy your authorization key. This key is required in subsequent steps below.
 
 
 ## 3. Follow instructions for your platform
-- [Install on Kubernetes](install-satellite.mdx#install-on-kubernetes)
-- [Install on Linux host via Docker Compose](./install-satellite.mdx#install-on-linux-host-via-docker-compose)
-- [Install in AWS using Levo Satellite AMI](./install-satellite.mdx#install-in-aws-using-levo-satellite-ami)
+- [Install on Kubernetes](#install-on-kubernetes)
+- [Install on Linux host via Docker Compose](#install-on-linux-host-via-docker-compose)
+- [Install in AWS EC2 using Levo Satellite AMI](#install-in-aws-ec2-using-levo-satellite-ami)
+- [Install in AWS EKS](#install-in-aws-eks)
+  - [Install in AWS EKS using EC2](#install-in-aws-eks-using-ec2)
+  - [Install in AWS EKS using Fargate](#install-in-aws-eks-using-fargate)
+- [Install in AWS ECS](#install-in-aws-ecs)
 
 <br></br>
 
@@ -78,22 +82,24 @@ helm upgrade --install -n levoai --create-namespace \
 
 #### a. Check Satellite health
 
-The Satellite is comprised of four sub components 1) levoai-collector, 2) levoai-rabbitmq, 3)levoai-satellite, and 4) levoai-tagger.
+The Satellite is comprised of five sub components 1) levoai-collector, 2) levoai-ion, 3) levoai-rabbitmq, 4)levoai-satellite, and 5) levoai-tagger.
 
 Wait couple of minutes after the install, and check the health of the components by executing the following:
 
 ```bash
 kubectl -n levoai get pods
 ```                              
-If the Satellite is healthy, you should see output similar to below. Don't worry about the restarts of the levoai-tagger pod.
+If the Satellite is healthy, you should see output similar to below.
 
 ```bash
-NAME                                READY   STATUS    RESTARTS      AGE
-levoai-collector-848fb4fff9-gv8g9   1/1     Running   0             4m8s
-levoai-rabbitmq-0                   1/1     Running   0             4m8s
-levoai-satellite-54956ccb89-5s4h2   1/1     Running   0             4m8s
-levoai-tagger-799db4d9cc-89jm8      1/1     Running   3 (4m8s ago)  4m8s
+NAME                                READY   STATUS    RESTARTS   AGE
+levoai-collector-5b54df8dd6-55hq9   1/1     Running   0          5m0s
+levoai-ion-669c9c4fbc-vsmmr         1/1     Running   0          5m0s
+levoai-rabbitmq-0                   1/1     Running   0          5m0s
+levoai-satellite-8688b67c65-xppbn   1/1     Running   0          5m0s
+levoai-tagger-7bbf565b47-b572w      1/1     Running   0          5m0s
 ```
+
 
 #### b. Check connectivity
 Execute the following to check for connectivity health:
@@ -206,7 +212,7 @@ Please proceed to install the Sensor.
 
 -------------------------------------------------
 
-## Install in AWS using Levo Satellite AMI
+## Install in AWS EC2 using Levo Satellite AMI
 
 ### 1. Open the EC2 Launch Wizard and select the Levo Satellite AMI
 Levo provides pre-built AMIs for Satellite. You can launch an EC2 instance using the AMI in the AWS region you wish to install the satellite in.
@@ -300,3 +306,528 @@ The Collector now runs in a container, and is reachable on the host via port 431
 Please note down the either the host's IP address or domain name. The Sensor will be configured to communicate with the Collector at <Host's IP|Domain-Name>:4317.
 
 Please proceed to install the Sensor.
+
+<br></br>
+
+---
+
+## Install in AWS EKS
+
+AWS EKS supports two compute types for its nodes, EC2 and Fargate. Depending on your usecase, you can follow the installation steps given below.
+- [Install using EC2](#install-in-aws-eks-using-ec2)
+- [Install using Fargate](#install-in-aws-eks-using-fargate)
+
+### Prerequisites
+- [eksctl](https://eksctl.io/) version >= `v0.152.0`
+- [Helm v3](https://helm.sh/docs/intro/install/) installed and working on your local machine.
+- An AWS account with EKS permissions.
+
+## Install in AWS EKS using EC2
+
+### 1. Setup environment variables
+
+```bash
+export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier> 
+export CLUSTER_NAME=<INSERT CLUSTER NAME>
+export REGION=<INSERT AWS REGION>
+export ACCOUNT_ID=<INSERT AWS ACCOUNT ID>
+```
+
+
+### 2. Cluster Creation
+```bash
+read -r -d '' EKS_CLUSTER <<EOF
+apiVersion: eksctl.io/v1alpha5
+kind: ClusterConfig
+
+metadata:
+  name: ${CLUSTER_NAME}
+  region: ${REGION}
+
+vpc:
+  subnets:
+    private:
+      # MENTION THE SUBNETS YOU WANT TO USE FOR YOUR SATELLITE
+      # FOR EXAMPLE:
+      # us-west-2a: { id: subnet-0d09e999a579234ea }
+      # us-west-2b: { id: subnet-0d09e999a579234eb }
+
+nodeGroups:
+  - name: ng-e2e
+    instanceType: t2.xlarge
+    desiredCapacity: 1
+    volumeSize: 40
+    privateNetworking: true
+EOF
+
+echo "${EKS_CLUSTER}" > eks-cluster.yaml
+
+eksctl create cluster -f ./configuration/eks-cluster.yaml
+```
+
+
+### 3. Connecting to the cluster
+
+AWS EKS grants cluster admin permissions to the account from which the cluster is created. If you don't need access to the cluster for other AWS Users, you can skip this section.
+
+Access to other AWS users in the same account can be granted via 2 ways.
+- [Adding individual access to user accounts](#adding-individuals-to-the-cluster)
+- [Giving the permissions to a user group](#giving-access-to-an-iam-user-group)
+
+#### Adding individuals to the cluster
+
+This command can be run to add an inidividual user account to the cluster's aws-auth configmap
+
+```bash
+eksctl create iamidentitymapping \
+    --cluster ${CLUSTER_NAME} \
+    --region ${REGION} \
+    --arn <AWS ACCOUNT ARN FOR THE USER> \
+    --group system:masters \
+    --no-duplicate-arns \
+    --username <AWS USERNAME FOR THE USER>
+```
+
+#### Giving access to an IAM User Group 
+
+We create a role developer.assume-access.role and attach two policies to it. The first one is `EKSFullAccess` so that it has access to all the EKS resources. The second one is `developer.assume-eks-access-role.policy` that allows assuming the role.
+
+A detailed guide on defining the roles and policies can be found [here](https://eng.grip.security/enabling-aws-iam-group-access-to-an-eks-cluster-using-rbac).
+
+Once you have followed the above guide to create the roles and attach the specific policies, you can add the role to the cluster's aws-auth config map to let the developers group access the cluster
+```bash
+eksctl create iamidentitymapping \
+    --cluster ${CLUSTER_NAME} \
+    --region ${REGION} \
+    --arn arn:aws:iam::${ACCOUND_ID}:role/developer.assume-access.role \
+    --group system:masters \
+```
+
+This needs to be run in order to grant access to the cluster.
+
+One can Connect to the cluster by running just a single command
+
+```bash
+aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${REGION}> --role-arn arn:aws:iam::${ACCOUNT_ID}:role/developer.assume-access.role
+```
+
+This commands updates the kubeconfig and adds the context for the cluster and sets the current context to it.
+The `--role` argument sets the correct role and policies so that seemless access to the cluster is granted instantly.
+
+
+### 4. Setting the cluster up
+
+#### Creating an OIDC provider
+
+Run these two commands:
+```bash
+oidc_id=$(aws eks describe-cluster --name ${CLUSTER_NAME} --region ${REGION} --query "cluster.identity.oidc.issuer" --output text | cut -d '/' -f 5)
+```
+
+```bash
+aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4 | cut -d "\"" -f1
+```
+
+If this returns a value, that is the OIDC ID that we need. If the statement returns nothing, run this command:
+```bash
+eksctl utils associate-iam-oidc-provider --cluster ${CLUSTER_NAME} --region ${REGION} --approve
+```
+
+This creates an OIDC Identity Provider.
+
+Next, to create a role in AWS for the EBS CSI Driver add-on ([Amazon Elastic Block Store CSI Driver](https://docs.aws.amazon.com/eks/latest/userguide/ebs-csi.html) manages persistent volumes in EKS) we need to run these:
+
+```bash
+OIDC=$(aws iam list-open-id-connect-providers | grep $oidc_id | cut -d "/" -f4 | cut -d "\"" -f1)
+
+read -r -d '' EBS_DRIVER_POLICY <<EOF
+{
+"Version": "2012-10-17",
+"Statement": [
+    {
+    "Sid": "",
+    "Effect": "Allow",
+    "Principal": {
+        "Federated": "arn:aws:iam::${ACCOUNT_ID}:oidc-provider/oidc.eks.${REGION}.amazonaws.com/id/${OIDC}"
+    },
+    "Action": "sts:AssumeRoleWithWebIdentity",
+    "Condition": {
+        "StringEquals": {
+        "oidc.eks.${REGION}.amazonaws.com/id/${OIDC}:aud": "sts.amazonaws.com",
+        "oidc.eks.${REGION}.amazonaws.com/id/${OIDC}:sub": "system:serviceaccount:kube-system:ebs-csi-controller-sa"
+        }
+    }
+    }
+]
+}
+EOF
+echo "${EBS_DRIVER_POLICY}" > aws-ebs-csi-driver-trust-policy.json
+
+aws iam create-role \
+  --role-name AmazonEKS_EBS_CSI_DriverRole \
+  --assume-role-policy-document file://aws-ebs-csi-driver-trust-policy.json
+
+aws iam attach-role-policy \
+  --policy-arn arn:aws:iam::aws:policy/service-role/AmazonEBSCSIDriverPolicy \
+  --role-name AmazonEKS_EBS_CSI_DriverRole
+
+eksctl create addon --name aws-ebs-csi-driver --cluster ${CLUSTER_NAME} --region ${REGION} --service-account-role-arn arn:aws:iam::${ACCOUNT_ID}:role/AmazonEKS_EBS_CSI_DriverRole —force
+```
+
+### 5. Install the satellite
+
+Please follow the instructions in the [Install on Kubernetes](#install-on-kubernetes) section to install the Satellite.
+
+Please ensure that you note down the address of the collector.
+
+-------------------------------------------------
+
+## Install in AWS EKS using Fargate
+
+Fargate allows us to have containers without the overhead of managing and scaling servers and clusters. AWS handles the maintenance, as well as security and health of the instances for us, which is something we would not want to spend time into.
+
+### 1. Setup environment variables
+
+```bash
+export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier> 
+CLUSTER_NAME=< INSERT CLUSTER NAME >
+REGION=< INSERT AWS REGION >
+ACCOUNT_ID=<INSERT AWS ACCOUNT ID>
+```
+
+### 2. Cluster creation
+
+To create a cluster using Fargate, run
+
+```bash
+eksctl create cluster --name ${CLUSTER_NAME} --region ${REGION} --fargate 
+```
+
+`--fargate` specifies that the cluster needs to run on fargate, and initially assigns 2 fargate nodes to us 
+
+
+It can be checked by running `kubectl get nodes` . The output would be something like this:
+```bash
+fargate-ip-192.168.1.1.<aws-region>.compute.internal   Ready    <none>   1m   v1.25
+fargate-ip-192-168-1.1.<aws-region>.compute.internal   Ready    <none>   1m   v1.25
+```
+
+
+### 3. Connecting to the cluster
+
+AWS EKS grants cluster admin permissions to the account from which the cluster is created. If you don't need access to the cluster for other AWS Users, you can skip this section.
+
+Access to other AWS users in the same account can be granted via 2 ways.
+- [Adding individual access to user accounts](#adding-individuals-to-the-cluster)
+- [Giving the permissions to a user group](#giving-access-to-an-iam-user-group)
+
+#### Adding individuals to the cluster
+
+This command can be run to add an inidividual user account to the cluster's aws-auth configmap
+
+```bash
+eksctl create iamidentitymapping \
+    --cluster ${CLUSTER_NAME} \
+    --region ${REGION} \
+    --arn <AWS ACCOUNT ARN FOR THE USER> \
+    --group system:masters \
+    --no-duplicate-arns \
+    --username <AWS USERNAME FOR THE USER>
+```
+
+#### Giving access to an IAM User Group 
+
+We create a role developer.assume-access.role and attach two policies to it. The first one is `EKSFullAccess` so that it has access to all the EKS resources. The second one is `developer.assume-eks-access-role.policy` that allows assuming the role.
+
+A detailed guide on defining the roles and policies can be found [here](https://eng.grip.security/enabling-aws-iam-group-access-to-an-eks-cluster-using-rbac).
+
+Once you have followed the above guide to create the roles and attach the specific policies, you can add the role to the cluster's aws-auth config map to let the developers group access the cluster
+```bash
+eksctl create iamidentitymapping \
+    --cluster ${CLUSTER_NAME} \
+    --region ${REGION} \
+    --arn arn:aws:iam::${ACCOUND_ID}:role/developer.assume-access.role \
+    --group system:masters \
+```
+
+This needs to be run in order to grant access to the cluster.
+
+One can Connect to the cluster by running just a single command
+
+```bash
+aws eks update-kubeconfig --name ${CLUSTER_NAME} --region ${REGION}> --role-arn arn:aws:iam::${ACCOUNT_ID}:role/developer.assume-access.role
+```
+
+This commands updates the kubeconfig and adds the context for the cluster and sets the current context to it.
+The `--role` argument sets the correct role and policies so that seemless access to the cluster is granted instantly.
+
+
+### 4. Install the satellite
+Please follow the instructions in the [Install on Kubernetes](#install-on-kubernetes) section to install the Satellite.
+
+Please ensure that you note down the address of the collector.
+
+-------------------------------------------------
+
+## Install in AWS ECS
+
+### Prerequisites
+- Access to AWS ECS.
+- Levo.ai Org ID. Follow instructions below to copy the org ID.
+  - [Login](https://app.levo.ai/login) to Levo.ai.
+  - Click on your user profile.
+  - Click on `User Settings`
+  - Click on `Organizations` on the left navigation panel
+  - Click on `Copy` under `Organization ID`
+- An AWS Role with the policies - _____ to assign to the task.
+
+### 1. Creating a Task Definition
+
+- Open the AWS ECS console and click on Task Definitions.
+
+- Under the Create Task Defintion on the top right, click on [Create New Task Definition with JSON](https://console.aws.amazon.com/ecs/v2/create-task-definition-with-json).
+
+  > **_NOTE:_**  Make sure you are in the right AWS region that you want to have your service in
+
+- Use the following task definition.
+
+```bash
+{
+    "family": "levoai-satellite",
+    "containerDefinitions": [
+        {
+            "name": "levoai-satellite",
+            "image": "levoai/satellite",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "levoai-satellite-9999-tcp",
+                    "containerPort": 9999,
+                    "hostPort": 9999,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "command": [
+                "-w",
+                "1",
+                "-b",
+                "0.0.0.0:9999",
+                "--worker-class",
+                "gevent",
+                "--worker-connections",
+                "30",
+                "levoai_e7s.satellite.satellite:create_server()"
+            ],
+            "environment": [
+                {
+                    "name": "LEVOAI_DEBUG_SERVER_HOST",
+                    "value": "host.docker.internal"
+                },
+                {
+                    "name": "LEVOAI_ORG_ID",
+                    "value": "899590a5-0cca-47f3-915d-31e8a0d2386a"
+                },
+                {
+                    "name": "LEVOAI_MODE",
+                    "value": "docker-compose"
+                },
+                {
+                    "name": "LEVOAI_CONF_OVERRIDES",
+                    "value": "{\"onprem-api\": {\"url\": \"https://api.levo.ai\", \"refresh-token\": \"${LEVOAI_AUTH_KEY}\", \"org-id\": \"${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"}}"
+                },
+                {
+                    "name": "LEVOAI_DEBUG_ENABLED",
+                    "value": "false"
+                },
+                {
+                    "name": "LEVOAI_AUTH_KEY",
+                    "value": "< INSERT YOUR LEVO.AI AUTH KEY HERE >"
+                },
+                {
+                    "name": "LEVOAI_LOG_LEVEL",
+                    "value": "INFO"
+                },
+                {
+                    "name": "LEVOAI_DEBUG_PORT",
+                    "value": "12345"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/satellite",
+                    "awslogs-region": "< INSERT YOUR AWS REGION HERE >",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        },
+        {
+            "name": "levoai-tagger",
+            "image": "levoai/satellite",
+            "cpu": 0,
+            "portMappings": [],
+            "essential": true,
+            "entryPoint": [
+                "python",
+                "-OO"
+            ],
+            "command": [
+                "/opt/levoai/e7s/src/python/levoai_e7s/tag_server.py"
+            ],
+            "environment": [
+                {
+                    "name": "LEVOAI_DEBUG_SERVER_HOST",
+                    "value": "host.docker.internal"
+                },
+                {
+                    "name": "LEVOAI_ORG_ID",
+                    "value": "< INSERT YOUR LEVO.AI ORG ID HERE >"
+                },
+                {
+                    "name": "LEVOAI_MODE",
+                    "value": "docker-compose"
+                },
+                {
+                    "name": "LEVOAI_CONF_OVERRIDES",
+                    "value": "{\"onprem-api\":{\"url\": \"https://api.levo.ai\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"url_clusterer_id_len\": 1,\"min_urls_required_per_pattern\": 10,\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"disable_ml_detector\": true,\"service_naming\":{\"strategies\": \"KUBERNETES_METADATA,HOST_HEADER,DEFAULT\"},\"user_resolvers\": [],\"sample_collection\":{\"enabled\": true,\"max_samples_per_end_point\": 2,\"users\": []},\"tagger_batch_interval_minute\": 5,\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"sensitive_data_config\": [],\"traces_queue\":{\"type\": \"sqs\"}}"
+                },
+                {
+                    "name": "PI_DETECTOR_DATA_DIR",
+                    "value": "/opt/levoai/datasets/"
+                },
+                {
+                    "name": "LEVOAI_DEBUG_ENABLED",
+                    "value": "false"
+                },
+                {
+                    "name": "LEVOAI_AUTH_KEY",
+                    "value": "< INSERT YOUR LEVO.AI AUTH KEY HERE >"
+                },
+                {
+                    "name": "LEVOAI_LOG_LEVEL",
+                    "value": "INFO"
+                },
+                {
+                    "name": "LEVOAI_DEBUG_PORT",
+                    "value": "1234"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/satellite",
+                    "awslogs-region": "< INSERT YOUR AWS REGION HERE >",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        },
+        {
+            "name": "levoai-collector",
+            "image": "levoai/collector",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "levoai-collector-4317-tcp",
+                    "containerPort": 4317,
+                    "hostPort": 4317,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/satellite",
+                    "awslogs-region": "< INSERT YOUR AWS REGION HERE >",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        },
+        {
+            "name": "levoai-ion",
+            "image": "levoai/ion",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "levoai-ion-8000-tcp",
+                    "containerPort": 8000,
+                    "hostPort": 8000,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": false,
+            "environment": [],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-create-group": "true",
+                    "awslogs-group": "/ecs/satellite",
+                    "awslogs-region": "< INSERT YOUR AWS REGION HERE >",
+                    "awslogs-stream-prefix": "ecs"
+                }
+            }
+        }
+    ],
+    "taskRoleArn": "< INSERT THE ARN OF THE ROLE YOU WANT TO ASSIGN TO THIS TASK HERE >",
+    "executionRoleArn": "< INSERT THE ARN OF THE ROLE YOU WANT TO ASSIGN TO THIS TASK HERE >",
+    "networkMode": "awsvpc",
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "4096",
+    "memory": "8192",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    }
+}
+```
+
+### 2. Run the Satellite
+
+Now that we have created a task definition, we will start our satellite up as a service in an ECS cluster.
+- Open the levo-satellite task definition, and click on the latest revision.
+- Head over to `deploy` and select `Create Service`.
+- Choose the cluster you want to deploy the satellite.
+- Under `Compute Options` select `Launch Type`.
+- Leave the other configurations on default settings, and start the service.
+
+### 3. Note down `Host:Port` information
+
+The collector can be accessed over the internet and its IP can be checked from within the cluster.
+
+Head over to the cluster you earlier used to run the satellite on.
+
+Click on Tasks and select the particular satellite task.
+
+Under the `Container details for levoai-collector` go to `Network bindings`. It should look something like this
+
+```bash
+Network bindings
+Host port       Container port      Protocol        External link
+4317            4317                tcp             52.32.232.165:4317
+```
+
+The Collector can now be reached by the Sensors over the internet using this `external-link:4317` (Kindly add inbound rules to the security group being used by this task if you're unable to reach the satellite). Please note this, as it will be required to configure the Sensor.
+
+Please proceed to install the Sensor.
+
+<br></br>
+
+-------------------------------------------------
