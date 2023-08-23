@@ -26,13 +26,15 @@ sensor:
     
     
     # --------------------------------------------------------------------------------------------
-    # Default Application Name:
+    # Default Application Settings:
     # --------------------------------------------------------------------------------------------
     # Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
     # grouped under this application name. The application name helps segregate and group API
-    # endpoints from different environments.
+    # endpoints from different environments. The environment lets us know what environment the 
+    # sensor is installed in e.g. staging, prod, dev.
     
     default-service-name: default
+    env: staging
     # --------------------------------------------------------------------------------------------
     
     
@@ -50,7 +52,7 @@ sensor:
     collector-traces-endpoint: levoai-collector:4317
     
     # host:port for receiving the sensor's metrics
-    collector-metrics-endpoint: 
+    # collector-metrics-endpoint: levoai-collector:4317
     # --------------------------------------------------------------------------------------------
     
     # --------------------------------------------------------------------------------------------
@@ -74,6 +76,7 @@ sensor:
     # messages.
     
     # export-metrics-to-log: false
+    # enable-metrics: false
     
     # --------------------------------------------------------------------------------------------
     # Process Filters: process command names/IDs to monitor & capture API traffic.
@@ -204,7 +207,7 @@ sensor:
     # --------------------------------------------------------------------------------------------
     # The maximum request or response body size the sensor will parse.  Request or response bodies
     # larger than this limit will be ignored by the sensor.
-    # max-msg-body-size-bytes: 5000000
+    # max-msg-body-size-bytes: 512000
     
     # --------------------------------------------------------------------------------------------
 
