@@ -167,6 +167,14 @@ k8s-pod-filter-list:
 ## Factory Settings
 These settings control logging, debugging, and performance tuning functions. ***DO NOT*** modify these settings, unless specifically asked by Levo Support. 
 
+### HTTP/HTTPS Proxy
+You may configure an HTTP/HTTPS proxy for requests made by the Sensor to the Satellite, e.g.
+
+```yaml
+http-proxy: "http://your-proxy:8080" # Proxy used for HTTP requests
+https-proxy: "http://your-proxy:8080" # Proxy used for HTTPS requests
+```
+
 <br></br>
 
 --------------------------------------------------------------------------------
