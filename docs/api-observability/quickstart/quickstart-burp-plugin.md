@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 keywords: [API Security, ZAP, OWASP, Linux, macOS, Windows, API Observability]
 ---
 

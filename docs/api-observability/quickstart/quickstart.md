@@ -8,6 +8,7 @@ Evaluate Levo's API Observability in Action with your favourite tools.
 
 ![Quickstart for API Observability](../../assets/quickstart.svg)
 
+## [Quickstart with Minikube](./quickstart-minikube.md)
 ## [Quickstart with Burp](./quickstart-burp-plugin.md)
 ## [Quickstart with OWASP ZAP](./quickstart-zap-addon.md)
 ## [Quickstart with MITM proxy in Docker](./quickstart-mitm.md)
