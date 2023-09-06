@@ -10,15 +10,12 @@ The Levo.ai add-on for ZAP allows building OpenAPI specs with the traffic sent o
 This guide assumes that you have [signed up for a Levo account](https://app.levo.ai/signup) and have [installed a recent version of ZAP](https://www.zaproxy.org/download/) (> 2.12.0).
 
 Here are the steps you need to follow to start building OpenAPI specs with Levo and ZAP:
-1. The OpenAPI spec is built by sending anonymized API traces to Levo. You may run the *Satellite* (a set of services which receives and processes the traces) locally using docker or minikube, on AWS with an AMI provided by Levo, or use a temporary 40-minute instance spun-up by Levo using Google Cloud Run.
-   1. If you want to run the satellite yourself, follow the instructions on [this page](/api-observability/install-guide/install-satellite) as per your prefered mode of installation.
-    Note that the collector does not need to be enabled.
-    ZAP should be able to reach the satellite at port `9999`.
-    If the satellite is running inside a container, you may need to forward a port from the host to port `9999` inside the container.
-   2. The easier option is to use a temporary satellite instance provided by Levo.
-    Go to Organizations &rarr; Satellite in the Levo dashboard, generate and enter an authorization key, and start the satellite. Copy the provided Cloud Run URL.
+1. The OpenAPI spec is built by sending anonymized API traces to Levo. You may run the *Satellite* (a set of services which receives and processes the traces) locally using docker or minikube, or on AWS with an AMI provided by Levo.
 
-    ![Screenshot of the satellite page in Levo's Dashboard](../../assets/cloudrun-satellite.png)
+   [Click here for instructions on installing the satellite](/api-observability/install-guide/install-satellite).
+
+   Please ensure that ZAP is able to reach the satellite at the configured listening port (the default is `9999`).
+
 2. Launch ZAP and install the Levo.ai add-on from the [ZAP Marketplace](https://www.zaproxy.org/addons/). You may need to restart ZAP after the add-on is installed.
 3. If the add-on is successfully installed, you should see a new button in the main toolbar.
    ![Screenshot of the Levo.ai button in ZAP's main toolbar](../../assets/zap-levo-button-toolbar.png)
