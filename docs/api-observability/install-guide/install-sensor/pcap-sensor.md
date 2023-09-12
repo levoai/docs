@@ -32,7 +32,7 @@ The steps to add the sensor to your task are as follows
  - Select the required task definition
  - Click on `Create revision with JSON`
  - Add the given JSON object under ContainerDefinitions
- - Replace the values for satellite-url and levoai-org-id in entrypoint.
+ - Replace the values for satellite-url, levo-env and levoai-org-id in entrypoint.
  - Replace the values for Environment and LogConfiguration as per your requirement.
 
 ```json
@@ -47,6 +47,8 @@ The steps to add the sensor to your task are as follows
         "apidump",
         "--satellite-url",
         "< INSERT SATELLITE URL (http(s)://hostname|IP:port) >",
+        "--levo-env",
+        "<INSERT APPLICATION ENVIRONMENT (staging, production etc.)>",
         "--levoai-org-id",
         "< INSERT LEVO ORG ID >"
     ],
@@ -93,6 +95,7 @@ Do ***NOT *** use `localhost` as the hostname, since the sensor is running insid
 sudo docker run --net=host --rm -it levoai/pcap-sensor \
 ./bin/levo-pcap-sensor apidump \
 --satellite-url "your satellite url (http(s)://hostname|IP:port)" \
+--levo-env "your application environment (staging, production etc.)" \
 --levoai-org-id "your levo org id"
 ```
 Specify additional flags in the command
@@ -132,7 +135,8 @@ helm upgrade levoai-pcap-sensor levoai/levoai-pcap-sensor \
   --namespace levoai \
   --create-namespace \
   --set sensor.config.levoaiOrgId="your Levo Org ID" \
-  --set sensor.config.satelliteUrl="htpp(s)://hostname|IP:port"
+  --set sensor.config.satelliteUrl="http(s)://hostname|IP:port"
+  --set sensor.confg.levoEnv="your application environment (staging, production etc.)"
 ```
 
 Set additional configs
