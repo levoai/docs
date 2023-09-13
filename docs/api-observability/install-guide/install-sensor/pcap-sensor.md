@@ -34,12 +34,14 @@ The steps to add the sensor to your task are as follows
  - Add the given JSON object under ContainerDefinitions
  - Replace the values for satellite-url, levo-env and levoai-org-id in entrypoint.
  - Replace the values for Environment and LogConfiguration as per your requirement.
+ - Set the memory limit in `Mib` (*Note: memory should not exceed the Task memory limit*)
 
 ```json
 {
     "name": "levo-pcap-sensor",
     "image": "levoai/pcap-sensor",
     "cpu": 0,
+    "memory": 2048,
     "portMappings": [],
     "essential": false,
     "entryPoint": [
