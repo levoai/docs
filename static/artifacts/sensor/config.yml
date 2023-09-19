@@ -43,11 +43,9 @@ env: staging
 # Use HTTP/2 (gRPC) for communication with the collector. If this is disabled, HTTP/1.1 will be used.
 collector-grpc-transport: true
 
-# host:port for the collector service receiving the Sensor's API traces.
-collector-traces-endpoint: https://collector.levo.ai
+# host:port for the collector service receiving the Sensor's API traces and metrics.
+collector-endpoint: https://collector.levo.ai
 
-# host:port for receiving the sensor's metrics
-# collector-metrics-endpoint: 
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
@@ -70,8 +68,8 @@ collector-traces-endpoint: https://collector.levo.ai
 # Uncomment and modify to enable the printing of sensor metrics alongside other sensor logging
 # messages.
 
-# export-metrics-to-log: false
-# enable-metrics: false
+# export-metrics-to-log: true
+enable-metrics: true
 
 # --------------------------------------------------------------------------------------------
 # Process Filters: process command names/IDs to monitor & capture API traffic.
