@@ -10,6 +10,8 @@ sidebar_position: 3
 - At least 4 CPUs
 - At least 8 GB RAM
 - The Satellite URL should be reachable from the Sensor.
+  - The Collector listens for spans from the eBPF Sensor on port 4317 using HTTP/2 (gRPC), and port 4318 using HTTP/1.1. 
+  - The Satellite listens for spans from the PCAP Sensor on port 9999 using HTTP/1.1.
 
 ## 2. Copy `Authorization Key` from Levo.ai
 
