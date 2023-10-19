@@ -91,8 +91,6 @@ Specify additional flags in the entrypoint
 -   Docker Engine version  `18.03.0`  and above
 -   Admin (or  `sudo`) privileges on the Docker host
 
-If you are running the satellite as a docker container on the host machine, use the satellite-url `http://host.docker.internal:9999`
-Do ***NOT *** use `localhost` as the hostname, since the sensor is running inside a container.
 ```bash
 sudo docker run --net=host --rm -it levoai/pcap-sensor \
 ./bin/levo-pcap-sensor apidump \
