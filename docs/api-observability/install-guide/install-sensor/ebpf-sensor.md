@@ -51,7 +51,8 @@ helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --namespace levoai \
   --create-namespace \
   --set sensor.config.default-service-name=<'Application Name' chosen earlier> \
-  --set sensor.config.collector-traces-endpoint=<hostname|IP:port>
+  --set sensor.config.collector-endpoint=<hostname|IP:port>
+  --set sensor.config.env=<'Application environment'>
 ```
 
 
@@ -89,10 +90,10 @@ If connectivity is healthy, you should see output similar to below.
 #### NOTE:
 The default address for the collector in helm installations is `levoai-collector:4317`.
 This address assumes that the Satellite is installed in the same cluster (and namespace) as the Sensor.
-If you wish to, you may also request Levo to host the Satellite for you. In this case, you will need to set the `collector-traces-endpoint` to `https://collector.levo.ai` and specify an organization ID (`organization-id`) via helm values.
+If you wish to, you may also request Levo to host the Satellite for you. In this case, you will need to set the `collector-endpoint` to `https://collector.levo.ai` and specify an organization ID (`organization-id`) via helm values.
 
 ```shell
-helm upgrade --set sensor.config.collector-traces-endpoint=https://collector.levo.ai --set sensor.config.organization-id=<your-org-id> levoai-sensor levoai/levoai-ebpf-sensor -n levoai
+helm upgrade --set sensor.config.env=<your-application-environment> --set sensor.config.collector-endpoint=https://collector.levo.ai --set sensor.config.organization-id=<your-org-id> levoai-sensor levoai/levoai-ebpf-sensor -n levoai
 ```
 
 Please proceed to the next step, if there are no errors.
@@ -120,7 +121,8 @@ sudo docker run --restart unless-stopped \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
   --privileged --detach levoai/ebpf_sensor:latest \
   --host-proc-path /host/proc/ \
-  --collector-traces-endpoint <collector-address> \
+  --collector-endpoint <collector-address> \
+  --env <'application-environment'> \
   --default-service-name <'Application Name' chosen earlier>
 ```
 
@@ -235,7 +237,7 @@ This address assumes that Levo is hosting the Satellite for you, and you must al
 If you wish, you may also host the Satellite yourself and specify the address of the collector in the self-hosted Satellite to direct the Sensor's traffic to it.
 
 
-Edit `/etc/levo/sensor/config.yaml`, and set `collector-traces-endpoint` (under Satellite Settings) to the address noted from the Satellite install.
+Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satellite Settings) to the address noted from the Satellite install.
 
 ```yaml
 ...
@@ -247,7 +249,8 @@ Edit `/etc/levo/sensor/config.yaml`, and set `collector-traces-endpoint` (under 
 # organization-id: ""
 
 # host:port for the collector service receiving the Sensor's API traces.
-collector-traces-endpoint: <Use the default (https://collector.levo.ai) or set to a custom address>
+collector-endpoint: <Use the default (https://collector.levo.ai) or set to a custom address>
+env: <Your application environment eg. dev, staging, prod etc.>
 ...
 ```
 **Note**: If you change the Satellite address later, you have to restart the Sensor, since it's not a hot property.
