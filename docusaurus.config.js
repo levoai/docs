@@ -134,12 +134,10 @@ const config = {
         darkTheme: darkCodeTheme,
       },
       announcementBar: {
-        id: 'api_observability',
+        id: 'postman_announcement',
         content:
-          'Frictionless API Observability - <a target="_blank" rel="noopener noreferrer" href="api-observability">Available Now!</a>',
-        backgroundColor: '#fafbfc',
-        textColor: '#700be3',
-        isCloseable: true,
+          '<a target="_blank" rel="noopener noreferrer" href="https://levo.ai/postman-collections">Unveiling Levo\'s One-Click Postman Collections</a>',
+        backgroundColor: '#ffc784'
       },
     }),
 };
