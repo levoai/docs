@@ -13,8 +13,8 @@ if [[ ! $kernel_name =~ Linux|GNU* ]]; then
   helpful_exit
 fi
 
-if [[ "$kernel_architecture" != "x86_64" ]]; then
-  printf "%s\n" "The Sensor is only compatible with 64-bit (x86_64) Linux kernels."
+if [[ ! $kernel_architecture =~ x86_64|aarch64 ]]; then
+  printf "%s\n" "The Sensor is only compatible with 64-bit (x86_64 and aarch64) Linux kernels."
   helpful_exit
 fi
 
@@ -44,6 +44,7 @@ available_btf_kernels=(
   "4.14.318-241.531.amzn2.x86_64"
   "4.15.0-1054-aws"
   "4.15.0-1084-fips"
+  "4.18.0-477.27.1.el8_8.x86_64"
   "5.4.0-1029-aws"
   "5.4.0-1055-aws"
   "5.4.0-1059-aws"
