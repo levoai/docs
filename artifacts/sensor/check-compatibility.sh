@@ -51,6 +51,7 @@ available_btf_kernels=(
   "5.4.0-1065-gke"
   "5.4.0-1066-gke"
   "5.4.0-1067-gke"
+  "5.4.0-1103-aws"
 )
 for i in "${available_btf_kernels[@]}"; do
   if [[ "$kernel_version" == "$i" ]]; then
