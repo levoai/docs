@@ -1,7 +1,7 @@
 version: "2.2"
 services:
   levoai-rabbitmq:
-    image: 'rabbitmq:3.10.5-management'
+    image: 'rabbitmq:3.12.8-management'
     container_name: levoai-rabbitmq
     restart: always
     healthcheck:
@@ -79,7 +79,7 @@ services:
           "user_resolvers": [],
           "api_rule_evaluation": {"enabled": true},
           "sample_collection": {
-              "enabled": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-True}",
+              "enabled": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-False}",
               "max_samples_per_end_point": "${MAX_SAMPLES_PER_END_POINT:-2}",
               "users": [ { "name": "User1", "match_type": "user", "user_id": "user1" } ]
           },
@@ -100,7 +100,8 @@ services:
       - "${LEVOAI_PROXY_PORT:-9080}:8080"
       - '8081:8081'
     environment:
-      LEVOAI_PROXY_MODE: ${LEVOAI_PROXY_MODE:-reverse}
+      LEVOAI_PROXY_MODE: ${LEVOAI_PROXY_MODE:-regular}
+      LEVOAI_HTTP2_ENABLE: ${LEVOAI_HTTP2_ENABLE:-false}
       LEVOAI_PROXY_PORT: ${LEVOAI_PROXY_PORT:-9080}
       LEVOAI_SERVICE_NAME: ${LEVOAI_SERVICE_NAME:-default}
       SERVICE_ADDRESS: ${SERVICE_ADDRESS:-http://host.docker.internal:8010}

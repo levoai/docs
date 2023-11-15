@@ -1,7 +1,7 @@
 version: "3.9"
 services:
   levoai-rabbitmq:
-    image: 'rabbitmq:3.10.5-management'
+    image: 'rabbitmq:3.12.8-management'
     container_name: levoai-rabbitmq
     restart: always
     healthcheck:
@@ -88,7 +88,7 @@ services:
           "service_naming": {"strategies": "KUBERNETES_METADATA,HOST_HEADER,DEFAULT"},
           "user_resolvers": [],
           "sample_collection": {
-              "enabled": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-True}",
+              "enabled": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-False}",
               "max_samples_per_end_point": "${MAX_SAMPLES_PER_END_POINT:-2}",
               "users": []
           },
