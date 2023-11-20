@@ -29,8 +29,20 @@ helm upgrade -n levoai \
 
 
 ### Uninstall Satellite
-```bash
+```shell
 helm uninstall levoai-satellite -n levoai
+```
+
+After running the above command, wait until all Satellite pods have been terminated, and then run the following command to delete the rabbitmq PersistentVolumeClaim. Deleting the PVC also deletes the corresponding PersistentVolume.
+
+```shell
+kubectl delete pvc data-levoai-rabbitmq-0 -n levoai
+```
+
+In case the `kubectl delete pvc` command gets stuck, run the following command before deleting the PVC again:
+
+```shell
+kubectl patch pvc data-levoai-rabbitmq-0 -p '{"metadata":{"finalizers":null}}' -n levoai
 ```
 
 ### Change the `Authorization Key` used to communicate with Levo.ai
