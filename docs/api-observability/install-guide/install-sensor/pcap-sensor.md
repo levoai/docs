@@ -54,8 +54,8 @@ The steps to add the sensor to your task are as follows
         "<INSERT APPLICATION ENVIRONMENT (staging, production etc.)>",
         "--levoai-org-id",
         "< INSERT LEVO ORG ID >",
-        "--sample-rate",
-        "<INSERT DECIMAL NUMBER FROM 0 TO 1"
+        "--rate-limit",
+        "<INSERT NUMBER OF TRACES PER MINUTE>"
     ],
     "environment": [
         {
@@ -80,7 +80,7 @@ The steps to add the sensor to your task are as follows
 Specify additional flags in the entrypoint
 ```bash
 --trace-export-interval     # default 10s
---sample-rate               # default 1
+--rate-limit                # number of traces per minute
 --filter                    # eg. port 8080 and (not port 8081)
 --host-allow                # regex for allowed hosts
 --path-allow                # regex for allowed paths
@@ -104,7 +104,7 @@ sudo docker run --net=host --rm -it levoai/pcap-sensor \
 Specify additional flags in the command
 ```bash
 --trace-export-interval	"trace export interval in seconds (default 10)"
---sample-rate "sampling rate for traces (default 1)"
+--rate-limit "number of traces per minute"
 --filter "pcap filter string, eg. port 8080 and (not port 8081)"
 --host-allow "host allow regex"
 --path-allow "path allow regex"
