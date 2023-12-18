@@ -41,18 +41,20 @@ The steps to add the sensor to your task are as follows
     "name": "levo-pcap-sensor",
     "image": "levoai/pcap-sensor",
     "cpu": 0,
-    "memory": 2048,
+    "memory": 256,
     "portMappings": [],
     "essential": false,
     "entryPoint": [
-        "./bin/levo-pcap-sensor",
+        "./run.sh",
         "apidump",
         "--satellite-url",
         "< INSERT SATELLITE URL (http(s)://hostname|IP:port) >",
         "--levo-env",
         "<INSERT APPLICATION ENVIRONMENT (staging, production etc.)>",
         "--levoai-org-id",
-        "< INSERT LEVO ORG ID >"
+        "< INSERT LEVO ORG ID >",
+        "--sample-rate",
+        "<INSERT DECIMAL NUMBER FROM 0 TO 1"
     ],
     "environment": [
         {
@@ -77,7 +79,7 @@ The steps to add the sensor to your task are as follows
 Specify additional flags in the entrypoint
 ```bash
 --trace-export-interval     # default 10s
---rate-limit                # default 1000/min
+--sample-rate               # default 1
 --filter                    # eg. port 8080 and (not port 8081)
 --host-allow                # regex for allowed hosts
 --path-allow                # regex for allowed paths
@@ -93,7 +95,7 @@ Specify additional flags in the entrypoint
 
 ```bash
 sudo docker run --net=host --rm -it levoai/pcap-sensor \
-./bin/levo-pcap-sensor apidump \
+./run.sh apidump \
 --satellite-url "your satellite url (http(s)://hostname|IP:port)" \
 --levo-env "your application environment (staging, production etc.)" \
 --levoai-org-id "your levo org id"
@@ -101,7 +103,7 @@ sudo docker run --net=host --rm -it levoai/pcap-sensor \
 Specify additional flags in the command
 ```bash
 --trace-export-interval	"trace export interval in seconds (default 10)"
---rate-limit "rate limit in traces per min (default 1000)"
+--sample-rate "sampling rate for traces (default 1)"
 --filter "pcap filter string, eg. port 8080 and (not port 8081)"
 --host-allow "host allow regex"
 --path-allow "path allow regex"
