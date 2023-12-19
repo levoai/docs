@@ -14,7 +14,7 @@ You should install the [eBPF sensor](/api-observability/concepts.md#ebpf-sensor)
 
 [**Click here for the installation instructions**](/api-observability/install-guide/install-sensor/ebpf-sensor.md).
 
-## pcap Sensor
+## PCAP Sensor
 You should install the pcap sensor if:
 
 - Your application workloads are deployed on a Serverless compute architecture (like AWS Fargate)
@@ -24,7 +24,14 @@ You should install the pcap sensor if:
 ## AWS Traffic Mirroring
 Use this if you want to use traffic mirroring to instrument your application workloads.
 
-[**Click here for the installation instructions**](/api-observability/install-guide/other-installation-options.md).
+[**Click here for the installation instructions**](/api-observability/install-guide/install-sensor/aws-traffic-mirroring.md).
+
+## Cloudflare Worker
+You may install Levo's Cloudflare Worker if:
+
+- You are using Cloudflare for DNS, and you have [proxying](https://developers.cloudflare.com/dns/manage-dns-records/reference/proxied-dns-records/) enabled.
+
+[**Click here for the installation instructions**](/api-observability/install-guide/install-sensor/cloudflare-worker.md).
 
 ---
 
