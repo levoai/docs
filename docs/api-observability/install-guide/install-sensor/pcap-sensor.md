@@ -40,7 +40,7 @@ The steps to add the sensor to your task are as follows
 ```json
 {
     "name": "levo-pcap-sensor",
-    "image": "levoai/pcap-sensor:stable",
+    "image": "levoai/pcap-sensor:0.0.17",
     "cpu": 512,
     "memory": 512,
     "portMappings": [],
@@ -95,7 +95,7 @@ Specify additional flags in the entrypoint
 -   Admin (or  `sudo`) privileges on the Docker host
 
 ```bash
-sudo docker run --net=host --rm -it levoai/pcap-sensor \
+sudo docker run --net=host --rm -it levoai/pcap-sensor:0.0.17 \
 ./levo_pcap_sensor.sh apidump \
 --satellite-url "your satellite url (http(s)://hostname|IP:port)" \
 --levo-env "your application environment (staging, production etc.)" \
