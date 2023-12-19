@@ -119,7 +119,7 @@ Please proceed to the next step, if there are no errors.
 #
 sudo docker run --restart unless-stopped \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
-  --privileged --detach levoai/ebpf_sensor:latest \
+  --privileged --detach levoai/ebpf_sensor:0.29.6 \
   --host-proc-path /host/proc/ \
   --collector-endpoint <collector-address> \
   --env <'application-environment'> \
@@ -180,7 +180,7 @@ sudo apt update
 ### 3. Download/install Sensor artifacts
 
 ```bash
-sudo apt install levo-ebpf-sensor
+sudo apt install levo-ebpf-sensor=0.29.6
 ```
 
 ### 4. Start the Sensor
@@ -216,7 +216,7 @@ Install the eBPF Sensor from Levo's RPM repository.
 
 1. Install the package in your repository.
   ```shell
-  sudo yum install levo-ebpf-sensor
+  sudo yum install levo-ebpf-sensor-0.29.6
   ```
 
 Enter `y` when prompted.
