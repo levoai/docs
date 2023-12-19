@@ -30,13 +30,15 @@ cd cf-worker
 # Deploy the worker
 wrangler deploy
 # Add your organization ID as a secret
-echo <VALUE> | wrangler secrets put LEVO_ORG_ID
+echo <VALUE> | wrangler secret put LEVO_ORG_ID
 ```
 
 That's it! The worker has been added to your Cloudflare account.
 
 :::info
 You must also add `LEVO_SATELLITE_URL` as an environment variable for the worker if you are hosting the Satellite yourself.
+
+Check the [repository's README](https://github.com/levoai/cf-worker/blob/main/README.md) for a list of all supported variables.
 :::
 
 ## Configuring Websites to use the Worker
