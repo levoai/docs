@@ -319,9 +319,9 @@ sudo vi /usr/lib/systemd/system/levo-ebpf-sensor.service
 ```
 For example,
 
-If you want to limit sensor's CPU usage to 75% of CPU, then set `CPUQuota=75%`.
+If you want to limit sensor's CPU usage to 0.75 of a core, then set `CPUQuota=75%`. You can set `CPUQuota=200%` to go upto two full cores of CPU.
 
-If you want to limit sensor's memory usage to 3GB, then set `MemoryMax=3G` 
+If you want to limit sensor's memory usage to 1GB, then set `MemoryMax=1G` 
 
 #### #2. Reload the config
 
