@@ -35,6 +35,7 @@ The Sensor can be customized via a <SensorConfigFile/>. Examples of customizatio
 - [Factory Settings](#factory-settings)
 - [Default Application Name](#default-application-name)
 - [Satellite Settings](#satellite-settings)
+- [API Trace Export Rate Limiting](#api-trace-export-rate-limiting)
 - [Process & IP Filters](#process--ip-filters)
 - [URL Filters](#url-filters)
 - [Kubernetes Pod Filters](#kubernetes-pod-filters)
@@ -68,7 +69,8 @@ Sensors running on Kubernetes have an additional section called `Kubernetes Pod 
 # --------------------------------------------------------------------------------------------
 # Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
 # grouped under this application name. The application name helps segregate and group API
-# endpoints from different environments.
+# endpoints from different environments. The environment is used to specify the environment
+# that the sensor is installed in (e.g. staging, prod, dev).
 #
 # In Kubernetes and other container orchestration systems, where meta data about applications
 # (that have been deployed) is readily available, auto discovered API endpoints are attributed
@@ -76,16 +78,48 @@ Sensors running on Kubernetes have an additional section called `Kubernetes Pod 
 # if the service name meta data in unavailable.
 #
 default-service-name: my-api-application
+env: staging
 # --------------------------------------------------------------------------------------------
 
 
 # --------------------------------------------------------------------------------------------
 # Satellite Settings:
 # --------------------------------------------------------------------------------------------
-# host:port for the collector service receiving the Sensor's API traces.
-collector-endpoint: localhost:4317
+
+# Levo Organization ID. This must be specified when the collector is hosted by Levo.
+# organization-id: ""
+
+# Use HTTP/2 (gRPC) for communication with the collector. If this is disabled, HTTP/1.1 will be used.
+collector-grpc-transport: true
+
+# host:port for the collector service receiving the Sensor's API traces and metrics.
+collector-endpoint: https://collector.levo.ai
+
 # --------------------------------------------------------------------------------------------
 
+
+# --------------------------------------------------------------------------------------------
+# API Trace Export Rate Limiting:
+# --------------------------------------------------------------------------------------------
+# By default, the sensor rate-limits the overall number of request-response traces it exports
+# to the satellite.  It also rate-limits traces on a per-endpoint basis.  Rate limiting can
+# be disabled or adjusted, but doing so may affect the performance of downstream Levo
+# services.
+
+# enable-export-rate-limiting: true
+# max-total-exported-requests-per-second: 200
+# max-per-endpoint-exported-requests-per-second: 20
+
+# --------------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------------------------
+# Metrics Settings:
+# --------------------------------------------------------------------------------------------
+# Uncomment and modify to enable the printing of sensor metrics alongside other sensor logging
+# messages.
+
+# export-metrics-to-log: true
+enable-metrics: true
 
 # --------------------------------------------------------------------------------------------
 # Process Filters: process command names/IDs to monitor & capture API traffic.
@@ -190,6 +224,23 @@ Auto discovered API endpoints and their OpenAPI specifications are show in the [
 These are settings related to the Satellite, such as the Satellite's listen port, etc.
 
 <br></br>
+
+--------------------------------------------------------------------------------
+
+## API Trace Export Rate Limiting
+The sensor allows rate limiting the overall number of traces it exports to the satellite (`max-total-exported-requests-per-second`).
+
+Rate limiting may also be done on a per-endpoint basis (`max-per-endpoint-exported-requests-per-second`).
+
+Rate limiting is optional and may be toggled with the `enable-export-rate-limiting` setting.
+
+The default values for these settings are listed below.
+
+```yaml
+enable-export-rate-limiting: true
+max-total-exported-requests-per-second: 200
+max-per-endpoint-exported-requests-per-second: 20
+```
 
 --------------------------------------------------------------------------------
 
