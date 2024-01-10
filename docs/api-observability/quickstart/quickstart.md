@@ -2,7 +2,7 @@
 sidebar_position: 1
 ---
 
-# Teaser
+# Quickstart
 
 Evaluate Levo's API Observability in Action with your favourite tools.
 
