@@ -35,7 +35,7 @@ You may install Levo's Cloudflare Worker if:
 
 ---
 
-## Teaser
+## Quickstart
 
-If you want a quick glimpse of Levo's API Observability without a full installation, check out the [Teaser page](/api-observability/quickstart/quickstart.md).
+If you want a quick glimpse of Levo's API Observability without a full installation, check out the [Quickstart page](/api-observability/quickstart/quickstart.md).
 
