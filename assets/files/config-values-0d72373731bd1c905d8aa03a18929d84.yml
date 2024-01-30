@@ -65,7 +65,8 @@ sensor:
     # enable-export-rate-limiting: true
     # max-total-exported-requests-per-second: 200
     # max-per-endpoint-exported-requests-per-second: 20
-    
+    # bpf-rate-limit-window-size: 1000  # Maximum number of events within a fixed window of time
+    # bpf-rate-limit-window-duration-ms: 1000 # Time interval in milli-seconds during which the specified number of events (bpf-rate-limit-window-size) are allowed
     # --------------------------------------------------------------------------------------------
     
     # --------------------------------------------------------------------------------------------
@@ -193,14 +194,12 @@ sensor:
     # URL filters allow granular filtering of API traffic based on the 'API endpoint Method' (operation),
     # the 'API Host' (Host Header), and the 'API endpoint's URI'.
     # Refer to the documentation for instructions on configuring URL filters.
-    #
-    # Example: Ignore API endpoints with URI path beginning with '/static/'
-    #url-filter:
-    #  default-url-action: trace # Trace all API endpoints by default
-    #  rules:
-    #    - action: ignore
-    #      request-uri: /static/.*
-    #
+    url-filter:
+      default-url-action: trace # Trace all API endpoints by default
+      rules:
+        - action: ignore
+          request-uri: /stats/prometheus
+    
     
     # --------------------------------------------------------------------------------------------
     # Memory-related settings
