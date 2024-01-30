@@ -9,7 +9,6 @@ Lambda@Edge functions to ingest traffic from AWS CloudFront distributions.
 ## Installation
 
 ### Pre-requisites
-- Contact Levo (`support@levo.ai`) to get access to the GitHub repository containing the Lambda functions.
 - Install the AWS CLI (version 2) by following the [AWS docs](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html).
 - You have sufficient permissions on AWS to create and deploy Lambda@Edge functions.
 - The Satellite has been successfully set up and is reachable (via HTTPS) from the worker.
