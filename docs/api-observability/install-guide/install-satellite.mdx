@@ -2,6 +2,9 @@
 sidebar_position: 3
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 # Install Satellite
 
 ## 1. Prerequisites
@@ -574,6 +577,16 @@ Please ensure that you note down the address of the collector.
 
 -------------------------------------------------
 
+export function DownloadMainTF() {
+  return (
+    <BrowserOnly fallback={<div>Loading...</div>}>
+      {() => (
+        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/main.tf'} download> main.tf </a>
+      )}
+    </BrowserOnly>
+  );
+}
+
 ## Install in AWS ECS
 
 ### Prerequisites
@@ -587,6 +600,16 @@ Please ensure that you note down the address of the collector.
 - An AWS Role with the policies - _____ to assign to the task.
 
 ### 1. Creating a Task Definition
+
+<Tabs
+  defaultValue="console"
+  values={[
+      { label: 'AWS Console', value: 'console', },
+      { label: 'Terraform', value: 'tf', },
+  ]}
+  groupId="env"
+>
+<TabItem value="console">
 
 - Open the AWS ECS console and click on Task Definitions.
 
@@ -803,6 +826,23 @@ Please ensure that you note down the address of the collector.
     }
 }
 ```
+
+</TabItem>
+<TabItem value="tf">
+Download the <DownloadMainTF/> file.
+
+Run the following command in the same directory - 
+
+```bash
+terraform apply
+```
+
+Enter the Refresh Token and Org ID as prompted to create a task definition in your AWS account.
+
+</TabItem>
+</Tabs>
+<br/>
+
 
 ### 2. Run the Satellite
 
