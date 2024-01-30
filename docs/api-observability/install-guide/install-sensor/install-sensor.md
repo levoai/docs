@@ -33,6 +33,15 @@ You may install Levo's Cloudflare Worker if:
 
 [**Click here for the installation instructions**](/api-observability/install-guide/install-sensor/cloudflare-worker.md).
 
+## AWS CloudFront Lambda@Edge
+You may install Levo's CloudFront Lambda@Edge functions if:
+
+- You are using CloudFront as a CDN for your API endpoints.
+
+Note that CloudFront does not provide access to the API endpoint response bodies.
+
+[**Click here for the installation instructions**](/api-observability/install-guide/install-sensor/aws-cloudfront.md).
+
 ---
 
 ## Quickstart
