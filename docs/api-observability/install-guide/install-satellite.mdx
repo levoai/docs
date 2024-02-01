@@ -217,24 +217,40 @@ Please proceed to install the Sensor.
 
 -------------------------------------------------
 
+export function DownloadAMIMainTF() {
+  return (
+    <BrowserOnly fallback={<div>Loading...</div>}>
+      {() => (
+        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/ami/main.tf'} download> main.tf </a>
+      )}
+    </BrowserOnly>
+  );
+}
+
 ## Install in AWS EC2 using Levo Satellite AMI
+
+<Tabs
+  defaultValue="console"
+  values={[
+      { label: 'AWS Console', value: 'console', },
+      { label: 'Terraform', value: 'tf', },
+  ]}
+  groupId="env"
+>
+<TabItem value="console">
 
 ### 1. Open the EC2 Launch Wizard and select the Levo Satellite AMI
 Levo provides pre-built AMIs for Satellite. You can launch an EC2 instance using the AMI in the AWS region you wish to install the satellite in.
 
-<Tabs groupId="satellite-ami">
-  <TabItem value="mac" label="Mac OSX">
-    <ul>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-1#LaunchInstances:ami=ami-0080f67c406a8e836;instanceType=c6a.xlarge">us-west-1 (N. California)</a> </li>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#LaunchInstances:ami=ami-09cc59369bf39272b;instanceType=c6a.xlarge">us-west-2 (Oregon)</a> </li>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-east-1#LaunchInstances:ami=ami-03cf724298d12783b;instanceType=c6a.xlarge">us-east-1 (N. Virginia)</a> </li>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-east-2#LaunchInstances:ami=ami-04df19b9035976a79;instanceType=c6a.xlarge">us-east-2 (Ohio)</a> </li>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=ap-south-1#LaunchInstances:ami=ami-03effa71398878b37;instanceType=c6a.xlarge">ap-south-1 (Mumbai)</a> </li>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=ap-southeast-1#LaunchInstances:ami=ami-006844540d965f519;instanceType=c6a.xlarge">ap-southeast-1 (Singapore)</a> </li>
-      <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=eu-west-2#LaunchInstances:ami=ami-0e0418c44c42c3b56;instanceType=c6a.xlarge">eu-west-2 (London)</a> </li>
-    </ul>
-  </TabItem>
-</Tabs>
+<ul>
+    <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-1#LaunchInstances:ami=ami-0080f67c406a8e836;instanceType=c6a.xlarge">us-west-1 (N. California)</a> </li>
+    <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-west-2#LaunchInstances:ami=ami-09cc59369bf39272b;instanceType=c6a.xlarge">us-west-2 (Oregon)</a> </li>
+    <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-east-1#LaunchInstances:ami=ami-03cf724298d12783b;instanceType=c6a.xlarge">us-east-1 (N. Virginia)</a> </li>
+    <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=us-east-2#LaunchInstances:ami=ami-04df19b9035976a79;instanceType=c6a.xlarge">us-east-2 (Ohio)</a> </li>
+    <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=ap-south-1#LaunchInstances:ami=ami-03effa71398878b37;instanceType=c6a.xlarge">ap-south-1 (Mumbai)</a> </li>
+    <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=ap-southeast-1#LaunchInstances:ami=ami-006844540d965f519;instanceType=c6a.xlarge">ap-southeast-1 (Singapore)</a> </li>
+    <li> <a href="https://us-west-2.console.aws.amazon.com/ec2/home?region=eu-west-2#LaunchInstances:ami=ami-0e0418c44c42c3b56;instanceType=c6a.xlarge">eu-west-2 (London)</a> </li>
+</ul>
 
 
 ### 2. EC2 Configuration
@@ -257,6 +273,27 @@ sudo /opt/levoai/levo_satellite.sh start >> satellite-start.log 2>&1
 # Uncomment the following line to enable the traffic mirroring listener
 # sudo /opt/levoai/levo_traffic_listener.sh start >> traffic-listener-start.log 2>&1
 ```
+
+</TabItem>
+<TabItem value="tf">
+
+### 1. Download the Terraform script
+
+Download the <DownloadAMIMainTF/> file.
+
+### 2. Run the Terraform Script
+
+Run the following command in the same directory - 
+
+```bash
+terraform apply
+```
+### 3. TF Script Configuration
+
+Enter the AWS Region and Satellite Refres Token as prompted to create a task definition in your AWS account.
+
+</TabItem>
+</Tabs>
 
 #### Traffic Mirroring
 
@@ -316,6 +353,7 @@ Please note down the either the host's IP address or domain name. The Sensor wil
 Please proceed to install the Sensor.
 
 <br></br>
+
 
 ---
 
