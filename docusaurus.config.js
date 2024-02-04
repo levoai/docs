@@ -136,7 +136,7 @@ const config = {
       announcementBar: {
         id: 'postman_announcement',
         content:
-          '<a target="_blank" rel="noopener noreferrer" href="https://levo.ai/postman-collections">Unveiling Levo\'s One-Click Postman Collections</a>',
+          '<a target="_blank" rel="noopener noreferrer" href="https://www.loom.com/share/a924767075ad41cc88b910fe99310b9c?sid=41e6f47c-b6f4-4cf5-b536-56f2ee6b8f1f">Democratize API Documentation with Levo.ai\'s Portal</a>',
         backgroundColor: '#ffc784'
       },
     }),
