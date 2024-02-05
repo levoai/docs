@@ -5,6 +5,16 @@ sidebar_label: API Portal
 sidebar_position: 5
 ---
 
+export function DownloadMainTF() {
+  return (
+    <BrowserOnly fallback={<div>Loading...</div>}>
+      {() => (
+        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/apiportal/main.tf'} download> main.tf </a>
+      )}
+    </BrowserOnly>
+  );
+}
+
 **Levo's API Portal** is a powerful tool for API documentation and insight generation. Here's how it helps developers:
 
 - **Clear API Documentation:** It offers clean, interactive documentation that helps developers understand APIs quickly and effectively.
@@ -33,7 +43,7 @@ By leveraging Levo's API Portal, developers can gain deep insights into their AP
 
 ### Creating a Task Definition in your AWS Account using Terraform.
 
-Download the <a href={window.location.protocol + '//' + window.location.host + '/artifacts/api-portal/main.tf'} download>main.tf</a> file.
+Download the <DownloadMainTF/> file.
 
 Run the following command in the same directory - 
 
