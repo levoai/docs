@@ -145,6 +145,8 @@ sensor:
           host-ports: [2181, 3888, 3888] # ZooKeeper
         - policy: drop
           host-ports: [4317, 4318, 9999] # Levo's Satellite services
+        - policy: drop
+          host-ports: 8126 # datadog
         ### Peer Ports ###
         # Peer Port is the client port used in communication with the server listening port.
         - policy: drop
@@ -185,6 +187,8 @@ sensor:
           peer-ports: [2181, 3888, 3888] # ZooKeeper
         - policy: drop
           peer-ports: [4317, 4318, 9999] # Levo's Satellite services
+        - policy: drop
+          peer-ports: 8126 # datadog
     # --------------------------------------------------------------------------------------------
     
     
@@ -224,6 +228,14 @@ sensor:
     k8s-pod-filter-list:
       default-policy: trace
       rules:
+        - policy: ignore
+          namespace: datadog
+        - policy: ignore
+          namespace: monitoring
+        - policy: ignore
+          namespace: prometheus
+        - policy: ignore
+          namespace: kubecost
         - policy: ignore
           namespace: kube-.*
         - policy: ignore
