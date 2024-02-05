@@ -140,6 +140,8 @@ ip-filter-list:
       host-ports: [2181, 3888, 3888] # ZooKeeper
     - policy: drop
       host-ports: [4317, 4318, 9999] # Levo's Satellite services
+    - policy: drop
+      host-ports: 8126 # datadog
     ### Peer Ports ###
     # Peer Port is the client port used in communication with the server listening port.
     - policy: drop
@@ -180,6 +182,8 @@ ip-filter-list:
       peer-ports: [2181, 3888, 3888] # ZooKeeper
     - policy: drop
       peer-ports: [4317, 4318, 9999] # Levo's Satellite services
+    - policy: drop
+      peer-ports: 8126 # datadog
 # --------------------------------------------------------------------------------------------
 
 
