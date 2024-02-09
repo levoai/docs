@@ -1,4 +1,4 @@
-version: "3.9"
+version: "3.10"
 services:
   levoai-rabbitmq:
     image: 'rabbitmq:3.12.8-management'
@@ -17,6 +17,14 @@ services:
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-levoailevoai}
       # send logs to stdout, ref: https://www.rabbitmq.com/logging.html#log-file-location
       RABBITMQ_LOGS: '-'
+    command: >
+      bash -c "mkdir -p /opt/rabbitmq/resources &&
+      openssl req -x509 -nodes -newkey rsa:4096 -subj "/C=IN/ST=Telangana/L=Hyderabad/O=Levo.ai/OU=Security/CN=localhost:5672" -keyout /opt/rabbitmq/resources/ca.key -out /opt/rabbitmq/resources/ca.crt -days 365000 &&
+      openssl req -nodes -new -newkey rsa:4096 -subj  "/C=IN/ST=Telangana/L=Hyderabad/O=Levo.ai/OU=Security/CN=localhost:5672"  -keyout /opt/rabbitmq/resources/server.key -out /opt/rabbitmq/resources/server.csr -days 365000 &&
+      openssl x509 -req -in /opt/rabbitmq/resources/server.csr -CA /opt/rabbitmq/resources/ca.crt -CAkey /opt/rabbitmq/resources/ca.key -CAcreateserial -out /opt/rabbitmq/resources/server.crt -days 365000 &&
+      chmod -R 755 /opt/rabbitmq/resources &&
+      echo -e 'listeners.tcp          = none\\nlisteners.ssl.default  = 5672\\nssl_options.cacertfile = /opt/rabbitmq/resources/ca.crt\\nssl_options.certfile   = /opt/rabbitmq/resources/server.crt\\nssl_options.keyfile    = /opt/rabbitmq/resources/server.key\\nssl_options.verify     = verify_none' > /etc/rabbitmq/rabbitmq.conf &&
+      /usr/local/bin/docker-entrypoint.sh rabbitmq-server"
     deploy:
       resources:
         limits:
