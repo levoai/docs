@@ -66,6 +66,15 @@ resource "aws_ecs_task_definition" "levoai-sensor" {
     }
   ])
 
+
+  volume {
+    name = "host-proc"
+    host_path = "/proc"
+  }
+  volume {
+    name = "kernel-debug"
+    host_path = "/sys/kernel/debug"
+  }
 }
 
 resource "aws_iam_role" "terraform_ecs_execution_role" {
