@@ -101,11 +101,13 @@ Please proceed to the next step, if there are no errors.
 <br></br>
 -----------------------------------------------------------------------
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
 export function DownloadMainTF() {
   return (
     <BrowserOnly fallback={<div>Loading...</div>}>
       {() => (
-        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/main.tf'} download> main.tf </a>
+        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/main.tf'} download> main.tf</a>
       )}
     </BrowserOnly>
   );
