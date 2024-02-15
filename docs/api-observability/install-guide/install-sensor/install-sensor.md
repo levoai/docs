@@ -12,7 +12,7 @@ You should install the [eBPF sensor](/api-observability/concepts.md#ebpf-sensor)
 - You have access to the node / VM / machine where your application workloads are running
 - In addition to your publicly exposed services, you want to instrument internal applications which do not have public API endpoints
 
-[**Click here for the installation instructions**](/api-observability/install-guide/install-sensor/ebpf-sensor.md).
+[**Click here for the installation instructions**](/api-observability/install-guide/install-sensor/ebpf-sensor.mdx).
 
 ## PCAP Sensor
 You should install the pcap sensor if:
