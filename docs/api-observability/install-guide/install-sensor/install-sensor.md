@@ -42,9 +42,15 @@ Note that CloudFront does not provide access to the API endpoint response bodies
 
 [**Click here for the installation instructions**](/api-observability/install-guide/install-sensor/aws-cloudfront.md).
 
+## Azure API Management Policy
+You should install Levo's Azure API Management policy if:
+
+- Your API endpoints are managed by Azure API Management.
+
+[**Click here for the installation instructions**](/api-observability/install-guide/install-sensor/azure-api-management.md).
+
 ---
 
 ## Quickstart
 
 If you want a quick glimpse of Levo's API Observability without a full installation, check out the [Quickstart page](/api-observability/quickstart/quickstart.md).
-
