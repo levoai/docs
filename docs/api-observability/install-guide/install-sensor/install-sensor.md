@@ -49,6 +49,11 @@ You should install Levo's Azure API Management policy if:
 
 [**Click here for the installation instructions**](/api-observability/install-guide/install-sensor/azure-api-management.md).
 
+## Log Parser
+You may install the log parser to discover endpoints from your application access logs.
+
+[**Click here for the installation instructions**](/api-observability/install-guide/install-sensor/log-parser).
+
 ---
 
 ## Quickstart
