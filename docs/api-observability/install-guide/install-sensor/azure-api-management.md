@@ -3,6 +3,8 @@ sidebar_position: 6
 ---
 
 # Azure API Management
+- [Policy-based Instrumentation](#policy-based-instrumentation)
+- [Logs-based Instrumentation](#logs-based-instrumentation)
 
 ## Policy-based Instrumentation
 
@@ -34,3 +36,8 @@ Follow the steps in the official Azure docs to [add a policy to your API Managem
 Copy the contents of the `policy.xml` file in the [levoai/azure-apim-policy](https://github.com/levoai/azure-apim-policy) repository on GitHub and paste it into the policy editor.
 
 Ensure that the policy is added at the [API Scope](https://learn.microsoft.com/en-us/azure/api-management/set-edit-policies?tabs=editor#api-scope).
+
+## Logs-based Instrumentation
+
+You may also use Azure API Management Logs to instrument your APIs.
+Visit the [Log Parser](/api-observability/install-guide/install-sensor/log-parser) page for more details.
