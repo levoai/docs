@@ -85,6 +85,15 @@ enable-metrics: true
 #  - <process command name. Example: nginx>
 #  - <process command name. Example: python3>
 
+ignored-commands:
+  - proxy-agent
+  - operator
+  - metrics-server
+  - kube-controller
+  - pod_nanny
+  - MetricsExtension
+  - postgres
+
 #monitored-pids:
 #  - <pid. Example: 123>
 #  - <pid. Example: 45>
@@ -184,6 +193,8 @@ ip-filter-list:
       peer-ports: [4317, 4318, 9999] # Levo's Satellite services
     - policy: drop
       peer-ports: 8126 # datadog
+    - policy: drop
+      peer-network: 169.254.169.254 # AWS / Azure Metadata Service
 # --------------------------------------------------------------------------------------------
 
 
