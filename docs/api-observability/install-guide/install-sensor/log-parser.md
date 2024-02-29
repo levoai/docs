@@ -41,16 +41,17 @@ Follow instructions for your specific platform/method below:
 # 
 docker run --rm -d --name=log-parser \
   -v ./logs:/mnt/levo/logs \
-  -e SATELLITE_URL=<SATELLITE_URL> \
+  -e LEVO_SATELLITE_URL=<LEVO_SATELLITE_URL> \
+  -e LEVOAI_ORG_ID=<LEVOAI_ORG_ID> \
   -e APP_NAME=<APP_NAME> \
   -e ENV_NAME=<ENV_NAME> \
   levoai/log-parser 
 ```
 
 #### NOTE:
-The default address for the satellite in Docker-based Log Parser installations is `https://satellite.levo.ai`.
-This address assumes that Levo is hosting the Satellite for you, and you must also specify an organization ID when starting the log parser (with the `-e LEVO_ORG_ID=<LEVO_ORG_ID>` flag).
-If you wish, you may also host the Satellite yourself and specify the address of the collector in the self-hosted Satellite to direct the Log Parser's data to it.
+- The default address for the satellite in Docker-based Log Parser installations is `https://satellite.levo.ai`.
+- In case of levo hosted satellite, it is necessary that you must also specify an organization ID (`LEVOAI_ORG_ID`).
+- If you wish, you may also host the Satellite yourself and specify the address of the satellite to direct the Log Parser's data to it.
 
 ### 2. Verify connectivity with Satellite
 Execute the following command to check for connectivity health:
