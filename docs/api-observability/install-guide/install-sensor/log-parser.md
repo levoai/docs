@@ -12,7 +12,7 @@ sidebar_position: 7
 - The Satellite is reachable (via HTTP/s) from the location where you are going to install the log-parser.
 
 ## ii. Pick an `Application Name`
-Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](/security-contract-testing/concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different environments, similar to how file folders work in an operating system.
+Auto discovered API endpoints and their OpenAPI specifications are shown in the [API Catalog](/security-contract-testing/concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different environments, similar to how file folders work in an operating system.
 
 Pick a descriptive name which will be used in the subsequent step below. For example: `my-test-app`.
 
@@ -36,7 +36,7 @@ Follow instructions for your specific platform/method below:
 ```bash
 # Replace '<SATELLITE_URL>' with the values you noted down from the Satellite install
 #
-# Specify below the 'Application Name' chosen earlier. Do not quote the 'Application Name'
+# Specify below the 'APP_NAME'. Do not quote the 'APP_NAME'.
 # Environment Name is optional. If not specified, it defaults to 'staging'
 # 
 docker run --rm -d --name=log-parser \
