@@ -36,7 +36,7 @@ Follow instructions for your specific platform/method below:
 ```bash
 # Replace '<SATELLITE_URL>' with the values you noted down from the Satellite install
 #
-# Specify below the 'App_Name'. Do not quote the 'App_Name'.
+# Specify below the 'APP_NAME'. Do not quote the 'APP_NAME'.
 # Environment Name is optional. If not specified, it defaults to 'staging'
 # 
 docker run --rm -d --name=log-parser \
