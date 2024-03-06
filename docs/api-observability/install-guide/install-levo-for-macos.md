@@ -122,3 +122,15 @@ The following environment variables can be configured to modify the behavior of 
 Setting these environment variables is optional and can be set according to your specific requirements
 before deploying the Sensor-Satellite setup.
 
+
+## List of supported log parsers
+- Nginx
+- Apache
+- Azure API Gateway
+
+### Note
+- Make sure logs directories are structured as per the supported log parsers.
+- The logs directory should be mounted to the `/mnt/levo/logs` directory in the container.
+  - Nginx logs should be mounted to `/mnt/levo/logs/nginx`.
+  - Apache logs should be mounted to `/mnt/levo/logs/apache`.
+  - Azure API Gateway logs should be mounted to `/mnt/levo/logs/azure`.
