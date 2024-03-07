@@ -14,11 +14,25 @@ sidebar_position: 4
 
 *   Open a powershell window and type the following commands to setup an alias:
 
-```bash
+```powershell
 Function Launch_Levo {docker run --rm -v ${HOME}/.config/configstore:/home/levo/.config/configstore:rw -v ${pwd}:/home/levo/work:rw -e TERM=xterm-256color -ti levoai/levo:stable $args} 
 
 Set-Alias -Name levo -Value Launch_Levo
 ```
+
+:::info
+
+Depending on the region your apps are in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the CLI will be used with `app.india-1.levo.ai`, use the following alias:
+
+```powershell
+Function Launch_Levo {docker run --rm -v ${HOME}/.config/configstore:/home/levo/.config/configstore:rw -v ${pwd}:/home/levo/work:rw -e TERM=xterm-256color -e LEVO_BASE_URL=https://api.india-1.levo.ai -ti levoai/levo:stable $args} 
+
+Set-Alias -Name levo -Value Launch_Levo
+```
+
+:::
 
 *   Now signup and create an account on [Levo.ai](http://Levo.ai) via the CLI:
 

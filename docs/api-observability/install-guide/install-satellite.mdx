@@ -55,7 +55,7 @@ Copy your authorization key. This key is required in subsequent steps below.
 ### 1. Setup environment variables
 
 ```bash
-export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier> 
+export LEVOAI_AUTH_KEY='Authorization Key'
 ```
 
 ### 2. Install levoai Helm repo
@@ -72,6 +72,21 @@ helm upgrade --install -n levoai --create-namespace \
   levoai-satellite levoai/levoai-satellite
 ```
 
+:::info
+
+Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the satellite will be used with `app.india-1.levo.ai`, the installation command will be:
+
+```bash
+helm upgrade --install -n levoai --create-namespace \
+  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+  --set global.levoai_config_override.onprem-api.url="https://api.india-1.levo.ai" \
+  levoai-satellite levoai/levoai-satellite
+```
+
+:::
+
 #### If locating Satellite on a dedicated cluster
 You will need to expose the Satellite via either a `LoadBalancer` or `NodePort`, such that is is reachable by Sensors running in other clusters. Please modify the below command appropriately.
 
@@ -80,6 +95,7 @@ You will need to expose the Satellite via either a `LoadBalancer` or `NodePort`,
 helm upgrade --install -n levoai --create-namespace \
     --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
     --set levoai-collector.service.type=<LoadBalancer | NodePort> \
+    # --set global.levoai_config_override.onprem-api.url="https://api.india-1.levo.ai" \
     levoai-satellite levoai/levoai-satellite
 ```
 
@@ -167,8 +183,23 @@ Levo provides pre-built Docker images for the Satellite that can be installed vi
 Execute the following from the directory where the Docker Compose file was downloaded.
 
 ```bash
-(export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier>; docker compose pull && docker compose up -d)
+export LEVOAI_AUTH_KEY='Authorization Key'
+docker compose pull && docker compose up -d
 ```
+
+:::info
+
+Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the satellite will be used with `app.india-1.levo.ai`, the installation command will be:
+
+```bash
+export LEVOAI_AUTH_KEY='Authorization Key'
+export LEVOAI_BASE_URL='https://api.india-1.levo.ai'
+docker compose pull && docker compose up -d
+```
+
+:::
 
 > If `docker compose ...` complains with *"docker: 'compose' is not a docker command."*, you have can try **`docker-compose`** instead.
 
@@ -268,11 +299,23 @@ Under Advanced details > User Data, add the following (pick the appropriate valu
 
 ```bash
 #!/bin/bash
-echo "LEVOAI_AUTH_KEY=xxx" > /opt/levoai/.levoenv
+echo "LEVOAI_AUTH_KEY='Authorization Key'" > /opt/levoai/.levoenv
 sudo /opt/levoai/levo_satellite.sh start >> satellite-start.log 2>&1
 # Uncomment the following line to enable the traffic mirroring listener
 # sudo /opt/levoai/levo_traffic_listener.sh start >> traffic-listener-start.log 2>&1
 ```
+
+:::info
+
+Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the satellite will be used with `app.india-1.levo.ai`, add the following line to the `/opt/levoai/.levoenv` file as well.
+
+```bash
+echo "LEVOAI_BASE_URL='https://api.india-1.levo.ai'" > /opt/levoai/.levoenv
+```
+
+:::
 
 </TabItem>
 <TabItem value="tf">
@@ -373,10 +416,9 @@ AWS EKS supports two compute types for its nodes, EC2 and Fargate. Depending on 
 ### 1. Setup environment variables
 
 ```bash
-export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier> 
-export CLUSTER_NAME=<INSERT CLUSTER NAME>
-export REGION=<INSERT AWS REGION>
-export ACCOUNT_ID=<INSERT AWS ACCOUNT ID>
+export CLUSTER_NAME='Cluster Name'
+export REGION='AWS Region'
+export ACCOUNT_ID='AWS Account ID'
 ```
 
 
@@ -535,10 +577,9 @@ Fargate allows us to have containers without the overhead of managing and scalin
 ### 1. Setup environment variables
 
 ```bash
-export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier> 
-CLUSTER_NAME=< INSERT CLUSTER NAME >
-REGION=< INSERT AWS REGION >
-ACCOUNT_ID=<INSERT AWS ACCOUNT ID>
+export CLUSTER_NAME='Cluster Name'
+export REGION='AWS Region'
+export ACCOUNT_ID='AWS Account ID'
 ```
 
 ### 2. Cluster creation
@@ -701,7 +742,7 @@ export function DownloadMainTF() {
                 },
                 {
                     "name": "LEVOAI_CONF_OVERRIDES",
-                    "value": "{\"onprem-api\": {\"url\": \"https://api.levo.ai\", \"refresh-token\": \"${LEVOAI_AUTH_KEY}\", \"org-id\": \"${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"}}"
+                    "value": "{\"onprem-api\": {\"url\": \"${LEVOAI_BASE_URL}\", \"refresh-token\": \"${LEVOAI_AUTH_KEY}\", \"org-id\": \"${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"}}"
                 },
                 {
                     "name": "LEVOAI_DEBUG_ENABLED",
@@ -709,7 +750,11 @@ export function DownloadMainTF() {
                 },
                 {
                     "name": "LEVOAI_AUTH_KEY",
-                    "value": "< INSERT YOUR LEVO.AI AUTH KEY HERE >"
+                    "value": "INSERT YOUR LEVO.AI AUTH KEY HERE"
+                },
+                {
+                    "name": "LEVOAI_BASE_URL",
+                    "value": "https://api.levo.ai"
                 },
                 {
                     "name": "LEVOAI_LOG_LEVEL",
@@ -727,7 +772,7 @@ export function DownloadMainTF() {
                 "options": {
                     "awslogs-create-group": "true",
                     "awslogs-group": "/ecs/satellite",
-                    "awslogs-region": "< INSERT YOUR AWS REGION HERE >",
+                    "awslogs-region": "INSERT YOUR AWS REGION HERE",
                     "awslogs-stream-prefix": "ecs"
                 }
             }
@@ -752,7 +797,7 @@ export function DownloadMainTF() {
                 },
                 {
                     "name": "LEVOAI_ORG_ID",
-                    "value": "< INSERT YOUR LEVO.AI ORG ID HERE >"
+                    "value": "INSERT YOUR LEVO.AI ORG ID HERE"
                 },
                 {
                     "name": "LEVOAI_MODE",
@@ -760,7 +805,7 @@ export function DownloadMainTF() {
                 },
                 {
                     "name": "LEVOAI_CONF_OVERRIDES",
-                    "value": "{\"onprem-api\":{\"url\": \"https://api.levo.ai\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"url_clusterer_id_len\": 1,\"min_urls_required_per_pattern\": 10,\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"disable_ml_detector\": true,\"service_naming\":{\"strategies\": \"KUBERNETES_METADATA,HOST_HEADER,DEFAULT\"},\"user_resolvers\": [],\"sample_collection\":{\"enabled\": true,\"max_samples_per_end_point\": 2,\"users\": []},\"tagger_batch_interval_minute\": 5,\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"sensitive_data_config\": [],\"traces_queue\":{\"type\": \"sqs\"}}"
+                    "value": "{\"onprem-api\":{\"url\": \"${LEVOAI_BASE_URL}\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"url_clusterer_id_len\": 1,\"min_urls_required_per_pattern\": 10,\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"disable_ml_detector\": true,\"service_naming\":{\"strategies\": \"KUBERNETES_METADATA,HOST_HEADER,DEFAULT\"},\"user_resolvers\": [],\"sample_collection\":{\"enabled\": true,\"max_samples_per_end_point\": 2,\"users\": []},\"tagger_batch_interval_minute\": 5,\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"sensitive_data_config\": [],\"traces_queue\":{\"type\": \"sqs\"}}"
                 },
                 {
                     "name": "PI_DETECTOR_DATA_DIR",
@@ -772,7 +817,11 @@ export function DownloadMainTF() {
                 },
                 {
                     "name": "LEVOAI_AUTH_KEY",
-                    "value": "< INSERT YOUR LEVO.AI AUTH KEY HERE >"
+                    "value": "INSERT YOUR LEVO.AI AUTH KEY HERE"
+                },
+                {
+                    "name": "LEVOAI_BASE_URL",
+                    "value": "https://api.levo.ai"
                 },
                 {
                     "name": "LEVOAI_LOG_LEVEL",
@@ -790,7 +839,7 @@ export function DownloadMainTF() {
                 "options": {
                     "awslogs-create-group": "true",
                     "awslogs-group": "/ecs/satellite",
-                    "awslogs-region": "< INSERT YOUR AWS REGION HERE >",
+                    "awslogs-region": "INSERT YOUR AWS REGION HERE",
                     "awslogs-stream-prefix": "ecs"
                 }
             }
@@ -817,7 +866,7 @@ export function DownloadMainTF() {
                 "options": {
                     "awslogs-create-group": "true",
                     "awslogs-group": "/ecs/satellite",
-                    "awslogs-region": "< INSERT YOUR AWS REGION HERE >",
+                    "awslogs-region": "INSERT YOUR AWS REGION HERE",
                     "awslogs-stream-prefix": "ecs"
                 }
             }
@@ -844,14 +893,14 @@ export function DownloadMainTF() {
                 "options": {
                     "awslogs-create-group": "true",
                     "awslogs-group": "/ecs/satellite",
-                    "awslogs-region": "< INSERT YOUR AWS REGION HERE >",
+                    "awslogs-region": "INSERT YOUR AWS REGION HERE",
                     "awslogs-stream-prefix": "ecs"
                 }
             }
         }
     ],
-    "taskRoleArn": "< INSERT THE ARN OF THE ROLE YOU WANT TO ASSIGN TO THIS TASK HERE >",
-    "executionRoleArn": "< INSERT THE ARN OF THE ROLE YOU WANT TO ASSIGN TO THIS TASK HERE >",
+    "taskRoleArn": "INSERT THE ARN OF THE ROLE YOU WANT TO ASSIGN TO THIS TASK HERE",
+    "executionRoleArn": "INSERT THE ARN OF THE ROLE YOU WANT TO ASSIGN TO THIS TASK HERE",
     "networkMode": "awsvpc",
     "requiresCompatibilities": [
         "FARGATE"
@@ -864,6 +913,21 @@ export function DownloadMainTF() {
     }
 }
 ```
+
+:::info
+
+Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the satellite will be used with `app.india-1.levo.ai`, set the `LEVOAI_BASE_URL` environment variable as
+
+```json
+{
+    "name": "LEVOAI_BASE_URL",
+    "value": "https://api.india-1.levo.ai"
+},
+```
+
+:::
 
 </TabItem>
 <TabItem value="tf">
