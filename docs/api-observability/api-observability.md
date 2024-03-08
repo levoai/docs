@@ -15,11 +15,11 @@ Levo’s frictionless & privacy-preserving API observability solution, auto disc
 
 - [Supported Platforms](./supported-platforms.md)
 
-- [Quickstart](./quickstart/quickstart.md)
+- [Quickstart](../quickstart/quickstart.md)
 
 - [Install Guide](./install-guide/install-guide.md)
 
-- [Demo Application](./quickstart/sample-app.md)
+- [Demo Application](../quickstart/sample-app.md)
 
 - [Common Tasks](./common-tasks/common-tasks.md)
 

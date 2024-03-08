@@ -16,6 +16,6 @@ Your estimated completion time is *10 minutes*.
 
 ### 2. [OS Platform Compatibility Check](./os-compat-check.mdx)
 
-### 3. [Install Satellite](./install-satellite.mdx)
+### 3. [Install Satellite](../../install-satellite/install-satellite)
 
 ### 4. [Install Sensor](/api-observability/install-guide/install-sensor/install-sensor.md)

@@ -11,7 +11,7 @@ sidebar_position: 5
 - Linux Kernel versions 4.14 and above.
 - Debian, Fedora, OpenSUSE, and Amazon Linux based distributions
 
-> macOS & Windows Laptops are supported via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](./quickstart/quickstart-mitm.md).
+> macOS & Windows Laptops are supported via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](../quickstart/quickstart-mitm.md).
 
 ## What Kubernetes platforms are supported?
 - [minikube on Linux](https://minikube.sigs.k8s.io/docs/)

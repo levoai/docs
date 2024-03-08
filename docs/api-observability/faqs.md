@@ -32,12 +32,12 @@ Please see [K8s Platforms](./supported-platforms.md#what-kubernetes-platforms-ar
 ### Is Docker Desktop or minikube on Mac OSX, supported?
 Support for Docker Desktop, Docker Desktop based Kubernetes, and minikube on MacOS is on the roadmap.
 
-Developers can evaluate `API Observability` on their macOS Laptops, via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](./quickstart/quickstart-mitm.md).
+Developers can evaluate `API Observability` on their macOS Laptops, via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](../quickstart/quickstart-mitm.md).
 
 ### Is Windows OS supported?
 Microsoft is currently building support for [eBPF in Windows](https://github.com/microsoft/ebpf-for-windows). Windows support will be added subsequent to the completion of that effort.
 
-Developers can evaluate `API Observability` on their Windows Laptops, via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](./quickstart/quickstart-mitm.md).
+Developers can evaluate `API Observability` on their Windows Laptops, via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](../quickstart/quickstart-mitm.md).
 
 ### Is there a script that can assess if my OS platform is compatible?
 Yes. Please see [install guide](../api-observability/install-guide/install-guide.md).
@@ -92,7 +92,7 @@ Yes, Levo certainly can host the Satellite for you. Please contact `support@levo
 Yes. Multiple sensors from different hosts/clusters can be configured to send API Traces to the same Satellite.
 
 ### Can the Satellite be deployed in a different host/cluster?
-Yes. Please see [Install Satellite](./install-guide/install-satellite.mdx).
+Yes. Please see [Install Satellite](../install-satellite/install-satellite).
 
 ### How does the Satellite detect sensitive data in API Traffic?
 The Satellite has a pre-trained ML model that is used to detect sensitive data such as PII, PSI, etc.

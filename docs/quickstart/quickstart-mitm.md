@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 7
 keywords: [API Security, eBPF, macOS, Windows, API Observability]
 ---
 
@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 Quickstart instructions for evaluating *API Observability* on Laptops/Desktops running **Mac OSX** or **Windows**.
 
-![Levo Sensor Package for OSX/Windows](../../assets/api-observability-laptops.svg)
+![Levo Sensor Package for OSX/Windows](../assets/api-observability-laptops.svg)
 
 Since Mac OSX and Windows do not support [eBPF](https://ebpf.io), Levo provides a Sensor package (Docker based install), to enable quick evaluation on these platforms. This Sensor package gets visibility into your API traffic, by **[reverse proxying](https://www.cloudflare.com/learning/cdn/glossary/reverse-proxy/)** traffic between your *API Client* and *API Server*.
 
@@ -102,7 +102,7 @@ The Sensor package uses an authorization key to access Levo.ai. Follow instructi
 
 
 ## 4. Pick an `Application Name`
-Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../../security-contract-testing/concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different API servers, similar to how file folders work in an operating system.
+Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../security-contract-testing/concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different API servers, similar to how file folders work in an operating system.
 
 - a. Pick a descriptive name which will be used in the subsequent step below. For example: `my-test-api-server`.
 - b. Export the `Application Name` in your terminal.
@@ -301,7 +301,7 @@ If API Traffic is correctly being processed, you will see a lot of log entries c
 
 
 ## 9. View Auto-discovered OpenAPI Specifications
-The [API Catalog](../../security-contract-testing/concepts/api-catalog/api-catalog.md) in Levo.ai should be auto populated in a matter of minutes (after your API endpoints are being exercised consistently).
+The [API Catalog](../security-contract-testing/concepts/api-catalog/api-catalog.md) in Levo.ai should be auto populated in a matter of minutes (after your API endpoints are being exercised consistently).
 
 The API Catalog will contain your auto discovered API endpoints and their OpenAPI schemas, all grouped under the `Application Name` you chose earlier.
 
@@ -320,7 +320,7 @@ docker compose -f proxy-docker-compose.yml down
 ### Change Sensor Listen Port
 The Sensor by default listens on TCP port 9080 (interface address 127.0.0.1). If this conflicts with a port being used by another application, you can change it by following the instructions below.
 
-- [Shutdown](./quickstart-mitm.md#shutdown-sensor) the Sensor (if running)
+- [Shutdown](quickstart-mitm.md#shutdown-sensor) the Sensor (if running)
 - Export your desired port in your terminal
 <Tabs groupId="operating-systems">
   <TabItem value="mac" label="Mac OSX">

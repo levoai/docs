@@ -123,7 +123,9 @@ Setting these environment variables is optional and can be set according to your
 before deploying the Sensor-Satellite setup.
 
 
-## List of supported log parsers
+## Log Parser
+
+### List of supported log parsers
 - Nginx
 - Apache
 - Azure API Gateway
