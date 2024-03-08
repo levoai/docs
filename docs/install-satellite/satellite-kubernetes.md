@@ -16,7 +16,7 @@ sidebar_position: 1
 ### 1. Setup environment variables
 
 ```bash
-export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier>
+export LEVOAI_AUTH_KEY=<'Authorization Key'>
 ```
 
 ### 2. Install levoai Helm repo
@@ -33,6 +33,21 @@ helm upgrade --install -n levoai --create-namespace \
   levoai-satellite levoai/levoai-satellite
 ```
 
+:::info
+
+Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the satellite will be used with `app.india-1.levo.ai`, the installation command will be:
+
+```bash
+helm upgrade --install -n levoai --create-namespace \
+  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+  --set global.levoai_config_override.onprem-api.url="https://api.india-1.levo.ai" \
+  levoai-satellite levoai/levoai-satellite
+```
+
+:::
+
 #### If locating Satellite on a dedicated cluster
 You will need to expose the Satellite via either a `LoadBalancer` or `NodePort`, such that is is reachable by Sensors running in other clusters. Please modify the below command appropriately.
 
@@ -41,6 +56,7 @@ You will need to expose the Satellite via either a `LoadBalancer` or `NodePort`,
 helm upgrade --install -n levoai --create-namespace \
     --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
     --set levoai-collector.service.type=<LoadBalancer | NodePort> \
+    # --set global.levoai_config_override.onprem-api.url="https://api.india-1.levo.ai" \
     levoai-satellite levoai/levoai-satellite
 ```
 

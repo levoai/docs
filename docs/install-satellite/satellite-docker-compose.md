@@ -31,8 +31,23 @@ Levo provides pre-built Docker images for the Satellite that can be installed vi
 Execute the following from the directory where the Docker Compose file was downloaded.
 
 ```bash
-(export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier>; docker compose pull && docker compose up -d)
+export LEVOAI_AUTH_KEY='Authorization Key'
+docker compose pull && docker compose up -d
 ```
+
+:::info
+
+Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the satellite will be used with `app.india-1.levo.ai`, the installation command will be:
+
+```bash
+export LEVOAI_AUTH_KEY='Authorization Key'
+export LEVOAI_BASE_URL='https://api.india-1.levo.ai'
+docker compose pull && docker compose up -d
+```
+
+:::
 
 > If `docker compose ...` complains with *"docker: 'compose' is not a docker command."*, you have can try **`docker-compose`** instead.
 

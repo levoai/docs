@@ -91,7 +91,7 @@ export function DownloadMainTF() {
         },
         {
             "name": "LEVOAI_CONF_OVERRIDES",
-            "value": "{\"onprem-api\": {\"url\": \"https://api.levo.ai\", \"refresh-token\": \"${LEVOAI_AUTH_KEY}\", \"org-id\": \"${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"}}"
+            "value": "value": "{\"onprem-api\": {\"url\": \"${LEVOAI_BASE_URL}\", \"refresh-token\": \"${LEVOAI_AUTH_KEY}\", \"org-id\": \"${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"}}"
         },
         {
             "name": "LEVOAI_DEBUG_ENABLED",
@@ -99,7 +99,11 @@ export function DownloadMainTF() {
         },
         {
             "name": "LEVOAI_AUTH_KEY",
-            "value": "< INSERT YOUR LEVO.AI AUTH KEY HERE >"
+            "value": "INSERT YOUR LEVO.AI AUTH KEY HERE"
+        },
+        {
+            "name": "LEVOAI_BASE_URL",
+            "value": "https://api.levo.ai"
         },
         {
             "name": "LEVOAI_LOG_LEVEL",
@@ -142,7 +146,7 @@ export function DownloadMainTF() {
         },
         {
             "name": "LEVOAI_ORG_ID",
-            "value": "< INSERT YOUR LEVO.AI ORG ID HERE >"
+            "value": "INSERT YOUR AWS REGION HERE",
         },
         {
             "name": "LEVOAI_MODE",
@@ -150,7 +154,7 @@ export function DownloadMainTF() {
         },
         {
             "name": "LEVOAI_CONF_OVERRIDES",
-            "value": "{\"onprem-api\":{\"url\": \"https://api.levo.ai\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"url_clusterer_id_len\": 1,\"min_urls_required_per_pattern\": 10,\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"disable_ml_detector\": true,\"service_naming\":{\"strategies\": \"KUBERNETES_METADATA,HOST_HEADER,DEFAULT\"},\"user_resolvers\": [],\"sample_collection\":{\"enabled\": true,\"max_samples_per_end_point\": 2,\"users\": []},\"tagger_batch_interval_minute\": 5,\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"sensitive_data_config\": [],\"traces_queue\":{\"type\": \"sqs\"}}"
+            "value": "{\"onprem-api\":{\"url\": \"${LEVOAI_BASE_URL}\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"url_clusterer_id_len\": 1,\"min_urls_required_per_pattern\": 10,\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"disable_ml_detector\": true,\"service_naming\":{\"strategies\": \"KUBERNETES_METADATA,HOST_HEADER,DEFAULT\"},\"user_resolvers\": [],\"sample_collection\":{\"enabled\": true,\"max_samples_per_end_point\": 2,\"users\": []},\"tagger_batch_interval_minute\": 5,\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"sensitive_data_config\": [],\"traces_queue\":{\"type\": \"sqs\"}}"
         },
         {
             "name": "PI_DETECTOR_DATA_DIR",
@@ -162,7 +166,11 @@ export function DownloadMainTF() {
         },
         {
             "name": "LEVOAI_AUTH_KEY",
-            "value": "< INSERT YOUR LEVO.AI AUTH KEY HERE >"
+            "value": "INSERT YOUR LEVO.AI AUTH KEY HERE"
+        },
+        {
+            "name": "LEVOAI_BASE_URL",
+            "value": "https://api.levo.ai"
         },
         {
             "name": "LEVOAI_LOG_LEVEL",
@@ -180,7 +188,7 @@ export function DownloadMainTF() {
             "options": {
             "awslogs-create-group": "true",
             "awslogs-group": "/ecs/satellite",
-            "awslogs-region": "< INSERT YOUR AWS REGION HERE >",
+            "awslogs-region": "INSERT YOUR AWS REGION HERE",
             "awslogs-stream-prefix": "ecs"
         }
         }
@@ -207,7 +215,7 @@ export function DownloadMainTF() {
             "options": {
             "awslogs-create-group": "true",
             "awslogs-group": "/ecs/satellite",
-            "awslogs-region": "< INSERT YOUR AWS REGION HERE >",
+            "awslogs-region": "INSERT YOUR AWS REGION HERE",
             "awslogs-stream-prefix": "ecs"
         }
         }
@@ -234,14 +242,14 @@ export function DownloadMainTF() {
             "options": {
             "awslogs-create-group": "true",
             "awslogs-group": "/ecs/satellite",
-            "awslogs-region": "< INSERT YOUR AWS REGION HERE >",
+            "awslogs-region": "INSERT YOUR AWS REGION HERE",
             "awslogs-stream-prefix": "ecs"
         }
         }
         }
             ],
-            "taskRoleArn": "< INSERT THE ARN OF THE ROLE YOU WANT TO ASSIGN TO THIS TASK HERE >",
-            "executionRoleArn": "< INSERT THE ARN OF THE ROLE YOU WANT TO ASSIGN TO THIS TASK HERE >",
+            "taskRoleArn": "INSERT THE ARN OF THE ROLE YOU WANT TO ASSIGN TO THIS TASK HERE",
+            "executionRoleArn": "INSERT THE ARN OF THE ROLE YOU WANT TO ASSIGN TO THIS TASK HERE",
             "networkMode": "awsvpc",
             "requiresCompatibilities": [
             "FARGATE"
@@ -254,18 +262,32 @@ export function DownloadMainTF() {
         }
         }
         ```
+:::info
 
-    </TabItem>
-    <TabItem value="tf">
-        Download the <DownloadMainTF/> file.
+Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
 
-        Run the following command in the same directory -
+For example, if the satellite will be used with `app.india-1.levo.ai`, set the `LEVOAI_BASE_URL` environment variable as
 
-        ```bash
-        terraform apply
-        ```
+```json
+{
+    "name": "LEVOAI_BASE_URL",
+    "value": "https://api.india-1.levo.ai"
+},
+```
 
-        Enter the Refresh Token and Org ID as prompted to create a task definition in your AWS account.
+:::
+
+</TabItem>
+<TabItem value="tf">
+Download the <DownloadMainTF/> file.
+
+Run the following command in the same directory -
+
+```bash
+terraform apply
+```
+
+Enter the Refresh Token and Org ID as prompted to create a task definition in your AWS account.
 
 </TabItem>
 </Tabs>

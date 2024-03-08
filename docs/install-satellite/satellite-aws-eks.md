@@ -18,10 +18,9 @@ AWS EKS supports two compute types for its nodes, EC2 and Fargate. Depending on 
 ### 1. Setup environment variables
 
 ```bash
-export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier>
-export CLUSTER_NAME=<INSERT CLUSTER NAME>
-export REGION=<INSERT AWS REGION>
-export ACCOUNT_ID=<INSERT AWS ACCOUNT ID>
+export CLUSTER_NAME='Cluster Name'
+export REGION='AWS Region'
+export ACCOUNT_ID='AWS Account ID'
 ```
 
 

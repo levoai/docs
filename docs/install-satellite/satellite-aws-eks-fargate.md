@@ -9,10 +9,9 @@ Fargate allows us to have containers without the overhead of managing and scalin
 ### 1. Setup environment variables
 
 ```bash
-export LEVOAI_AUTH_KEY=<'Authorization Key' copied earlier> 
-CLUSTER_NAME=< INSERT CLUSTER NAME >
-REGION=< INSERT AWS REGION >
-ACCOUNT_ID=<INSERT AWS ACCOUNT ID>
+export CLUSTER_NAME='Cluster Name'
+export REGION='AWS Region'
+export ACCOUNT_ID='AWS Account ID'
 ```
 
 ### 2. Cluster creation
