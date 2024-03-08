@@ -43,7 +43,7 @@ Since Mac OSX and Windows do not support [eBPF](https://ebpf.io), Levo provides 
 
 API Observability auto discovers APIs and generates OpenAPI specifications for all API endpoints, by observing API traffic between your *API Client* and *API Server*.
 
-If you do not have a test *API Service*/*Application*, you can use the [sample application](sample-app.md) provided by Levo.
+If you do not have a test *API Service*/*Application*, you can use the [sample application](/guides/install-guide/demo-application) provided by Levo.
 
 - a. Note down the base URL for your test *API Server*/*Service*.
 > For example, if you are running the sample application (crAPI) on your laptop, the base URL would be `http://localhost:8888`. If your local test *API Server* uses HTTPs the base URL for example, would be `https://localhost/`.
