@@ -2,11 +2,11 @@
 sidebar_position: 4
 ---
 
-## Install in AWS EKS
+# Satellite on AWS EKS
 
 AWS EKS supports two compute types for its nodes, EC2 and Fargate. Depending on your usecase, you can follow the installation steps given below.
-- [Install using EC2](#install-in-aws-eks-using-ec2)
-- [Install using Fargate](#install-in-aws-eks-using-fargate)
+- [Install using EC2](satellite-aws-ecs.mdx)
+- [Install using Fargate](satellite-aws-eks-fargate.md)
 
 ### Prerequisites
 - [eksctl](https://eksctl.io/) version >= `v0.152.0`
@@ -167,7 +167,7 @@ eksctl create addon --name aws-ebs-csi-driver --cluster ${CLUSTER_NAME} --region
 
 ### 5. Install the satellite
 
-Please follow the instructions in the [Install on Kubernetes](#install-on-kubernetes) section to install the Satellite.
+Please follow the instructions in the [Install on Kubernetes](satellite-kubernetes.md) section to install the Satellite.
 
 Please ensure that you note down the address of the collector.
 

@@ -11,6 +11,6 @@ The Sensor captures live traffic from your environment and sends it to the Satel
 
 Levo can host the Satellite for you (reach out to [`support@levo.ai`](mailto:support@levo.ai)), or you can host it yourself.
 
-### [Click Here To Install Satellite](/api-observability/install-guide/install-satellite)
+### [Click Here To Install Satellite](/install-satellite)
 
-### [Click Here To Install Sensor](/api-observability/install-guide/install-sensor)
+### [Click Here To Install Sensor](/install-sensor)

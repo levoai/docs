@@ -1,16 +1,16 @@
 ---
-sidebar_position: 6
+sidebar_position: 2
 ---
 
-# FAQs
+# Satellite-Sensor FAQs
 ![FAQs](../assets/FAQs.svg)
 
 ## Table of Contents
 
-- [Getting Help](./faqs.md#getting-help)
-- [Sensor](./faqs.md#sensor)
-- [Satellite](./faqs.md#satellite)
-- [API Catalog](./faqs.md#api-catalog)
+- [Getting Help](satellite-sensor-faqs.md#getting-help)
+- [Sensor](satellite-sensor-faqs.md#sensor)
+- [Satellite](satellite-sensor-faqs.md#satellite)
+- [API Catalog](satellite-sensor-faqs.md#api-catalog)
 
 ------------------------------------------------------------------------------
 
@@ -24,10 +24,10 @@ Please provide as much details as possible in your support request.
 ## Sensor
 
 ### What OS platforms are supported?
-Please see [OS Platforms](./supported-platforms.md#what-os-platforms-are-supported).
+Please see [OS Platforms](../guides/supported-platforms.md#what-os-platforms-are-supported).
 
 ### What Kubernetes platforms are supported?
-Please see [K8s Platforms](./supported-platforms.md#what-kubernetes-platforms-are-supported).
+Please see [K8s Platforms](../guides/supported-platforms.md#what-kubernetes-platforms-are-supported).
 
 ### Is Docker Desktop or minikube on Mac OSX, supported?
 Support for Docker Desktop, Docker Desktop based Kubernetes, and minikube on MacOS is on the roadmap.
@@ -40,10 +40,10 @@ Microsoft is currently building support for [eBPF in Windows](https://github.com
 Developers can evaluate `API Observability` on their Windows Laptops, via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](../quickstart/quickstart-mitm.md).
 
 ### Is there a script that can assess if my OS platform is compatible?
-Yes. Please see [install guide](../api-observability/install-guide/install-guide.md).
+Yes. Please see [install guide](/guides/install-guide.md).
 
 ### How do I install the Sensor?
-Please see [install guide](../api-observability/install-guide/install-guide.md).
+Please see [install guide](/guides/install-guide.md).
 
 ### What kind of API traffic is discovered?
 Currently REST APIs only. Support for gRPC, and GraphQL are on the roadmap.
@@ -70,7 +70,7 @@ Less than 5%, as the sensor can sample API traffic.
 Yes. API traffic can be sampled in high traffic environments to optimize CPU consumption of the Sensor. Unlike vendors building API security solutions that are anomaly based (where every single API call has to be captured), Levo can aggressively sample API traffic. Sampled API traffic is used to discover API endpoints and their underlying schema.
 
 ### Can API traffic be filtered?
-Yes. Please see [Filtering API Traffic](./common-tasks/sensor/filter-traffic.md).
+Yes. Please see [Filtering API Traffic](../guides/common-tasks/sensor/filter-traffic.md).
 
 ### Can I consume captured API Traces from the sensor?
 Yes. The Sensor exports captured API Traces in industry standard [OpenTelemetry](https://opentelemetry.io/docs/concepts/what-is-opentelemetry/) format. These traces can be visualized using tools like [Jaeger](https://www.jaegertracing.io/), etc.

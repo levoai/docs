@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 0
 ---
 
 # FAQs
@@ -8,6 +8,6 @@ sidebar_position: 1
 
 ## [Data Processing & Storage](data-processing-storage.md)
 
-## [API Observability](../api-observability/faqs.md)
+## [Satellite-Sensor FAQs](satellite-sensor-faqs.md)
 
 ## [Sample Applications](sample-apps.md)

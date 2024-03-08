@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Satellite in AWS EKS using Fargate
+# Satellite on AWS EKS using Fargate
 
 Fargate allows us to have containers without the overhead of managing and scaling servers and clusters. AWS handles the maintenance, as well as security and health of the instances for us, which is something we would not want to spend time into.
 

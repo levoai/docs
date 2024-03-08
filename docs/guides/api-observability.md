@@ -23,4 +23,4 @@ Levo’s frictionless & privacy-preserving API observability solution, auto disc
 
 - [Common Tasks](./common-tasks/common-tasks.md)
 
-- [FAQs](./faqs.md)
+- [FAQs](../faqs/satellite-sensor-faqs.md)

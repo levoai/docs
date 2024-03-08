@@ -17,4 +17,4 @@ Evaluate Levo's API Observability in Action with your favourite tools.
 
 <br/>
 
-> If you are looking for comprehensive install instructions (for all supported platforms), please refer to the [Install Guide](../api-observability/install-guide/install-guide.md).
+> If you are looking for comprehensive install instructions (for all supported platforms), please refer to the [Install Guide](../guides/install-guide/install-guide.md).

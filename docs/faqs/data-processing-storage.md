@@ -3,7 +3,7 @@ sidebar_position: 3
 keywords: [Security, Privacy, Data Processing, Data Storage]
 ---
 
-# Data Processing & Storage - FAQ
+# Data Processing & Storage FAQs
 
 ## Is my data accessible by anyone outside my organization?
 Your data belongs ONLY to you, and is ONLY accessible by members of your organization.

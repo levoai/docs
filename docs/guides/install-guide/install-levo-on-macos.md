@@ -2,7 +2,7 @@
 sidebar_position: 5
 ---
 
-# Install Levo for MacOS
+# Install Levo on MacOS
 
 This guide provides comprehensive instructions for installing the Levo Satellite, Sensor and Log Parser components together as a single container on a MacOS host.
 
