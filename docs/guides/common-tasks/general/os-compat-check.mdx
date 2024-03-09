@@ -17,7 +17,7 @@ export function CurlScript() {
       {() => (
         <pre>
           <code>
-              curl -s {window.location.protocol + '//' + window.location.host + '/artifacts/common-tasks/check-compatibility.sh'} | bash
+              curl -s {window.location.protocol + '//' + window.location.host + '/artifacts/sensor/check-compatibility.sh'} | bash
           </code>
         </pre>
       )}
@@ -29,7 +29,7 @@ export function DownloadLink() {
   return (
     <BrowserOnly fallback={<div>Loading...</div>}>
       {() => (
-        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/common-tasks/check-compatibility.sh'}> here</a>
+        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/check-compatibility.sh'}> here</a>
       )}
     </BrowserOnly>
   );

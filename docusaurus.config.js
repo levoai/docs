@@ -81,7 +81,7 @@ const config = {
             label: 'Docs',
           },
           {
-            to: 'vulnerabilities/v1/guides',
+            to: 'vulnerabilities/v1/guide',
             position: 'left',
             label: 'Vulnerability Guide',
           },
