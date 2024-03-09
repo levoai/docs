@@ -37,8 +37,8 @@ If you wish, you may also host the Satellite yourself and specify the address of
 Execute the following command to check for connectivity health:
 
 ```bash
-# Please specify the actual container name for levoai-common-tasks below
-docker logs <levoai-common-tasks container name> | grep "Initial connection with Collector"
+# Please specify the actual container name for levoai-sensor below
+docker logs <levoai-sensor container name> | grep "Initial connection with Collector"
 ```
 If connectivity is healthy, you should see output similar to below.
 

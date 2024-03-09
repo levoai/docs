@@ -24,13 +24,13 @@ helm repo add levoai https://charts.levo.ai && helm repo update
 #
 # Specify below the 'Application Name' chosen earlier.
 #
-helm upgrade levoai-common-tasks levoai/levoai-ebpf-common-tasks \
+helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --install \
   --namespace levoai \
   --create-namespace \
-  --set common-tasks.config.default-service-name=<'Application Name' chosen earlier> \
-  --set common-tasks.config.collector-endpoint=<hostname|IP:port>
-  --set common-tasks.config.env=<'Application environment'>
+  --set sensor.config.default-service-name=<'Application Name' chosen earlier> \
+  --set sensor.config.collector-endpoint=<hostname|IP:port>
+  --set sensor.config.env=<'Application environment'>
 ```
 
 
@@ -41,12 +41,12 @@ helm upgrade levoai-common-tasks levoai/levoai-ebpf-common-tasks \
 Check the health of the Sensor by executing the following:
 
 ```bash
-kubectl -n levoai get pods | grep levoai-common-tasks
+kubectl -n levoai get pods | grep levoai-sensor
 ```                              
 If the Sensor is healthy, you should see output similar to below.
 
 ```bash
-levoai-common-tasks-747fb4aaa9-gv8g9   1/1     Running   0             1m8s
+levoai-sensor-747fb4aaa9-gv8g9   1/1     Running   0             1m8s
 ```
 
 #### ii. Check connectivity
@@ -54,8 +54,8 @@ levoai-common-tasks-747fb4aaa9-gv8g9   1/1     Running   0             1m8s
 Execute the following command to check for connectivity health:
 
 ```bash
-# Please specify the actual pod name for levoai-common-tasks below
-kubectl -n levoai logs <levoai-common-tasks pod name> | grep "Initial connection with Collector"
+# Please specify the actual pod name for levoai-sensor below
+kubectl -n levoai logs <levoai-sensor pod name> | grep "Initial connection with Collector"
 ```
 If connectivity is healthy, you should see output similar to below.
 
@@ -71,7 +71,7 @@ This address assumes that the Satellite is installed in the same cluster (and na
 If you wish to, you may also request Levo to host the Satellite for you. In this case, you will need to set the `collector-endpoint` to `https://collector.levo.ai` and specify an organization ID (`organization-id`) via helm values.
 
 ```shell
-helm upgrade --set common-tasks.config.env=<your-application-environment> --set common-tasks.config.collector-endpoint=https://collector.levo.ai --set common-tasks.config.organization-id=<your-org-id> levoai-common-tasks levoai/levoai-ebpf-common-tasks -n levoai
+helm upgrade --set sensor.config.env=<your-application-environment> --set sensor.config.collector-endpoint=https://collector.levo.ai --set sensor.config.organization-id=<your-org-id> levoai-sensor levoai/levoai-ebpf-sensor -n levoai
 ```
 
 Please proceed to the next step, if there are no errors.

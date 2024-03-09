@@ -32,7 +32,7 @@ Install the eBPF Sensor from Levo's RPM repository.
 
 1. Install the package in your repository.
   ```shell
-  sudo yum install levo-ebpf-common-tasks-0.29.6
+  sudo yum install levo-ebpf-sensor-0.29.6
   ```
 
 Enter `y` when prompted.
@@ -93,15 +93,15 @@ default-service-name: <'Application Name' chosen earlier>
 
 ### 3. Start the Sensor
 ```bash
-sudo systemctl start levo-ebpf-common-tasks
+sudo systemctl start levo-ebpf-sensor
 ```
 
 ### 4. Verify connectivity with Satellite
 ```bash
-sudo journalctl -u levo-ebpf-common-tasks.service -b -f
+sudo journalctl -u levo-ebpf-sensor.service -b -f
 
 # If 'journalctl' isn't tailing logs, use syslog:
-sudo cat /var/log/syslog | grep 'levo-ebpf-common-tasks'
+sudo cat /var/log/syslog | grep 'levo-ebpf-sensor'
 ```
 
 #### Connection Success

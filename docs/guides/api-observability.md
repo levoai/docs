@@ -11,16 +11,16 @@ Levo’s frictionless & privacy-preserving API observability solution, auto disc
 
 #### Get Started
 
-- [Key Concepts](./key-concepts)
+- [Key Concepts](/guides/key-concepts)
 
-- [Supported Platforms](./supported-platforms.md)
+- [Supported Platforms](/guides/supported-platforms.md)
 
-- [Quickstart](../quickstart/quickstart.md)
+- [Quickstart](/quickstart)
 
-- [Install Guide](./install-guide/install-guide.md)
+- [Install Guide](/install-guide)
 
 - [Demo Application](demo-application.md)
 
-- [Common Tasks](./common-tasks/common-tasks.md)
+- [Common Tasks](/guides/common-tasks)
 
-- [FAQs](../faqs/satellite-sensor-faqs.md)
+- [Miscellaneous](/guides/miscellaneous.md)

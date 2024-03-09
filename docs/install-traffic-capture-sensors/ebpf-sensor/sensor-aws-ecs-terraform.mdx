@@ -9,7 +9,7 @@ export function DownloadMainTF() {
     return (
         <BrowserOnly fallback={<div>Loading...</div>}>
             {() => (
-                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/common-tasks/main.tf'} download> main.tf</a>
+                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/main.tf'} download> main.tf</a>
             )}
         </BrowserOnly>
     );
@@ -39,7 +39,7 @@ Now that we have created a task definition, we will start our satellite up as a 
 - Open the levo-satellite task definition, and click on the latest revision.
 - Head over to `deploy` and select `Create Service`.
 - Choose the cluster you want to deploy the satellite.
-- Under `Compute Options` select `Launch Type` as `FARGATE`. If you have requirements for your EC2 nodes, refer to our [pcap-sensor](/api-observability/install-guide/install-sensor/pcap-sensor.md).
+- Under `Compute Options` select `Launch Type` as `FARGATE`. If you have requirements for your EC2 nodes, refer to our [pcap-sensor](/install-traffic-capture-sensors/pcap-sensor).
 - Leave the other configurations on default settings, and start the service.
 
 

@@ -14,7 +14,7 @@ Your estimated completion time is *10 minutes*.
 
 ### 1. [Signup with your enterprise email](https://app.levo.ai/signup)
 
-### 2. [OS Platform Compatibility Check](../common-tasks/general/os-compat-check.mdx)
+### 2. [OS Platform Compatibility Check](/guides/common-tasks/general/os-compat-check.mdx)
 
 ### 3. [Install Satellite](/install-satellite)
 

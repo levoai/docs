@@ -10,7 +10,7 @@ export function SensorConfigFile() {
   return (
     <BrowserOnly fallback={<div>Loading...</div>}>
       {() => (
-        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/common-tasks/config.yml'} download> YAML configuration file</a>
+        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/config.yml'} download> YAML configuration file</a>
       )}
     </BrowserOnly>
   );
@@ -20,7 +20,7 @@ export function ConfigurationValues() {
   return (
     <BrowserOnly fallback={<div>Loading...</div>}>
       {() => (
-        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/common-tasks/config-values.yml'} download> Configuration Values</a>
+        <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/config-values.yml'} download> Configuration Values</a>
       )}
     </BrowserOnly>
   );
@@ -70,7 +70,7 @@ Sensors running on Kubernetes have an additional section called `Kubernetes Pod 
 # Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
 # grouped under this application name. The application name helps segregate and group API
 # endpoints from different environments. The environment is used to specify the environment
-# that the common-tasks is installed in (e.g. staging, prod, dev).
+# that the sensor is installed in (e.g. staging, prod, dev).
 #
 # In Kubernetes and other container orchestration systems, where meta data about applications
 # (that have been deployed) is readily available, auto discovered API endpoints are attributed
@@ -101,7 +101,7 @@ collector-endpoint: https://collector.levo.ai
 # --------------------------------------------------------------------------------------------
 # API Trace Export Rate Limiting:
 # --------------------------------------------------------------------------------------------
-# By default, the common-tasks rate-limits the overall number of request-response traces it exports
+# By default, the sensor rate-limits the overall number of request-response traces it exports
 # to the satellite.  It also rate-limits traces on a per-endpoint basis.  Rate limiting can
 # be disabled or adjusted, but doing so may affect the performance of downstream Levo
 # services.
@@ -115,7 +115,7 @@ collector-endpoint: https://collector.levo.ai
 # --------------------------------------------------------------------------------------------
 # Metrics Settings:
 # --------------------------------------------------------------------------------------------
-# Uncomment and modify to enable the printing of common-tasks metrics alongside other common-tasks logging
+# Uncomment and modify to enable the printing of sensor metrics alongside other sensor logging
 # messages.
 
 # export-metrics-to-log: true
@@ -288,22 +288,22 @@ Configuration is specified via a [Helm Values](https://helm.sh/docs/chart_templa
 #
 # Specify the 'Application Name' chosen earlier in the config-values.yml file.
 #
-helm upgrade levoai-common-tasks levoai/levoai-ebpf-common-tasks \
+helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --install \
   --namespace levoai \
   --create-namespace \
-  --set common-tasks.otel.grpcEndpoint=<hostname|IP:port> \
+  --set sensor.otel.grpcEndpoint=<hostname|IP:port> \
   --values config-values.yml
 ```
 
 You may also specify specific configuration values using `helm --set`. For example,
 
 ```bash
-helm upgrade levoai-common-tasks levoai/levoai-ebpf-common-tasks \
+helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --install \
   --namespace levoai \
   --create-namespace \
-  --set common-tasks.config.default-service-name="my-test-app-k8s-c101" \
+  --set sensor.config.default-service-name="my-test-app-k8s-c101" \
   --set "sensor.config.monitored-commands={python3,java}"
 ```
 
@@ -320,7 +320,7 @@ Please check the Sensor logs to ensure that the specified configuration values d
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
 sudo docker run --restart unless-stopped \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
-  -v $PWD/config.yml:/etc/levo/common-tasks/config.yaml:ro \
+  -v $PWD/config.yml:/etc/levo/sensor/config.yaml:ro \
   --privileged --detach \
   levoai/ebpf_sensor:latest \
   --host-proc-path /host/proc \

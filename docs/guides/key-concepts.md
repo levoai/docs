@@ -42,7 +42,7 @@ Typical API observability solutions, will ingest all your API data into their Sa
 Levo’s privacy preserving technology, does not ingest any of your API data into SaaS. Levo discovers and documents your APIs using only data type inferences performed in the Satellite.
 
 ## API Catalog
-Levo SaaS aggregates data received from the Satellite to create an [API Catalog](security-testing/concepts/api-catalog/api-catalog.md).
+Levo SaaS aggregates data received from the Satellite to create an [API Catalog](/guides/security-testing/concepts/api-catalog/api-catalog.md).
 
 The API Catalog is the source of truth to answer the following questions:
 

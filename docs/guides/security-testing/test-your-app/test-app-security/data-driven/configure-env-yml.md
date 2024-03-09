@@ -23,4 +23,4 @@ Follow the instructions [here][configure-authn] to configure appropriate user cr
 
 
 [env-file]: ../../../concepts/test-plans/env-yml.md
-[configure-authn]: ../../../../../security-testing/tasks/authentication/authn-authz.md
+[configure-authn]: /security-testing/tasks/authentication/authn-authz.md
