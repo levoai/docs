@@ -102,7 +102,7 @@ The Sensor package uses an authorization key to access Levo.ai. Follow instructi
 
 
 ## 4. Pick an `Application Name`
-Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../security-testing/concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different API servers, similar to how file folders work in an operating system.
+Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../guides/security-testing-concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different API servers, similar to how file folders work in an operating system.
 
 - a. Pick a descriptive name which will be used in the subsequent step below. For example: `my-test-api-server`.
 - b. Export the `Application Name` in your terminal.
@@ -301,7 +301,7 @@ If API Traffic is correctly being processed, you will see a lot of log entries c
 
 
 ## 9. View Auto-discovered OpenAPI Specifications
-The [API Catalog](../security-testing/concepts/api-catalog/api-catalog.md) in Levo.ai should be auto populated in a matter of minutes (after your API endpoints are being exercised consistently).
+The [API Catalog](../guides/security-testing-concepts/api-catalog/api-catalog.md) in Levo.ai should be auto populated in a matter of minutes (after your API endpoints are being exercised consistently).
 
 The API Catalog will contain your auto discovered API endpoints and their OpenAPI schemas, all grouped under the `Application Name` you chose earlier.
 

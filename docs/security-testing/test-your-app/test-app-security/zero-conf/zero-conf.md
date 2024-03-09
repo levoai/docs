@@ -6,7 +6,7 @@ sidebar_position: 1
 # Zero Conf Security Tests
 ![](../../../../assets/zero-conf-test-plan.svg)
 
-The below figure describes the high level workflow for the generation and execution of [Zero Configuration](../../../concepts/test-plans/test-plan-types.md) security tests.
+The below figure describes the high level workflow for the generation and execution of [Zero Configuration](../../../../guides/security-testing-concepts/test-plans/test-plan-types.md) security tests.
 
 ![](../../../../assets/zero-conf-flow.svg)
 

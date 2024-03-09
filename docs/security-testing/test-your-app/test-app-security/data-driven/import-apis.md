@@ -32,7 +32,7 @@ If you are trying Levo for the first time, we recommend you skip this step and p
 
 If you have role based access controls (RBAC) for your APIs, and you wish to validate the proper configuration and functioning of the said controls, you will need to construct a metadata.yml file and upload it to the catalog created in the previous step.
 
-You can read more about authorization bypass tests and the metadata.yml file [here](../../../concepts/api-catalog/metadata-yml.md).
+You can read more about authorization bypass tests and the metadata.yml file [here](../../../../guides/security-testing-concepts/api-catalog/metadata-yml.md).
 
 Please construct an appropriate metadata.yml for your API endpoints and upload it via the `Metadata` tab for your API catalog in the Levo SaaS UI.
 

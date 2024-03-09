@@ -41,7 +41,7 @@ Zero Configuration test plans cannot truly distinguish between an authentication
 This results in lower efficacy and reduced test coverage (results might have false negatives).
 
 ## Data Driven
-As the name suggests, parameter data for APIs is end user supplied via [fixtures](./fixtures/test-fixtures.md).
+As the name suggests, parameter data for APIs is end user supplied via [fixtures](fixtures/test-fixtures.md).
 
 By configuring parameter data, end users have complete control of what data is send when making API calls. 
 

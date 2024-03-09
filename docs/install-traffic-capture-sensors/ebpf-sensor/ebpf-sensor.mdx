@@ -1,0 +1,26 @@
+---
+sidebar_position: 0
+---
+
+# Install eBPF Sensor
+
+## i. Prerequisites
+- Compatibility script (from step 1) indicates the Linux host (that you want to instrument) is compatible.
+- Satellite has been successfully installed.
+- You have noted down the Satellite's `hostname:port` or `ip-address:port` information.
+- The Satellite is reachable (via HTTP/s) from the location where you are going to install the Sensor.
+
+## ii. Pick an `Application Name`
+Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](/security-contract-testing/concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different environments, similar to how file folders work in an operating system.
+
+Pick a descriptive name which will be used in the subsequent step below. For example: `my-test-app`.
+
+## iii. Follow instructions for your platform
+Follow instructions for your specific platform/method below:
+- [Install on Kubernetes](/install-traffic-capture-sensors/ebpf-sensor/sensor-kubernetes)
+- [Install on AWS ECS using Terraform](/install-traffic-capture-sensors/ebpf-sensor/sensor-aws-ecs-terraform)
+- [Install on Linux host via Docker](/install-traffic-capture-sensors/ebpf-sensor/sensor-docker)
+- [Install on Debian based Linux Distributions via `apt`](/install-traffic-capture-sensors/ebpf-sensor/sensor-apt-package)
+- [Install on RPM based Linux Distributions via `yum`](/install-traffic-capture-sensors/ebpf-sensor/sensor-yum-package)
+
+<br></br>

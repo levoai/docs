@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Satellite via Docker Compose
+# Satellite via Docker
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
@@ -90,7 +90,93 @@ The Collector now runs in a container, and is reachable on the host via port 431
 
 Please note down the either the host's IP address or domain name. The Sensor will be configured to communicate with the Collector at <Host's IP|Domain-Name>:4317.
 
-Please proceed to install the Sensor.
+Please proceed to [install traffic capture sensors](/install-traffic-capture-sensors).
 
-<br></br>
+----------------------------------------------
+
+### Uninstall the Satellite
+
+Ensure you are in the same directory where you downloaded the <DownloadDockerComposeLink/>.
+
+Execute the below command:
+```bash
+docker compose down --remove-orphans -v
+```
+
+### Upgrade the Satellite
+1. [Uninstall](#uninstall-the-satellite) the Satellite
+2. [Reinstall](/install-satellite/satellite-docker#2-install-satellite) the Satellite. The install always *pulls* the latest Docker images for the Satellite.
+
+
+### Change the `minimum number of URLs` that the satellite needs to observe to detect an API endpoint.
+To detect an API endpoint, Satellite waits for at least '10' URLs to match that endpoint URL pattern.
+This number may cause delays in detecting API endpoints when there is not enough load.
+
+If you want to change this number to suit your environment:
+- export the environment variable `LEVOAI_MIN_URLS_PER_PATTERN` - for example :
+  `export LEVOAI_MIN_URLS_PER_PATTERN=3`
+
+- Reinstall the Satellite to pickup the new configuration
+
+
+### List Satellite's containers
+```bash
+docker ps | grep -E 'levoai/collector|bitnami/rabbitmq|levoai/satellite|levoai/tagger'
+```
+
+### Get logs of a specific container
+```bash
+docker logs <container id>
+```
+
+### Tail logs of a specific container
+```bash
+docker logs -f <container id>
+```
+
+### Get logs for last 1 minute
+```bash
+docker logs <container id> --since 1m
+```
+
+------------------------------------------------------------------
+
+### Troubleshooting
+
+### Tagger Errors
+
+The `Tagger` component sends API endpoint metadata information to Levo.ai. API Observability will not function if the Tagger is in an errored state.
+
+Please see sample output below from `docker ps | grep -E "levoai/collector|levoai/satellite|bitnami/rabbitmq"`, that shows the Tagger (2nd line item) in an errored state.
+
+```bash
+65fe40867c70   levoai/collector:stable   "/usr/local/bin/levo…"   5 minutes ago   Up 5 minutes                    0.0.0.0:4317->4317/tcp, 9411/tcp                                                                                                         levoai-collector
+45d6c4cccb28   levoai/satellite:stable   "python -OO /opt/lev…"   5 minutes ago   Restarting (1) 55 seconds ago                                                                                                                                            levoai-tagger
+721b5431369a   levoai/satellite:stable   "gunicorn --capture-…"   5 minutes ago   Up 5 minutes                    0.0.0.0:9999->9999/tcp                                                                                                                   levoai-satellite
+a00dc710d4af   bitnami/rabbitmq:3.10     "/opt/bitnami/script…"   5 minutes ago   Up 5 minutes                    5551-5552/tcp, 0.0.0.0:4369->4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 0.0.0.0:15672->15672/tcp, 0.0.0.0:25672->25672/tcp, 15671/tcp   levoai-rabbitmq
+```
+
+Below are common error scenarios:
+
+### Authentication Errors
+
+The `Tagger` component authenticates with Levo.ai using the `Authorization Key`. If Tagger is unable to authenticate, it will error out.
+
+Check for authentication errors in the `Tagger` logs:
+```bash
+docker logs levoai-tagger | grep "Exception: Failed to refresh access token"
+```
+
+If there are exception messages, you have an incorrect or stale `Authorization Key`. Please contact support@levo.ai for further assistance.
+
+### Connectivity Errors
+
+Check for connectivity errors in the `Tagger` logs:
+```bash
+
+docker logs levoai-tagger | grep "ConnectionRefusedError: [Errno 111] Connection refused"
+```
+
+If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries. Please contact support@levo.ai for further assistance.
+
 

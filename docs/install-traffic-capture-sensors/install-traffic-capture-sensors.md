@@ -1,8 +1,8 @@
 ---
-sidebar_position: 1
+sidebar_position: 0
 ---
 
-# Install Sensor
+# Install Traffic Capture Sensors
 
 Depending on your environment, you may choose to install a different Levo sensor to suit your needs.
 

@@ -28,7 +28,7 @@ Copy your authorization key. This key is required in subsequent steps below.
 
 ## 3. Follow instructions for your platform
 - [Install on Kubernetes](satellite-kubernetes.md)
-- [Install on Linux host via Docker Compose](satellite-docker-compose.md)
+- [Install on Linux host via Docker Compose](satellite-docker.mdx)
 - [Install in AWS EC2 using Levo Satellite AMI](satellite-ami-aws-ec2.mdx)
 - [Install in AWS EKS](satellite-aws-eks.md)
   - [Install in AWS EKS using EC2](satellite-aws-ecs.mdx)

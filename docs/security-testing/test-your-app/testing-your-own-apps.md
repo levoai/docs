@@ -22,7 +22,7 @@ First review the [Concepts][concepts] section. Then follow these steps:
 
 
 
-[concepts]: ../concepts/concepts.md
+[concepts]: ../../guides/security-testing-concepts/security-testing-concepts
 [mac]: ../levo-cli/levo-cli-for-mac-os.md
 [linux]: ../levo-cli/levo-cli-for-linux.md
 [windows]: ../levo-cli/levo-cli-for-windows.md

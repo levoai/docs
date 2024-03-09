@@ -21,7 +21,7 @@ sidebar_position: 2
 ## 3. Upload a metadata.yml file to enable authorization bypass (RBAC) tests
 crAPI's APIs have role based access controls (RBAC). If want to validate the proper configuration and functioning of the said controls, you will need to construct a metadata.yml file and upload it to the catalog created in the previous step.
 
-You can read more about authorization bypass tests and the metadata.yml file [here](../../concepts/api-catalog/metadata-yml.md).
+You can read more about authorization bypass tests and the metadata.yml file [here](../../../guides/security-testing-concepts/api-catalog/metadata-yml.md).
 
 For your convenience, the appropriate metadata.yml for crAPI is shown below. Please upload this to catalog via the `Metadata` tab in the catalog UI.
 
@@ -98,5 +98,5 @@ and download this file to your desktop. You can read more about the purpose of t
 [install-crapi]: https://github.com/levoai/demo-apps/blob/main/crAPI/docs/quick-start.md
 [crapi-openapi-spec]: https://raw.githubusercontent.com/levoai/demo-apps/main/crAPI/api-specs/demo%20scenarios/onboarding-scenarios.json
 [crapi-credentials]: https://github.com/levoai/demo-apps/blob/main/crAPI/docs/user-asset-info.md#user-info
-[fixtures]: ../../concepts/test-plans/fixtures/test-fixtures.md
-[env-file]: ../../concepts/test-plans/env-yml.md
+[fixtures]: ../../../guides/security-testing-concepts/test-plans/fixtures/test-fixtures.md
+[env-file]: ../../../guides/security-testing-concepts/test-plans/env-yml.md

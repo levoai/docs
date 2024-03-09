@@ -1,0 +1,70 @@
+---
+sidebar_position: 2
+---
+
+# Sensor on AWS ECS using Terraform
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+export function DownloadMainTF() {
+    return (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+            {() => (
+                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/main.tf'} download> main.tf</a>
+            )}
+        </BrowserOnly>
+    );
+}
+
+## Install on AWS ECS using Terraform
+
+### Prerequisites
+- Access to AWS ECS.
+- Terraform CLI installed.
+
+### 1. Creating a Task Definition
+
+Download the <DownloadMainTF/> file.
+
+Run the following command in the same directory -
+
+```bash
+terraform apply
+```
+
+Enter the Collector URL as prompted to create a task definition in your AWS account.
+
+### 2. Run the Sensor
+
+Now that we have created a task definition, we will start our satellite up as a service in an ECS cluster.
+- Open the levo-satellite task definition, and click on the latest revision.
+- Head over to `deploy` and select `Create Service`.
+- Choose the cluster you want to deploy the satellite.
+- Under `Compute Options` select `Launch Type` as `FARGATE`. If you have requirements for your EC2 nodes, refer to our [pcap-sensor](/api-observability/install-guide/install-sensor/pcap-sensor.md).
+- Leave the other configurations on default settings, and start the service.
+
+
+### 3. Verify connectivity with Satellite
+
+#### i. Check Sensor health
+
+Check the health of the Sensor by checking the task health in the AWS ECS console.
+
+If the Sensor is healthy, you should see the task running similar with the `Running` status.
+
+```bash
+status
+Running
+```
+
+#### ii. Check connectivity
+
+Head over to the logs for the sensor's task and you should see output similar to below if the connectivity is healthy.
+
+```
+2022/06/13 21:15:40 729071	INFO [ebpf_sensor.cpp->main:120]	Initial connection with Collector was successful.
+```
+
+**Please contact `support@levo.ai` if you notice health/connectivity related errors.**
+
+Please proceed to the next step, if there are no errors.
+

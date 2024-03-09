@@ -1,5 +1,5 @@
 ---
-sidebar_position: 0
+sidebar_position: 1
 ---
 
 # Frictionless API Observability
@@ -11,7 +11,7 @@ Levo’s frictionless & privacy-preserving API observability solution, auto disc
 
 #### Get Started
 
-- [Key Concepts](./concepts.md)
+- [Key Concepts](./key-concepts)
 
 - [Supported Platforms](./supported-platforms.md)
 

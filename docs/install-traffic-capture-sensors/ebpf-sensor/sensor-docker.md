@@ -1,0 +1,51 @@
+---
+sidebar_position: 3
+---
+
+# Sensor via Docker
+
+## Install on Linux host via Docker
+
+### Prerequisites
+- Docker Engine version `18.03.0` and above
+- Admin (or `sudo`) privileges on the Docker host
+
+### 1. Install Sensor
+
+> If you are installing the Satellite and Sensor on the ***same*** Linux host, please do ***NOT*** use `localhost` as the hostname below. Use the Linux host's `IP address`, or `domain name` instead. This is required as the Sensor runs inside a Docker container, and `localhost` resolves to the Sensor container's IP address, instead of the Linux host.
+
+```bash
+# Replace '<collector-address>' with the values you noted down from the Satellite install
+#
+# Specify below the 'Application Name' chosen earlier. Do not quote the 'Application Name'
+#
+sudo docker run --restart unless-stopped \
+  -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
+  --privileged --detach levoai/ebpf_sensor:0.29.6 \
+  --host-proc-path /host/proc/ \
+  --collector-endpoint <collector-address> \
+  --env <'application-environment'> \
+  --default-service-name <'Application Name' chosen earlier>
+```
+
+#### NOTE:
+The default address for the collector in Docker-based Sensor installations is `https://collector.levo.ai`.
+This address assumes that Levo is hosting the Satellite for you, and you must also specify an organization ID when starting the sensor (with the `--organization-id` flag).
+If you wish, you may also host the Satellite yourself and specify the address of the collector in the self-hosted Satellite to direct the Sensor's traffic to it.
+
+### 2. Verify connectivity with Satellite
+Execute the following command to check for connectivity health:
+
+```bash
+# Please specify the actual container name for levoai-sensor below
+docker logs <levoai-sensor container name> | grep "Initial connection with Collector"
+```
+If connectivity is healthy, you should see output similar to below.
+
+```bash
+2022/06/13 21:15:40 729071	INFO [ebpf_sensor.cpp->main:120]	Initial connection with Collector was successful.
+```
+
+Please proceed to the next step, if there are no errors.
+
+<br></br>
