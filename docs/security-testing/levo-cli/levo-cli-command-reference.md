@@ -1,5 +1,5 @@
 ---
-sidebar_position: 6
+sidebar_position: 5
 ---
 
 # Levo CLI Command Reference
@@ -223,4 +223,4 @@ Options:
 ##### Usage Examples
 `levo test-plan export-env --lrn "acme-gizmo-org:ws/buchi:app/Demo_crAPI:tp/Demo_crAPI" --local-dir ./`
 
-[env-yaml]: ../../guides/security-testing-concepts/test-plans/env-yml.md
+[env-yaml]: ../../guides/security-testing/concepts/test-plans/env-yml.md

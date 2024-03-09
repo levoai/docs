@@ -1,5 +1,5 @@
 ---
-sidebar_position: 4
+sidebar_position: 3
 ---
 
 # Levo CLI for Windows
@@ -49,4 +49,4 @@ levo login
 
 ### [Upgrade Instructions][cli-upgrade]
 
-[cli-upgrade]: ./levo-cli-upgrade-instructions.md#windows
+[cli-upgrade]: levo-cli-upgrade-instructions.mdindows

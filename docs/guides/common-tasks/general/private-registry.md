@@ -27,7 +27,7 @@ registry="your.registry"
 helm repo add levoai https://charts.levo.ai || true
 helm repo update
 images=($(helm template levoai/levoai-satellite | yq -N '..|.image? | select(.)' | sort -u))
-images+=($(helm template levoai/levoai-ebpf-sensor | yq -N '..|.image? | select(.)' | sort -u))
+images+=($(helm template levoai/levoai-ebpf-common-tasks | yq -N '..|.image? | select(.)' | sort -u))
 
 for image in "${images[@]}"; do
   echo "Pushing $image to $registry"

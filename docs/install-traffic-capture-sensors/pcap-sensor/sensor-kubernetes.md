@@ -24,31 +24,31 @@ helm repo add levoai https://charts.levo.ai && helm repo update
 # If Sensor is installed on same cluster as Satellite, use 'http://levoai-satellite:9999'
 # Specify below the 'Application Name' chosen earlier.
 #
-helm upgrade levoai-pcap-sensor levoai/levoai-pcap-sensor \
+helm upgrade levoai-pcap-common-tasks levoai/levoai-pcap-common-tasks \
   --install \
   --namespace levoai \
   --create-namespace \
-  --set sensor.config.levoaiOrgId="your Levo Org ID" \
-  --set sensor.config.satelliteUrl="http(s)://hostname|IP:port"
-  --set sensor.confg.levoEnv="your application environment (staging, production etc.)"
+  --set common-tasks.config.levoaiOrgId="your Levo Org ID" \
+  --set common-tasks.config.satelliteUrl="http(s)://hostname|IP:port"
+  --set common-tasks.confg.levoEnv="your application environment (staging, production etc.)"
 ```
 
 Set additional configs
 ```bash
-sensor.config.traceExportInterval="trace export interval in seconds (default 10)"
-sensor.config.rateLimit="rate limit number in traces/min (default 1000)"
-sensor.config.fitler="pcap filter string, eg. port 8080 and (not port 8081)"
-sensor.config.hostAllow="host allow regex"
-sensor.config.pathAllow="path allow regex"
-sensor.config.hostExclusions="host exclusion regex"
-sensor.config.pathExclusions="path exclusion regex"
+common-tasks.config.traceExportInterval="trace export interval in seconds (default 10)"
+common-tasks.config.rateLimit="rate limit number in traces/min (default 1000)"
+common-tasks.config.fitler="pcap filter string, eg. port 8080 and (not port 8081)"
+common-tasks.config.hostAllow="host allow regex"
+common-tasks.config.pathAllow="path allow regex"
+common-tasks.config.hostExclusions="host exclusion regex"
+common-tasks.config.pathExclusions="path exclusion regex"
 ```
 
 ## Sensor Lifecycle Management
 
 ### Uninstall Sensor
 ```bash
-helm uninstall levoai-sensor -n levoai
+helm uninstall levoai-common-tasks -n levoai
 ```
 
 ### Get Sensor Logs

@@ -25,8 +25,8 @@ The steps to add the sensor to your task are as follows
 
 ```json
 {
-    "name": "levo-pcap-sensor",
-    "image": "levoai/pcap-sensor:0.0.20",
+    "name": "levo-pcap-common-tasks",
+    "image": "levoai/pcap-common-tasks:0.0.20",
     "cpu": 512,
     "memory": 512,
     "portMappings": [],
@@ -107,7 +107,7 @@ Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satelli
 # --------------------------------------------------------------------------------------------
 # Satellite Settings:
 # --------------------------------------------------------------------------------------------
-# host:port for the collector service receiving the sensor's API traces.
+# host:port for the collector service receiving the common-tasks's API traces.
 collector-endpoint: <set to desired host:port value>
 # --------------------------------------------------------------------------------------------
 ...
@@ -117,36 +117,36 @@ collector-endpoint: <set to desired host:port value>
 
 ### Start Sensor
 ```bash
-# Note: The default config file is located at: '/etc/levo/sensor/config.yaml'
-sudo systemctl start levo-ebpf-sensor
+# Note: The default config file is located at: '/etc/levo/common-tasks/config.yaml'
+sudo systemctl start levo-ebpf-common-tasks
 ```
 
 ### Get Sensor Status
 ```bash
-sudo systemctl status levo-ebpf-sensor
+sudo systemctl status levo-ebpf-common-tasks
 ```
 
 ### Stop Sensor
 ```bash
-sudo systemctl stop levo-ebpf-sensor
+sudo systemctl stop levo-ebpf-common-tasks
 ```
 
 ### Check Sensor Logs
 ```bash
-journalctl -u levo-ebpf-sensor.service -b -f --since "15min ago"
+journalctl -u levo-ebpf-common-tasks.service -b -f --since "15min ago"
 
 # If journalctl isn't providing logs, you can alternatively:
-sudo cat syslog | grep 'levo-ebpf-sensor'
+sudo cat syslog | grep 'levo-ebpf-common-tasks'
 ```
 
 ### Show Sensor Config
 ```bash
-cat /etc/levo/sensor/config.yaml
+cat /etc/levo/common-tasks/config.yaml
 ```
 
 ### Uninstall Sensor
 ```bash
-sudo apt remove --purge levo-ebpf-sensor
+sudo apt remove --purge levo-ebpf-common-tasks
 sudo apt clean
 ```
 

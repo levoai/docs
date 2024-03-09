@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 1
 ---
 
 # Levo CLI for Mac OS
@@ -55,6 +55,6 @@ levo login
 
 ### [Upgrade Instructions][cli-upgrade]
 
-[cli-upgrade]: ./levo-cli-upgrade-instructions.md#mac-os
+[cli-upgrade]: levo-cli-upgrade-instructions.md
 
 

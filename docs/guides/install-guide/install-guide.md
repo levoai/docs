@@ -1,5 +1,5 @@
 ---
-sidebar_position: 1
+sidebar_position: 0
 ---
 
 # Install Guide
@@ -14,7 +14,7 @@ Your estimated completion time is *10 minutes*.
 
 ### 1. [Signup with your enterprise email](https://app.levo.ai/signup)
 
-### 2. [OS Platform Compatibility Check](os-compat-check.mdx)
+### 2. [OS Platform Compatibility Check](../common-tasks/general/os-compat-check.mdx)
 
 ### 3. [Install Satellite](/install-satellite)
 

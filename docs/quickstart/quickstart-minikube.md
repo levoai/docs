@@ -45,8 +45,8 @@ Then, in a new terminal window, run:
 
 ```shell
 helm repo add levoai https://charts.levo.ai && helm repo update
-helm pull levoai/levoai-ebpf-sensor --untar
-cd levoai-ebpf-sensor/
+helm pull levoai/levoai-ebpf-common-tasks --untar
+cd levoai-ebpf-common-tasks/
 sed -i "s/path: \/proc/path: \/ggproc/" templates/deployment.yaml
-helm upgrade --install levoai-sensor . -n levoai
+helm upgrade --install levoai-common-tasks . -n levoai
 ```

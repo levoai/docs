@@ -68,20 +68,20 @@ If connectivity is healthy, you will see output similar to below.
 #
 # Specify below the 'Application Name' chosen earlier.
 #
-helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
+helm upgrade levoai-common-tasks levoai/levoai-ebpf-common-tasks \
   --install \
   --namespace levoai \
   --create-namespace \
-  --set sensor.config.default-service-name=<'Application Name' chosen earlier> \
-  --set sensor.config.collector-endpoint=<hostname|IP:port>
-  --set sensor.config.env=<'Application environment'>
+  --set common-tasks.config.default-service-name=<'Application Name' chosen earlier> \
+  --set common-tasks.config.collector-endpoint=<hostname|IP:port>
+  --set common-tasks.config.env=<'Application environment'>
 ```
 
 ### Check sensor health
 
 ```bash
-# Please specify the actual pod name for levoai-sensor below
-kubectl -n levoai logs <levoai-sensor pod name> | grep "Initial connection with Collector"
+# Please specify the actual pod name for levoai-common-tasks below
+kubectl -n levoai logs <levoai-common-tasks pod name> | grep "Initial connection with Collector"
 ```
 If connectivity is healthy, you should see output similar to below.
 

@@ -8,7 +8,7 @@ Often you will want to test APIs for both [`Horizontal Authorization Abuse`][hor
 
 This requires credentials for additional users, and their associated role information.
 
-User `role` information for API endpoints is provided in the API catalog via the [metadata.yml file](../../../guides/security-testing-concepts/api-catalog/metadata-yml.md). The metadata file specifies the various roles used by the API, and specific roles that apply to specific API endpoints.
+User `role` information for API endpoints is provided in the API catalog via the [metadata.yml file](../../../guides/security-testing/concepts/api-catalog/metadata-yml.md). The metadata file specifies the various roles used by the API, and specific roles that apply to specific API endpoints.
 
 While the metadata file is used to specify `role` information, the `environment.yml` file requires the provisioning of one or more users per role (as specified in the metadata file), and their respective authentication credentials.
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
 ---
 
 # Levo CLI for Linux
@@ -72,4 +72,4 @@ levo login
 
 ### [Upgrade Instructions][cli-upgrade]
 
-[cli-upgrade]: ./levo-cli-upgrade-instructions.md#linux
+[cli-upgrade]: levo-cli-upgrade-instructions.mdinux

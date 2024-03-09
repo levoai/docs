@@ -9,7 +9,7 @@ export function DownloadMainTF() {
     return (
         <BrowserOnly fallback={<div>Loading...</div>}>
             {() => (
-                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/main.tf'} download> main.tf</a>
+                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/common-tasks/main.tf'} download> main.tf</a>
             )}
         </BrowserOnly>
     );
