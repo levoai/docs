@@ -22,5 +22,5 @@ Open your test plan, navigate to the `environment.yml` section, and download thi
 Follow the instructions [here][configure-authn] to configure appropriate user credentials/roles required to effectively test your live API endpoints.
 
 
-[env-file]: ../../../concepts/test-plans/env-yml.md
+[env-file]: /guides/security-testing/concepts/test-plans/env-yml.md
 [configure-authn]: /security-testing/tasks/authentication/authn-authz.md

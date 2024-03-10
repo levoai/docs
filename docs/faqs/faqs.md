@@ -4,7 +4,7 @@ sidebar_position: 0
 
 # FAQs
 
-## [General](./general.md)
+## [General](general.md)
 
 ## [Data Processing & Storage](data-processing-storage.md)
 

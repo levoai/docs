@@ -6,7 +6,7 @@ sidebar_position: 0
 
 ## 1. Prerequisites
 - You have an account on [Levo.ai](https://app.levo.ai/login)
-- [OS Compatibility script](./os-compat-check.mdx) indicates the Linux host (that you want to instrument with the Sensor) is compatible.
+- [OS Compatibility script](/guides/common-tasks/general/os-compat-check.mdx) indicates the Linux host (that you want to instrument with the Sensor) is compatible.
 - At least 4 CPUs
 - At least 8 GB RAM
 - The Satellite URL should be reachable from the Sensor.

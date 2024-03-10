@@ -7,7 +7,7 @@ sidebar_position: 3
 
 You can read more about *crAPI* [here](https://github.com/levoai/demo-apps/blob/main/crAPI/README.md).
 
-1. First follow instructions in the [Install Guide](install-guide/install-guide.md) to install the Satellite, and Sensor components successfully.
+1. First follow instructions in the [Install Guide](/guides/install-guide) to install the Satellite, and Sensor components successfully.
 
 2. Now install the crAPI demo application by following instructions [here](https://github.com/levoai/demo-apps/blob/main/crAPI/docs/quick-start.md).
 

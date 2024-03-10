@@ -21,5 +21,5 @@ This test plan requires configuration of these test fixtures prior to execution.
 
 
 [example-values]: https://swagger.io/docs/specification/adding-examples/
-[fixtures]: ../../../concepts/test-plans/fixtures/test-fixtures.md
-[fixture-example]: ../../../concepts/test-plans/fixtures/configure-fixtures.md
+[fixtures]: /guides/security-testing/concepts/test-plans/fixtures/test-fixtures.md
+[fixture-example]: /guides/security-testing/concepts/test-plans/fixtures/configure-fixtures.md
