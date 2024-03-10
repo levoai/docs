@@ -63,5 +63,5 @@ kubectl logs -n levoai <pod name>
 - Reinstall Sensor
 
 ### Manage Sensor Configuration
-Please refer to [Sensor Configuration](./sensor-configuration.mdx), and [Applying Configuration Changes](./sensor-configuration.mdx#running-on-kubernetes).
+Please refer to [Sensor Configuration](/install-traffic-capture-sensors/common-tasks/sensor-configuration.mdx), and [Applying Configuration Changes](/install-traffic-capture-sensors/common-tasks/sensor-configuration.mdx#running-on-kubernetes).
 

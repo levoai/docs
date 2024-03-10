@@ -21,7 +21,7 @@ Below are the high level steps for running a previously generated Data Driven Te
 
 Data Driven Test Plans may require some parameter data to be configured for the API endpoints, prior to execution.
 
-Please follow detailed steps outlined [here](../../../guides/security-testing/test-your-app/test-app-security/data-driven/configure-plan-fixtures.md), to configure parameters via `Test Fixtures`.
+Please follow detailed steps outlined [here](/guides/security-testing/test-your-app/test-app-security/data-driven/configure-plan-fixtures.md), to configure parameters via `Test Fixtures`.
 
 Your test plan's `Runnable` status, and `number of test cases runnable` will auto update as you configure required parameters.
 
@@ -35,11 +35,11 @@ Test Cases that are not runnable, will be skipped during execution of the Test P
     
 Your test plan `may` have an auto generated `environment.yml` associated with it.
     
-If it was auto generated follow the steps outlined [here](../../../guides/security-testing/test-your-app/test-app-security/data-driven/configure-env-yml.md), to download and configure it appropriately.
+If it was auto generated follow the steps outlined [here](/guides/security-testing/test-your-app/test-app-security/data-driven/configure-env-yml.md), to download and configure it appropriately.
 
 ### 2. Execute Test Plan via CLI
 
-Follow instructions [here](../../../guides/security-testing/test-your-app/test-app-security/data-driven/execute-test-plan.md) to execute the Test Plan via the CLI (Test Runner).
+Follow instructions [here](/guides/security-testing/test-your-app/test-app-security/data-driven/execute-test-plan.md) to execute the Test Plan via the CLI (Test Runner).
 
 ### 3. View Test Results
 

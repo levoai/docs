@@ -44,8 +44,8 @@ docker run -e LEVOAI_AUTH_KEY=<your-auth-key> \
     - *Default:* ""
 
 ### Note
-- For more information on the environment variables, refer to the [Environment Variables](/api-observability/install-guide/install-levo-for-macos#required-environment-variables) section.
-- For more information on log parser, refer to the [Log Parser](/api-observability/install-guide/install-levo-for-macos#log-parser) section.
+- For more information on the environment variables, refer to the [Environment Variables](/install-traffic-capture-sensors/sensor-on-macos#required-environment-variables) section.
+- For more information on log parser, refer to the [Log Parser](/install-traffic-capture-sensors/sensor-on-macos#log-parser) section.
 
 
 **Please contact `support@levo.ai` if you notice health/connectivity related errors.**

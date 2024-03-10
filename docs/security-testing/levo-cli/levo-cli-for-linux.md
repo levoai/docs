@@ -72,4 +72,4 @@ levo login
 
 ### [Upgrade Instructions][cli-upgrade]
 
-[cli-upgrade]: levo-cli-upgrade-instructions.mdinux
+[cli-upgrade]: levo-cli-upgrade-instructions.md#linux

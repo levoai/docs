@@ -13,11 +13,11 @@ Below are the high level steps for running a previously generated Zero Configura
     
 Your test plan `may` have an auto generated `environment.yml` associated with it.
     
-If it was auto generated follow the steps outlined [here](../../../guides/security-testing/test-your-app/test-app-security/zero-conf/configure-env-yml.md), to download and configure it appropriately.
+If it was auto generated follow the steps outlined [here](/guides/security-testing/test-your-app/test-app-security/zero-conf/configure-env-yml.md), to download and configure it appropriately.
 
 ### 2. Execute Test Plan via CLI
 
-Follow instructions [here](../../../guides/security-testing/test-your-app/test-app-security/zero-conf/execute-test-plan.md) to execute the Test Plan via the CLI (Test Runner).
+Follow instructions [here](/guides/security-testing/test-your-app/test-app-security/zero-conf/execute-test-plan.md) to execute the Test Plan via the CLI (Test Runner).
 
 ### 3. View Test Results
 

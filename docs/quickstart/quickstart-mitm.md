@@ -43,7 +43,7 @@ Since Mac OSX and Windows do not support [eBPF](https://ebpf.io), Levo provides 
 
 API Observability auto discovers APIs and generates OpenAPI specifications for all API endpoints, by observing API traffic between your *API Client* and *API Server*.
 
-If you do not have a test *API Service*/*Application*, you can use the [sample application](/guides/install-guide/demo-application) provided by Levo.
+If you do not have a test *API Service*/*Application*, you can use the [sample application](/guides/demo-application) provided by Levo.
 
 - a. Note down the base URL for your test *API Server*/*Service*.
 > For example, if you are running the sample application (crAPI) on your laptop, the base URL would be `http://localhost:8888`. If your local test *API Server* uses HTTPs the base URL for example, would be `https://localhost/`.
@@ -102,7 +102,7 @@ The Sensor package uses an authorization key to access Levo.ai. Follow instructi
 
 
 ## 4. Pick an `Application Name`
-Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](../guides/security-testing/concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different API servers, similar to how file folders work in an operating system.
+Auto discovered API endpoints and their OpenAPI specifications are show in the [API Catalog](/guides/security-testing/concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different API servers, similar to how file folders work in an operating system.
 
 - a. Pick a descriptive name which will be used in the subsequent step below. For example: `my-test-api-server`.
 - b. Export the `Application Name` in your terminal.
@@ -301,7 +301,7 @@ If API Traffic is correctly being processed, you will see a lot of log entries c
 
 
 ## 9. View Auto-discovered OpenAPI Specifications
-The [API Catalog](../guides/security-testing/concepts/api-catalog/api-catalog.md) in Levo.ai should be auto populated in a matter of minutes (after your API endpoints are being exercised consistently).
+The [API Catalog](/guides/security-testing/concepts/api-catalog/api-catalog.md) in Levo.ai should be auto populated in a matter of minutes (after your API endpoints are being exercised consistently).
 
 The API Catalog will contain your auto discovered API endpoints and their OpenAPI schemas, all grouped under the `Application Name` you chose earlier.
 

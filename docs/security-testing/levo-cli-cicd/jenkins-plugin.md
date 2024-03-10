@@ -8,8 +8,8 @@ Levo's security/contract tests can be embedded in Jenkins quality gates via Levo
 
 ### Prerequisites
 - Forever Free Account on Levo.ai
-- A runnable Levo [Test Plan](../../guides/security-testing/concepts/test-plans/test-plans.md)
-- A `Levo CLI Authorization Key`. Refer to instructions [here](./common-tasks.md#generating-cli-authorization-keys)
+- A runnable Levo [Test Plan](/guides/security-testing/concepts/test-plans/test-plans.md)
+- A `Levo CLI Authorization Key`. Refer to instructions [here](/integrations/common-tasks.md#generating-cli-authorization-keys)
 
 ### Installation
 Below are the installation options:
@@ -50,7 +50,7 @@ Follow the steps below to create a build job, that executes a Levo Test Plan aga
 
    iii. `Extra CLI Arguments` (optional)
 
-   Please refer to the [CLI Command Reference](../levo-cli/levo-cli-command-reference.md). Specify any optional arguments based on your preferences here.
+   Please refer to the [CLI Command Reference](/security-testing/levo-cli/levo-cli-command-reference.md). Specify any optional arguments based on your preferences here.
 
    iv. `Generate JUnit Reports`
 
@@ -66,14 +66,14 @@ Follow the steps below to create a build job, that executes a Levo Test Plan aga
     - Select your domain
     - Select "Levo CLI Credentials" for Kind
     - Select your `Scope` based on your preferences
-    - Enter your *Organization ID* in the `Organization Id` text box. Refer to [Accessing Organization IDs](./common-tasks.md#accessing-organization-ids) for instructions on fetching your ID
-    - Enter your CLI authorization key in the `CLI Authorization Key` textbox. Refer to [Generating CLI Authorization Keys](./common-tasks.md#generating-cli-authorization-keys) for instructions on fetching your key
+    - Enter your *Organization ID* in the `Organization Id` text box. Refer to [Accessing Organization IDs](/integrations/common-tasks.md#accessing-organization-ids) for instructions on fetching your ID
+    - Enter your CLI authorization key in the `CLI Authorization Key` textbox. Refer to [Generating CLI Authorization Keys](/integrations/common-tasks.md#generating-cli-authorization-keys) for instructions on fetching your key
     - Click `Add` to save the credentials
     - Finally select the credential you just added
 
    vi. `Environment Secret Text`
 
-   If you are using an [environment file](../guides/security-testing/test-your-app/test-app-security/data-driven/configure-env-yml) to define authentication details, you add those details as a secret file here.
+   If you are using an [environment file](/guides/security-testing/test-your-app/test-app-security/data-driven/configure-env-yml) to define authentication details, you add those details as a secret file here.
 
    ![Environment File for Jenkins](../../assets/add-env-file-to-jenkins-secret.png)
 
