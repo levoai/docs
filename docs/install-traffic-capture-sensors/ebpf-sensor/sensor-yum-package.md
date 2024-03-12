@@ -38,6 +38,6 @@ Install the eBPF Sensor from Levo's RPM repository.
 Enter `y` when prompted.
 
 ### 3. Start the Sensor
-Please take a look at the [Running the Sensor as a Systemd Service](./sensor-systemd-service) section for further instructions.
+Please take a look at the [Running the Sensor as a Systemd Service](/install-traffic-capture-sensors/ebpf-sensor/sensor-systemd-service) section for further instructions.
 
 

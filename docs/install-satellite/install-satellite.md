@@ -35,5 +35,3 @@ Copy your authorization key. This key is required in subsequent steps below.
   - [Install in AWS EKS using Fargate](satellite-aws-eks-fargate.md)
 - [Install in AWS ECS](satellite-aws-ecs.mdx)
 
-<br></br>
-

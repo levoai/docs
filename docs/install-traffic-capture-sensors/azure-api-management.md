@@ -40,4 +40,4 @@ Ensure that the policy is added at the [API Scope](https://learn.microsoft.com/e
 ## Logs-based Instrumentation
 
 You may also use Azure API Management Logs to instrument your APIs.
-Visit the [Log Parser](/api-observability/install-guide/install-sensor/log-parser) page for more details.
+Visit the [Log Parser](/install-log-parsing-sensors) page for more details.
