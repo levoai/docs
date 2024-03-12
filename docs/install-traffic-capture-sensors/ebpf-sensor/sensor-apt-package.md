@@ -38,5 +38,5 @@ sudo apt install levo-ebpf-sensor=0.29.6
 ```
 
 ### 4. Start the Sensor
-Please take a look at the [Running the Sensor as a Systemd Service](#running-sensor-systemd) section for further instructions.
+Please take a look at the [Running the Sensor as a Systemd Service](/install-traffic-capture-sensors/ebpf-sensor/sensor-systemd-service) section for further instructions.
 

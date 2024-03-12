@@ -6,6 +6,9 @@ sidebar_position: 0
 
 ## 1. Prerequisites
 - You have an account on [Levo.ai](https://app.levo.ai/login)
+:::info
+Depending on the region you are installing in, you may need to use [Levo.ai India-1](https://app.india-1.levo.ai/login) to create account.
+:::
 - [OS Compatibility script](/guides/common-tasks/general/os-compat-check.mdx) indicates the Linux host (that you want to instrument with the Sensor) is compatible.
 - At least 4 CPUs
 - At least 8 GB RAM

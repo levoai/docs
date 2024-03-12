@@ -2,7 +2,7 @@
 sidebar_position: 6
 ---
 
-# Install Code Analysis Sensors
+# Install Code Analysis Tools
 
 ## Prerequisites
 - Docker is installed on your machine.

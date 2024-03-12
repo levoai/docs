@@ -7,7 +7,7 @@ sidebar_position: 5
 This guide provides comprehensive instructions for installing the Levo Satellite, Sensor and Log Parser components together as a single container on a MacOS host.
 
 Follow instructions for your specific platform/method below:
-- [Install on Linux host via Docker](#install-on-linux-host-via-docker)
+- [Install on Linux host via Docker](#install-via-docker)
 
 <br></br>
 
