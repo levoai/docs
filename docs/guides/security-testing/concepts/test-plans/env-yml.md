@@ -23,4 +23,4 @@ The `environment.yml` file contains `secrets` and is **never** sent to, or store
 Please treat this file securely, and take all precautions necessary for handling secrets.
 
 ## Tell me more
-You can find more information on providing authentication/authorization information for tests [here](/security-testing/tasks/authentication/authn-authz.md)
+You can find more information on providing authentication/authorization information for tests [here](/security-testing/tasks/authentication/authentication.md)

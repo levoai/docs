@@ -29,7 +29,7 @@ Based on your minikube driver, follow the instructions below:
 
 
 ## Bare-metal or VM-based driver
-Follow the [standard Kubernetes installation instructions](/api-observability/install-guide/install-sensor/ebpf-sensor#install-on-kubernetes).
+Follow the [standard Kubernetes installation instructions](/install-traffic-capture-sensors/ebpf-sensor/sensor-kubernetes).
 
 
 ## Docker driver

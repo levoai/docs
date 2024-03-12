@@ -20,7 +20,7 @@ valid `bearer tokens` for `user_1` in the example below.
 iam:
   users:
   - name: user_1
-    default: true # This user's credentials will be used for all authentication
+    default: true # This user's credentials will be used for all authn-authz
     bearer_tokens:
     - name: bearerAuth
       value: <Enter the bearer token>
@@ -42,7 +42,7 @@ Below is the syntax to enable `http_call` based login.
 iam:
   #
   #
-  # This section specifies how to extract an authentication token
+  # This section specifies how to extract an authn-authz token
   authenticators:
     - name:  <your friendly name for this authenticator. E.g. my_authenticator>
       type: http_call # Makes a HTTP request using the specified method
@@ -84,7 +84,7 @@ iam:
     - name: user_1
       username: <username for an actual user in your API's backend>
       password_base64: <password for the specified user> # Passwords need to be base64 encoded
-      # Below defines which authentication mechanism to use
+      # Below defines which authn-authz mechanism to use
       authenticator: <friendly name of the authenticator specified above>
 ```
 
@@ -103,7 +103,7 @@ iam:
       default: true # Default user for `ROLE_USER`
       username: <username for an actual user in your API's backend>
       password_base64: <password for the specified user> # Passwords need to be base64 encoded
-      # Below defines which authentication mechanism to use
+      # Below defines which authn-authz mechanism to use
       authenticator: <friendly name of the authenticator specified above>
       roles:
         - ROLE_USER
@@ -112,7 +112,7 @@ iam:
     - name: user_2
       username: <username for an actual user in your API's backend>
       password_base64: <password for the specified user> # Passwords need to be base64 encoded
-      # Below defines which authentication mechanism to use
+      # Below defines which authn-authz mechanism to use
       authenticator: <friendly name of the authenticator specified above>
       roles:
         - ROLE_USER
@@ -122,7 +122,7 @@ iam:
       default: true # Default user for `ROLE_ADMIN`
       username: <username for an actual user in your API's backend>
       password_base64: <password for the specified user> # Passwords need to be base64 encoded
-      # Below defines which authentication mechanism to use
+      # Below defines which authn-authz mechanism to use
       authenticator: <friendly name of the authenticator specified above>
       roles:
         - ROLE_ADMIN
@@ -131,7 +131,7 @@ iam:
     - name: admin_2
       username: <username for an actual user in your API's backend>
       password_base64: <password for the specified user> # Passwords need to be base64 encoded
-      # Below defines which authentication mechanism to use
+      # Below defines which authn-authz mechanism to use
       authenticator: <friendly name of the authenticator specified above>
       roles:
         - ROLE_ADMIN
@@ -146,14 +146,14 @@ The environment.yml file provides specific values for the API key and can be spe
 iam:
   authenticators:
     - name: <your friendly name for this authenticator>
-      type: api_key # Use API key authentication for API calls
+      type: api_key # Use API key authn-authz for API calls
   users:
     # This section defines users and their respective API keys
     - name: user_1
       api_keys:
       - name: <friendly name for your API key for user_1>
         value: <your api key value>
-      # Below defines which authentication mechanism to use
+      # Below defines which authn-authz mechanism to use
       authenticator: <friendly name of the authenticator specified above>
 ```
 If you using roles, the format is similar to the Basic Authentication example. You just need to use API key instead of username and password.
@@ -168,7 +168,7 @@ Below example is applicable, when the cookie values are known *a priori*.
 iam:
   users:
   - name: user_1
-    default: true # This user's credentials will be used for all authentication
+    default: true # This user's credentials will be used for all authn-authz
     cookies:
     - name: <Enter exact cookie name. E.g. JSESSIONID> # Cookie is case sensitive
       value: <Enter the cookie value>
@@ -212,7 +212,7 @@ iam:
       # This section specifies how to extract the cookie from the HTTP response
       session_credential_extractors:
         - name: <your friendly name for this cookie extractor. E.g. my-cookies>
-          type: cookies # Use cookie based authentication 
+          type: cookies # Use cookie based authn-authz 
           location: headers # Location of the cookie is in the response headers
           header_name: Set-Cookie # Case sensitive name of the header. All cookies in the Set-Cookie header are extracted
   #
@@ -223,7 +223,7 @@ iam:
       default: true # This user's credentials will be used to access all API endpoints requiring AuthN
       username: <user_id> # Specify the actual user id
       password_base64: <base64 password> # Specify the user's base64 encoded password.
-      # Below defines which authentication mechanism to use
+      # Below defines which authn-authz mechanism to use
       authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
 ```
 
@@ -242,7 +242,7 @@ iam:
     default: true # Default user for `ROLE_ADMIN`
     roles:
     - ROLE_ADMIN
-    # Use the below cookie header for authentication
+    # Use the below cookie header for authn-authz
     cookies:
     - name: <Enter exact cookie name. E.g. JSESSIONID> # Cookie is case sensitive
       value: <Enter the cookie value>
@@ -286,7 +286,7 @@ iam:
       # This section specifies how to extract the cookie from the HTTP response
       session_credential_extractors:
         - name: <your friendly name for this cookie extractor. E.g. my-cookies>
-          type: cookies # Use cookie based authentication 
+          type: cookies # Use cookie based authn-authz 
           location: headers # Location of the cookie is in the response headers
           header_name: Set-Cookie # Case sensitive name of the header. All cookies in the Set-Cookie header are extracted.
   #
@@ -298,7 +298,7 @@ iam:
       default: true # Default user for `ROLE_ADMIN`
       username: <user_id> # Specify the actual user id
       password_base64: <base64 password> # Specify the user's base64 encoded password.
-      # Below defines which authentication mechanism to use
+      # Below defines which authn-authz mechanism to use
       authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
     #
     # `user_1` with role ROLE_USER
@@ -306,14 +306,14 @@ iam:
       default: true # Default user for `ROLE_USER`
       username: <user_id> # Specify the actual user id
       password_base64: <base64 password> # Specify the user's base64 encoded password.
-      # Below defines which authentication mechanism to use
+      # Below defines which authn-authz mechanism to use
       authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
     #
     # `user_2` with role ROLE_USER
     - name: user_2
       username: <user_id> # Specify the actual user id
       password_base64: <base64 password> # Specify the user's base64 encoded password.
-      # Below defines which authentication mechanism to use
+      # Below defines which authn-authz mechanism to use
       authenticator: <friendly name of the authenticator specified above. E.g. my_auth_cookie_extractor>
 ```
 
@@ -356,7 +356,7 @@ iam:
   # This section specifies actual user information the test plan will use
   users:
     - name: user_1
-      default: true # This user's credentials will be used for all authentication
+      default: true # This user's credentials will be used for all authn-authz
       username: <Enter the username for whom you want to extract the access token>
       password_base64: <base64 password> # Passwords need to be base64 encoded
       scopes: # Optional field with a list of scopes
@@ -401,7 +401,7 @@ iam:
   # This section specifies actual user information the test plan will use
   users:
     - name: user_1
-      default: true # This user's credentials will be used for all authentication
+      default: true # This user's credentials will be used for all authn-authz
       scopes: # Optional field with a list of scopes
       #  E.g. - api.read
       #  E.g. - api.write

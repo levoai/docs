@@ -12,7 +12,7 @@ This guide assumes that you have [signed up for a Levo account](https://app.levo
 Here are the steps you need to follow to start building OpenAPI specs with Levo and ZAP:
 1. The OpenAPI spec is built by sending anonymized API traces to Levo. You may run the *Satellite* (a set of services which receives and processes the traces) locally using docker or minikube, or on AWS with an AMI provided by Levo.
 
-   [Click here for instructions on installing the satellite](/api-observability/install-guide/install-satellite).
+   [Click here for instructions on installing the satellite](/install-satellite).
 
    Please ensure that ZAP is able to reach the satellite at the configured listening port (the default is `9999`).
 
