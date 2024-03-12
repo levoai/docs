@@ -10,7 +10,7 @@ sidebar_position: 4
 - You have noted down the Source Elastic Network Interface (source ENI) id, usually the Load Balancer ENI.
 - The Satellite is reachable from the source where you are mirroring traffic from.
 
-[Setup Levo CLI with AWS credentials](/security-testing/levo-cli)
+[Setup Levo CLI with AWS credentials](/security-testing/test-laptop)
 
 ### ii. Creating mirroring session using Levo CLI
 

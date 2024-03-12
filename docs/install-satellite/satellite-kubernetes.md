@@ -109,7 +109,7 @@ Run the below command and note the `external` address/port of the the Collector 
 ```bash
 kubectl get service levoai-collector -n levoai
 ```
-Please proceed to [install Traffic Capture Sensors](/install-sensor-capture-sensors).
+Please proceed to [install Traffic Capture Sensors](/install-traffic-capture-sensors).
 
 ---------------------------------------------------------
 

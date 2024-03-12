@@ -1,5 +1,5 @@
 ---
-sidebar_position: 0
+sidebar_position: 4
 ---
 
 # Levo CLI in CI/CD
@@ -10,8 +10,8 @@ You can embed Levo’s contract & security tests in various stages of your softw
 
 While Levo can be embedded in any CI/CD product (via the CLI), below are first class integrations.
 
-- [GitHub Actions](/security-testing/levo-cli-cicd/github-action)
-- [Jenkins](/security-testing/levo-cli-cicd/jenkins-plugin)
+- [GitHub Actions](/security-testing/github-action)
+- [Jenkins](/security-testing/jenkins-plugin)
 
 -----------------------------------
 

@@ -61,4 +61,4 @@ sidebar_position: 6
 - The App Name will be the same as the title of the OpenAPI/Swagger spec.
 
 
-[install-cli]: /security-testing/levo-cli
+[install-cli]: /security-testing/test-laptop

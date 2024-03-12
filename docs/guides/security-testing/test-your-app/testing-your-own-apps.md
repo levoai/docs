@@ -22,10 +22,10 @@ First review the [Concepts][concepts] section. Then follow these steps:
 
 
 
-[concepts]: /guides/security-testing/concepts/concepts
-[mac]: /security-testing/levo-cli/levo-cli-for-mac-os.md
-[linux]: /security-testing/levo-cli/levo-cli-for-linux.md
-[windows]: /security-testing/levo-cli/levo-cli-for-windows.md
+[concepts]: /guides/security-testing/concepts
+[mac]: /security-testing/test-laptop/test-mac-os.md
+[linux]: /security-testing/test-laptop/test-linux.md
+[windows]: /security-testing/test-laptop/test-windows.md
 
 [use-my-app-for-schema-tests]: test-app-schema-conformance.md
 [use-my-app-for-security-tests]: test-app-security/choices.md

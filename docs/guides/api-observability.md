@@ -17,10 +17,5 @@ Levo’s frictionless & privacy-preserving API observability solution, auto disc
 
 - [Quickstart](/quickstart)
 
-- [Install Guide](/guides/install-guide)
-
 - [Demo Application](demo-application.md)
 
-- [Common Tasks](/guides/common-tasks)
-
-- [Miscellaneous](/guides/miscellaneous.md)

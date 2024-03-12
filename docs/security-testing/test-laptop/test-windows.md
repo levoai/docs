@@ -2,7 +2,7 @@
 sidebar_position: 3
 ---
 
-# Levo CLI for Windows
+# Test on Windows
 
 ### Prerequisites
 

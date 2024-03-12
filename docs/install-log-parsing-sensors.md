@@ -12,7 +12,7 @@ sidebar_position: 5
 - The Satellite is reachable (via HTTP/s) from the location where you are going to install the log-parser.
 
 ## ii. Pick an `Application Name`
-Auto discovered API endpoints and their OpenAPI specifications are shown in the [API Catalog](/security-testing/concepts/api-catalog/api-catalog.md), grouped under an application name. The application name helps segregate and group API endpoints from different environments, similar to how file folders work in an operating system.
+Auto discovered API endpoints and their OpenAPI specifications are shown in the [API Catalog](/guides/security-testing/concepts/api-catalog), grouped under an application name. The application name helps segregate and group API endpoints from different environments, similar to how file folders work in an operating system.
 
 Pick a descriptive name which will be used in the subsequent step below. For example: `my-test-app`.
 

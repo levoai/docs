@@ -40,10 +40,10 @@ Microsoft is currently building support for [eBPF in Windows](https://github.com
 Developers can evaluate `API Observability` on their Windows Laptops, via a proxy based Sensor. Please refer to [Quickstart for macOS/Windows](/quickstart/quickstart-mitm.md).
 
 ### Is there a script that can assess if my OS platform is compatible?
-Yes. Please see [install guide](/guides/install-guide.md).
+Yes. Please see [install guide](/guides/install-guide).
 
 ### How do I install the Sensor?
-Please see [install guide](/guides/install-guide.md).
+Please see [install guide](/guides/install-guide).
 
 ### What kind of API traffic is discovered?
 Currently REST APIs only. Support for gRPC, and GraphQL are on the roadmap.

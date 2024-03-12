@@ -19,7 +19,7 @@ The CLI is packaged as a Docker container, and is available for Mac OS, Windows,
 [Levo CLI Command Reference][cli-reference]
 
 
-[cli-mac]: levo-cli-for-mac-os.md
-[cli-linux]: levo-cli-for-linux.md
-[cli-win]: levo-cli-for-windows.md
-[cli-reference]: levo-cli-command-reference.md
+[cli-mac]: /security-testing/test-laptop/test-mac-os
+[cli-linux]: /security-testing/test-laptop/test-linux
+[cli-win]: /security-testing/test-laptop/test-windows
+[cli-reference]: /security-testing/test-laptop/levo-cli-command-reference

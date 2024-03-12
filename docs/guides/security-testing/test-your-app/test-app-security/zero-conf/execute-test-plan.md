@@ -43,4 +43,4 @@ In the Levo SaaS console side panel, click on `Test Runs` and navigate to your m
 
 
 
-[levo-cli]: /security-testing/levo-cli
+[levo-cli]: /security-testing/test-laptop

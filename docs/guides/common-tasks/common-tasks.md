@@ -6,5 +6,7 @@ sidebar_position: 2
 
 This section provides a list of common tasks that can be performed using Levo.
 
-- [General](/guides/common-tasks/general)
+- General
+  - [OS Compatibility Check](/guides/common-tasks/general/os-compat-check)
+  - [Private Registry](/guides/common-tasks/general/private-registry)
 

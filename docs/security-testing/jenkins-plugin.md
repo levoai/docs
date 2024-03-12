@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # Jenkins Plugin
@@ -32,17 +32,17 @@ Follow the steps below to create a build job, that executes a Levo Test Plan aga
 
 3. Add `Levo Test Plan` build step to `Build Steps`
 
-   ![Jenkins Build Step](../../assets/jenkins-build-step.png)
+   ![Jenkins Build Step](../assets/jenkins-build-step.png)
 
 4. Configure the build step as shown below:
 
-   ![Levo Build Step Config](../../assets/jenkins-levo-test-plan-build-step.png)
+   ![Levo Build Step Config](../assets/jenkins-levo-test-plan-build-step.png)
 
    i. `Test Plan`
 
    Copy the LRN of your Levo Test Plan (from the Levo console), and paste it in the Test Plan section. The LRN uniquely identifies the Test Plan to execute.
 
-   ![LRN](../../assets/test-plan-lrn.png)
+   ![LRN](../assets/test-plan-lrn.png)
 
    ii. `Target`
 
@@ -50,7 +50,7 @@ Follow the steps below to create a build job, that executes a Levo Test Plan aga
 
    iii. `Extra CLI Arguments` (optional)
 
-   Please refer to the [CLI Command Reference](/security-testing/levo-cli/levo-cli-command-reference.md). Specify any optional arguments based on your preferences here.
+   Please refer to the [CLI Command Reference](/security-testing/test-laptop/levo-cli-command-reference.md). Specify any optional arguments based on your preferences here.
 
    iv. `Generate JUnit Reports`
 
@@ -60,7 +60,7 @@ Follow the steps below to create a build job, that executes a Levo Test Plan aga
 
    You will need to specify the *Levo CLI Authorization Key* here. The Jenkins [Credentials Provider Plugin](https://plugins.jenkins.io/credentials/) is utilized to securely store the API key.
 
-   ![Jenkins Credentials](../../assets/add-jenkins-cli-auth-key.png)
+   ![Jenkins Credentials](../assets/add-jenkins-cli-auth-key.png)
 
     - Click on the "Add" button next to the credentials dropdown
     - Select your domain
@@ -75,7 +75,7 @@ Follow the steps below to create a build job, that executes a Levo Test Plan aga
 
    If you are using an [environment file](/guides/security-testing/test-your-app/test-app-security/data-driven/configure-env-yml) to define authentication details, you add those details as a secret file here.
 
-   ![Environment File for Jenkins](../../assets/add-env-file-to-jenkins-secret.png)
+   ![Environment File for Jenkins](../assets/add-env-file-to-jenkins-secret.png)
 
     - Click on the "Add" button next to the *Environment Secret Text* dropdown
     - Select your domain

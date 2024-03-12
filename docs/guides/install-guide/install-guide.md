@@ -18,4 +18,4 @@ Your estimated completion time is *10 minutes*.
 
 ### 3. [Install Satellite](/install-satellite)
 
-### 4. [Install Sensor](/install-sensor)
+### 4. [Install Sensor](/install-traffic-capture-sensors)

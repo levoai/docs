@@ -2,7 +2,7 @@
 sidebar_position: 2
 ---
 
-# Levo CLI for Linux
+# Test on Linux
 
 ### Prerequisites
 

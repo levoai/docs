@@ -49,5 +49,5 @@ Inside `crAPI`, use the top level menu to navigate to `Hackpad`. Follow instruct
 
 
 [fixtures]: /guides/security-testing/concepts/test-plans/fixtures/test-fixtures.md
-[levo-cli]: /security-testing/levo-cli
+[levo-cli]: /security-testing/test-laptop
 [BOLA]: /vulnerabilities/v1/OWASP-API-10/A1-BOLA
