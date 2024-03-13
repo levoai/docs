@@ -69,6 +69,10 @@ const config = {
             to: '/install-satellite',
             from: ['/api-observability/install-guide/install-satellite'],
           },
+          {
+            to: '/security-testing/test-laptop',
+            from: ['/security-contract-testing/levo-cli/levo-cli-intro'],
+          }
         ],
       },
     ],

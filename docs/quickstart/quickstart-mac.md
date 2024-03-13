@@ -3,7 +3,7 @@ sidebar_position: 2
 keywords: [API Security, ZAP, OWASP, Linux, macOS, Windows, API Observability]
 ---
 
-# Quickstart on Mac
+# Quickstart on Mac / Laptop
 
 ### Prerequisites
 - Docker Engine version `18.03.0` and above
