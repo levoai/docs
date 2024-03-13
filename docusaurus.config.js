@@ -60,7 +60,18 @@ const config = {
       {
         indexDocSidebarParentCategories: 0
       }
-      ]
+    ],
+    [
+      '@docusaurus/plugin-client-redirects',
+      {
+        redirects: [
+          {
+            to: '/install-satellite',
+            from: ['/api-observability/install-guide/install-satellite'],
+          },
+        ],
+      },
+    ],
   ],
 
   themeConfig:
