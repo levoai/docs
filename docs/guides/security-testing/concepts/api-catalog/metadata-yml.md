@@ -21,4 +21,4 @@ RESTful APIs operate on resources, and provide `CRUD` operations on those resour
 The `metadata.yml` also allows grouping API endpoints for specific resources, so that Levo can auto generate tests that evaluate the consistency of state changing `CRUD` operation sequences.
 
 ## How do I provide RBAC information for my API endpoints?
-You can get detailed information [here](/security-testing/common-tasks/api-rbac)
+You can get detailed information [here](/guides/security-testing/common-tasks/api-rbac)

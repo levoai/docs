@@ -113,6 +113,8 @@ Please proceed to [install Traffic Capture Sensors](/install-traffic-capture-sen
 
 ---------------------------------------------------------
 
+## Satellite Lifecycle Management
+
 ### Upgrade Satellite
 ```bash
 # Setup environment variables

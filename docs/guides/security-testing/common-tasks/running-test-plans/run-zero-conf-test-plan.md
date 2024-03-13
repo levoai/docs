@@ -3,11 +3,11 @@ sidebar_position: 2
 ---
 
 # How do I run a Zero Configuration Test Plan?
-![](../../../assets/zero-conf-test-plan.svg)
+![](../../../../assets/zero-conf-test-plan.svg)
 
 Below are the high level steps for running a previously generated Zero Configuration Test Plan.
 
-![](../../../assets/task-run-zero-conf-test-plan.svg)
+![](../../../../assets/task-run-zero-conf-test-plan.svg)
 
 ### 1. Download & Configure `environment.yml`
     

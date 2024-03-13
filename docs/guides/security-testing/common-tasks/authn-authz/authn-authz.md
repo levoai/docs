@@ -8,8 +8,8 @@ Most API endpoints require some form of user/client authentication, and authoriz
 
 Below sections cover the provisioning of authentication and authorization information for test plans.
 
-### [Providing Authentication Information](/security-testing/common-tasks/authn-authz/authn)
-### [Supported Authentication Methods](/security-testing/common-tasks/authn-authz/supported-auth-methods)
-### [Providing Authorization Information for Authorization Abuse Tests](/security-testing/common-tasks/authn-authz/authz)
+### [Providing Authentication Information](/guides/security-testing/common-tasks/authn-authz/authn)
+### [Supported Authentication Methods](/guides/security-testing/common-tasks/authn-authz/supported-auth-methods)
+### [Providing Authorization Information for Authorization Abuse Tests](/guides/security-testing/common-tasks/authn-authz/authz)
 
 

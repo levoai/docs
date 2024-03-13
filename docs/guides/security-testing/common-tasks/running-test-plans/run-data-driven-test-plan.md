@@ -3,11 +3,11 @@ sidebar_position: 3
 ---
 
 # How do I run a Data Driven Test Plan?
-![](../../../assets/data-driven-test-plan.svg)
+![](../../../../assets/data-driven-test-plan.svg)
 
 Below are the high level steps for running a previously generated Data Driven Test Plan.
 
-![](../../../assets/task-run-data-driven-test-plan.svg)
+![](../../../../assets/task-run-data-driven-test-plan.svg)
 
 ### 1. Check Test Plan State
 
