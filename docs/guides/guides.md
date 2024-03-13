@@ -10,7 +10,7 @@ This section contains guides to help you get started with LevoAI's API Observabi
 ## [Key Concepts](/guides/key-concepts)
 ## [API Observability](/guides/api-observability)
 ## [Security Testing](/guides/security-testing)
-## [Common Tasks](/guides/common-tasks)
+## [General](/guides/general)
 ## [Install Guide](/guides/install-guide)
 ## [Demo Application](/guides/demo-application)
 

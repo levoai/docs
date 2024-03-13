@@ -13,7 +13,7 @@ Levo’s frictionless & privacy-preserving API observability solution, auto disc
 
 - [Key Concepts](/guides/key-concepts)
 
-- [Supported Platforms](/guides/supported-platforms.md)
+- [Supported Platforms](/guides/general/supported-platforms.md)
 
 - [Quickstart](/quickstart)
 

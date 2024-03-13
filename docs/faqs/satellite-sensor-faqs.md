@@ -24,10 +24,10 @@ Please provide as much details as possible in your support request.
 ## Sensor
 
 ### What OS platforms are supported?
-Please see [OS Platforms](/guides/supported-platforms.md#what-os-platforms-are-supported).
+Please see [OS Platforms](/guides/general/supported-platforms.md#what-os-platforms-are-supported).
 
 ### What Kubernetes platforms are supported?
-Please see [K8s Platforms](/guides/supported-platforms.md#what-kubernetes-platforms-are-supported).
+Please see [K8s Platforms](/guides/general/supported-platforms.md#what-kubernetes-platforms-are-supported).
 
 ### Is Docker Desktop or minikube on Mac OSX, supported?
 Support for Docker Desktop, Docker Desktop based Kubernetes, and minikube on MacOS is on the roadmap.

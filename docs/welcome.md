@@ -13,7 +13,7 @@ Levo can host the Satellite for you (reach out to [`support@levo.ai`](mailto:sup
 
 ### [Signup with your enterprise email](https://app.levo.ai/signup)
 
-### [OS Platform Compatibility Check](/guides/common-tasks/general/os-compat-check)
+### [OS Platform Compatibility Check](/guides/general/os-compat-check)
 
 ### [Install Satellite](/install-satellite)
 
