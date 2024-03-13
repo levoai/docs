@@ -24,3 +24,26 @@ Follow instructions for your specific platform/method below:
 - [Install on RPM based Linux Distributions via `yum`](/install-traffic-capture-sensors/ebpf-sensor/sensor-yum-package)
 
 <br></br>
+-----------------------------------------------------------
+
+## Sensor Lifecycle Management
+
+### Uninstall Sensor
+```bash
+helm uninstall levoai-sensor -n levoai
+```
+
+### Get Sensor Logs
+```bash
+kubectl get pods -n levoai
+
+kubectl logs -n levoai <pod name>
+```
+
+### Upgrade Sensor
+- Uninstall Sensor
+- Reinstall Sensor
+
+### Manage Sensor Configuration
+Please refer to [Sensor Configuration](/install-traffic-capture-sensors/common-tasks/sensor-configuration.mdx), and [Applying Configuration Changes](/install-traffic-capture-sensors/common-tasks/sensor-configuration.mdx#running-on-kubernetes).
+

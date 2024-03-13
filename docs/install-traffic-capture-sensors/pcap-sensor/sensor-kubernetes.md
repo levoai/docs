@@ -44,24 +44,3 @@ sensor.config.hostExclusions="host exclusion regex"
 sensor.config.pathExclusions="path exclusion regex"
 ```
 
-## Sensor Lifecycle Management
-
-### Uninstall Sensor
-```bash
-helm uninstall levoai-sensor -n levoai
-```
-
-### Get Sensor Logs
-```bash
-kubectl get pods -n levoai
-
-kubectl logs -n levoai <pod name>
-```
-
-### Upgrade Sensor
-- Uninstall Sensor
-- Reinstall Sensor
-
-### Manage Sensor Configuration
-Please refer to [Sensor Configuration](/install-traffic-capture-sensors/common-tasks/sensor-configuration.mdx), and [Applying Configuration Changes](/install-traffic-capture-sensors/common-tasks/sensor-configuration.mdx#running-on-kubernetes).
-

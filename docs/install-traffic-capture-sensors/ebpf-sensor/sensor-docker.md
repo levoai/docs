@@ -49,3 +49,35 @@ If connectivity is healthy, you should see output similar to below.
 Please proceed to the next step, if there are no errors.
 
 <br></br>
+--------------------------------------------------------------
+
+## Sensor Lifecycle Management
+
+### Uninstall Sensor
+```bash
+# Get the container id of the Sensor
+docker ps | grep "levoai/ebpf_sensor"
+
+# Remove the Sensor
+docker rm -f <container id from docker ps step above>
+```
+
+### Get Sensor Logs
+```bash
+# Get the container id of the Sensor
+docker ps | grep "levoai/ebpf_sensor"
+
+sudo docker logs <container id from docker ps step above>
+```
+
+### Upgrade Sensor
+- Uninstall Sensor
+- Pull new Sensor image
+```bash
+docker pull levoai/ebpf_sensor:latest
+```
+- Reinstall Sensor
+
+### Manage Sensor Configuration
+Please refer to [Sensor Configuration](/install-traffic-capture-sensors/common-tasks/sensor-configuration.mdx), and [Applying Configuration Changes](/install-traffic-capture-sensors/common-tasks/sensor-configuration.mdx#running-via-docker).
+
