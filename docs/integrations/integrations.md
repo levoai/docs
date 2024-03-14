@@ -9,10 +9,8 @@ Levo allows you to embed API security/resilience testing into development workfl
 
 Below are details on various supported integrations.
 
-## [Embed Security/Contract Tests In CI/CD](./cicd-plugins.md)
-
-## [Generating JUnit Format Test Results](./junit-format-results.md)
-
-## [Ticketing & Notifications](./ticketing-notifications.md)
-
-## [Direct API Integrations](./api-integrations.md)
+- [JIRA](/integrations/jira)
+- [Splunk](/integrations/splunk)
+- [Slack](/integrations/slack)
+- [Okta](/integrations/okta)
+- [Webhooks](/integrations/webhooks)
