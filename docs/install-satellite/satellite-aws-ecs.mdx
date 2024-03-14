@@ -294,8 +294,6 @@ Enter the Refresh Token and Org ID as prompted to create a task definition in yo
 </Tabs>
 <br/>
 
-
-
 ### 2. Run the Satellite
 
 Now that we have created a task definition, we will start our satellite up as a service in an ECS cluster.
@@ -324,7 +322,4 @@ Host port       Container port      Protocol        External link
 The Collector can now be reached by the Sensors over the internet using this `external-link:4317` (Kindly add inbound rules to the security group being used by this task if you're unable to reach the satellite). Please note this, as it will be required to configure the Sensor.
 
 Please proceed to [install traffic capture sensors](/install-traffic-capture-sensors).
-
-<br/>
-
 

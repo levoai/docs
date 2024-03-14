@@ -12,7 +12,7 @@ Your estimated completion time is *10 minutes*.
 
 ![Install Steps](../../assets/api-observability-install.svg)
 
-- [Signup with your enterprise email](https://app.levo.ai/signup) <br/>
-- [OS Platform Compatibility Check](/guides/general/os-compat-check.mdx) <br/>
-- [Install Satellite](/install-satellite) <br/>
-- [Install Sensor](/install-traffic-capture-sensors) <br/>
+- [Signup with your enterprise email](https://app.levo.ai/signup)
+- [OS Platform Compatibility Check](/guides/general/os-compat-check.mdx)
+- [Install Satellite](/install-satellite)
+- [Install Sensor](/install-traffic-capture-sensors)
