@@ -212,7 +212,16 @@ const config = {
   themeConfig:
     /** @type {import('@docusaurus/preset-classic').ThemeConfig} */
     ({
-      metadata: [{name: 'keywords', content: 'API Observability, API Security Testing, API Contract Testing, DAST for APIs'}],
+      metadata: [{name: 'keywords', content: "LEVO, Levo.ai, Levo, Levo Inc, Levo Inc. " +
+            "API Observability, API Security Testing, API Contract Testing, DAST for APIs, API Security Automation, " +
+            "API Security, API Testing, API Monitoring, API Observability Platform, API Security Platform, API Testing Platform, " +
+            "Open API Specification, Swagger, API Catalog, " +
+            "eBPF, PCAP, Sensor, Satellite, Log Parser, API Portal, API Management, Traffic Capture Sensors, Code Analysis, Code Scan, Levo CLI, " +
+            "apt, yum, Burp Suite Extension, OWASP ZAP Addon, MITM proxy, Docker, Kubernetes, AWS, Azure, GKE, " +
+            "AWS ECS, AWS EKS, AWS Fargate, AWS Cloudfront, Cloudflare, Traffic Mirroring, Azure APIM, " +
+            "Github Plugin, Jenkins Action, JIRA, Slack, Splunk, Okta, DeScope, Webhooks, " +
+            "crAPI, crAPI Security Testing, OWASP, " +
+            "Guides, Install Guide, FAQs"}],
       navbar: {
         // title: 'Levo.ai',
         logo: {
