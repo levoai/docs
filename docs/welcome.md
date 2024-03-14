@@ -11,10 +11,7 @@ The Sensor captures live traffic from your environment and sends it to the Satel
 
 Levo can host the Satellite for you (reach out to [`support@levo.ai`](mailto:support@levo.ai)), or you can host it yourself.
 
-### [Signup with your enterprise email](https://app.levo.ai/signup)
-
-### [OS Platform Compatibility Check](/guides/general/os-compat-check)
-
-### [Install Satellite](/install-satellite)
-
-### [Install Traffic Capture Sensors](/install-traffic-capture-sensors)
+- [Signup with your enterprise email](https://app.levo.ai/signup)
+- [OS Platform Compatibility Check](/guides/general/os-compat-check)
+- [Install Satellite](/install-satellite)
+- [Install Traffic Capture Sensors](/install-traffic-capture-sensors)

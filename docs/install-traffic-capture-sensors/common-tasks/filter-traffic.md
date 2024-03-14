@@ -16,9 +16,9 @@ Below diagram shows the outcomes and precedence, when the various filtering crit
 
 Below are details on the supported filtering criteria.
 
-- [**Default Excluded Ports**](#default-excluded-ports) <br/>
-- [**Configure IP Filters**](#configure-ip-filters) <br/>
-  - [**IP Filter Examples**](#ip-filter-examples) <br/>
+- [**Default Excluded Ports**](#default-excluded-ports)
+- [**Configure IP Filters**](#configure-ip-filters)
+  - [**IP Filter Examples**](#ip-filter-examples)
       - [Exclude All Traffic](#exclude-all-traffic)
       - [Exclude Specific Ports/Port Ranges](#exclude-specific-portsport-ranges)
       - [Include Specific Ports/Port Ranges](#include-specific-portsport-ranges)
@@ -28,8 +28,8 @@ Below are details on the supported filtering criteria.
       - [Include IP Subnets](#include-ip-subnets)
       - [Capture Traffic for Specific Processes](#capture-traffic-for-specific-processes)
 
-- [**Configure Kubernetes Pod Filters**](#configure-kubernetes-pod-filters) <br/>
-  - [**K8s Pod Filter Examples**](#k8s-pod-filter-examples) <br/>
+- [**Configure Kubernetes Pod Filters**](#configure-kubernetes-pod-filters)
+  - [**K8s Pod Filter Examples**](#k8s-pod-filter-examples)
     - [Trace A Single Deployment In A Specific Namespace](#trace-a-single-deployment-in-a-specific-namespace)
     - [Ignore All Traffic Belonging To A Specific Namespace](#ignore-all-traffic-belonging-to-a-specific-namespace)
     - [Trace Multiple Deployments In A Specific Namespace](#trace-multiple-deployments-in-a-specific-namespace)
@@ -38,8 +38,8 @@ Below are details on the supported filtering criteria.
     - [Ignore Traffic From K8s System Level Services](#ignore-traffic-from-k8s-system-level-services)
     
     
-- [**Configure URL Filters**](#configure-url-filters) <br/>
-  - [**URL Filter Examples**](#url-filter-examples) <br/>
+- [**Configure URL Filters**](#configure-url-filters)
+  - [**URL Filter Examples**](#url-filter-examples)
     - [Ignore All `.js` API Endpoints](#ignore-all-js-api-endpoints)
     - [Ignore API Base Path `/static/`](#ignore-api-base-path-static)
     - [Ignore API Endpoints With Query Parameter `timeout`](#ignore-api-endpoints-with-query-parameter-timeout)
@@ -48,8 +48,6 @@ Below are details on the supported filtering criteria.
     - [Only Trace `payments.com:8888` APIs](#only-trace-paymentscom8888-apis)
     - [Only Trace `payments.com:8888/credit/` APIs Doing `GET`](#only-trace-paymentscom8888credit-apis-doing-get)
     - [Trace APIs on All Subdomains of `api.acme.com`](#trace-apis-on-all-subdomains-of-apiacmecom)
-
-<br/>
 
 -------------------------------------------------------------
 

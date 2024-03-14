@@ -20,8 +20,6 @@ Pick a descriptive name which will be used in the subsequent step below. For exa
 Follow instructions for your specific platform/method below:
 - [Install on Linux host via Docker](#install-on-linux-host-via-docker)
 
-<br></br>
-
 -----------------------------------------------------------------------
 
 ## Install on Linux host via Docker
