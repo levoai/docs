@@ -21,7 +21,7 @@ sidebar_position: 3
 #
 sudo docker run --restart unless-stopped \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
-  --privileged --detach levoai/ebpf_sensor:0.29.6 \
+  --privileged --detach levoai/ebpf_sensor:0.35.2 \
   --host-proc-path /host/proc/ \
   --collector-endpoint <collector-address> \
   --env <'application-environment'> \
