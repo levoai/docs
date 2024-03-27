@@ -13,15 +13,6 @@ sidebar_position: 3
 
 ### Using the CLI
 
-Before proceeding, ensure that you have Wrangler installed and authenticated.
-
-```shell
-# Install wrangler
-npm install --global wrangler
-# Authenticate with Cloudflare
-wrangler login
-```
-
 Follow the steps below to deploy the worker to your account.  
 You can obtain your organization's ID from https://app.levo.ai/settings/organizations or by
 clicking on your profile picture in Levo's dashboard, and navigating to `User Settings -> Organizations`.
@@ -31,10 +22,14 @@ clicking on your profile picture in Levo's dashboard, and navigating to `User Se
 git clone https://github.com/levoai/cf-worker.git
 # cd into the repository
 cd cf-worker
+# Install all dependencies
+yarn
+# Authenticate with Cloudflare
+npx wrangler login
 # Deploy the worker
-wrangler deploy
+npx wrangler deploy
 # Add your organization ID as a secret
-echo <VALUE> | wrangler secret put LEVO_ORG_ID
+echo <VALUE> | npx wrangler secret put LEVO_ORG_ID
 ```
 
 That's it! The worker has been added to your Cloudflare account.
