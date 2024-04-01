@@ -1,10 +1,8 @@
 ---
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 # Azure API Management
-- [Policy-based Instrumentation](#policy-based-instrumentation)
-- [Logs-based Instrumentation](#logs-based-instrumentation)
 
 ## Policy-based Instrumentation
 
