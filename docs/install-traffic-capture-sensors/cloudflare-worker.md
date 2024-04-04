@@ -43,3 +43,14 @@ Check the [repository's README](https://github.com/levoai/cf-worker/blob/main/RE
 ## Configuring Websites to use the Worker
 
 Follow the instructions in the [Cloudflare Docs](https://developers.cloudflare.com/workers/configuration/routing/routes/#set-up-a-route).
+
+:::caution
+When adding a worker route, ensure that the failure mode is set to "Fail open" to allow requests to bypass the worker in case of unexpected errors
+or if the [daily request limit](https://developers.cloudflare.com/workers/platform/limits/#daily-request) runs out.
+:::
+
+<img
+  src={require('../assets/cf-worker-route.png').default}
+  alt="Adding a Cloudflare Worker route"
+  style={{ display: 'block', margin: 'auto', paddingTop: '24px'}}
+/>
