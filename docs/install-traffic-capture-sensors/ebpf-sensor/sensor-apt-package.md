@@ -44,9 +44,9 @@ Please take a look at the [Running the Sensor as a Systemd Service](/install-tra
 
 ## Sensor Lifecycle Management
 
-### Configure Satellite Address (`host:port` information)
+### Configure Collector Address (`host:port` information)
 
-The Satellite address is configured in `/etc/levo/sensor/config.yaml`. The default `host:port` for Satellite is `localhost:4317`.
+The Collector address is configured in `/etc/levo/sensor/config.yaml`. The default `host:port` for Collector is `localhost:4317`.
 
 Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satellite Settings) to the desired `host:port` value.
 

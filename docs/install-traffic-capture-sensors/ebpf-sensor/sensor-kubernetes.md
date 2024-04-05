@@ -29,7 +29,8 @@ helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --namespace levoai \
   --create-namespace \
   --set sensor.config.default-service-name=<'Application Name' chosen earlier> \
-  --set sensor.config.collector-endpoint=<hostname|IP:port>
+  --set sensor.config.collector-endpoint=<hostname|IP:port> \
+  --set sensor.config.satellite-endpoint=<hostname|IP:port> \
   --set sensor.config.env=<'Application environment'>
 ```
 
