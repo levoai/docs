@@ -65,7 +65,7 @@ If connectivity is healthy, you will see output similar to below.
 ```bash
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
 # If Sensor is installed on same cluster as Satellite, use 'levoai-collector.levoai:4317'
-#
+# as collector-endpoint and 'levoai-satellite.levoai:9999' as satellite-endpoint
 # Specify below the 'Application Name' chosen earlier.
 #
 helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \

@@ -16,6 +16,7 @@ sidebar_position: 3
 
 ```bash
 # Replace '<collector-address>' and '<satellite-address>' with the values you noted down from the Satellite install
+# The collector port by default is '4317' and satellite port is '9999'
 #
 # Specify below the 'Application Name' chosen earlier. Do not quote the 'Application Name'
 #
