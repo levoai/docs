@@ -12,7 +12,7 @@ sidebar_position: 3
 
 ### 1. Install Sensor
 
-> If you are installing the Satellite and Sensor on the ***same*** Linux host, please do ***NOT*** use `localhost` as the hostname below. Use the Linux host's `IP address`, or `domain name` instead. This is required as the Sensor runs inside a Docker container, and `localhost` resolves to the Sensor container's IP address, instead of the Linux host.
+> If you are installing the Satellite and Sensor on the ***same*** Linux host, please do ***NOT*** use `localhost` as the hostname below. Use `host.docker.internal`, or the Linux host's `IP address` or `domain name` instead. This is required as the Sensor runs inside a Docker container, and `localhost` resolves to the Sensor container's IP address, instead of the Linux host.
 
 ```bash
 # Replace '<collector-address>' with the values you noted down from the Satellite install
@@ -21,7 +21,8 @@ sidebar_position: 3
 #
 sudo docker run --restart unless-stopped \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
-  --privileged --detach levoai/ebpf_sensor:0.29.6 \
+  --add-host host.docker.internal:host-gateway \
+  --privileged --detach levoai/ebpf_sensor:0.36.0 \
   --host-proc-path /host/proc/ \
   --collector-endpoint <collector-address> \
   --env <'application-environment'> \
