@@ -21,7 +21,6 @@ helm repo add levoai https://charts.levo.ai && helm repo update
 ```bash
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
 # If Sensor is installed on same cluster as Satellite, use 'levoai-collector.levoai:4317'
-# as collector-endpoint and 'levoai-satellite.levoai:9999' as satellite-endpoint
 # Specify below the 'Application Name' chosen earlier.
 #
 helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
@@ -30,7 +29,6 @@ helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --create-namespace \
   --set sensor.config.default-service-name=<'Application Name' chosen earlier> \
   --set sensor.config.collector-endpoint=<hostname|IP:port> \
-  --set sensor.config.satellite-endpoint=<hostname|IP:port> \
   --set sensor.config.env=<'Application environment'>
 ```
 

@@ -94,7 +94,6 @@ collector-grpc-transport: true
 
 # host:port for the collector service receiving the Sensor's API traces and metrics.
 collector-endpoint: https://collector.levo.ai
-satellite-endpoint: https://collector.levo.ai
 
 # --------------------------------------------------------------------------------------------
 
@@ -326,7 +325,6 @@ sudo docker run --restart unless-stopped \
   levoai/ebpf_sensor:latest \
   --host-proc-path /host/proc \
   --collector-endpoint <hostname|IP:port> \
-  --satellite-endpoint <hostname|IP:port> \
   --default-service-name <'Application Name' chosen earlier>
 ```
 Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.
