@@ -84,7 +84,7 @@ Here is a sample *Scan Code Action* with its configuration:
 
 ```YAML
 - name: Levo Scan Repo
-  uses: levoai/actions/scan@scan
+  uses: levoai/actions/scan@v2.3.0
   with:
     # Authorization key required to execute the Levo CLI. Please refer to https://app.levo.ai/settings/keys to get your authorization key.
     authorization-key: <'Specify your CLI authorization key here'>
