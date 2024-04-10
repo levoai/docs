@@ -11,7 +11,7 @@ sidebar_position: 1
 -   Admin (or  `sudo`) privileges on the Docker host
 
 ```bash
-sudo docker run --net=host --rm -it levoai/pcap-sensor:0.0.20 \
+sudo docker run --net=host --rm -it levoai/pcap-sensor:0.1.1 \
 ./bin/init apidump \
 --satellite-url "your satellite url (http(s)://hostname|IP:port)" \
 --levo-env "your application environment (staging, production etc.)" \
