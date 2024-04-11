@@ -64,8 +64,8 @@ sidebar_position: 6
 ### Github Action
 
 #### Prerequisites
-- Forever Free Account on Levo.ai
-- An application code repository on GitHub (Currently Java is supported)
+- An account on Levo.ai
+- An application code repository on GitHub (Currently Java and Python is supported)
 
 #### Action Configuration
 The pre-built action for executing `Scan Code` requires the following configuration settings:
