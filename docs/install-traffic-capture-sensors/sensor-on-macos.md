@@ -109,6 +109,14 @@ The following environment variables can be configured to modify the behavior of 
     - *Description:* Set the log level (e.g., "INFO").
     - *Default:* "INFO"
 
+- **ENABLE_LOG_PARSER**
+    - *Description:* Enable or disable the log parser.
+    - *Default:* true
+
+- **LEVOAI_BASE_URL**
+    - *Description:* Set the base URL for the Levo.ai.
+    - *Default:* "https://api.levo.ai"
+
 - **APP_NAME**
     - *Description:* Set the application name.
     - *Default:* "app-logs-DATE-TIME"
