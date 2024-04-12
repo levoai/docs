@@ -114,7 +114,7 @@ The following environment variables can be configured to modify the behavior of 
     - *Default:* true
 
 - **LEVOAI_BASE_URL**
-    - *Description:* Set the base URL for the Levo.ai.
+    - *Description:* Set the base URL for the Levo.ai Platform API.
     - *Default:* "https://api.levo.ai"
 
 - **APP_NAME**
