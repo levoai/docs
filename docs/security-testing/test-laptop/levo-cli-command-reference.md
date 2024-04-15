@@ -223,4 +223,26 @@ Options:
 ##### Usage Examples
 `levo test-plan export-env --lrn "acme-gizmo-org:ws/buchi:app/Demo_crAPI:tp/Demo_crAPI" --local-dir ./`
 
+## Additional Notes
+
+### Usage with a proxy
+
+#### Option 1: Copy proxy CA certificate
+
+The CLI container does not have access to the host's CA certificates. If you are using a proxy with a self-signed certificate, you can copy the CA certificate to `$HOME/.config/configstore/ca-cert.pem` on the host. This directory is mounted as a volume in the CLI container in the alias. The CLI will read this file if it exists and load it into the container's CA certificate store.
+
+#### Option 2: Use the `--ignore-ssl-verify` option
+
+You can use the `--ignore-ssl-verify` flag with the `levo` command to disable SSL verification for **all** requests made by the CLI, for example:
+
+```shell
+levo --ignore-ssl-verify test --target-url https://crapi.levo.ai --app-lrn your-app
+```
+
+The usage of this option is discouraged unless absolutely necessary.
+
+:::tip
+Adding the `--ignore-ssl-verify` flag after the `test` subcommand, e.g. `levo test --ignore-ssl-verify`, will cause SSL verification to be ignored only for the requests sent to the target server.
+:::
+
 [env-yaml]: /guides/security-testing/concepts/test-plans/env-yml.md
