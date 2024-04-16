@@ -23,6 +23,7 @@ sensor:
     #http-proxy: "" # Proxy used for HTTP requests
     #https-proxy: "" # Proxy used for HTTPS requests
     #kube-api-rate-limit-time: 30 # Interval between each successful Kube Api call
+    #enable-fetch-sensor-config: true # Enable sensor communication with the backend for fetching config
     # --------------------------------------------------------------------------------------------
     
     
@@ -63,9 +64,11 @@ sensor:
     # services.
     
     # enable-export-rate-limiting: true
-    # max-total-exported-requests-per-second: 200
-    # max-per-endpoint-exported-requests-per-second: 20
-    # bpf-rate-limit-window-size: 1000  # Maximum number of events within a fixed window of time
+    # max-total-exported-requests-per-second: 100
+    # max-per-endpoint-exported-requests-per-second: 2
+    # token-bucket-refresh-period-ms: 1000 # 1 second
+    
+    # bpf-rate-limit-window-size: 300 # Maximum number of events within a fixed window of time
     # bpf-rate-limit-window-duration-ms: 1000 # Time interval in milli-seconds during which the specified number of events (bpf-rate-limit-window-size) are allowed
     # --------------------------------------------------------------------------------------------
     
@@ -85,6 +88,8 @@ sensor:
     # Uncomment and modify appropriately to limit capture to specific process names or IDs.
     # Both monitored-commands and monitored-pids support list of names & IDs respectively.
     # NOTE: monitored-commands and monitored-pids settings are mutually exclusive
+    # Command names will be truncated to 15 characters, since that is the maximum allowed comm size.
+    # https://www.kernel.org/doc/html/latest/filesystems/proc.html#proc-pid-comm-proc-pid-task-tid-comm
     
     #monitored-commands:
     #  - <process command name. Example: nginx>
@@ -98,6 +103,11 @@ sensor:
       - pod_nanny
       - MetricsExtension
       - postgres
+      - kube_state_metrics  # ref: https://github.com/kubernetes/kube-state-metrics
+      - prometheus  # ref: https://github.com/prometheus/prometheus
+      - node_exporter  # ref: https://github.com/prometheus/node_exporter
+      - redis_exporter  # ref: https://github.com/oliver006/redis_exporter
+      - cloud_node_manager  # ref: https://github.com/kubernetes-sigs/cloud-provider-azure/blob/ce798999ad48f6fb2063a808b9dcedec2fadd49a/examples/out-of-tree/cloud-node-manager.yaml
     
     #monitored-pids:
     #  - <pid. Example: 123>
@@ -222,8 +232,7 @@ sensor:
     # The maximum request or response body size the sensor will parse.  Request or response bodies
     # larger than this limit will be ignored by the sensor.
     # max-msg-body-size-bytes: 512000
-    
-    # --------------------------------------------------------------------------------------------
+    # ---------------------------------------------------------------------------------------------
 
 
     # --------------------------------------------------------------------------------------------
