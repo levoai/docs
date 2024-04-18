@@ -45,9 +45,8 @@ env: staging
 # Use HTTP/2 (gRPC) for communication with the collector. If this is disabled, HTTP/1.1 will be used.
 collector-grpc-transport: true
 
-# host:port for the collector service receiving the Sensor's API traces and metrics.
-collector-endpoint: https://collector.levo.ai
-satellite-endpoint: https://collector.levo.ai
+# URL for the satellite receiving the Sensor's API traces and metrics.
+satellite-url: https://collector.levo.ai
 # --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
