@@ -14,7 +14,7 @@ Click on the `Run Tests` button on the top right side of the screen and then cho
 
 Select Runnable Endpoints on the next screen.
 
->Note: You can configure a non-runnable endpoint by entering a sample value for mandatory query parameters.
+>Note: You can configure non-runnable endpoints by manually entering sample values for mandatory parameters.
 
 Click on Next and select the categories of test you want to run from and choose from a wide variety of Tests like BOLA, SQLI, CORS, Fuzzing, etc.
 
