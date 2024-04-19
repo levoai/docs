@@ -12,7 +12,7 @@ Navigate to the `Applications` tab and choose an Application you want to run tes
 
 Click on the `Run Tests` button on the top right side of the screen and then choose `Run on Cloud`.
 
-Select Runnable Endpoints from the screen that comes up.
+Select Runnable Endpoints on the next screen.
 
 >Note: You can configure a non-runnable endpoint by entering a sample value for mandatory query parameters.
 
