@@ -4,7 +4,7 @@ sidebar_position: 0
 
 # Running Tests from Catalog
 
-Levo's application provides you with the feature to run a variety of tests on your endpoints using our Test Runs feature.
+Levo provides you with the ability to run a variety of tests on your endpoints using the Test Runs feature.
 
 It runs on our Platform and can be configured to run various tests in just a few minutes.
 
