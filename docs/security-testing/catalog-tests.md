@@ -6,7 +6,7 @@ sidebar_position: 0
 
 Levo provides you with the ability to run a variety of tests on your endpoints using the Test Runs feature.
 
-It runs on our Platform and can be configured to run various tests in just a few minutes.
+The tests run on Levo's Platform, i.e., the requests to the target server are made by Levo. This means that the application must be exposed via a publicly reachable domain or IP address.
 
 Just head over to the `Applications` tab and choose an Application you want to run tests on.
 
