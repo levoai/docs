@@ -10,7 +10,7 @@ The tests run on Levo's Platform, i.e., the requests to the target server are ma
 
 Navigate to the `Applications` tab and choose an Application you want to run tests against.
 
-Click on `Run Tests` on the top right side and then choose `Run on Cloud`.
+Click on the `Run Tests` button on the top right side of the screen and then choose `Run on Cloud`.
 
 Select Runnable Endpoints from the screen that comes up.
 
