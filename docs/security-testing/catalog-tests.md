@@ -8,7 +8,7 @@ Levo provides you with the ability to run a variety of tests on your endpoints u
 
 The tests run on Levo's Platform, i.e., the requests to the target server are made by Levo. This means that the application must be exposed via a publicly reachable domain or IP address.
 
-Just head over to the `Applications` tab and choose an Application you want to run tests on.
+Navigate to the `Applications` tab and choose an Application you want to run tests against.
 
 Click on `Run Tests` on the top right side and then choose `Run on Cloud`.
 
