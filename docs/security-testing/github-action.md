@@ -150,4 +150,3 @@ outputs:
   failed:
     description: '# of failed test cases'
 ```
-
