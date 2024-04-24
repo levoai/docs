@@ -49,7 +49,7 @@ services:
       - "--worker-tmp-dir"
       - "/dev/shm"
       - "--worker-class"
-      - "gevent"
+      - "uvicorn.workers.UvicornWorker"
       - "--worker-connections"
       - "500"
       - "levoai_e7s.satellite.satellite:create_server()"
