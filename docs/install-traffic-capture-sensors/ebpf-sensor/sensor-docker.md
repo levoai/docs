@@ -12,7 +12,7 @@ sidebar_position: 3
 
 ### 1. Install Sensor
 
-> If you are installing the Satellite and Sensor on the ***same*** Linux host, please do ***NOT*** use `localhost` as the hostname below. Use `host.docker.internal`, or the Linux host's `IP address` or `domain name` instead. This is required as the Sensor runs inside a Docker container, and `localhost` resolves to the Sensor container's IP address, instead of the Linux host.
+> If you are installing the Satellite and Sensor on the ***same*** Linux host, please do ***NOT*** use `localhost` as the satellite-address below. Use `host.docker.internal`, or the Linux host's `IP address` or `domain name` instead. This is required as the Sensor runs inside a Docker container, and `localhost` resolves to the Sensor container's IP address, instead of the Linux host.
 
 ```bash
 # Replace '<satellite-address>' with the values you noted down from the Satellite install

@@ -56,6 +56,7 @@ Edit `/etc/levo/sensor/config.yaml`, and set `satellite-url` (under Satellite Se
 # Satellite Settings:
 # --------------------------------------------------------------------------------------------
 # host:port for the collector service receiving the sensor's API traces.
+# mention the scheme http/https if you decide not to use gRPC for sensor satellite communication
 satellite-url: <set to desired host:port value>
 # --------------------------------------------------------------------------------------------
 ...
