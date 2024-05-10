@@ -33,9 +33,11 @@ sidebar_position: 6
     levo scan code \
         --dir <relative path to directory you wish to scan> \
         --app-name <name of the app you wish to see on Dashboard> \
-        --env-name <the environment to which your app should belong>
+        --env-name <the environment to which your app should belong> \
+        --language <programmming language used in repository, default is java>
     ```
 - In the `--dir` option, you can specify the relative subdirectory path (`./path/to/sub-directory`) if you want to scan only a part of the project, or simply DOT (`.`) for the current directory.
+- Use the `--help` option to know the list of available options
 - If there are REST endpoints in the code, they will be imported to the Levo Dashboard, under the given app-name.
 
 
@@ -57,6 +59,7 @@ sidebar_position: 6
         --env-name <the environment to which your app should belong>
     ```
 - In the `--dir` option, you can specify the relative subdirectory path (`./path/to/sub-directory`) if you want to scan only a part of the project, or simply DOT (`.`) for the current directory.
+- Use the `--help` option to know the list of available options
 - If there are OpenAPI/Swagger specs in the project directory, they will be imported to Levo Dashboard.
 - The App Name will be the same as the title of the OpenAPI/Swagger spec.
 
