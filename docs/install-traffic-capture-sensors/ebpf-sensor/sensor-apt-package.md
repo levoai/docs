@@ -65,13 +65,12 @@ satellite-url: <set to desired host:port value>
 ### Configure sensor environment
 The eBPF sensor environment is configured in `/etc/default/levo-ebpf-sensor`. The default env value is `staging`
 
-Edit `/etc/default/levo-ebpf-sensor`, and set `ARG2` to the desired env value (eg. `prod`, `qa`)
+Edit `/etc/default/levo-ebpf-sensor`, and set `LEVO_ENV` to the desired env value (eg. `prod`, `qa`)
 
 ```bash
 # Environment Variables for levo-ebpf-sensor.service
 MALLOC_CONF="background_thread:true,narenas:1,tcache:false,dirty_decay_ms:0,muzzy_decay_ms:0,abort_conf:true"
-ARG1="--env"
-ARG2="staging"
+LEVO_ENV="staging"
 ```
 
 **A Sensor *restart* is required for this to take effect.**

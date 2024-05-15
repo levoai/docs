@@ -6,6 +6,10 @@ variable "collector_url" {
   description = "Enter your Collector Endpoint"
 }
 
+variable "levo_env" {
+  description = "Enter your Application environment"
+}
+
 resource "aws_ecs_task_definition" "levoai-sensor" {
   family                   = "levoai-ebpf-sensor"
   network_mode             = "awsvpc"
@@ -31,7 +35,9 @@ resource "aws_ecs_task_definition" "levoai-sensor" {
         "--host-proc-path",
         "/host/proc",
         "--collector-endpoint",
-        var.collector_url
+        var.collector_url,
+        "--levo-env",
+        var.levo_env
       ],
       "environment": [
         {
