@@ -23,7 +23,6 @@ sensor:
     #http-proxy: "" # Proxy used for HTTP requests
     #https-proxy: "" # Proxy used for HTTPS requests
     #kube-api-rate-limit-time: 30 # Interval between each successful Kube Api call
-    #enable-fetch-sensor-config: true # Enable sensor communication with the backend for fetching config
     # --------------------------------------------------------------------------------------------
     
     
@@ -32,11 +31,9 @@ sensor:
     # --------------------------------------------------------------------------------------------
     # Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
     # grouped under this application name. The application name helps segregate and group API
-    # endpoints from different environments. The environment lets us know what environment the 
-    # sensor is installed in e.g. staging, prod, dev.
+    # endpoints from different environments.
     
     default-service-name: default
-    env: staging
     # --------------------------------------------------------------------------------------------
     
     
@@ -67,8 +64,10 @@ sensor:
     # max-per-endpoint-exported-requests-per-second: 2
     # token-bucket-refresh-period-ms: 1000 # 1 second
     
-    # bpf-rate-limit-window-size: 300 # Maximum number of events within a fixed window of time
-    # bpf-rate-limit-window-duration-ms: 1000 # Time interval in milli-seconds during which the specified number of events (bpf-rate-limit-window-size) are allowed
+    # Maximum number of events within a fixed window of time, disabled by default, set to positive number to enable
+    # bpf-rate-limit-window-size: -1
+    # Time interval in milli-seconds during which the specified number of events (bpf-rate-limit-window-size) are allowed
+    # bpf-rate-limit-window-duration-ms: 1000
     # --------------------------------------------------------------------------------------------
     
     # --------------------------------------------------------------------------------------------
