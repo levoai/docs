@@ -21,8 +21,8 @@ helm repo add levoai https://charts.levo.ai && helm repo update
 ```bash
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
 # If Sensor is installed on same cluster as Satellite, use 'levoai-haproxy'
-# If they are installed on different clusters, the haproxy should be exposed so that it is
-# reachable to the sensor, mention the exposed ip-address as satellite-url
+# If they are installed on different clusters, the haproxy service should be exposed so that it is
+# reachable by the sensor. Use the exposed address as the value for satellite-url.
 # Specify below the 'Application Name' chosen earlier and Organization ID (copy from levo platform).
 #
 helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
