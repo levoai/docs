@@ -26,7 +26,6 @@ sudo docker run --restart unless-stopped \
   --host-proc-path /host/proc/ \
   --satellite-url <satellite-address> \
   --env <'application-environment'> \
-  --default-service-name <'Application Name' chosen earlier>
 ```
 
 #### NOTE:
