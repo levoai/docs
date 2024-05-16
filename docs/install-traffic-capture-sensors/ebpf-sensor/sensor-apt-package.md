@@ -48,7 +48,7 @@ Please take a look at the [Running the Sensor as a Systemd Service](/install-tra
 
 The Satellite address is configured in `/etc/levo/sensor/config.yaml`. The default `host:port` for Satellite is `localhost:4317`.
 
-Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satellite Settings) to the desired `host:port` value.
+Edit `/etc/levo/sensor/config.yaml`, and set `satellite-url` (under Satellite Settings) to the desired `host:port` value.
 
 ```bash
 ...
@@ -56,10 +56,23 @@ Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satelli
 # Satellite Settings:
 # --------------------------------------------------------------------------------------------
 # host:port for the collector service receiving the sensor's API traces.
-collector-endpoint: <set to desired host:port value>
+# mention the scheme http/https if you decide not to use gRPC for sensor satellite communication
+satellite-url: <set to desired host:port value>
 # --------------------------------------------------------------------------------------------
 ...
 ```
+
+### Configure sensor environment
+The eBPF sensor environment is configured in `/etc/default/levo-ebpf-sensor`. The default env value is `staging`
+
+Edit `/etc/default/levo-ebpf-sensor`, and set `LEVO_ENV` to the desired env value (eg. `prod`, `qa`)
+
+```bash
+# Environment Variables for levo-ebpf-sensor.service
+MALLOC_CONF="background_thread:true,narenas:1,tcache:false,dirty_decay_ms:0,muzzy_decay_ms:0,abort_conf:true"
+LEVO_ENV="staging"
+```
+
 **A Sensor *restart* is required for this to take effect.**
 
 

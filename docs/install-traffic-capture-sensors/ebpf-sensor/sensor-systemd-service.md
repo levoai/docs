@@ -15,7 +15,7 @@ This address assumes that Levo is hosting the Satellite for you, and you must al
 If you wish, you may also host the Satellite yourself and specify the address of the collector in the self-hosted Satellite to direct the Sensor's traffic to it.
 
 
-Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satellite Settings) to the address noted from the Satellite install.
+Edit `/etc/levo/sensor/config.yaml`, and set `satellite-url` (under Satellite Settings) to the address noted from the Satellite install.
 
 ```yaml
 ...
@@ -27,8 +27,7 @@ Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satelli
 # organization-id: ""
 
 # host:port for the collector service receiving the Sensor's API traces.
-collector-endpoint: <Use the default (https://collector.levo.ai) or set to a custom address>
-env: <Your application environment eg. dev, staging, prod etc.>
+satellite-url: <Use the default (https://collector.levo.ai) or set to a custom address>
 ...
 ```
 **Note**: If you change the Satellite address later, you have to restart the Sensor, since it's not a hot property.
@@ -50,6 +49,18 @@ Edit `/etc/levo/sensor/config.yaml`, and set `default-service-name` to the `Appl
 default-service-name: <'Application Name' chosen earlier>
 # --------------------------------------------------------------------------------------------
 ```
+
+### Configure sensor environment
+The eBPF sensor environment is configured in `/etc/default/levo-ebpf-sensor`. The default env value is `staging`
+
+Edit `/etc/default/levo-ebpf-sensor`, and set `LEVO_ENV` to the desired env value (eg. `prod`, `qa`)
+
+```bash
+# Environment Variables for levo-ebpf-sensor.service
+MALLOC_CONF="background_thread:true,narenas:1,tcache:false,dirty_decay_ms:0,muzzy_decay_ms:0,abort_conf:true"
+LEVO_ENV="staging"
+```
+
 **Note**: If you change the `Application Name` later, you have to restart the Sensor, since it's not a hot property.
 
 
