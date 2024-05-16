@@ -36,7 +36,6 @@ sensor:
     # sensor is installed in e.g. staging, prod, dev.
     
     default-service-name: default
-    env: staging
     # --------------------------------------------------------------------------------------------
     
     
