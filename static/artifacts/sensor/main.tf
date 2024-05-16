@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 variable "satellite_url" {
-  description = "Enter your Collector Endpoint"
+  description = "Enter your Satellite's Address"
 }
 
 variable "levo_env" {
