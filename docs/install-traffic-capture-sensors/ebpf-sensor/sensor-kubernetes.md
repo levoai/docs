@@ -70,8 +70,8 @@ If connectivity is healthy, you should see output similar to below.
 #### NOTE:
 The default address for the satellite url in helm installations is `levoai-haproxy`.
 This address assumes that the Satellite is installed in the same cluster (and namespace) as the Sensor.
-If they are installed on different clusters, the haproxy should be exposed so that it is
-reachable to the sensor, mention the exposed ip-address as satellite-url
+If they are installed on different clusters, the haproxy service should be exposed so that it is
+reachable by the sensor. Use the exposed address as the value for satellite-url.
 If you wish to, you may also request Levo to host the Satellite for you. In this case, you will need to set the
 `satellite-url` to `https://collector.levo.ai` and specify an organization ID (`organization-id`) via helm values.
 
