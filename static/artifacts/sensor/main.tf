@@ -39,12 +39,7 @@ resource "aws_ecs_task_definition" "levoai-sensor" {
         "--levo-env",
         var.levo_env
       ],
-      "environment": [
-        {
-          "name": "OUTSIDE_HOSTNAME",
-          "value": "$(hostname)"
-        }
-      ],
+      "environment": [],
       "mountPoints": [
         {
           "sourceVolume": "host-proc",
