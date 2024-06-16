@@ -101,6 +101,31 @@ ignored-commands:
   - node_exporter  # ref: https://github.com/prometheus/node_exporter
   - redis_exporter  # ref: https://github.com/oliver006/redis_exporter
   - cloud_node_manager  # ref: https://github.com/kubernetes-sigs/cloud-provider-azure/blob/ce798999ad48f6fb2063a808b9dcedec2fadd49a/examples/out-of-tree/cloud-node-manager.yaml
+  - kube_proxy
+  - loki
+  - argocd_server
+  - argocd_applicat
+  - argocd_dex
+  - argocd_notifica
+  - argocd_repo_ser
+  - kubectl_argo_ro
+  - amazon_ssm_agen
+  - aws
+  - awsagent
+  - aws_k8s_agent
+  - aws_ebs_csi_dri
+  - cluster_autosca
+  - csi_attacher
+  - csi_node_driver
+  - csi_provisioner
+  - csi_resizer
+  - csi_snapshotter
+  - datacollector
+  - datadog_cluster
+  - teleport
+  - agent
+  - process_agent
+  - trace_agent
 
 #monitored-pids:
 #  - <pid. Example: 123>
