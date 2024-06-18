@@ -116,6 +116,17 @@ Please proceed to [install Traffic Capture Sensors](/install-traffic-capture-sen
 ## Satellite Lifecycle Management
 
 ### Upgrade Satellite
+
+:::note
+
+Please check the following table for notes on certain versions to ensure a smooth upgrade process.
+
+| Version | Notes |
+| ------- | ----- |
+| `0.2.522` and newer | Persistence is disabled for the RabbitMQ StatefulSet by default. On fresh installations, nothing needs to be done. However, when upgrading from versions prior to `0.2.522`, you will need to manually delete the StatefulSet and PersistentVolumeClaim resources before upgrading. You can do this with the following commands: <pre>kubectl delete statefulset levoai-rabbitmq -n levoai<br/>kubectl delete pvc data-levoai-rabbitmq-0 -n levoai</pre> |
+
+:::
+
 ```bash
 # Setup environment variables
 export LEVOAI_AUTH_KEY=<'Authorization Key' from the original installation> 
