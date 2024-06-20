@@ -42,6 +42,62 @@ By leveraging Levo's API Portal, developers can gain deep insights into their AP
 
 ## Installation
 
+### Docker Installation
+
+#### Pre-requisites
+- Docker Engine version `18.03.0` and above.
+- Get the refresh token from the Levo App User Profile page.
+
+
+#### Installation Steps
+
+- Run the following command to install the API Portal Docker container.
+
+```bash
+docker run --rm -d --name=levoai-api-portal \
+-e REFRESH_TOKEN='<REFRESH_TOKEN>' -e APP_NAME='<APP_NAME>' \
+-e ENV_NAME='<ENV_NAME>' -e LEVO_ORG_ID='<LEVO_ORG_ID>' \
+-p 8000:80 levoai/api-portal:latest
+```
+
+- Navigate to `http://localhost:8000` to view the API docs.
+
+Note:
+* Default `ENV_NAME` environment value is `staging`.
+* If user is part of multiple orgs, you would have to add `-e LEVO_ORG_ID='<LEVO_ORG_ID>'` otherwise optional.
+* If you are running for an app from Levo's India Saas instance, add this environment variable `-e LEVO_BASE_URL='https://api.india-1.levo.ai'`.
+
+
+
+### Install via Helm Chart
+
+#### Pre-requisites
+- Get the refresh token from the Levo App User Profile page.
+
+#### Installation Steps
+- Add Levo Helm repo
+
+```bash
+helm repo add levoai https://levoai.github.io/helm-charts/
+```
+
+- Run following command to install the API Portal Helm Chart
+
+```bash
+helm install levoai-api-portal helm/levoai-api-portal/ \
+--set levoAuthKey="your_auth_key" \
+--set levoAppName="your_app_name" \
+--set levoEnvName="your_env_name" \
+--set levoOrgId="your_org_id"
+```
+
+- Port forward and navigate to `http://localhost:8000` to view the API docs.
+
+```bash
+kubectl port-forward services/levoai-api-portal 8000:80
+```
+
+
 ### Creating a Task Definition in your AWS Account using Terraform.
 
 Download the <DownloadMainTF/> file.
