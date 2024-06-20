@@ -54,7 +54,7 @@ By leveraging Levo's API Portal, developers can gain deep insights into their AP
 - Run the following command to install the API Portal Docker container.
 
 ```bash
-docker run --rm -d --name=levoai-api-portal \
+docker run --rm --name=levoai-api-portal \
 -e REFRESH_TOKEN='<REFRESH_TOKEN>' -e APP_NAME='<APP_NAME>' \
 -e ENV_NAME='<ENV_NAME>' -e LEVO_ORG_ID='<LEVO_ORG_ID>' \
 -p 8000:80 levoai/api-portal:latest
@@ -84,7 +84,7 @@ helm repo add levoai https://levoai.github.io/helm-charts/
 - Run following command to install the API Portal Helm Chart
 
 ```bash
-helm install levoai-api-portal helm/levoai-api-portal/ \
+helm install levoai-api-portal levoai/levoai-api-portal \
 --set levoAuthKey="your_auth_key" \
 --set levoAppName="your_app_name" \
 --set levoEnvName="your_env_name" \
