@@ -60,13 +60,15 @@ docker run --rm --name=levoai-api-portal \
 -p 8000:80 levoai/api-portal:latest
 ```
 
+
+> ##### **_NOTE:_**
+> ##### * Default `ENV_NAME` environment value is `staging`.
+> ##### * If user is part of multiple orgs, you would have to add `-e LEVO_ORG_ID='<LEVO_ORG_ID>` otherwise optional.
+> ##### * If you are running for an app from Levo's India Saas instance, add this environment variable `-e LEVO_BASE_URL='https://api.india-1.levo.ai'`.
+
+<br/>
+
 - Navigate to `http://localhost:8000` to view the API docs.
-
-Note:
-* Default `ENV_NAME` environment value is `staging`.
-* If user is part of multiple orgs, you would have to add `-e LEVO_ORG_ID='<LEVO_ORG_ID>'` otherwise optional.
-* If you are running for an app from Levo's India Saas instance, add this environment variable `-e LEVO_BASE_URL='https://api.india-1.levo.ai'`.
-
 
 
 ### Install via Helm Chart
@@ -90,6 +92,13 @@ helm install levoai-api-portal levoai/levoai-api-portal \
 --set levoEnvName="your_env_name" \
 --set levoOrgId="your_org_id"
 ```
+
+> ##### **_NOTE:_**
+> ##### * Default `ENV_NAME` environment value is `staging`.
+> ##### * If user is part of multiple orgs, you would have to add `-e LEVO_ORG_ID='<LEVO_ORG_ID>'` otherwise optional.
+> ##### * If you are running for an app from Levo's India Saas instance, add this environment variable `-e LEVO_BASE_URL='https://api.india-1.levo.ai'`.
+
+<br/>
 
 - Port forward and navigate to `http://localhost:8000` to view the API docs.
 
