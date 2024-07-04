@@ -30,13 +30,12 @@ images=($(helm template levoai/levoai-satellite | yq -N '..|.image? | select(.)'
 images+=($(helm template levoai/levoai-ebpf-sensor | yq -N '..|.image? | select(.)' | sort -u))
 
 for image in "${images[@]}"; do
-  echo "Pushing $image to $registry"
-  docker pull "$image"
-  image_name=levoai/${image##*/}
-  repo_name=${image_name%:*}
+  src_image=${image#"docker.io/"}
+  dest_image="$registry/$src_image"
+  repo_name=${src_image%:*}
   aws ecr describe-repositories --repository-names $repo_name --region $region || aws ecr create-repository --repository-name $repo_name --region $region
-  docker tag "$image" "$registry/$image_name"
-  docker push "$registry/$image_name"
+  echo "Copying $src_image to $dest_image"
+  docker buildx imagetools create --tag $dest_image $src_image
 done
 ```
 
@@ -55,7 +54,6 @@ kubectl create secret docker-registry ecr-auth --docker-server=your.registry --d
 ```yaml
 sensor:
   imageRepo: your.registry/levoai/ebpf_sensor
-  imageTag: 0.30.1
 ```
 
 ### Satellite
@@ -65,43 +63,8 @@ global:
   levoai_config_override:
     onprem-api:
       org-id: <id>
-      refresh-token: 
-  busyboxImage: your.registry/levoai/busybox
-
-levoai-collector:
-  image: your.registry/levoai/collector
-  imageTag: 0.17.2
+      refresh-token: <token>
+  imageRegistry: your.registry
   imagePullSecrets:
-    - name: ecr-auth
-
-levoai-ion:
-  image:
-    repository: your.registry/levoai/ion
-    tag: 0.6.0
-  imagePullSecrets: 
-    - name: ecr-auth
-
-rabbitmq:
-  metrics:
-    enabled: true
-  image:
-    registry: your.registry
-    repository: levoai/rabbitmq
-    tag: 3.12.8-debian-11-r1
-    pullSecrets:
-      - ecr-auth
-
-satellite:
-  image:
-    repository: your.registry/levoai/satellite
-    tag: 0.2.462
-  imagePullSecrets: 
-    - name: ecr-auth
-
-tagger:
-  image:
-    repository: your.registry/levoai/satellite
-    tag: 0.2.462
-  imagePullSecrets: 
     - name: ecr-auth
 ```
