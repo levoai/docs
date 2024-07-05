@@ -14,7 +14,7 @@ The tests run on Levo's Platform, i.e., the requests to the target server are ma
 
 <br></br>
 
-### Click on the `Run Tests` button on the top right side of the screen. You can choose to  
+### Click on the `Run Tests` button on the bottom right side of the screen. You can choose to
 - `Run On Cloud`: The tests will be run on Levo's cloud.
 - `Run OnPrem`: The tests will run on the customer's premise. Head to the **[testrunners](testrunner.md)** page to know how and why to use **Testrunners**.
 
