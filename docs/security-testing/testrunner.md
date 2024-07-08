@@ -61,9 +61,9 @@ testrunner levoai/testrunner
 
 :::info
 
-Depending on the region your apps are in, you may need to set a different Levo base URL for the satellite.
+Depending on the region your apps are in, you may need to set a different Levo base URL.
 
-For example, if the CLI will be used with `app.india-1.levo.ai`, use the following alias:
+For example, if the testrunner will be used with `app.india-1.levo.ai`, use the following alias:
 
 ```bash
 helm install \
@@ -100,9 +100,9 @@ levo start --key "auth-key" --organization "orgId"
 ```
 :::info
 
-Depending on the region your apps are in, you may need to set a different Levo base URL for the satellite.
+Depending on the region your apps are in, you may need to set a different Levo base URL.
 
-For example, if the CLI will be used with `app.india-1.levo.ai`, use the following alias:
+For example, if the testrunner will be used with `app.india-1.levo.ai`, use the following alias:
 
 ```bash
 alias levo='docker run --rm \
@@ -134,6 +134,10 @@ To get the Organization ID
 - Click on Organizations on the left navigation panel
 - Click on Copy for whichever organization you want to run tests for
 
+:::info
+If you are an India Customer <br></br>
+[India Login](https://app.india-1.levo.ai/login) for  Levo.ai
+:::
 
 
 
