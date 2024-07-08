@@ -1,12 +1,10 @@
 ---
-sidebar_position: 1
+sidebar_position: 0
 ---
 
 # Running Tests from Catalog
 
-Levo provides you with the ability to run a variety of tests on your endpoints using the Test Runs feature.
-
-The tests run on Levo's Platform, i.e., the requests to the target server are made by Levo. This means that the application must be exposed via a publicly reachable domain or IP address.
+Levo provides you with the ability to run a variety of tests on your API endpoints using the Run Tests feature.
 
 ### Navigate to the `Applications` tab and choose an Application you want to run tests against.
 
@@ -15,8 +13,8 @@ The tests run on Levo's Platform, i.e., the requests to the target server are ma
 <br></br>
 
 ### Click on the `Run Tests` button on the bottom right side of the screen. You can choose to
-- `Run On Cloud`: The tests will be run on Levo's cloud.
-- `Run OnPrem`: The tests will run on the customer's premise. Head to the **[testrunners](testrunner.md)** page to know how and why to use **Testrunners**.
+- `Run On Cloud`: The tests will be run on Levo's platform, i.e., the requests to the target server are made by Levo. This means that the application must be exposed via a publicly reachable domain or IP address.
+- `Run OnPrem`: The tests will run on your premise. Head to the **[testrunners](testrunner.md)** page to know how to install **Testrunners**.
 
 ![](../assets/testruns-step-2.png)
 

@@ -1,5 +1,5 @@
 ---
-sidebar_position: 0
+sidebar_position: 1
 ---
 
 # Test Runner
@@ -59,7 +59,21 @@ helm install \
 testrunner levoai/testrunner
 ```
 
-*Note: If you are India customer and signed-up at India SaaS then set `https://api.india-1.levo.ai` as the `levoBaseUrl`*
+:::info
+
+Depending on the region your apps are in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the CLI will be used with `app.india-1.levo.ai`, use the following alias:
+
+```bash
+helm install \
+--set key="auth-key" \
+--set orgId="organization id" \
+--set levoBaseUrl="https://api.india-1.levo.ai" \
+testrunner levoai/testrunner
+```
+:::
+
 <br></br>
 
 ### Install testrunner via Docker
@@ -84,7 +98,26 @@ alias levo='docker run --rm \
 
 levo start --key "auth-key" --organization "orgId"
 ```
-*Note: If you are India customer and signed-up at India SaaS then set `https://api.india-1.levo.ai` as `LEVO_BASE_URL`*
+:::info
+
+Depending on the region your apps are in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the CLI will be used with `app.india-1.levo.ai`, use the following alias:
+
+```bash
+alias levo='docker run --rm \
+    --add-host=host.docker.internal:`ip route|awk '\''/docker0/ { print $9 }'\''` \
+    --mount type=bind,source=$HOME/.config/configstore,target=/home/levo/.config/configstore \
+    -v $HOME/.aws:/home/levo/.aws \
+    -v $PWD:/home/levo/work:rw \
+    -e LOCAL_USER_ID=$(id -u) \
+    -e LOCAL_GROUP_ID=$(id -g) \
+    -e LEVO_BASE_URL=https://api.india-1.levo.ai \
+    -e TERM=xterm-256color \
+    -ti levoai/levo:stable'
+```
+
+:::
 <br></br>
 
 ### Get Authorization token and Orgnaization ID
