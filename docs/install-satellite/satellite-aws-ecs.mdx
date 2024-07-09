@@ -8,11 +8,21 @@ import TabItem from '@theme/TabItem';
 
 # Satellite on AWS ECS
 
-export function DownloadMainTF() {
+export function DownloadSatEBPF() {
     return (
         <BrowserOnly fallback={<div>Loading...</div>}>
             {() => (
-                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/main.tf'} download> main.tf </a>
+                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/for-ebpf/main.tf'} download> main.tf </a>
+            )}
+        </BrowserOnly>
+    );
+}
+
+export function DownloadSatPCAP() {
+    return (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+            {() => (
+                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/for-pcap/main.tf'} download> main.tf </a>
             )}
         </BrowserOnly>
     );
@@ -280,7 +290,14 @@ For example, if the satellite will be used with `app.india-1.levo.ai`, set the `
 
 </TabItem>
 <TabItem value="tf">
-Download the <DownloadMainTF/> file.
+You can download the particular satellite according to your Packet Capture Sensor.
+<br /><br />
+
+#### For EBPF Sensor:
+Download the **<DownloadSatEBPF/>** file **(make sure you've installed the EBPF sensor)**.
+
+#### For PCAP Sensor:
+Download the **<DownloadSatPCAP/>** file **(make sure you've installed the PCAP sensor)**.
 
 Run the following command in the same directory -
 
@@ -288,11 +305,10 @@ Run the following command in the same directory -
 terraform apply
 ```
 
-Enter the Refresh Token and Org ID as prompted to create a task definition in your AWS account.
+> *Enter the Refresh Token, Org ID, AWS Region as prompted and choose the Levo Saas your account is based in (US/India) to create a task definition in your AWS account.*
 
 </TabItem>
 </Tabs>
-<br/>
 
 ### 2. Run the Satellite
 

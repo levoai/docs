@@ -38,6 +38,17 @@ variable "app_name" {
   description = "Enter your App Name"
 }
 
+variable "base_url" {
+  description = "Choose Levo Saas according to your satellite: \n 1. Levo US Saas\n 2. Levo India Saas\nEnter 1 or 2 accordingly as input"
+}
+
+locals {
+  saas = var.base_url == "1" ? "https://api.levo.ai" : var.base_url == "2" ? "https://api.india-1.levo.ai" : "invalid-choice"
+}
+
+variable "region" {
+  description = "Enter your AWS region"
+}
 
 resource "aws_ecs_task_definition" "levoai-docs" {
   family                   = "levoai-api-portal"
@@ -78,7 +89,7 @@ resource "aws_ecs_task_definition" "levoai-docs" {
                 },
                 {
                     "name": "LEVO_BASE_URL",
-                    "value": "https://api.levo.ai"
+                    "value": local.saas
                 }
             ],
             "logConfiguration": {
