@@ -8,21 +8,11 @@ import TabItem from '@theme/TabItem';
 
 # Satellite on AWS ECS
 
-export function DownloadSatEBPF() {
+export function DownloadSatTF() {
     return (
         <BrowserOnly fallback={<div>Loading...</div>}>
             {() => (
-                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/for-ebpf/main.tf'} download> main.tf </a>
-            )}
-        </BrowserOnly>
-    );
-}
-
-export function DownloadSatPCAP() {
-    return (
-        <BrowserOnly fallback={<div>Loading...</div>}>
-            {() => (
-                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/for-pcap/main.tf'} download> main.tf </a>
+                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/main.tf'} download> main.tf </a>
             )}
         </BrowserOnly>
     );
@@ -290,14 +280,9 @@ For example, if the satellite will be used with `app.india-1.levo.ai`, set the `
 
 </TabItem>
 <TabItem value="tf">
-You can download the particular satellite according to your Packet Capture Sensor.
-<br /><br />
 
-#### For EBPF Sensor:
-Download the **<DownloadSatEBPF/>** file **(make sure you've installed the EBPF sensor)**.
+Download the **<DownloadSatTF/>** file **(make sure you've installed the sensor)**.
 
-#### For PCAP Sensor:
-Download the **<DownloadSatPCAP/>** file **(make sure you've installed the PCAP sensor)**.
 
 Run the following command in the same directory -
 
