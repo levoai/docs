@@ -18,16 +18,30 @@ locals {
   saas = var.base_url == "1" ? "https://api.levo.ai" : var.base_url == "2" ? "https://api.india-1.levo.ai" : "invalid-choice"
 }
 
+variable "compute_type" {
+  description = "Choose your compute type: \n 1. EC2\n 2. FARGATE\nEnter 1 or 2 accordingly as input"
+}
+
+locals {
+  compute = var.compute_type == "1" ? "EC2" : var.compute_type == "2" ? "FARGATE" : "invalid-choice"
+}
+
+locals {
+  networking_mode = var.compute_type == "1" ? "host" : var.compute_type == "2" ? "awsvpc" : "invalid-choice"
+}
+
 variable "region" {
   description = "Enter your AWS region"
 }
 
 resource "aws_ecs_task_definition" "levoai-satellite" {
   family                   = "levoai-satellite"
-  network_mode             = "host"
-  requires_compatibilities = ["EC2"]
+  network_mode             = local.networking_mode
+  requires_compatibilities = [local.saas]
   cpu                   = "4096"
   memory                = "8192"
+
+  execution_role_arn    = aws_iam_role.terraform_ecs_execution_role.arn
 
   container_definitions  = jsonencode([
     {
