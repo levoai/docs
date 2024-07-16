@@ -37,7 +37,7 @@ variable "region" {
 resource "aws_ecs_task_definition" "levoai-satellite" {
   family                   = "levoai-satellite"
   network_mode             = local.networking_mode
-  requires_compatibilities = [local.saas]
+  requires_compatibilities = [local.compute]
   cpu                   = "4096"
   memory                = "8192"
 
