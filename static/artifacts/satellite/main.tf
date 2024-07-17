@@ -136,7 +136,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
           "appProtocol": "http"
         }
       ],
-      "essential": false,
+      "essential": true,
       "command": [],
       "environment": [],
       "environmentFiles": [],
