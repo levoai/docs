@@ -1,5 +1,5 @@
 provider "aws" {
-  region     = "us-west-2"
+  region = var.region
 }
 
 resource "aws_vpc" "levo_docs_vpc" {
@@ -97,7 +97,7 @@ resource "aws_ecs_task_definition" "levoai-docs" {
                 "options": {
                     "awslogs-create-group": "true",
                     "awslogs-group": "/ecs/api-docs-viewer",
-                    "awslogs-region": "us-west-2",
+                    "awslogs-region": var.region,
                     "awslogs-stream-prefix": "ecs"
                 }
             }

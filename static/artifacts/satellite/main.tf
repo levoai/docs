@@ -125,7 +125,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
     },
     {
       "name": "levoai-haproxy",
-      "image": "abhisheklevo/levoai-haproxy",
+      "image": "levoai/haproxy",
       "cpu": 0,
       "portMappings": [
         {
