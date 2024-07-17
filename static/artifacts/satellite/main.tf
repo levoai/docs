@@ -11,7 +11,13 @@ variable "org_id" {
 }
 
 variable "base_url" {
+  type        = string
   description = "Choose Levo Saas according to your satellite: \n 1. Levo US Saas\n 2. Levo India Saas\nEnter 1 or 2 accordingly as input"
+
+  validation {
+    condition     = contains(["1", "2"], var.base_url)
+    error_message = "Valid values for the options are are (1, 2)."
+  } 
 }
 
 locals {
@@ -19,7 +25,13 @@ locals {
 }
 
 variable "compute_type" {
+  type        = string
   description = "Choose your compute type: \n 1. EC2\n 2. FARGATE\nEnter 1 or 2 accordingly as input"
+  
+  validation {
+    condition     = contains(["1", "2"], var.compute_type)
+    error_message = "Valid values for the options are are (1, 2)."
+  } 
 }
 
 locals {
@@ -31,7 +43,13 @@ locals {
 }
 
 variable "region" {
+  type        = string
   description = "Enter your AWS region"
+  
+  validation {
+    condition     = contains(["us-east-2", "us-east-1", "us-west-1", "us-west-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-3", "ap-southeast-4", "ap-south-1", "ap-northeast-3", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ca-central-1", "ca-west-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-south-1", "eu-west-3", "eu-south-2", "eu-north-1", "eu-central-2", "il-central-1", "me-south-1", "me-central-1", "sa-east-1", "us-gov-east-1", "us-gov-west-1"], var.region)
+    error_message = "Valid values for the options are are (us-east-2, us-east-1, us-west-1, us-west-2, af-south-1, ap-east-1, ap-south-2, ap-southeast-3, ap-southeast-4, ap-south-1, ap-northeast-3, ap-northeast-2, ap-southeast-1, ap-southeast-2, ap-northeast-1, ca-central-1, ca-west-1, eu-central-1, eu-west-1, eu-west-2, eu-south-1, eu-west-3, eu-south-2, eu-north-1, eu-central-2, il-central-1, me-south-1, me-central-1, sa-east-1, us-gov-east-1, us-gov-west-1)."
+  } 
 }
 
 resource "aws_ecs_task_definition" "levoai-satellite" {
