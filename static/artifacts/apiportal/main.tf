@@ -32,6 +32,7 @@ variable "refresh_token" {
 
 variable "env_name" {
   description = "Enter your Env Name"
+  default = "staging"
 }
 
 variable "app_name" {
