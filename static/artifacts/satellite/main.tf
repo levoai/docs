@@ -204,7 +204,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
         },
         {
         "name": "LEVOAI_CONF_OVERRIDES",
-        "value": "{\"onprem-api\":{\"url\": \"$${LEVOAI_BASE_URL}\",\"refresh-token\":\"$${LEVOAI_AUTH_KEY}\",\"org-id\": \"$${LEVOAI_ORG_ID}\",\"org-prefix\": \"$${LEVOAI_ORG_PREFIX}\"},\"url_clusterer_id_len\": 1,\"min_urls_required_per_pattern\": 10,\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"$${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"disable_ml_detector\": true,\"service_naming\":{\"strategies\":\"KUBERNETES_METADATA,HOST_HEADER,DEFAULT\"},\"user_resolvers\": [],\"sample_collection\":{\"enabled\": true,\"max_samples_per_end_point\": 2,\"users\": []},\"tagger_batch_interval_minute\": 5,\"api_rule_evaluation\":{\"enabled\": true},\"enable_ssl_cert_checks\": true,\"sensitive_data_config\": [],\"traces_queue\":{\"type\": \"sqs\"}}"
+        "value": "{\"onprem-api\":{\"url\": \"$${LEVOAI_BASE_URL}\",\"refresh-token\":\"$${LEVOAI_AUTH_KEY}\",\"org-id\": \"$${LEVOAI_ORG_ID}\",\"org-prefix\": \"$${LEVOAI_ORG_PREFIX}\"},\"url_clusterer_id_len\": 1,\"dynamic_url_threshold_factor\": 0.5,\"api_rule_evaluation\":{\"enabled\": true},\"traces_queue\":{\"type\": \"sqs\"}}"
         },
         {
           "name": "PI_DETECTOR_DATA_DIR",
