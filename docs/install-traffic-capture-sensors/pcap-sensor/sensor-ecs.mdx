@@ -2,13 +2,51 @@
 sidebar_position: 3
 ---
 
-# Sensor on Fargate
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+# Sensor on ECS
+
+export function DownloadMainTF() {
+    return (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+            {() => (
+                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/sensor/pcap/main.tf'} download> main.tf </a>
+            )}
+        </BrowserOnly>
+    );
+}
 
 ## Prerequisites
 - AWS profile access key and secret access key saved at path  ~/.aws/credentials file
 - The profile should have all the required permissions as listed [here](#aws-permissions)
 
-## Install Sensor on Fargate
+<Tabs
+    defaultValue="ec2"
+    values={[
+        { label: 'EC2', value: 'ec2', },
+        { label: 'FARGATE', value: 'fargate', },
+    ]}
+    groupId="env"
+>
+<TabItem value="ec2">
+
+Download the **<DownloadMainTF/>** file.
+
+
+Run the following command in the same directory -
+
+```bash
+terraform apply
+```
+
+> *Enter the inputs as prompted to create a task definition in your AWS account.*
+
+
+</TabItem>
+<TabItem value="fargate">
+
 
 The pcap Sensor can be installed as a sidecar on an existing AWS task by adding to its task definition via the AWS Console.
 
@@ -62,6 +100,9 @@ The steps to add the sensor to your task are as follows
     }
 }
 ```
+
+</TabItem>
+</Tabs>
 
 Specify additional flags in the entrypoint
 ```bash
