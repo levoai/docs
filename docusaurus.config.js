@@ -84,7 +84,11 @@ const config = {
           },
           {
             to: '/security-testing/test-laptop',
-            from: ['/security-contract-testing/levo-cli/levo-cli-intro'],
+            from: [
+              '/security-contract-testing/levo-cli/levo-cli-intro',
+              '/levo-cli/levo-cli-intro',
+              '/beta/api-observability/quickstart/quickstart-laptop'
+            ],
           },
           {
             to: '/security-testing/test-laptop/test-mac-os',
@@ -139,6 +143,10 @@ const config = {
             from: '/api-observability/install-guide',
           },
           {
+            to: '/install-traffic-capture-sensors',
+            from: '/beta/api-observability/install-guide/install-sensor',
+          },
+          {
             to: '/guides/demo-application',
             from: '/api-observability/quickstart/sample-app',
           },
@@ -148,7 +156,7 @@ const config = {
           },
           {
             to: '/guides/key-concepts',
-            from: '/api-observability/concepts',
+            from: ['/api-observability/concepts', '/beta/api-observability/concepts'],
           },
           {
             to: '/guides/api-observability',
@@ -170,10 +178,49 @@ const config = {
             to: '/install-traffic-capture-sensors/ebpf-sensor/sensor-kubernetes',
             from: '/api-observability/common-tasks/sensor/sensor-mgmt',
           },
+          {
+            to: '/security-testing/test-laptop/test-linux',
+            from: '/levo-cli/levo-cli-for-linux'
+          },
+          {
+            to: '/security-testing/test-laptop/test-mac-os',
+            from: '/levo-cli/levo-cli-for-mac-os'
+          },
+          {
+            to: '/security-testing/test-laptop/test-windows',
+            from: '/levo-cli/levo-cli-for-windows'
+          },
+          {
+            to: '/quickstart',
+            from: '/beta/api-observability/quickstart'
+          },
+          {
+            to: '/security-testing/catalog-tests',
+            from: [
+              '/test-your-app/test-app-security/data-driven/execute-test-plan',
+              '/test-your-app/test-app-security/choices',
+              '/solutions/api-security-testing'
+            ]
+          },
+          {
+            to: '/guides/security-testing/test-your-app/test-app-security/choices',
+            from: '/concepts/test-plans/test-plan-types'
+          },
+          {
+            to: '/guides/security-testing/concepts/test-plans/fixtures/test-fixtures',
+            from: '/concepts/test-plans/fixtures/test-fixtures'
+          },
+          {
+            to:'/vulnerabilities/v1/Miscellaneous/schema-conformance',
+            from: '/test-your-app/test-app-schema-conformance'
+          },
+          {
+            to: '/',
+            from: '/how-it-works'
+          }
         ],
         createRedirects(existingPath) {
           if (existingPath.includes('/quickstart')) {
-            // Redirect from /docs/team/X to /community/X and /docs/support/X to /community/X
             return [
               existingPath.replace('/quickstart', '/api-observability/quickstart'),
             ];
@@ -196,11 +243,6 @@ const config = {
             return [
               existingPath.replace('/install-traffic-capture-sensors', '/api-observability/install-guide/install-sensor'),
               existingPath.replace('/install-traffic-capture-sensors/common-tasks', '/api-observability/common-tasks/sensor'),
-            ];
-          }
-          if (existingPath.includes('/quickstart')) {
-            return [
-              existingPath.replace('/quickstart', '/api-observability/quickstart'),
             ];
           }
           return undefined; // Return a falsy value: no redirect created
