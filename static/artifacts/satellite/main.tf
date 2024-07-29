@@ -155,9 +155,8 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
         }
       ],
       "essential": true,
-      "entryPoint": ["/opt/bitnami/haproxy/sbin/haproxy"],
+      "entryPoint": [],
       "command": [
-        "-V",
         "-f",
         "/usr/local/etc/haproxy/haproxy-ecs.cfg"
       ],
