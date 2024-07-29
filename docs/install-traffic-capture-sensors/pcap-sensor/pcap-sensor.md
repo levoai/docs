@@ -9,7 +9,7 @@ Edit Inbound Rules to accept port `9999` in case the satellite is running on an 
 
 ## Follow instructions for your platform
 
- - [Install on Fargate](/install-traffic-capture-sensors/pcap-sensor/sensor-fargate)
+ - [Install on ECS](/install-traffic-capture-sensors/pcap-sensor/sensor-ecs)
  - [Install via Docker](/install-traffic-capture-sensors/pcap-sensor/sensor-docker)
  - [Install on Kuberenetes](/install-traffic-capture-sensors/pcap-sensor/sensor-kubernetes)
 
