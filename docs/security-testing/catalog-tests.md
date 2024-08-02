@@ -12,28 +12,32 @@ Levo provides you with the ability to run a variety of tests on your API endpoin
 
 <br></br>
 
-### Click on the `Run Tests` button on the bottom right side of the screen. You can choose to
-- `Run On Cloud`: The tests will be run on Levo's platform, i.e., the requests to the target server are made by Levo. This means that the application must be exposed via a publicly reachable domain or IP address.
-- `Run OnPrem`: The tests will run on your premise. Head to the **[testrunners](testrunner.md)** page to know how to install **Testrunners**.
+### Click on the `Test` button on the bottom right side of the screen.
 
 ![](../assets/testruns-step-2.png)
 
 <br></br>
 
-### Select Runnable Endpoints on the next screen.
+### Select Test Mode.
 
 ![](../assets/testruns-step-3.png)
+
+### Tests will run for all runnable endpoints, you can change the endpoints test parameters if needed.
+
+![](../assets/testruns-step-4.png)
 
 >Note: You can configure non-runnable endpoints by manually entering sample values for mandatory parameters.
 
 <br></br>
 
-### Click on Next and select the categories of test you want to run from and choose from a wide variety of Tests like BOLA, SQLI, CORS, Fuzzing, etc.
+### Select the categories of test you want to run from and choose from a wide variety of Tests like BOLA, SQLI, CORS, Fuzzing, etc.
 
-![](../assets/testruns-step-4.png)
+![](../assets/testruns-step-5.png)
 
 <br></br>
 
-### Enter a Target URL to run tests against, e.g. `http://crapi.levo.ai` and click on `Run Tests` to start the tests' execution.
+### Select Method and Enter a Target URL to run tests against, e.g. `http://crapi.levo.ai` and click on `Run Tests` to start the tests' execution.
+- `Run on Cloud`: The tests will be run on Levo's platform, i.e., the requests to the target server are made by Levo. This means that the application must be exposed via a publicly reachable domain or IP address.
+- `Run on-prem`: The tests will run on your premise. Head to the **[testrunners](testrunner.md)** page to know how to install **Testrunners**.
 
-![](../assets/testruns-step-5.png)
+![](../assets/testruns-step-6.png)
