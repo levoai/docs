@@ -14,7 +14,7 @@ sidebar_position: 1
 
 ### 1. Install levoai Helm repo
 ```bash
-helm repo add levoai https://charts.levo.ai && helm repo update
+helm repo add levoai https://charts.levo.ai && helm repo update levoai
 ```
 
 ### 2. Create `levoai` namespace & install Sensor
@@ -29,11 +29,37 @@ helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --install \
   --namespace levoai \
   --create-namespace \
-  --set sensor.config.default-service-name=<'Application Name' chosen earlier> \
-  --set sensor.config.satellite-url=<hostname|IP:port> \
-  --set sensor.config.organization-id=<your-org-id> \
-  --set sensor.levoEnv=<'Application environment'>
+  --set sensor.satelliteUrl=levoai-haproxy \
+  --set sensor.levoEnv=<Application environment>
 ```
+
+:::info
+
+You need to specify the organization-id if Levo is hosting the satellite for you; the installation command will be:
+
+```bash
+helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
+  --install \
+  --namespace levoai \
+  --create-namespace \
+  --set sensor.satelliteUrl="https://collector.levo.ai" \
+  --set sensor.levoEnv=<Application environment> \
+  --set sensor.config.organization-id=<your-org-id>
+```
+
+You need to expose the levoai-haproxy service so that sensor can reach satellite when it is installed 
+in a different cluster; the installation command will be:
+
+```bash
+helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
+  --install \
+  --namespace levoai \
+  --create-namespace \
+  --set sensor.satelliteUrl=<hostname|IP:port> \
+  --set sensor.levoEnv=<Application environment>
+```
+
+:::
 
 
 ### 3. Verify connectivity with Satellite
