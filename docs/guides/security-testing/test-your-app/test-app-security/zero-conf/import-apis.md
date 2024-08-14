@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+description: "Secure Your APIs: Import Specs, Bypass Authorization & Test with Levo. Auto-gen or upload, Levo simplifies API security testing."
 ---
 
 

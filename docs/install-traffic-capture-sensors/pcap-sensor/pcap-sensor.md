@@ -1,3 +1,7 @@
+---
+description: Install Levo.ai PCAP Sensor with our guide. Follow detailed instructions for setting up and configuring traffic capture sensors across multiple platforms.
+---
+
 # Install PCAP Sensor
 
 ## Prerequisites

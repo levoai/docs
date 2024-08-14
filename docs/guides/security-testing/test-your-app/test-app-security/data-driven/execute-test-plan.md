@@ -1,5 +1,6 @@
 ---
 sidebar_position: 6
+description: Execute your test plan with Levo.ai. Follow our guide to use Levo CLI for testing live API endpoints and view detailed results to ensure robust security.
 ---
 
 # Execute Test Plan

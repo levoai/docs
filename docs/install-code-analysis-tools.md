@@ -1,5 +1,6 @@
 ---
 sidebar_position: 6
+description: Install Levo.ai code analysis tools with our comprehensive guide. Enhance your API security with easy setup and detailed instructions.
 ---
 
 # Install Code Analysis Tools

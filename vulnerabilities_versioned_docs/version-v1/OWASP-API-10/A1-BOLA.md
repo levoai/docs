@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: "Understand OWASP API Security Top 10 - A1: BOLA with Levo.ai. Learn about Broken Object Level Authorization vulnerabilities and mitigation strategies."
 ---
 
 # API A1 - Broken Object Level Authorization

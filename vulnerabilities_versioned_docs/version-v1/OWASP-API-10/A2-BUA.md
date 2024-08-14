@@ -1,5 +1,7 @@
 ---
 sidebar_position: 2
+description: "Understand OWASP API Security Top 10 - A2: BUA with Levo.ai. Learn about Broken User Authentication vulnerabilities and how to mitigate them."
+
 ---
 
 # API A2 - Broken Authentication
