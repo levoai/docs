@@ -1,3 +1,6 @@
+---
+title: "API Security: Prevent Leaks via HTTP Referrer Headers"
+---
 
 # Information Disclosure - Sensitive Information in HTTP Referrer Header
 ![Information Disclosure - Referrer Header](../assets/baseline/baseline-vuln.svg)

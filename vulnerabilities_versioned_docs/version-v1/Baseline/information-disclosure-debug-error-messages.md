@@ -1,3 +1,6 @@
+---
+title: "Debug Error Messages Vulnerability | Levo.ai"
+---
 
 # Information Disclosure - Debug Error Messages
 ![Debug Error Messages](../assets/baseline/baseline-vuln.svg)

@@ -1,3 +1,6 @@
+---
+title: "Sensitive Data in URL Vulnerability | Levo.ai"
+---
 
 # Information Disclosure - Sensitive Information in URL
 ![Information Disclosure - Sensitive Information in URL](../assets/baseline/baseline-vuln.svg)

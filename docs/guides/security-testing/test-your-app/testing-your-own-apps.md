@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: "API Security Testing: DIY Guide for Your Apps"
 ---
 
 # How do I use Levo with my own applications?
