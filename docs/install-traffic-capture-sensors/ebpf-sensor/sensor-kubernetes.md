@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: Install eBPF Sensor on Kubernetes | Levo.ai Documentation
 ---
 
 # Sensor on Kubernetes

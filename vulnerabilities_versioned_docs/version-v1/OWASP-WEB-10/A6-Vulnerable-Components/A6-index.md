@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: "API Security | Addressing OWASP A6 Vulnerabilities"
 ---
 
 # Web A6 - Vulnerable and Outdated Components

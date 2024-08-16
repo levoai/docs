@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+title: "Levo.ai Guide: Testing API Authorization Controls"
 ---
 
 # Providing Authorization Information for Authorization Abuse Tests

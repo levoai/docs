@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+title: "Secure & Organize APIs: Leverage a Private Registry"
 ---
 
 # Use a Private Docker Registry for Kubernetes Installations
