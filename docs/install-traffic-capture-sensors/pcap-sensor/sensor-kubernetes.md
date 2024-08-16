@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+title: Install PCAP Sensor on Kubernetes | Levo.ai Documentation
 ---
 
 # Sensor on Kubernetes

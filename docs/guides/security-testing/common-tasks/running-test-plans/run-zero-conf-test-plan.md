@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+title: "Effortless API Security Testing: Run Zero-Conf Test Plans"
 ---
 
 # How do I run a Zero Configuration Test Plan?

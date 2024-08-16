@@ -1,5 +1,6 @@
 ---
 sidebar_position: 6
+title: Common Integration Tasks | Levo.ai Documentation
 ---
 
 # Common Tasks

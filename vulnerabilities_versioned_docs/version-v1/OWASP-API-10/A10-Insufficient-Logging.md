@@ -1,5 +1,6 @@
 ---
 sidebar_position: 10
+title: "API Security: Fix Insufficient Logging (OWASP A10)"
 ---
 
 # API A10 - Insufficient Logging & Monitoring

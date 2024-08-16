@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+title: Install eBPF Sensor on Docker | Levo.ai Documentation
 ---
 
 # Sensor via Docker

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+title: API Role-Based Access Control Testing Guide
 ---
 
 # Associating RBAC Information Using Pattern Matching (Glob)

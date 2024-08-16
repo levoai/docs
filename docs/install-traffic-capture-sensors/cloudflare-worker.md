@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+description: Deploy Levo.ai PCAP sensor on Cloudflare Worker. Follow our detailed guide to set up and configure for enhanced API traffic capture and analysis.
 ---
 
 # Cloudflare Worker

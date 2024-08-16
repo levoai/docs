@@ -1,5 +1,6 @@
 ---
 sidebar_position: 0
+title: "API Security Testing: AuthN & AuthZ Best Practices"
 ---
 
 # Providing Authentication / Authorization for Tests

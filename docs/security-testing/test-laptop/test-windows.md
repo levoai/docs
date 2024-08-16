@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+description: Learn how to test Levo.ai on Windows laptops. Follow our detailed guide for setup, execution, and security testing to ensure robust API protection.
 ---
 
 # Test on Windows

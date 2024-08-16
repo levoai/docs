@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Install Levo.ai Satellite on Kubernetes. Follow our detailed guide for setup, deployment, and ensuring API security with Levo.ai's comprehensive tools.
 ---
 
 

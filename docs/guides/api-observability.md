@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Explore Levo.ai's frictionless API observability guide. Auto-discover and document all your APIs seamlessly while preserving privacy.
 ---
 
 # Frictionless API Observability

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+title: "Levo.ai: Automate API Schema Conformance Testing"
 ---
 
 # Using your own app to evaluate Levo's schema conformance testing
