@@ -60,14 +60,25 @@ helm upgrade --install -n levoai --create-namespace \
     # --set global.levoai_config_override.onprem-api.url="https://api.india-1.levo.ai" \
     levoai-satellite levoai/levoai-satellite
 ```
+:::
 
+#### If rabbitmq persistence needs to be disabled
+You will need to set rabbitmq.persistence.enabled property to false.
+
+```bash
+helm upgrade --install -n levoai --create-namespace \
+    --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+    --set rabbitmq.persistence.enabled=false \
+    # --set global.levoai_config_override.onprem-api.url="https://api.india-1.levo.ai" \
+    levoai-satellite levoai/levoai-satellite
+```
 ### 4. Verify connectivity with Levo.ai
 
 #### a. Check Satellite health
 
 The Satellite is comprised of five sub components 1) levoai-collector, 2) levoai-ion, 3) levoai-rabbitmq, 4)levoai-satellite, and 5) levoai-tagger.
 
-Wait couple of minutes after the install, and check the health of the components by executing the following:
+Wait a couple of minutes after the installation, and check the health of the components by executing the following:
 
 ```bash
 kubectl -n levoai get pods
