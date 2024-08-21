@@ -69,6 +69,7 @@ global:
   imageRegistry: <your.registry>
   imagePullSecrets:
     - name: ecr-auth
+  busyboxImage: <your.repository-prefix>/busybox
 
 rabbitmq:
   image:
