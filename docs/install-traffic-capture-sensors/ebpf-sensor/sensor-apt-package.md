@@ -34,7 +34,7 @@ sudo apt update
 ### 3. Download/install Sensor artifacts
 
 ```bash
-sudo apt install levo-ebpf-sensor=0.42.1
+sudo apt install levo-ebpf-sensor=0.43.6
 ```
 
 ### 4. Start the Sensor
