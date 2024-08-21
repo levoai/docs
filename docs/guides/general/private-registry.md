@@ -55,7 +55,7 @@ kubectl create secret docker-registry ecr-auth --docker-server=your.registry --d
 
 ```yaml
 sensor:
-  imageRepo: <your.registry>/levoai/ebpf_sensor
+  imageRepo: <your.registry>/<your.repository-prefix>/ebpf_sensor
 ```
 
 ### Satellite
