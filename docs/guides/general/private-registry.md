@@ -24,7 +24,7 @@ trap "exit" INT
 
 region="us-west-2"
 registry="your.registry"
-repositoryPrefix="your.repository-prefix"
+repositoryPrefix="${repositoryPrefix:-levoai}" # Optional, replace with your repository prefix in case you are using a different repository
 
 helm repo add levoai https://charts.levo.ai || true
 helm repo update
@@ -57,7 +57,9 @@ kubectl create secret docker-registry ecr-auth --docker-server=your.registry --d
 sensor:
   imageRepo: <your.registry>/levoai/ebpf_sensor
 ```
+
 > Note: In case you are using a different repository, please replace `levoai/ebpf_sensor` with the correct repository name.
+
 ```yaml
 sensor:
   imageRepo: <your.registry>/<your-repository-prefix>/ebpf_sensor
@@ -77,6 +79,7 @@ global:
 ```
 
 > Note: In case you are using a different repository, please add the following lines to the `values.yaml`.
+
 ```yaml
 global:
     busyboxImage: <your.repository-prefix>/busybox
