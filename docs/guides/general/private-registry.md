@@ -33,8 +33,7 @@ images+=($(helm template levoai/levoai-ebpf-sensor | yq -N '..|.image? | select(
 
 for image in "${images[@]}"; do
   src_image=${image#"docker.io/"}
-  repo_name_with_tag=${src_image#*/}
-  repo_name=${repo_name_with_tag#*/}
+  repo_name=${src_image#*/}
   dest_image="$registry/$repositoryPrefix/$repo_name"
   aws ecr describe-repositories --repository-names $repo_name --region $region || aws ecr create-repository --repository-name $repo_name --region $region
   echo "Copying $src_image to $dest_image"
@@ -56,7 +55,7 @@ kubectl create secret docker-registry ecr-auth --docker-server=your.registry --d
 
 ```yaml
 sensor:
-  imageRepo: your.registry/levoai/ebpf_sensor
+  imageRepo: <your.registry>/levoai/ebpf_sensor
 ```
 
 ### Satellite
@@ -73,32 +72,32 @@ global:
 
 rabbitmq:
   image:
-    repository: <your.registry-prefix>/rabbitmq
+    repository: <your.repository-prefix>/rabbitmq
     tag: <version>
     
 satellite:
   image:
-    repository: <your.registry-prefix>/satellite
+    repository: <your.repository-prefix>/satellite
     tag: <version>
 
 tagger:
   image:
-    repository: <your.registry-prefix>/satellite
+    repository: <your.repository-prefix>/satellite
     tag: <version>
 
 levoai-ion:
   image:
-    repository: <your.registry-prefix>/satellite
+    repository: <your.repository-prefix>/satellite
     tag: <version>
     
 levoai-collector:
   image:
-    repository: <your.registry-prefix>/collector
+    repository: <your.repository-prefix>/collector
     tag: <version>
 
 haproxy:
   image:
-    repository: <your.registry-prefix>/haproxy
+    repository: <your.repository-prefix>/haproxy
     tag: <version>
 
 ```
