@@ -55,7 +55,12 @@ kubectl create secret docker-registry ecr-auth --docker-server=your.registry --d
 
 ```yaml
 sensor:
-  imageRepo: <your.registry>/<your.repository-prefix>/ebpf_sensor
+  imageRepo: <your.registry>/levoai/ebpf_sensor
+```
+> Note: In case you are using a different repository, please replace `levoai/ebpf_sensor` with the correct repository name.
+```yaml
+sensor:
+  imageRepo: <your.registry>/<your-repository-prefix>/ebpf_sensor
 ```
 
 ### Satellite
@@ -69,7 +74,12 @@ global:
   imageRegistry: <your.registry>
   imagePullSecrets:
     - name: ecr-auth
-  busyboxImage: <your.repository-prefix>/busybox
+```
+
+> Note: In case you are using a different repository, please add the following lines to the `values.yaml`.
+```yaml
+global:
+    busyboxImage: <your.repository-prefix>/busybox
 
 rabbitmq:
   image:
@@ -100,5 +110,4 @@ haproxy:
   image:
     repository: <your.repository-prefix>/haproxy
     tag: <version>
-
 ```
