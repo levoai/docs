@@ -30,7 +30,7 @@ Copy your authorization key. This key is required in subsequent steps below.
 ### Add Helm Charts Repository
 
 ```bash
-helm repo add levoai https://charts.levo.ai && helm repo update
+helm repo add levoai https://charts.levo.ai && helm repo update levoai
 ```
 
 ### Add LevoAI Auth Key
@@ -46,6 +46,12 @@ helm upgrade --install -n levoai --create-namespace \
   --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
   levoai-satellite levoai/levoai-satellite 
 ```
+
+:::info
+
+Please refer to [install satellite in kubernetes](/../../install-satellite/satellite-kubernetes) for detailed instructions. 
+
+:::
 
 ### Check satellite connectivity
 Execute the following to check for connectivity health:
@@ -63,17 +69,16 @@ If connectivity is healthy, you will see output similar to below.
 ### Install eBPF Sensor
 
 ```bash
-# Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
-# If Sensor is installed on same cluster as Satellite, use 'levoai-collector.levoai:4317'
-# Specify below the 'Application Name' chosen earlier.
-#
+# Replace 'levoai-haproxy' with the values you noted down from previous step if 
+# Sensor was installed on a different cluster than satellite.
+# Use appropriate environment value for levoEnv to segregate API assets in Levo dashboard.
+
 helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --install \
   --namespace levoai \
   --create-namespace \
-  --set sensor.config.default-service-name=<'Application Name' chosen earlier> \
-  --set sensor.config.satellite-url=<hostname|IP:port>
-  --set sensor.config.env=<'Application environment'>
+  # --set sensor.satelliteUrl=levoai-haproxy \
+  --set sensor.levoEnv=<Application environment>
 ```
 
 ### Check sensor health
