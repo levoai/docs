@@ -24,7 +24,7 @@ trap "exit" INT
 
 region="us-west-2"
 registry="your.registry"
-repositoryPrefix="${repositoryPrefix:-levoai}" # Optional, replace with your repository prefix in case you are using a different repository
+repositoryPrefix="${repositoryPrefix:-}" # Optional, replace with your repository prefix, in case you are using a different repository
 
 helm repo add levoai https://charts.levo.ai || true
 helm repo update
@@ -33,8 +33,13 @@ images+=($(helm template levoai/levoai-ebpf-sensor | yq -N '..|.image? | select(
 
 for image in "${images[@]}"; do
   src_image=${image#"docker.io/"}
-  repo_name=${src_image#*/}
-  dest_image="$registry/$repositoryPrefix/$repo_name"
+  if [ -n "$repositoryPrefix" ]; then
+    repo_name=${src_image#*/}
+    dest_image="$registry/$repositoryPrefix/$repo_name"
+  else
+    repo_name=${src_image%:*}
+    dest_image="$registry/$src_image"
+  fi
   aws ecr describe-repositories --repository-names $repo_name --region $region || aws ecr create-repository --repository-name $repo_name --region $region
   echo "Copying $src_image to $dest_image"
   docker buildx imagetools create --tag $dest_image $src_image
