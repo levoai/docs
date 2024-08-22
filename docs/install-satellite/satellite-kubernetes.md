@@ -6,6 +6,8 @@ description: Install Levo.ai Satellite on Kubernetes. Follow our detailed guide 
 
 # Satellite on Kubernetes
 
+## Setup
+
 ### Prerequisites
 - Kubernetes version >= `v1.18.0`
 - [Helm v3](https://helm.sh/docs/intro/install/) installed and working.
@@ -72,6 +74,47 @@ helm upgrade --install -n levoai --create-namespace \
     # --set global.levoai_config_override.onprem-api.url="https://api.india-1.levo.ai" \
     levoai-satellite levoai/levoai-satellite
 ```
+
+
+#### Kubernetes related customizations
+
+##### Add Tolerations, Affinity and Node Selectors
+
+Tolerations, Affinity and Node Selectors for the Satellite pods may be specified via helm values. For example:
+
+```yaml
+tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule
+  - key: "devops"
+    operator: "Equal"
+    value: "dedicated"
+    effect: "NoSchedule"
+nodeSelector:s
+  kubernetes.io/hostname: "mavros"
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: topology.kubernetes.io/zone
+          operator: In
+          values:
+          - antarctica-east1
+          - antarctica-west1
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 1
+      preference:
+        matchExpressions:
+        - key: another-node-label-key
+          operator: In
+          values:
+          - another-node-label-value
+```
+
+
+
 ### 4. Verify connectivity with Levo.ai
 
 #### a. Check Satellite health
