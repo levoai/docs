@@ -30,7 +30,7 @@ The Sensor-Satellite setup can be run with the following docker command -
 docker run -e LEVOAI_AUTH_KEY=<your-auth-key> \
   -e LEVOAI_ORG_ID=<your-org-id> \
   --net=host \
-  -v ./logs:/mnt/levo/logs
+  -v ./logs:/mnt/levo/logs \
   levoai/levo-all
 ```
 
