@@ -6,31 +6,26 @@ sidebar_position: 6
 
 ## Running the Sensor as a Systemd Service {#running-sensor-systemd}
 
-### 1. Configure Satellite Address
-The Satellite (collector) address is configured in `/etc/levo/sensor/config.yaml`.
+
+### 1. Configure Satellite Address and Sensor Environment
+The eBPF sensor environment and the satellite address is configured in `/etc/default/levo-ebpf-sensor`.
+The default env value is `staging`, and default satellite-address is `https://collector.levo.ai`.
+
+Edit `/etc/default/levo-ebpf-sensor`
+- set `LEVO_ENV` to the desired env value (eg. `prod`, `qa`)
+- set `LEVO_SATELLITE_URL` to desired value `host:port` value
+
+```bash
+# Environment Variables for levo-ebpf-sensor.service
+MALLOC_CONF="background_thread:true,narenas:1,tcache:false,dirty_decay_ms:0,muzzy_decay_ms:0,abort_conf:true"
+LEVO_ENV="staging"
+LEVO_SATELLITE_URL="https://collector.levo.ai"
+```
 
 #### NOTE:
 The default address for the collector in Systemd installations is `https://collector.levo.ai`.
-This address assumes that Levo is hosting the Satellite for you, and you must also specify an organization ID (`organization-id`) via the config file.
+This address assumes that Levo is hosting the Satellite for you, and you must also specify an organization ID (`organization-id`) via the config file (`/etc/levo/sensor/config.yaml`).
 If you wish, you may also host the Satellite yourself and specify the address of the collector in the self-hosted Satellite to direct the Sensor's traffic to it.
-
-
-Edit `/etc/levo/sensor/config.yaml`, and set `satellite-url` (under Satellite Settings) to the address noted from the Satellite install.
-
-```yaml
-...
-# --------------------------------------------------------------------------------------------
-# Satellite Settings:
-# --------------------------------------------------------------------------------------------
-
-# Levo Organization ID. This must be specified when the collector is hosted by Levo.
-# organization-id: ""
-
-# host:port for the collector service receiving the Sensor's API traces.
-satellite-url: <Use the default (https://collector.levo.ai) or set to a custom address>
-...
-```
-**Note**: If you change the Satellite address later, you have to restart the Sensor, since it's not a hot property.
 
 ### 2. Configure Application Name
 The `Application Name` is configured in `/etc/levo/sensor/config.yaml`.
@@ -50,19 +45,7 @@ default-service-name: <'Application Name' chosen earlier>
 # --------------------------------------------------------------------------------------------
 ```
 
-### Configure sensor environment
-The eBPF sensor environment is configured in `/etc/default/levo-ebpf-sensor`. The default env value is `staging`
-
-Edit `/etc/default/levo-ebpf-sensor`, and set `LEVO_ENV` to the desired env value (eg. `prod`, `qa`)
-
-```bash
-# Environment Variables for levo-ebpf-sensor.service
-MALLOC_CONF="background_thread:true,narenas:1,tcache:false,dirty_decay_ms:0,muzzy_decay_ms:0,abort_conf:true"
-LEVO_ENV="staging"
-```
-
 **Note**: If you change the `Application Name` later, you have to restart the Sensor, since it's not a hot property.
-
 
 ### 3. Start the Sensor
 ```bash
