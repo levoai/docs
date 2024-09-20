@@ -12,7 +12,7 @@ title: Install PCAP Sensor on Docker | Levo.ai Documentation
 -   Admin (or  `sudo`) privileges on the Docker host
 
 ```bash
-sudo docker run --net=host --rm -it levoai/pcap-sensor:0.1.1 \
+sudo docker run --net=host --rm -it levoai/pcap-sensor:0.1.3 \
 ./bin/init apidump \
 --satellite-url "your satellite url (http(s)://hostname|IP:port)" \
 --levo-env "your application environment (staging, production etc.)" \
