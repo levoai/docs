@@ -48,10 +48,12 @@ Please take a look at the [Running the Sensor as a Systemd Service](/install-tra
 
 The Satellite address is configured in `/etc/levo/sensor/config.yaml`. The default `host:port` for Satellite is `localhost:4317`.
 
-Edit `/etc/levo/sensor/config.yaml`, and set `satellite-url` (under Satellite Settings) to the desired `host:port` value.
+Edit `/etc/levo/sensor/config.yaml`, set `satellite-url` (under Satellite Settings) to the desired `host:port` value,
+and set `organization-id` to the Organization ID fetched from the Levo Dashboard
 
 ```bash
 ...
+organization-id: "your Org ID"
 # --------------------------------------------------------------------------------------------
 # Satellite Settings:
 # --------------------------------------------------------------------------------------------

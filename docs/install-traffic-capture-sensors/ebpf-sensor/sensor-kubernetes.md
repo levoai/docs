@@ -24,29 +24,18 @@ helm repo add levoai https://charts.levo.ai && helm repo update levoai
 # If Sensor is installed on same cluster as Satellite, use 'levoai-haproxy'
 # If they are installed on different clusters, the haproxy service should be exposed so that it is
 # reachable by the sensor. Use the exposed address as the value for satellite-url.
-# Specify below the 'Application Name' chosen earlier and Organization ID (copy from levo platform).
+# Also specify the Organization ID (copy from levo platform).
 #
 helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --install \
   --namespace levoai \
   --create-namespace \
+  --set sensor.config.organization-id=<your-org-id>
   --set sensor.satelliteUrl=levoai-haproxy \
   --set sensor.levoEnv=<Application environment>
 ```
 
 :::info
-
-You need to specify the organization-id if Levo is hosting the satellite for you; the installation command will be:
-
-```bash
-helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
-  --install \
-  --namespace levoai \
-  --create-namespace \
-  --set sensor.satelliteUrl="https://collector.levo.ai" \
-  --set sensor.levoEnv=<Application environment> \
-  --set sensor.config.organization-id=<your-org-id>
-```
 
 You need to expose the levoai-haproxy service so that sensor can reach satellite when it is installed 
 in a different cluster; the installation command will be:
@@ -103,7 +92,7 @@ If you wish to, you may also request Levo to host the Satellite for you. In this
 `satellite-url` to `https://collector.levo.ai` and specify an organization ID (`organization-id`) via helm values.
 
 ```shell
-helm upgrade --set sensor.levoEnv=<your-application-environment> --set sensor.config.satellite-url=https://collector.levo.ai --set sensor.config.organization-id=<your-org-id> levoai-sensor levoai/levoai-ebpf-sensor -n levoai
+helm upgrade --set sensor.levoEnv=<your-application-environment> --set sensor.satelliteUrl=https://collector.levo.ai --set sensor.config.organization-id=<your-org-id> levoai-sensor levoai/levoai-ebpf-sensor -n levoai
 ```
 
 Please proceed to the next step, if there are no errors.

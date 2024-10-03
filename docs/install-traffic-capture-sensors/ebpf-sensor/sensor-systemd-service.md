@@ -15,10 +15,12 @@ This address assumes that Levo is hosting the Satellite for you, and you must al
 If you wish, you may also host the Satellite yourself and specify the address of the collector in the self-hosted Satellite to direct the Sensor's traffic to it.
 
 
-Edit `/etc/levo/sensor/config.yaml`, and set `satellite-url` (under Satellite Settings) to the address noted from the Satellite install.
+Edit `/etc/levo/sensor/config.yaml`, set `satellite-url` (under Satellite Settings) to the desired `host:port` value,
+and set `organization-id` to the Organization ID fetched from the Levo Dashboard
 
 ```yaml
 ...
+organization-id: <Org ID>
 # --------------------------------------------------------------------------------------------
 # Satellite Settings:
 # --------------------------------------------------------------------------------------------
