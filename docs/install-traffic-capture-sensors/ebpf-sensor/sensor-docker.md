@@ -26,6 +26,7 @@ sudo docker run --restart unless-stopped \
   --privileged --detach levoai/ebpf_sensor:0.40.0 \
   --host-proc-path /host/proc/ \
   --satellite-url <satellite-address> \
+  --organization-id <Org ID> \
   --env <'application-environment'> \
   --default-service-name <'Application Name' chosen earlier>
 ```
