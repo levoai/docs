@@ -58,7 +58,7 @@ You will need to expose the Satellite via either a `LoadBalancer` or `NodePort`,
 # Please modify this command template and choose either 'LoadBalancer' or 'NodePort', prior to execution
 helm upgrade --install -n levoai --create-namespace \
     --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
-    --set levoai-collector.service.type=<LoadBalancer | NodePort> \
+    --set haproxy.service.type=<LoadBalancer | NodePort> \
     # --set global.levoai_config_override.onprem-api.url="https://api.india-1.levo.ai" \
     levoai-satellite levoai/levoai-satellite
 ```
