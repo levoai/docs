@@ -166,7 +166,8 @@ kubectl get service levoai-collector -n levoai
 ```
 
 ### 6. Optionally, enable authentication for satellite APIs.
-Add below config to `values.yml` file to enable authentication for satellite APIs using Organization ID from Levo dashboard. Refer to [Accessing Organization IDs](/integrations/common-tasks.md#accessing-organization-ids) for fetching the Organization ID.
+Add below config to `values.yml` file to enable authentication for satellite APIs using a unique key. 
+Refer to [Accessing Organization IDs](/integrations/common-tasks.md#accessing-organization-ids) for fetching the Organization ID.
 
 ```yaml
 levoai-collector:
