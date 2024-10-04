@@ -30,7 +30,7 @@ helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --install \
   --namespace levoai \
   --create-namespace \
-  --set sensor.config.organization-id=<your-org-id>
+  --set sensor.orgId=<your-org-id>
   --set sensor.satelliteUrl=levoai-haproxy \
   --set sensor.levoEnv=<Application environment>
 ```
@@ -92,7 +92,7 @@ If you wish to, you may also request Levo to host the Satellite for you. In this
 `satellite-url` to `https://collector.levo.ai` and specify an organization ID (`organization-id`) via helm values.
 
 ```shell
-helm upgrade --set sensor.levoEnv=<your-application-environment> --set sensor.satelliteUrl=https://collector.levo.ai --set sensor.config.organization-id=<your-org-id> levoai-sensor levoai/levoai-ebpf-sensor -n levoai
+helm upgrade --set sensor.levoEnv=<your-application-environment> --set sensor.satelliteUrl=https://collector.levo.ai --set sensor.orgId=<your-org-id> levoai-sensor levoai/levoai-ebpf-sensor -n levoai
 ```
 
 Please proceed to the next step, if there are no errors.
