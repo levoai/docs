@@ -21,6 +21,13 @@ You should install the pcap sensor if:
 
 [**Click here for the installation instructions**](/install-traffic-capture-sensors/pcap-sensor).
 
+## Windows Sensor
+You should install the windows sensor if:
+
+- Your application workloads are deployed on a windows Serverless compute architecture.
+
+[**Click here for the installation instructions**](/install-traffic-capture-sensors/windows-sensor).
+
 ## AWS Traffic Mirroring
 Use this if you want to use traffic mirroring to instrument your application workloads.
 
