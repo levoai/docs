@@ -94,6 +94,6 @@ netsh advfirewall firewall add rule name="Levo.ai Sensor" dir=in action=allow pr
 ```
 Replace `"C:\Program Files\Levo\levo-sensor.exe"` with the actual path to the Levo sensor executable.
 
-#### Additional Support
+### 5. Troubleshooting
 
 For additional support, please [contact](support@levo.ai) Levo.ai technical support.
