@@ -58,7 +58,7 @@ You will need to expose the Satellite via either a `LoadBalancer` or `NodePort`,
 # Please modify this command template and choose either 'LoadBalancer' or 'NodePort', prior to execution
 helm upgrade --install -n levoai --create-namespace \
     --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
-    --set levoai-collector.service.type=<LoadBalancer | NodePort> \
+    --set haproxy.service.type=<LoadBalancer | NodePort> \
     # --set global.levoai_config_override.onprem-api.url="https://api.india-1.levo.ai" \
     levoai-satellite levoai/levoai-satellite
 ```
@@ -164,6 +164,40 @@ Run the below command and note the `external` address/port of the the Collector 
 ```bash
 kubectl get service levoai-collector -n levoai
 ```
+
+### 6. Optionally, enable authentication for satellite APIs.
+Add below config to `values.yml` file to enable authentication for satellite APIs using a unique key. 
+Refer to [Accessing Organization IDs](/integrations/common-tasks.md#accessing-organization-ids) for fetching the Organization ID.
+
+```yaml
+levoai-collector:
+  config:
+    data:
+      extensions:
+        levoauth:
+          org_id: <your-org-id>
+      receivers:
+        otlp:
+          protocols:
+            grpc:
+              auth:
+                authenticator: levoauth
+            http:
+              auth:
+                authenticator: levoauth
+      service:
+        extensions: [health_check, memory_ballast, levoauth]
+```
+
+Install satellite using this `values.yml`.
+
+```bash
+helm upgrade --install -n levoai --create-namespace \
+  -f ./values.yml \
+  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+  levoai-satellite levoai/levoai-satellite
+```
+
 Please proceed to [install Traffic Capture Sensors](/install-traffic-capture-sensors).
 
 ---------------------------------------------------------

@@ -22,14 +22,24 @@ The Satellite uses an authorization key to access Levo.ai.
 
 - [Login](https://app.levo.ai/login) to Levo.ai.
 - Click on your user profile.
-- Click on `User Settings`
-- Click on `Keys` on the left navigation panel
-- Click on `Get Satellite Authorization Key`
+- Click on `User Settings`.
+- Click on `Keys` on the left navigation panel.
+- Click on `Get Satellite Authorization Key`.
 
 Copy your authorization key. This key is required in subsequent steps below.
 
+## 3. Copy `Organization ID` from Levo.ai
 
-## 3. Follow instructions for your platform
+The Satellite uses an organization ID to authenticate incoming requests.
+
+- [Login](https://app.levo.ai/login) to Levo.ai.
+- Click on your user profile.
+- Click on `User Settings`.
+- Click on `Organizations` on the left navigation panel.
+- Click on `Copy` button to copy the Organization ID.
+
+
+## 4. Follow instructions for your platform
 - [Install on Kubernetes](satellite-kubernetes.md)
 - [Install on Linux host via Docker Compose](satellite-docker.mdx)
 - [Install in AWS EC2 using Levo Satellite AMI](satellite-ami-aws-ec2.mdx)
