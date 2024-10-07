@@ -1,9 +1,9 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 title: Install Levo.ai’s Sensor on Windows | Levo.ai Documentation
 ---
 
-# Levo’s Sensor for Windows
+# Levo Sensor for Windows
 
 This guide walks you through installing and configuring Levo.ai’s sensor to capture network traffic on Windows systems.
 
@@ -96,4 +96,4 @@ Replace `"C:\Program Files\Levo\levo-sensor.exe"` with the actual path to the Le
 
 ### 5. Troubleshooting
 
-For additional support, please [contact](support@levo.ai) Levo.ai technical support.
+For additional support, please [contact](mailto:support@levo.ai) Levo.ai technical support.
