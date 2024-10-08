@@ -5,7 +5,7 @@ title: Install Levo.ai’s Sensor on Windows | Levo.ai Documentation
 
 # Levo Sensor for Windows
 
-This guide walks you through installing and configuring Levo.ai’s sensor to capture network traffic on Windows systems/servers.
+This guide walks you through installing and configuring Levo.ai’s sensor to capture http traffic on Windows systems/servers.
 
 ## Prerequisites
 
