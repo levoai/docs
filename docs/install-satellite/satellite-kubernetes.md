@@ -170,23 +170,12 @@ Add below config to `values.yml` file to enable authentication for satellite API
 Refer to [Accessing Organization IDs](/integrations/common-tasks.md#accessing-organization-ids) for fetching the Organization ID.
 
 ```yaml
-levoai-collector:
-  config:
-    data:
-      extensions:
-        levoauth:
-          org_id: <your-org-id>
-      receivers:
-        otlp:
-          protocols:
-            grpc:
-              auth:
-                authenticator: levoauth
-            http:
-              auth:
-                authenticator: levoauth
-      service:
-        extensions: [health_check, memory_ballast, levoauth]
+global:
+  levoai_config_override:
+    onprem-api:
+      org-id: <your-org-id>
+haproxy:
+  authnEnabled: false
 ```
 
 Install satellite using this `values.yml`.
@@ -195,6 +184,16 @@ Install satellite using this `values.yml`.
 helm upgrade --install -n levoai --create-namespace \
   -f ./values.yml \
   --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+  levoai-satellite levoai/levoai-satellite
+```
+
+Otherwise, you can pass the `org-id` and `authnEnabled` as arguments to the helm command.
+
+```bash
+helm upgrade --install -n levoai --create-namespace \
+  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+  --set global.levoai_config_override.onprem-api.org-id=<your-org-id> \
+  --set haproxy.authnEnabled=true \
   levoai-satellite levoai/levoai-satellite
 ```
 
