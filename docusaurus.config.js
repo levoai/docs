@@ -268,7 +268,8 @@ const config = {
         // title: 'Levo.ai',
         logo: {
           alt: 'Levo.ai Logo',
-          src: 'img/logo.svg',
+          src: 'img/logo-light.svg',
+          srcDark: 'img/logo-dark.svg'
         },
         items: [
           {
@@ -290,7 +291,6 @@ const config = {
         ],
       },
       footer: {
-        style: 'dark',
         links: [
           {
             title: 'Levo.ai',
