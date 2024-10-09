@@ -175,7 +175,7 @@ global:
     onprem-api:
       org-id: <your-org-id>
 haproxy:
-  authnEnabled: false
+  satelliteAuthnEnabled: false
 ```
 
 Install satellite using this `values.yml`.
