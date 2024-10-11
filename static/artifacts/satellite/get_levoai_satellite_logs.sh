@@ -44,7 +44,6 @@ done
 TAR_FILE="/tmp/levoai_satellite_logs_$(date +%Y_%m_%d_%H_%M_%S).tar.gz"
 tar -czf "$TAR_FILE" -C "$TEMP_DIR" .
 
-# Print the path to the zip file
 echo "Logs have been collected and archived at $TAR_FILE"
 
 # Clean up temporary directory
