@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   levoai-rabbitmq:
     image: 'rabbitmq:3.12.8-management'
@@ -169,5 +168,23 @@ services:
               "refresh-token": "${LEVOAI_AUTH_KEY}",
               "org-id": "${LEVOAI_ORG_ID:-}",
               "org-prefix": "${LEVOAI_ORG_PREFIX:-}"
+          }
+        }
+
+  levoai-haproxy:
+    image: "levoai/haproxy:${LEVOAI_HAPROXY_VERSION:-latest}"
+    container_name: levoai-haproxy
+    restart: always
+    depends_on:
+      - levoai-collector
+      - levoai-satellite
+    ports:
+      - '80:8080'
+    environment:
+      LEVOAI_SATELLITE_AUTHN_ENABLED: ${LEVOAI_SATELLITE_AUTHN_ENABLED:-false}
+      LEVOAI_CONF_OVERRIDES: >
+        {
+          "onprem-api": {
+              "org-id": "${LEVOAI_ORG_ID:-}",
           }
         }
