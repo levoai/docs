@@ -21,6 +21,15 @@ You should install the pcap sensor if:
 
 [**Click here for the installation instructions**](/install-traffic-capture-sensors/pcap-sensor).
 
+## AWS Fargate Sensor
+To install AWS Fargate sensor:
+
+> **_NOTE:_**  You need to have the satellite installed to configure the sensor to point to it. If you haven't done it already, head over to [Install Satellite ](/install-satellite)
+Make sure the satellite is able to listen on port `9999`
+Edit Inbound Rules to accept port `9999` in case the satellite is running on an AWS instance.
+
+[**Click here for the installation instructions**](/install-traffic-capture-sensors/sensor-fargate).
+
 ## Windows Sensor
 You should install the windows sensor if:
 

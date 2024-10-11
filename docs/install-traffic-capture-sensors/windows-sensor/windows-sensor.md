@@ -26,8 +26,8 @@ This guide walks you through installing and configuring Levo.ai’s sensor to ca
 
 ### 2. Download Levo’s Windows Sensor
 
-1. Download the latest Levo.ai Windows sensor executable from our [downloads](https://github.com/levoai/downloads/tree/main/windows) portal.
-2. Place the executable in a directory of your choice, e.g., `C:\Program Files\Levo\levo-sensor.exe\`.
+1. Download the latest Levo.ai Windows sensor executable from our [downloads](https://github.com/levoai/downloads/tree/main/windows/bin) portal.
+2. Place the executable in a directory of your choice, e.g., `C:\Program Files\Levo\levo-pcap-sensor.exe\`.
 
 ### 3. Configure the Sensor
 
@@ -35,7 +35,7 @@ This guide walks you through installing and configuring Levo.ai’s sensor to ca
 2. Navigate to the directory containing the sensor executable.
 3. Run the following command to initialize the sensor:
 ```bash
-    levo-sensor.exe apidump ^
+    levo-pcap-sensor.exe apidump ^
     --satellite-url "your satellite url (http(s)://hostname|IP:port)" ^
     --levo-env "your application environment (staging, production etc.)" ^
     --levoai-org-id "your levo org id"
@@ -90,9 +90,9 @@ netsh advfirewall firewall show rule name=all
 
 To create a new inbound rule for the Levo sensor:
 ```bash
-netsh advfirewall firewall add rule name="Levo.ai Sensor" dir=in action=allow program="C:\Program Files\Levo\levo-sensor.exe" enable=yes 
+netsh advfirewall firewall add rule name="Levo.ai Sensor" dir=in action=allow program="C:\Program Files\Levo\levo-pcap-sensor.exe" enable=yes 
 ```
-Replace `"C:\Program Files\Levo\levo-sensor.exe"` with the actual path to the Levo sensor executable.
+Replace `"C:\Program Files\Levo\levo-pcap-sensor.exe"` with the actual path to the Levo sensor executable.
 
 ### 5. Additional Support
 
