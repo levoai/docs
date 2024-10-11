@@ -12,7 +12,7 @@ export function DownloadGetLogsScript() {
     return (
         <BrowserOnly fallback={<div>Loading...</div>}>
             {() => (
-                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/get_logs.sh'} download> download</a>
+                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/get_levoai_satellite_logs.sh'} download> download</a>
             )}
         </BrowserOnly>
     );
@@ -348,15 +348,13 @@ kubectl -n levoai logs <levoai-tagger-pod-id> | grep "ConnectionRefusedError: [E
 
 If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries. Please contact support@levo.ai for further assistance.
 
-### Extracting logs from Satellite components
+### Share Satellite logs with Levo Support
 
-To extract logs from Satellite components, please <DownloadGetLogsScript/> script and execute following commands.
+Please <DownloadGetLogsScript/> script and execute following commands to collect logs from all Satellite components. This will create an archive as `/tmp/levoai_satellite_logs_%date-time%.tar.gz`.
 
 ```bash
-chmod +x get_logs.sh
-./get_logs.sh
+chmod +x get_levoai_satellite_logs.sh
+./get_levoai_satellite_logs.sh
 ```
-
-Executing this script will collect logs from all Satellite components and creates an archive as `/tmp/levoai_satellite_logs_%date-time%.tar.gz`.
 
 <br></br>
