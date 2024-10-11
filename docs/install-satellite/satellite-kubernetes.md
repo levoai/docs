@@ -198,6 +198,28 @@ helm upgrade --install -n levoai --create-namespace \
   levoai-satellite levoai/levoai-satellite
 ```
 
+### 7. Optionally, access Satellite through a CNAME and HTTPS
+Add below config to `values.yml` file to add an ingress route for Satellite APIs so that it can be accessed through a CNAME and HTTPS.
+
+```yaml
+haproxy:
+  ingress:
+    enabled: true
+    hostname: <Your CNAME>
+    ingressClassName: haproxy
+    pathType: Prefix
+    extraPaths:
+      - path: /*
+        pathType: Prefix
+        backend:
+          service:
+            name: levoai-haproxy
+            port:
+              number: 80
+```
+
+Please reach out to support@levo.ai if you're using a custom ingress controller.
+
 Please proceed to [install Traffic Capture Sensors](/install-traffic-capture-sensors).
 
 ---------------------------------------------------------
