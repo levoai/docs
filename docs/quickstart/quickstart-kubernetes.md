@@ -49,7 +49,7 @@ helm upgrade --install -n levoai --create-namespace \
 
 :::info
 
-Please refer to [install satellite in kubernetes](/../../install-satellite/satellite-kubernetes) for detailed instructions. 
+Please refer to [install satellite in kubernetes](/install-satellite/satellite-kubernetes.mdx) for detailed instructions. 
 
 :::
 
