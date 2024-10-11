@@ -40,7 +40,7 @@ The Satellite uses an organization ID to authenticate incoming requests.
 
 
 ## 4. Follow instructions for your platform
-- [Install on Kubernetes](satellite-kubernetes.md)
+- [Install on Kubernetes](satellite-kubernetes.mdx)
 - [Install on Linux host via Docker Compose](satellite-docker.mdx)
 - [Install in AWS EC2 using Levo Satellite AMI](satellite-ami-aws-ec2.mdx)
 - [Install in AWS EKS](satellite-aws-eks.md)

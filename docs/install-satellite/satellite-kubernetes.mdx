@@ -6,6 +6,18 @@ description: Install Levo.ai Satellite on Kubernetes. Follow our detailed guide 
 
 # Satellite on Kubernetes
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+export function DownloadGetLogsScript() {
+    return (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+            {() => (
+                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/get_logs.sh'} download> download</a>
+            )}
+        </BrowserOnly>
+    );
+}
+
 ## Setup
 
 ### Prerequisites
@@ -336,5 +348,15 @@ kubectl -n levoai logs <levoai-tagger-pod-id> | grep "ConnectionRefusedError: [E
 
 If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries. Please contact support@levo.ai for further assistance.
 
-<br></br>
+### Extracting logs from Satellite components
 
+To extract logs from Satellite components, please <DownloadGetLogsScript/> script and execute following commands.
+
+```bash
+chmod +x get_logs.sh
+./get_logs.sh
+```
+
+Executing this script will collect logs from all Satellite components and creates an archive as `/tmp/levoai_satellite_logs_%date-time%.tar.gz`.
+
+<br></br>
