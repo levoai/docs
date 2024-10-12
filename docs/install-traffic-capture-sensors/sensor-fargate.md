@@ -3,7 +3,7 @@ sidebar_position: 3
 description: Install Levo.ai PCAP sensor on AWS Fargate. Follow our detailed guide for setup, configuration, and robust API traffic capture and analysis.
 ---
 
-# Sensor on Fargate
+# Sensor on AWS Fargate
 
 ## Prerequisites
 - AWS profile access key and secret access key saved at path  ~/.aws/credentials file
