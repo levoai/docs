@@ -24,39 +24,79 @@ This guide walks you through installing and configuring Levo.ai’s sensor to ca
    - Install Npcap service
    - Do not install the Npcap SDK
 
-### 2. Download Levo’s Windows Sensor
+### 2. Download Levo’s Windows Sensor Files
 
-1. Download the latest Levo.ai Windows sensor executable from our [downloads](https://github.com/levoai/downloads/tree/main/windows/bin) portal.
-2. Place the executable in a directory of your choice, e.g., `C:\Program Files\Levo\levo-pcap-sensor.exe\`.
+1. Download the following files from our [downloads](https://github.com/levoai/downloads/tree/main/windows) portal:
+    - config.json
+    - levoai-sensor.exe
+    - levoai-service.exe
+    - levoai-service.log
+2. Ensure that all downloaded files are placed in the same dedicated directory, e.g., `C:\Program Files\Levo\`.
 
 ### 3. Configure the Sensor
 
-1. Open a Command Prompt as Administrator.
-2. Navigate to the directory containing the sensor executable.
-3. Run the following command to initialize the sensor:
-```bash
-    levo-pcap-sensor.exe apidump ^
-    --satellite-url "your satellite url (http(s)://hostname|IP:port)" ^
-    --levo-env "your application environment (staging, production etc.)" ^
-    --levoai-org-id "your levo org id"
-```
+Before installing the sensor service, modify the `config.json` file to match your specific setup:
+
+1. Open the `config.json` file in a text editor.
+2. Update the following fields:
+
+   - **`LogFilePath`**: Set this to the full path of the `levoai-service.log` file, e.g., `C:\Program Files\Levo\levoai-service.log`.
+   - **`Exec`**: Set this to the full path of the `levoai-sensor.exe` file, e.g., `C:\Program Files\Levo\levoai-sensor.exe`.
+   - **`Args`**: Modify the arguments as follows:
+     - Replace `"your satellite url (http(s)://hostname|IP:port)"` with your actual Levoai Satellite URL.
+     - Replace `"your application environment (staging, production etc.)"` with your environment name.
+     - Replace `"your levo org id"` with your Levo organization ID.
+
+    Example of a configured `config.json`:
+
+    ```json
+    {
+    "Name": "Levoai Sensor",
+    "DisplayName": "Levoai Sensor Service",
+    "Description": "Service for running the Levoai Sensor",
+    "LogFilePath": "C:\\Program Files\\Levo\\levoai-service.log",
+    "Exec": "C:\\Program Files\\Levo\\levoai-sensor.exe",
+    "Args": ["apidump", "--satellite-url", "http://satellite.example.com:9999", "--levo-env", "production", "--levoai-org-id", "org-123456"]
+    }
 
 Replace the placeholders with your specific configuration details.
 
+
 ### 4. Configure Additional Options
 
-You can add the following optional flags to the command:
+You can add the following optional flags to the `Args` array in `config.json`:
 
-```bash
---trace-export-interval "trace export interval in seconds (default 10)"
---rate-limit "number of traces per minute"
---filter "pcap filter string, eg. port 8080 and (not port 8081)"
---host-allow "host allow regex"
---path-allow "path allow regex"
---host-exclusions "host exclude regex"
---path-exclusions "path exclude regex"
-```
-### 4. Troubleshooting
+1. Open the `config.json` file in a text editor.
+2. Locate the `Args` array and add any of these optional flags:
+
+   - **`--trace-export-interval`**: Set the trace export interval in seconds (default is 10)
+   - **`--rate-limit`**: Specify the number of traces per minute
+   - **`--filter`**: Add a PCAP filter string, e.g., "port 8080 and (not port 8081)"
+   - **`--host-allow`**: Set a host allow regex
+   - **`--path-allow`**: Set a path allow regex
+   - **`--host-exclusions`**: Set a host exclude regex
+   - **`--path-exclusions`**: Set a path exclude regex
+
+
+### 5. Install the Sensor Service
+
+After configuring the `config.json` file, you need to install the sensor as a Windows service:
+
+1. Open PowerShell as an administrator.
+2. Navigate to the directory containing the downloaded Levo.ai sensor files.
+3. Run the following command to install the sensor as a service:
+    ```bash 
+    levoai-service.exe -service install 
+4. Run the following command to check the status of the Levoai service:
+    ```bash
+    Get-Service | Where-Object { $_.Name -like "*Levo*" }
+5. If the service is installed and running successfully, you will see output similar to the following:
+    ```bash
+    Status   Name               DisplayName
+    Running  Levoai Sensor      Levoai Sensor Service
+    ```
+
+### 6. Troubleshooting
 
 #### Ensure Npcap is properly installed and that WinPcap compatibility mode is enabled
 
@@ -94,6 +134,6 @@ netsh advfirewall firewall add rule name="Levo.ai Sensor" dir=in action=allow pr
 ```
 Replace `"C:\Program Files\Levo\levo-pcap-sensor.exe"` with the actual path to the Levo sensor executable.
 
-### 5. Additional Support
+### 7. Additional Support
 
 For additional support, please [contact](mailto:support@levo.ai) Levo.ai technical support.
