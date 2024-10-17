@@ -130,9 +130,9 @@ netsh advfirewall firewall show rule name=all
 
 To create a new inbound rule for the Levo sensor:
 ```bash
-netsh advfirewall firewall add rule name="Levo.ai Sensor" dir=in action=allow program="C:\Program Files\Levo\levo-pcap-sensor.exe" enable=yes 
+netsh advfirewall firewall add rule name="Levo.ai Sensor" dir=in action=allow program="C:\\Program Files\\Levo\\levoai-sensor.exe" enable=yes 
 ```
-Replace `"C:\Program Files\Levo\levo-pcap-sensor.exe"` with the actual path to the Levo sensor executable.
+Replace `"C:\\Program Files\\Levo\\levoai-sensor.exe"` with the actual path to the Levo sensor executable.
 
 ### 7. Additional Support
 
