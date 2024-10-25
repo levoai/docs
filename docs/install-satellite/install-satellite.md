@@ -47,4 +47,5 @@ The Satellite uses an organization ID to authenticate incoming requests.
   - [Install in AWS EKS using EC2](satellite-aws-ecs.mdx)
   - [Install in AWS EKS using Fargate](satellite-aws-eks-fargate.md)
 - [Install in AWS ECS](satellite-aws-ecs.mdx)
+- [Install on Windows Virtual Machine](satellite-windows-vm.mdx)
 
