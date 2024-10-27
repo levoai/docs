@@ -17,6 +17,7 @@ services:
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-levoailevoai}
       # send logs to stdout, ref: https://www.rabbitmq.com/logging.html#log-file-location
       RABBITMQ_LOGS: '-'
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbit consumer_timeout 600000"
     command: >
       bash -c "mkdir -p /opt/rabbitmq/resources &&
       openssl req -x509 -nodes -newkey rsa:4096 -subj "/C=IN/ST=Telangana/L=Hyderabad/O=Levo.ai/OU=Security/CN=localhost:5671" -keyout /opt/rabbitmq/resources/ca.key -out /opt/rabbitmq/resources/ca.crt -days 365000 &&
@@ -24,8 +25,12 @@ services:
       openssl x509 -req -in /opt/rabbitmq/resources/server.csr -CA /opt/rabbitmq/resources/ca.crt -CAkey /opt/rabbitmq/resources/ca.key -CAcreateserial -out /opt/rabbitmq/resources/server.crt -days 365000 &&
       chmod -R 755 /opt/rabbitmq/resources &&
       echo '
+            heartbeat = 600
             listeners.tcp.1 = 0.0.0.0:5672
             listeners.ssl.default = 5671
+            tcp_listen_options.keepalive = true
+            tcp_listen_options.nodelay = true
+            tcp_listen_options.send_timeout = 120000
             ssl_options.cacertfile = /opt/rabbitmq/resources/ca.crt
             ssl_options.certfile = /opt/rabbitmq/resources/server.crt
             ssl_options.keyfile = /opt/rabbitmq/resources/server.key
