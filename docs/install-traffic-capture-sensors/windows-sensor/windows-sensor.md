@@ -90,10 +90,18 @@ After configuring the `config.json` file, you need to install the sensor as a Wi
     ```bash
     Status   Name               DisplayName
     Running  Levoai Sensor      Levoai Sensor Service
-    ```
-6. Run the following command to uninstall the sensor as a service:
+6. Run the following command to stop the sensor as a service:
     ```bash 
-    levoai-service.exe -service uninstall 
+    levoai-service.exe -service stop
+7. Run the following command to start the sensor as a service:
+    ```bash 
+    levoai-service.exe -service start
+8. Run the following command to restart the sensor as a service:
+    ```bash 
+    levoai-service.exe -service restart
+9. Run the following command to uninstall the sensor as a service:
+    ```bash 
+    levoai-service.exe -service uninstall
 
 ### 6. Troubleshooting
 
