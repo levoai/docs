@@ -24,14 +24,12 @@ This guide walks you through installing and configuring Levo.ai’s sensor to ca
    - Install Npcap service
    - Do not install the Npcap SDK
 
-### 2. Download Levo’s Windows Sensor Files
+### 2. Download Levo’s Windows Sensor Zip File
 
-1. Download the following files from our [downloads](https://github.com/levoai/downloads/tree/main/windows) portal:
-    - config.json
-    - levoai-sensor.exe
-    - levoai-service.exe
-    - levoai-service.log
-2. Ensure that all downloaded files are placed in the same dedicated directory, e.g., `C:\Program Files\Levo\`.
+1. Download the following zip file from our [downloads](https://github.com/levoai/downloads/tree/main/windows) portal:
+    - Levoai-Sensor.zip
+2. Extract the contents of Levoai-Sensor.zip
+3. Ensure that all extracted files are placed in the same dedicated directory, e.g., `C:\Program Files\Levo\`.
 
 ### 3. Configure the Sensor
 
@@ -40,8 +38,6 @@ Before installing the sensor service, modify the `config.json` file to match you
 1. Open the `config.json` file in a text editor.
 2. Update the following fields:
 
-   - **`LogFilePath`**: Set this to the full path of the `levoai-service.log` file, e.g., `C:\Program Files\Levo\levoai-service.log`.
-   - **`Exec`**: Set this to the full path of the `levoai-sensor.exe` file, e.g., `C:\Program Files\Levo\levoai-sensor.exe`.
    - **`Args`**: Modify the arguments as follows:
      - Replace `"your satellite url (http(s)://hostname|IP:port)"` with your actual Levoai Satellite URL.
      - Replace `"your application environment (staging, production etc.)"` with your environment name.
@@ -54,8 +50,8 @@ Before installing the sensor service, modify the `config.json` file to match you
     "Name": "Levoai Sensor",
     "DisplayName": "Levoai Sensor Service",
     "Description": "Service for running the Levoai Sensor",
-    "LogFilePath": "C:\\Program Files\\Levo\\levoai-service.log",
-    "Exec": "C:\\Program Files\\Levo\\levoai-sensor.exe",
+    "LogFilePath": "levoai-service.log",
+    "Exec": "levoai-sensor.exe",
     "Args": ["apidump", "--satellite-url", "http://satellite.example.com:9999", "--levo-env", "production", "--levoai-org-id", "org-123456"]
     }
 
@@ -83,7 +79,7 @@ You can add the following optional flags to the `Args` array in `config.json`:
 After configuring the `config.json` file, you need to install the sensor as a Windows service:
 
 1. Open PowerShell as an administrator.
-2. Navigate to the directory containing the downloaded Levo.ai sensor files.
+2. Navigate to the directory containing the extracted Levoai sensor files.
 3. Run the following command to install the sensor as a service:
     ```bash 
     levoai-service.exe -service install 
@@ -95,6 +91,9 @@ After configuring the `config.json` file, you need to install the sensor as a Wi
     Status   Name               DisplayName
     Running  Levoai Sensor      Levoai Sensor Service
     ```
+6. Run the following command to uninstall the sensor as a service:
+    ```bash 
+    levoai-service.exe -service uninstall 
 
 ### 6. Troubleshooting
 
