@@ -4,7 +4,7 @@ sidebar_position: 3
 
 # PCAP Sensor via YUM Package
 
-## Install on RPM based Linux Distributions via `yum` {#sensor-yum-install}
+## Install on RPM based Linux Distributions via `yum`
 
 ### Prerequisites
 - `libpcap` should be installed from the yum repository
@@ -47,9 +47,9 @@ Sensor is running as a Systemd Service
 
 1. Configure Satellite Address, Organization-Id and Environment
 
-The Satellite address is configured in `/etc/default/levo-pcap-sensor`. The default Satellite URL is `https://collector.levo.ai`.
+The Satellite address is configured in `/etc/default/sensor-env`. The default Satellite URL is `https://collector.levo.ai`.
 
-Edit `/etc/default/levo-pcap-sensor`, set the `LEVO_SATELLITE_URL` variable to the desired `host:port` value,
+Edit `/etc/default/sensor-env`, set the `LEVO_SATELLITE_URL` variable to the desired `host:port` value,
 and set the `LEVO_ORG_ID` to the Organization ID fetched from the Levo Dashboard.
 Set `LEVO_ENV` to the desired environment name in which you wish to see you applications on the Levo Dashboard.
 
@@ -61,15 +61,22 @@ LEVO_ORG_ID="your-org-id"
 ...
 ```
 
-Additional sensor configs are present in the file `/etc/levo/sensor/config.yaml`
-
-
 **A Sensor *restart* is required for the config changes to take effect.**
 
 
-2. Start the Sensor
+2. Start/Stop the Sensor
+
+To start the sensor
 ```bash
 sudo systemctl start pcap-sensor.service
 ```
 
+To stop the sensor
+```bash
+sudo systemctl stop pcap-sensor.service
+```
 
+To restart the sensor
+```bash
+sudo systemctl restart pcap-sensor.service
+```
