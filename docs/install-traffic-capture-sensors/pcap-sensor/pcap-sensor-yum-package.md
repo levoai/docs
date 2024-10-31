@@ -6,6 +6,10 @@ sidebar_position: 3
 
 ## Install on RPM based Linux Distributions via `yum` {#sensor-yum-install}
 
+### Prerequisites
+- `libpcap` should be installed from the yum repository
+- Admin (or `sudo`) privileges on the host
+
 ### 1. Configure the package manager
 
 Configure `yum` to access Levo's RPM packages using the following command:
