@@ -43,13 +43,13 @@ Enter `y` when prompted.
 
 ### 3. Start the Sensor
 
-Sensor is running as a Systemd Service
+Sensor runs as a Systemd Service
 
-1. Configure Satellite Address, Organization-Id and Environment
+#### Configure Satellite Address, Organization-Id and Environment
 
-The Satellite address is configured in `/etc/default/sensor-env`. The default Satellite URL is `https://collector.levo.ai`.
+The Satellite address is configured in `/etc/default/levo-pcap-sensor`. The default Satellite URL is `https://collector.levo.ai`.
 
-Edit `/etc/default/sensor-env`, set the `LEVO_SATELLITE_URL` variable to the desired `host:port` value,
+Edit `/etc/default/levo-pcap-sensor`, set the `LEVO_SATELLITE_URL` variable to the desired `host:port` value,
 and set the `LEVO_ORG_ID` to the Organization ID fetched from the Levo Dashboard.
 Set `LEVO_ENV` to the desired environment name in which you wish to see you applications on the Levo Dashboard.
 
@@ -61,22 +61,22 @@ LEVO_ORG_ID="your-org-id"
 ...
 ```
 
-**A Sensor *restart* is required for the config changes to take effect.**
+*Sensor **restart** is required for the config changes to take effect.*
 
 
-2. Start/Stop the Sensor
+#### Start/Stop the Sensor
 
 To start the sensor
 ```bash
-sudo systemctl start pcap-sensor.service
+sudo systemctl start levo-pcap-sensor.service
 ```
 
 To stop the sensor
 ```bash
-sudo systemctl stop pcap-sensor.service
+sudo systemctl stop levo-pcap-sensor.service
 ```
 
 To restart the sensor
 ```bash
-sudo systemctl restart pcap-sensor.service
+sudo systemctl restart levo-pcap-sensor.service
 ```
