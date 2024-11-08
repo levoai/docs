@@ -13,7 +13,7 @@ title: Install PCAP Sensor on Kubernetes | Levo.ai Documentation
 -   The Kubernetes cluster API endpoint should be reachable from the machine you are running Helm.
 -   `kubectl`  access to the cluster, with  `cluster-admin`  permissions.
 
-### 1. Install levoai helm repo
+### 1. Add levoai helm repo
 ```
 helm repo add levoai https://charts.levo.ai && helm repo update
 ```
