@@ -15,7 +15,7 @@ title: Install PCAP Sensor on Kubernetes | Levo.ai Documentation
 
 ### 1. Add levoai helm repo
 ```
-helm repo add levoai https://charts.levo.ai && helm repo update
+helm repo add levoai https://charts.levo.ai && helm repo update levoai
 ```
 
 ### 2. Create levoai namespace and install pcap-sensor

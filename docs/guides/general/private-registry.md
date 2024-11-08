@@ -26,7 +26,7 @@ region="us-west-2"
 registry="your.registry"
 
 helm repo add levoai https://charts.levo.ai || true
-helm repo update
+helm repo update levoai
 images=($(helm template levoai/levoai-satellite | yq -N '..|.image? | select(.)' | sort -u))
 images+=($(helm template levoai/levoai-ebpf-sensor | yq -N '..|.image? | select(.)' | sort -u))
 
