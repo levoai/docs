@@ -55,15 +55,13 @@ By leveraging Levo's API Portal, developers can gain deep insights into their AP
 
 ```bash
 docker run --rm --name=levoai-api-portal \
--e REFRESH_TOKEN='<REFRESH_TOKEN>' -e APP_NAME='<APP_NAME>' \
--e ENV_NAME='<ENV_NAME>' -e LEVO_ORG_ID='<LEVO_ORG_ID>' \
+-e REFRESH_TOKEN='<REFRESH_TOKEN>' -e LEVO_ORG_ID='<LEVO_ORG_ID>' \
 -p 8000:80 levoai/api-portal:latest
 ```
 
 - Navigate to `http://localhost:8000` to view the API docs.
 
 Note:
-* Default `ENV_NAME` environment value is `staging`.
 * If user is part of multiple orgs, you would have to add `-e LEVO_ORG_ID='<LEVO_ORG_ID>'` otherwise optional.
 * If you are running for an app from Levo's India Saas instance, add this environment variable `-e LEVO_BASE_URL='https://api.india-1.levo.ai'`.
 
@@ -86,8 +84,6 @@ helm repo add levoai https://levoai.github.io/helm-charts/
 ```bash
 helm install levoai-api-portal levoai/levoai-api-portal \
 --set levoAuthKey="your_auth_key" \
---set levoAppName="your_app_name" \
---set levoEnvName="your_env_name" \
 --set levoOrgId="your_org_id"
 ```
 
