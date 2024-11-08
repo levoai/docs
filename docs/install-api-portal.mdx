@@ -56,10 +56,10 @@ By leveraging Levo's API Portal, developers can gain deep insights into their AP
 ```bash
 docker run --rm --name=levoai-api-portal \
 -e REFRESH_TOKEN='<REFRESH_TOKEN>' -e LEVO_ORG_ID='<LEVO_ORG_ID>' \
--p 8000:80 levoai/api-portal:latest
+-p 8080:8080 levoai/api-portal:latest
 ```
 
-- Navigate to `http://localhost:8000` to view the API docs.
+- Navigate to `http://localhost:8080` to view the API docs.
 
 Note:
 * If user is part of multiple orgs, you would have to add `-e LEVO_ORG_ID='<LEVO_ORG_ID>'` otherwise optional.
@@ -76,7 +76,7 @@ Note:
 - Add Levo Helm repo
 
 ```bash
-helm repo add levoai https://levoai.github.io/helm-charts/
+helm repo add levoai https://charts.levo.ai && helm repo update levoai
 ```
 
 - Run following command to install the API Portal Helm Chart
@@ -87,10 +87,10 @@ helm install levoai-api-portal levoai/levoai-api-portal \
 --set levoOrgId="your_org_id"
 ```
 
-- Port forward and navigate to `http://localhost:8000` to view the API docs.
+- Port forward and navigate to `http://localhost:8080` to view the API docs.
 
 ```bash
-kubectl port-forward services/levoai-api-portal 8000:80
+kubectl port-forward services/levoai-api-portal 8080:80
 ```
 
 ### Install via Terraform
