@@ -58,7 +58,7 @@ docker compose pull && docker compose up -d
 
 The Satellite is comprised of four sub components 1) levoai-collector, 2) levoai-rabbitmq, 3)levoai-satellite, and 4) levoai-tagger.
 
-Wait couple of minutes after the install, and check the health of the components by executing the following:
+Wait a couple of minutes after the installation, and check the health of the components by executing the following:
 
 ```bash
 docker ps -f name=levoai
@@ -89,7 +89,7 @@ If connectivity is healthy, you will see output similar to below.
 ### 4. Note down `Host:Port` information
 The Collector now runs in a container, and is reachable on the host via port 4317 (on all the host's network interfaces).
 
-Please note down the either the host's IP address or domain name. The Sensor will be configured to communicate with the Collector at <Host's IP|Domain-Name>:4317.
+Please note down either the host's IP address or domain name. The Sensor will be configured to communicate with the Collector at <Host's IP|Domain-Name>:4317.
 
 Please proceed to [install traffic capture sensors](/install-traffic-capture-sensors).
 
