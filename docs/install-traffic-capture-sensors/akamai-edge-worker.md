@@ -7,7 +7,7 @@ description: Deploy Levo.ai PCAP sensor on Cloudflare Worker. Follow our detaile
 
 ## Prerequisites
 - **Akamai DNS Configuration:** Your website’s DNS is managed through Akamai.
-- **Permissions:** You have the necessary permissions on Akamai to create. And configure edge workers to your akamai property.
+- **Permissions:** You have the necessary permissions on Akamai to create and configure edge workers to your akamai property.
 - **Levo Satellite Setup:** The Satellite has been successfully set up and is accessible via HTTPS from the EdgeWorker. Ensure that Domain of the Satellite URL is served by the Akamai platform. Please refer to the [Satellite Installation](/install-satellite) for more information.
 - **Organization ID:** Obtain your Organization ID from Levo dashboard. Please refer to [Accessing Organization ID](/integrations/common-tasks.md#accessing-organization-ids)
 
