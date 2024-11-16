@@ -1,68 +1,82 @@
 ---
 sidebar_position: 8
-description: Deploy Levo.ai PCAP sensor on Cloudflare Worker. Follow our detailed guide to set up and configure for enhanced API traffic capture and analysis.
+description: Learn how to deploy Levo.ai Akamai Edge Worker with our step-by-step guide to enhance API traffic capture and analysis.
 ---
 
 # Akamai Edge Worker
 
+Deploying the Levo.ai Akamai Edge Worker enables advanced API traffic capture and analysis, ensuring seamless integration with your Akamai-powered setup. This guide walks you through the prerequisites, deployment, and configuration of the Edge Worker.
+
+---
+
 ## Prerequisites
-- **Akamai DNS Configuration:** Your website’s DNS is managed through Akamai.
-- **Permissions:** You have the necessary permissions on Akamai to create and configure edge workers to your akamai property.
-- **Levo Satellite Setup:** The Satellite has been successfully set up and is accessible via HTTPS from the EdgeWorker. Ensure that Domain of the Satellite URL is served by the Akamai platform. Please refer to the [Satellite Installation](/install-satellite) for more information.
-- **Organization ID:** Obtain your Organization ID from Levo dashboard. Please refer to [Accessing Organization ID](/integrations/common-tasks.md#accessing-organization-ids)
+
+Before deploying the Edge Worker, ensure the following requirements are met:
+
+- **Akamai DNS Configuration:** Your website’s DNS must be managed through Akamai.
+- **Permissions:** Ensure you have sufficient permissions on Akamai to create and configure edge workers for your property.
+- **Levo Satellite Setup:** 
+  - Confirm that the Levo Satellite is set up and is accessible via HTTPS from the EdgeWorker.
+  - Ensure that the Satellite's domain is served through Akamai platform by configuring an A record or a CNAME in Akamai's DNS settings.
+  - Refer to the [Satellite Installation Guide](/install-satellite) for levo.ai satellite setup instructions and [Manage DNS Records](https://techdocs.akamai.com/cloud-computing/docs/manage-dns-records) for DNS configuration in Akamai.
+- **Organization ID:** Obtain your Organization ID from Levo dashboard. Refer to [Accessing Organization ID](/integrations/common-tasks.md#accessing-organization-ids) for details.
 
 ## Deploying the Edge Worker
 
 ### Using the CLI
 
-Follow the steps below to deploy the edge worker to your account.
+Follow the steps below to deploy the EdgeWorker using the CLI.
 
-- Ensure you have installed Akamai CLI, Edge Workers CLI and authentication credentials. Please follow these instructions [Setup Akamai CLI and Install Edge Workers](#setup-akamai-cli-and-edge-workers).
-- Ensure you have edge worker created. Please follow [Create Edge Worker ID](#create-edge-worker-id).
+#### 1. Setup Akamai CLI and Edge Workers
+- **Install Akamai CLI**:
+  - Ensure you have installed [Akamai CLI](https://techdocs.akamai.com/edgeworkers/docs/akamai-cli).
+    - On Windows you may need to add `akamai.exe` location to `Path` environment variable.
+- **Install EdgeWorker CLI**:
+  - Run this command to install the EdgeWorkers CLI `akamai install edgeworkers`.
+- **Set Up Authentication**:
+  - Ensure you have required authentication credentials (e.g., access token and client secret), available on Akamai's **Identity & Access Management** page.
+  - For detailed instructions, refer to [Akamai Setup Authentication Credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials).
 
-#### Setup Edge Worker
-- Clone the edge worker repository `git clone https://github.com/levoai/akamai-worker.git`.
-- Navigate into the repo `cd akamai-worker`.
-- Copy `.env.example` to `.env`
-- Configure environment variables:
+#### 2. Create Edge Worker ID
+- Navigate to **CDN** > **EdgeWorkers** in the Akamai control center.
+- Click **Create EdgeWorker ID** and fill in the required details:
+  - Name for EdgeWorker ID
+  - Resource Tier
+  - other details before 
+- Click **Create**.
+- For more details, refer to [Create Akamai Edge Worker ID](https://techdocs.akamai.com/edgeworkers/docs/create-an-edgeworker-id).
+
+#### 3. Setup EdgeWorker
+- Clone the EdgeWorker repository `git clone https://github.com/levoai/akamai-worker.git`.
+- Navigate into the repository `cd akamai-worker`.
+- Copy the example environment file `cp .env.example .env`
+- Configure the following environment variables in the .env file:
     - `AKAMAI_WORKER_ID`
     - `AKAMAI_WORKER_NETWORK`
     - `AKAMAI_WORKER_VERSION_INCREMENT` (optional)
+- Prepare the EdgeWorker for deployment `yarn worker:version:prepare` which increments version.
+- Deploy and activate the EdgeWorker `yarn worker:version:deploy` which uploads and activates the code bundle.
 
 > Note: `\src\bundle.json` contains bundle metadata.
 
-- Execute `yarn worker:version:prepare` command to increment version and prepare dist.
-
-- Execute `yarn worker:version:deploy` command to upload and activate bundle.
-
-
-That's it! The edge worker has been set up. Now, let's add this EdgeWorker behavior to your Akamai property.
-
-#### Adding EdgeWorker Behavior to Akamai Property
-- Navigate to Akamai control center and click on **CDN** > **Properties** from left hamburger menu.
-- Click on the property you want to add the EdgeWorker behavior to.
-- Click **Edit New Version** button.
-- Under **Property Variables** section, click **+ Variables** to configure below values.
+#### 4. Adding EdgeWorker Behavior to Your Akamai Property
+- Login int to Akamai control center.
+- Navigate to **CDN** > **Properties** from left-hand menu.
+- Select the property you want to configure and click **Edit New Version**.
+- Under **Property Variables**, add following variables.
   - `LEVO_SATELLITE_URL` - The URL of the Satellite where the traffic will be sent.
   - `LEVO_ORG_ID` - Your organization ID.
-  - `LEVO_ENV` - The desired environment name in which you wish to see you applications on the Levo Dashboard. Optional, default is `staging`.
+  - `LEVO_ENV` - The desired environment name. Optional, default is `staging`.
   - `LEVO_SERVICE_NAME` - The name of the service you are monitoring. Optional.
-  - **Note:** These variables are already prefixed by **PMUSER_** as you can see in the section. 
-- Under **Property Configuration Settings** > **Rules** > **Behaviors** > **EdgeWorkers** choose **On** and select the Edge Worker ID.
-- Click **Save** and under Activate tab click **Activate** button to apply on Staging and/or Production accordingly.
+  >   **Note:** These variables are prefixed with **PMUSER_** in this section. 
+- Under **Property Configuration Settings**, go to > **Rules** > **Behaviors**, and:
+  - Enable **EdgeWorkers** behavior.
+  - Select the appropriate EdgeWorker ID.
+- Save your changes and activate the property for Staging and/or Production.
 
+---
 
-#### Setup Akamai CLI and Edge Workers
-- Ensure you have [Akamai CLI](https://techdocs.akamai.com/edgeworkers/docs/akamai-cli) installed.
-  - On Windows you may need to add `akamai.exe` location to `Path` environment variable
-- Install edge workers using `akamai install edgeworkers`.
-- Ensure you have required authentication credentials like access token and client secret for your account. These can be found on Akamai **Identity & Access Management** page. 
-- For more details please refer to docs [Akamai Setup Authentication Credentials](https://techdocs.akamai.com/developer/docs/set-up-authentication-credentials).
+**That's it!**
 
-#### Create Edge Worker ID
-- Navigate to Akamai control center and click on **CDN** > **EdgeWorkers** from left hamburger menu.
-- Click on **Create EdgeWorker ID** button.
-- Fill in the required fields like name for EdgeWorker ID, Resource Tier and other details before clicking on Create button.
-- For more details please refer to docs [Create Akamai Edge Worker ID](https://techdocs.akamai.com/edgeworkers/docs/create-an-edgeworker-id).
-
+Your EdgeWorker is now deployed and integrated with your Akamai property. Monitor and analyse your API traffic using the Levo.ai platform. For further support, feel free to reach out to the Levo.ai team at support@levo.ai.
 
