@@ -97,6 +97,13 @@ Please proceed to [install traffic capture sensors](/install-traffic-capture-sen
 
 ## Satellite Lifecycle Management
 
+
+### Upgrade the Satellite
+1. Navigate to directory where you have the Docker Compose file.
+2. [Reinstall](#2-install-satellite) the Satellite. The install always *pulls* the latest Docker images for the Satellite.
+
+> **Note**: If the re-installation fails, please [Uninstall](#uninstall-the-satellite) the Satellite and then reinstall.
+
 ### Uninstall the Satellite
 
 Ensure you are in the same directory where you downloaded the <DownloadDockerComposeLink/>.
@@ -105,22 +112,6 @@ Execute the below command:
 ```bash
 docker compose down --remove-orphans -v
 ```
-
-### Upgrade the Satellite
-1. [Uninstall](#uninstall-the-satellite) the Satellite
-2. [Reinstall](#2-install-satellite) the Satellite. The install always *pulls* the latest Docker images for the Satellite.
-
-
-### Change the `minimum number of URLs` that the satellite needs to observe to detect an API endpoint.
-To detect an API endpoint, Satellite waits for at least '10' URLs to match that endpoint URL pattern.
-This number may cause delays in detecting API endpoints when there is not enough load.
-
-If you want to change this number to suit your environment:
-- export the environment variable `LEVOAI_MIN_URLS_PER_PATTERN` - for example :
-  `export LEVOAI_MIN_URLS_PER_PATTERN=3`
-
-- Reinstall the Satellite to pickup the new configuration
-
 
 ### List Satellite's containers
 ```bash
@@ -141,6 +132,19 @@ docker logs -f <container id>
 ```bash
 docker logs <container id> --since 1m
 ```
+
+----
+
+## Configuration
+
+### Change the `minimum number of URLs` that the satellite needs to observe to detect an API endpoint.
+To detect an API endpoint, Satellite waits for at least '10' URLs to match that endpoint URL pattern.
+This number may cause delays in detecting API endpoints when there is not enough load.
+
+If you want to change this number to suit your environment:
+- Export the environment variable `LEVOAI_MIN_URLS_PER_PATTERN` - for example : `export LEVOAI_MIN_URLS_PER_PATTERN=3`
+
+- Reinstall the Satellite to pickup the new configuration
 
 ------------------------------------------------------------------
 
