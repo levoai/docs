@@ -112,7 +112,7 @@ case "$1" in
     show_usage
     ;;
   *)
-    echo "Invalid option: $1"
+    echo "Invalid argument: $1"
     show_usage
     exit 1
     ;;
