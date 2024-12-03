@@ -1,5 +1,5 @@
 ---
-sidebar_position: 0
+sidebar_position: 1
 ---
 
 # Running Tests from Catalog
@@ -38,6 +38,6 @@ Levo provides you with the ability to run a variety of tests on your API endpoin
 
 ### Select Method and Enter a Target URL to run tests against, e.g. `http://crapi.levo.ai` and click on `Run Tests` to start the tests' execution.
 - `Run on Cloud`: The tests will be run on Levo's platform, i.e., the requests to the target server are made by Levo. This means that the application must be exposed via a publicly reachable domain or IP address.
-- `Run on-prem`: The tests will run on your premise. Head to the **[testrunners](testrunner.md)** page to know how to install **Testrunners**.
+- `Run on-prem`: The tests will run on your premise. Head to the **[Testrunners](testrunner.mdx)** page to know how to install **Testrunners**.
 
 ![](../assets/testruns-step-6.png)
