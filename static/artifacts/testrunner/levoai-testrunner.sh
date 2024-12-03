@@ -8,8 +8,8 @@ show_usage() {
   echo "Usage: $0 [start|stop]"
   echo ""
   echo "Arguments:"
-  echo "  start       Start the Levo container."
-  echo "  stop        Stop the Levo container if running."
+  echo "  start       Start the $CONTAINER_NAME."
+  echo "  stop        Stop the $CONTAINER_NAME if running."
   echo "  --help, -h  Display this help message."
   echo ""
 }
@@ -18,7 +18,7 @@ show_usage() {
 show_start_usage() {
   echo "Usage: $0 start"
   echo ""
-  echo "Starts the Levo container with the provided environment variables."
+  echo "Starts the $CONTAINER_NAME with the provided environment variables."
   echo "Ensure the following environment variables are set:"
   echo "  LEVOAI_AUTH_KEY   Your Levo authentication key."
   echo "  LEVO_ORG_ID       Your Levo organization ID."
@@ -45,7 +45,8 @@ check_env_var() {
   local var_value="${!var_name}"
   if [[ -z "$var_value" ]]; then
     echo "Error: Environment variable $var_name is not set."
-    echo "export LEVOAI_AUTH_KEY='your-auth-key'"
+    echo "Try setting the $var_name using the following command:"
+    echo "export $var_name='value'"
     exit 1
   fi
 }
@@ -56,7 +57,7 @@ start_container() {
   check_env_var "LEVOAI_AUTH_KEY"
   check_env_var "LEVOAI_ORG_ID"
 
-  echo "Starting the Levo container..."
+  echo "Starting the $CONTAINER_NAME..."
   mkdir -p $HOME/.config/configstore
 
   docker run --restart always -d \
@@ -78,15 +79,18 @@ start_container() {
     echo "You can view logs using the following command:"
     echo "  docker logs -f $CONTAINER_NAME"
   else
-    echo "Failed to start the Levo container."
+    echo "Failed to start the $CONTAINER_NAME."
   fi
 }
 
 # Function to stop the container
 stop_container() {
   if docker ps --filter "name=$CONTAINER_NAME" --format "{{.Names}}" | grep -q "$CONTAINER_NAME"; then
-    echo "Stopping the Levo container..."
+    echo "Stopping the $CONTAINER_NAME..."
     docker stop $CONTAINER_NAME
+    echo "Removing the $CONTAINER_NAME..."
+    docker rm $CONTAINER_NAME
+    echo "$CONTAINER_NAME has been stopped and removed."
   else
     echo "No running container found with name $CONTAINER_NAME."
   fi
