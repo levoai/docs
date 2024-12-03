@@ -2,6 +2,7 @@
 
 CONTAINER_NAME="levoai-testrunner"
 IMAGE_NAME="levoai/levo:stable"
+DEFAULT_LEVOAI_BASE_URL="https://api.levo.ai"
 
 # Function to display usage information
 show_usage() {
@@ -22,6 +23,7 @@ show_start_usage() {
   echo "Ensure the following environment variables are set:"
   echo "  LEVOAI_AUTH_KEY   Your Levo authentication key."
   echo "  LEVO_ORG_ID       Your Levo organization ID."
+  echo "  LEVOAI_BASE_URL   (Optional) Levo Base URL. Default is '${DEFAULT_LEVOAI_BASE_URL}'."
   echo ""
   echo "Example:"
   echo "  export LEVOAI_AUTH_KEY='your-auth-key'"
@@ -57,6 +59,9 @@ start_container() {
   check_env_var "LEVOAI_AUTH_KEY"
   check_env_var "LEVOAI_ORG_ID"
 
+  local base_url="${LEVOAI_BASE_URL:-$DEFAULT_LEVOAI_BASE_URL}"
+  echo "LEVOAI_BASE_URL: $base_url"
+
   echo "Starting the $CONTAINER_NAME..."
   mkdir -p $HOME/.config/configstore
 
@@ -68,7 +73,7 @@ start_container() {
     -v $PWD:/home/levo/work:rw \
     -e LOCAL_USER_ID=$(id -u) \
     -e LOCAL_GROUP_ID=$(id -g) \
-    -e LEVO_BASE_URL=https://api.levo.ai \
+    -e LEVOAI_BASE_URL="${base_url}" \
     -e TERM=xterm-256color \
     -e LEVOAI_AUTH_KEY="${LEVOAI_AUTH_KEY}" \
     -e LEVO_ORG_ID="${LEVOAI_ORG_ID}" \
@@ -87,9 +92,9 @@ start_container() {
 stop_container() {
   if docker ps --filter "name=$CONTAINER_NAME" --format "{{.Names}}" | grep -q "$CONTAINER_NAME"; then
     echo "Stopping the $CONTAINER_NAME..."
-    docker stop $CONTAINER_NAME
+    docker stop $CONTAINER_NAME > /dev/null
     echo "Removing the $CONTAINER_NAME..."
-    docker rm $CONTAINER_NAME
+    docker rm $CONTAINER_NAME > /dev/null
     echo "$CONTAINER_NAME has been stopped and removed."
   else
     echo "No running container found with name $CONTAINER_NAME."
