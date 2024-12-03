@@ -43,4 +43,4 @@ This ID can now be used in third-party integrations like CI/CD plugins.
 ---
 
 ### Need Help?
-For further assistance, please [contact](mailto:support@levo.ai) Levo.ai technical support.
+For further assistance, please reach out to [Levo.ai Support](mailto:support@levo.ai).
