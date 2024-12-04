@@ -1,0 +1,25 @@
+##############################################################################################
+# PCAP Sensor Configuration Settings (YAML Format)
+# Copyright: Levo Inc., @COPYRIGHT_YEAR@
+##############################################################################################
+
+name: "Levoai Sensor"
+display-name: "Levoai Sensor Service"
+description: "Service for running the Levoai Sensor"
+log-file-path: "levoai-service.log"
+exec: "levoai-sensor.exe"
+args: ["apidump"]
+
+
+satellite-url: http://collector.levo.ai
+levo-env: staging
+levoai-org-id: ""
+rate-limit: 100
+trace-export-interval: 1
+filter: ""
+path-allow: []
+host-allow: []
+path-exclusions: []
+host-exclusions: []
+max-http-length: 1000000
+stream-timeout-seconds: 2

@@ -36,7 +36,7 @@ Install the pcap Sensor from Levo's RPM repository.
 
 1. Install the package in your repository.
   ```shell
-  sudo yum install levo-pcap-sensor-0.1.7
+  sudo yum install levo-pcap-sensor-0.1.9
   ```
 
 Enter `y` when prompted.
@@ -47,22 +47,44 @@ Sensor runs as a Systemd Service
 
 #### Configure Satellite Address, Organization-Id and Environment
 
-The Satellite address is configured in `/etc/default/levo-pcap-sensor`. The default Satellite URL is `https://collector.levo.ai`.
+The Satellite address is configured in `/etc/levo/config/pcap-sensor/config.yaml`. The default Satellite URL is `https://collector.levo.ai`.
 
-Edit `/etc/default/levo-pcap-sensor`, set the `LEVO_SATELLITE_URL` variable to the desired `host:port` value,
-and set the `LEVO_ORG_ID` to the Organization ID fetched from the Levo Dashboard.
-Set `LEVO_ENV` to the desired environment name in which you wish to see you applications on the Levo Dashboard.
+Edit `/etc/levo/config/pcap-sensor/config.yaml` and
+  - set the `satellite-url` variable to the desired `host:port` value
+  - set the `levoai-org-id` to the Organization ID fetched from the Levo Dashboard.
+  - set `levo-env` to the desired environment name in which you wish to see you applications on the Levo Dashboard.
 
-```bash
-...
-LEVO_ENV="your-env"
-LEVO_SATELLITE_URL="your-satellite-url"
-LEVO_ORG_ID="your-org-id"
-...
+```yaml
+##############################################################################################
+# PCAP Sensor Configuration Settings (YAML Format)
+# Copyright: Levo Inc., @COPYRIGHT_YEAR@
+##############################################################################################
+
+satellite-url: http://collector.levo.ai
+levo-env: staging
+levoai-org-id: ""
+rate-limit: 1000
+trace-export-interval: 10
+filter: ""
+path-allow: []
+host-allow: []
+path-exclusions: []
+host-exclusions: []
+max-http-length: 10000000
+stream-timeout-seconds: 10
 ```
 
 *Sensor **restart** is required for the config changes to take effect.*
 
+Additional options can be configured as follows:
+  - **`trace-export-interval`**: Set the trace export interval in seconds (default is 10)
+  - **`rate-limit`**: Specify the number of traces per minute
+  - **`filter`**: Add a PCAP filter string, e.g., "port 8080 and (not port 8081)"
+  - **`host-allow`**: Set a host allow regex
+  - **`path-allow`**: Set a path allow regex
+  - **`host-exclusions`**: Set a host exclude regex
+  - **`path-exclusions`**: Set a path exclude regex
+ 
 
 #### Start/Stop the Sensor
 
@@ -79,4 +101,15 @@ sudo systemctl stop levo-pcap-sensor.service
 To restart the sensor
 ```bash
 sudo systemctl restart levo-pcap-sensor.service
+```
+
+### 4. Configuring sensor as per memory and CPU resource limits
+
+- For normal/average case use the default config
+- For strict resources, modify the config with below options
+```yaml
+rate-limit: 100
+trace-export-interval: 1
+max-http-length: 1000000
+stream-timeout-seconds: 2
 ```

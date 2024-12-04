@@ -11,8 +11,10 @@ title: Install PCAP Sensor on Docker | Levo.ai Documentation
 -   Docker Engine version  `18.03.0`  and above
 -   Admin (or  `sudo`) privileges on the Docker host
 
+### Start the sensor
+
 ```bash
-sudo docker run --net=host --rm -it levoai/pcap-sensor:0.1.7 \
+sudo docker run --net=host --rm -it levoai/pcap-sensor:0.1.9 \
 ./bin/init apidump \
 --satellite-url "your satellite url (http(s)://hostname|IP:port)" \
 --levo-env "your application environment (staging, production etc.)" \
@@ -29,3 +31,13 @@ Specify additional flags in the command
 --path-exclusions "path exclude regex"
 ```
 
+### Configuring sensor as per memory and CPU resource limits
+
+- For normal/average case use the default config
+- For strict resources, start the sensor with below options
+```bash
+--rate-limit 100
+--trace-export-interval 1
+--max-http-length 1000000
+--stream-timeout-seconds 2
+```

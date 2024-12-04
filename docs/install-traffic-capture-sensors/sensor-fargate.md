@@ -27,7 +27,7 @@ The steps to add the sensor to your task are as follows
 ```json
 {
     "name": "levo-pcap-sensor",
-    "image": "levoai/pcap-sensor:0.1.3",
+    "image": "levoai/pcap-sensor:0.1.9",
     "cpu": 512,
     "memory": 512,
     "portMappings": [],
@@ -74,6 +74,11 @@ Specify additional flags in the entrypoint
 --host-exclusions           # regex for excluded hosts
 --path-exclusions           # regex for excluded paths
 ```
+
+### 3. Configuring sensor as per memory and CPU resource limits
+
+- For normal/average case use the above JSON
+- For strict resources, use the [Low resource JSON file](../../static/artifacts/pcap-sensor/low_resource.json)
 
 <a id="aws-permissions"></a>
 
