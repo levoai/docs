@@ -48,5 +48,5 @@ sensor.config.pathExclusions="path exclusion regex"
 ### 3. Configuring sensor as per memory and CPU resource limits
 
 - For normal/average case use the default config
-- For strict resources, use the [Low resource helm values file](../../static/artifacts/pcap-sensor/low_resource_values.yaml)
+- For strict resources, use the [Low resource helm values file](../../../static/artifacts/pcap-sensor/low_resource_values.yaml)
 
