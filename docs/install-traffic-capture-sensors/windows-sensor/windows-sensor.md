@@ -35,44 +35,57 @@ This guide walks you through installing and configuring Levo.ai’s sensor to ca
 
 Before installing the sensor service, modify the `config.json` file to match your specific setup:
 
-1. Open the `config.json` file in a text editor.
+1. Open the `config.yaml` file in a text editor.
 2. Update the following fields:
 
-   - **`Args`**: Modify the arguments as follows:
-     - Replace `"your satellite url (http(s)://hostname|IP:port)"` with your actual Levoai Satellite URL.
-     - Replace `"your application environment (staging, production etc.)"` with your environment name.
-     - Replace `"your levo org id"` with your Levo organization ID.
+    - `satellite-url`: Replace with your actual Levoai Satellite URL.
+    - `levo-env`: Replace with your environment name.
+    - `levoai-org-id`: Replace with your Levo organization ID.
 
-    Example of a configured `config.json`:
+    Example `config.yaml`:
 
-    ```json
-    {
-    "Name": "Levoai Sensor",
-    "DisplayName": "Levoai Sensor Service",
-    "Description": "Service for running the Levoai Sensor",
-    "LogFilePath": "levoai-service.log",
-    "Exec": "levoai-sensor.exe",
-    "Args": ["apidump", "--satellite-url", "http://satellite.example.com:9999", "--levo-env", "production", "--levoai-org-id", "org-123456"]
-    }
+    ```yaml
+        ##############################################################################################
+        # PCAP Sensor Configuration Settings (YAML Format)
+        # Copyright: Levo Inc., @COPYRIGHT_YEAR@
+        ##############################################################################################
 
-Replace the placeholders with your specific configuration details.
+        name: "Levoai Sensor"
+        display-name: "Levoai Sensor Service"
+        description: "Service for running the Levoai Sensor"
+        log-file-path: "levoai-service.log"
+        exec: "levoai-sensor.exe"
+        args: ["apidump"]
 
+
+        satellite-url: http://collector.levo.ai
+        levo-env: staging
+        levoai-org-id: ""
+        rate-limit: 1000
+        trace-export-interval: 10
+        filter: ""
+        path-allow: []
+        host-allow: []
+        path-exclusions: []
+        host-exclusions: []
+    ```
 
 ### 4. Configure Additional Options
 
-You can add the following optional flags to the `Args` array in `config.json`:
+1. Open the `config.yaml` file in a text editor.
+2. Modify any of these optional flags:
 
-1. Open the `config.json` file in a text editor.
-2. Locate the `Args` array and add any of these optional flags:
+   - **`trace-export-interval`**: Set the trace export interval in seconds (default is 10)
+   - **`rate-limit`**: Specify the number of traces per minute
+   - **`filter`**: Add a PCAP filter string, e.g., "port 8080 and (not port 8081)"
+   - **`host-allow`**: Set a host allow regex
+   - **`path-allow`**: Set a path allow regex
+   - **`host-exclusions`**: Set a host exclude regex
+   - **`path-exclusions`**: Set a path exclude regex
 
-   - **`--trace-export-interval`**: Set the trace export interval in seconds (default is 10)
-   - **`--rate-limit`**: Specify the number of traces per minute
-   - **`--filter`**: Add a PCAP filter string, e.g., "port 8080 and (not port 8081)"
-   - **`--host-allow`**: Set a host allow regex
-   - **`--path-allow`**: Set a path allow regex
-   - **`--host-exclusions`**: Set a host exclude regex
-   - **`--path-exclusions`**: Set a path exclude regex
-
+3. Configuring sensor as per memory and CPU resource limits
+- For normal/average case use the default config
+- For strict resources, use the [Low resource config file](../../static/artifacts/pcap-sensor/low_resource_config.yaml)
 
 ### 5. Install the Sensor Service
 
