@@ -55,3 +55,23 @@ or if the [daily request limit](https://developers.cloudflare.com/workers/platfo
   alt="Adding a Cloudflare Worker route"
   style={{ display: 'block', margin: 'auto', paddingTop: '24px'}}
 />
+
+
+### Troubleshooting wrangler login
+
+If you encounter an error while running `npx wrangler login`, make sure you have the latest version of Node.js installed. 
+
+- Running above command should open a browser window where you can log in to your Cloudflare account.
+- Once you have logged in successfully, you should be prompted with a consent form to allow Wrangler to access your Cloudflare account.
+
+![](../assets/cloudflare/Wrangler_consentform.png)
+
+- After you click on `Allow`, you will be redirected to a page with a success message.
+
+![](../assets/cloudflare/Wrangler_access_granted.png)
+
+- Now you can close the browser window and return to your terminal where you should see a success message.
+
+
+### Need Help?
+For further assistance, please reach out to [Levo.ai Support](mailto:support@levo.ai).
