@@ -122,6 +122,18 @@ export LEVOAI_ORG_ID='<your-organization-id>'
 ./levoai-testrunner.sh start
 ```
 
+:::note
+
+If you are running the script with `sudo`, ensure that the environment variables are also set with `sudo`. Otherwise, the script will not have access to these variables.
+
+Alternatively, you can use the `-E` flag with `sudo` to preserve the user-defined environment variables, like this:
+```bash
+sudo -E ./levoai-testrunner.sh start
+```
+This ensures the script can access the required environment variables without explicitly redefining them under sudo.
+
+:::
+
 5. Stop the testrunner:
 ```bash
 ./levoai-testrunner.sh stop
