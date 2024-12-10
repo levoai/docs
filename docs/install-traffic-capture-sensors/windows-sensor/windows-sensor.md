@@ -85,7 +85,7 @@ Before installing the sensor service, modify the `config.json` file to match you
 
 3. Configuring sensor as per memory and CPU resource limits
 - For normal/average case use the default config
-- For strict resources, use the [Low resource config file](../../../static/artifacts/pcap-sensor/low_resource_config.yaml)
+- For strict resources, download the [Low resource config file](../../../static/artifacts/pcap-sensor/config.yaml) and copy it in the windows sensor installation directory.
 
 ### 5. Install the Sensor Service
 

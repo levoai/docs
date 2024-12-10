@@ -80,6 +80,10 @@ Specify additional flags in the entrypoint
 - For normal/average case use the above JSON
 - For strict resources, use the [Low resource JSON file](../../static/artifacts/pcap-sensor/low_resource.json)
 
+### 4. Filtering out traffic
+- If you need to ignore the traffic from other side-cars in the AWS task, you can use the `--filter` command to ignore the traffic on the non-essential container ports
+eg. `--filter "not port 8888"
+
 <a id="aws-permissions"></a>
 
 ### AWS Permissions needed
