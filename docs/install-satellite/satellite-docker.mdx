@@ -22,7 +22,7 @@ export function DownloadShellScriptLink() {
     return (
         <BrowserOnly fallback={<div>Loading...</div>}>
             {() => (
-                  <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/levo_satellite.sh'} download> Download</a>
+                  <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/levo_satellite.sh'} download> levo_satellite.sh</a>
             )}
         </BrowserOnly>
     );
@@ -205,7 +205,8 @@ If there are exception messages, Tagger is unable to connect to dependent servic
 
 ### 1. Download Shell Script File
 Levo provides Shell Script file for the Satellite that can be installed via Docker.
-<DownloadShellScriptLink/> the Shell Script file to your desktop.
+
+Download <DownloadShellScriptLink/> script file to your desktop.
 
 ### 2. Install Satellite
 
@@ -217,10 +218,9 @@ This is a command to change file permissions and adds executable permissions to 
 chmod +x ./levo_satellite.sh
 ```
 
-### 3. Usage
 After making the script executable, you can use the following commands:
 
-#### a. Start the Levo Satellite
+#### i. Start the Levo Satellite
 
 Downloads the Docker Compose file if not present.
 
@@ -229,7 +229,19 @@ Starts the Levo Satellite Services.
 ```bash
 ./levo_satellite.sh start
 ```
-#### b. Stop the Levo Satellite
+:::note
+
+If you are running the script with `sudo`, ensure that the environment variables are also set with `sudo`. Otherwise, the script will not have access to these variables.
+
+Alternatively, you can use the `-E` flag with `sudo` to preserve the user-defined environment variables, like this:
+```bash
+sudo -E ./levo_satellite.sh start
+```
+This ensures the script can access the required environment variables without explicitly redefining them under sudo.
+
+:::
+
+#### ii. Stop the Levo Satellite
 
 This command stops all Levo Satellite services.
 
@@ -237,7 +249,7 @@ This command stops all Levo Satellite services.
 ./levo_satellite.sh stop
 ```
 
-#### c. Restart the Levo Satellite
+#### iii. Restart the Levo Satellite
 
 This command stops and then starts the Levo Satellite services.
 
@@ -245,7 +257,7 @@ This command stops and then starts the Levo Satellite services.
 ./levo_satellite.sh restart
 ```
 
-#### d. Upgrade the Levo Satellite
+#### iv. Upgrade the Levo Satellite
 
 This command:
 - Downloads the latest Docker Compose file.
@@ -257,7 +269,7 @@ This command:
 ./levo_satellite.sh upgrade
 ```
 
-#### e. Get-Logs
+#### v. Get-Logs
 
 This command:
 - Collects logs from all running Levo Satellite services.
