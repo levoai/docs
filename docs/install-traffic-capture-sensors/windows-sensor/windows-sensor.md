@@ -58,7 +58,7 @@ Before installing the sensor service, modify the `config.json` file to match you
 Replace the placeholders with your specific configuration details.
 
 
-### 4. Configure Additional Options
+### [Optional] 4. Configure Additional Filters
 
 You can add the following optional flags to the `Args` array in `config.json`:
 
