@@ -218,6 +218,20 @@ This is a command to change file permissions and adds executable permissions to 
 chmod +x ./levo_satellite.sh
 ```
 
+:::info
+
+Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the satellite will be used with `app.india-1.levo.ai`, the installation command will be:
+
+```bash
+export LEVOAI_AUTH_KEY='Authorization Key'
+export LEVOAI_BASE_URL='https://api.india-1.levo.ai'
+export LEVOAI_ORG_ID='Org ID'
+```
+
+:::
+
 After making the script executable, you can use the following commands:
 
 #### i. Start the Levo Satellite
