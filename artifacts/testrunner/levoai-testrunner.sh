@@ -60,7 +60,6 @@ start_container() {
   check_env_var "LEVOAI_ORG_ID"
 
   local base_url="${LEVOAI_BASE_URL:-$DEFAULT_LEVOAI_BASE_URL}"
-  echo "LEVOAI_BASE_URL: $base_url"
 
   echo "Starting the $CONTAINER_NAME..."
   mkdir -p $HOME/.config/configstore
