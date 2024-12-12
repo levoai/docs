@@ -2,8 +2,9 @@
 sidebar_position: 2
 description: Set up Levo.ai Satellite on Docker. Follow our detailed guide for installation and deployment to enhance API security in Docker environments.
 ---
-
 # Satellite via Docker
+
+## Section: 1
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
@@ -12,6 +13,16 @@ export function DownloadDockerComposeLink() {
         <BrowserOnly fallback={<div>Loading...</div>}>
             {() => (
                 <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/docker-compose.yml'} download> Download</a>
+            )}
+        </BrowserOnly>
+    );
+};
+
+export function DownloadShellScriptLink() {
+    return (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+            {() => (
+                  <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/levo_satellite.sh'} download> levo_satellite.sh</a>
             )}
         </BrowserOnly>
     );
@@ -186,4 +197,99 @@ docker logs levoai-tagger | grep "ConnectionRefusedError: [Errno 111] Connection
 
 If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries. Please contact support@levo.ai for further assistance.
 
+------------------------------------------------------------------------------------
 
+## Section: 2
+
+## Install on Docker using Shell Script
+
+### 1. Download Shell Script File
+Levo provides Shell Script file for the Satellite that can be installed via Docker.
+
+Download <DownloadShellScriptLink/> script file to your desktop.
+
+### 2. Install Satellite
+
+Permissions: Ensure the script has executable permissions.
+
+Otherwise, run the following command to add executable permissions.
+
+```bash
+chmod +x ./levo_satellite.sh
+```
+
+Set the following environment variables.
+
+```bash
+export LEVOAI_AUTH_KEY='Authorization Key'
+export LEVOAI_ORG_ID='Org ID'
+```
+
+:::info
+
+Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the satellite will be used with `app.india-1.levo.ai`, the installation command will be:
+
+```bash
+export LEVOAI_BASE_URL='https://api.india-1.levo.ai'
+```
+
+:::
+
+
+#### i. Start Levo Satellite
+
+Execute following command to start Levo satellite.
+
+```bash
+./levo_satellite.sh start
+```
+:::note
+
+If you are running the script with `sudo`, ensure that the environment variables are also set with `sudo`. Otherwise, the script will not have access to these variables.
+
+Alternatively, you can use the `-E` flag with `sudo` to preserve the user-defined environment variables, like this:
+```bash
+sudo -E ./levo_satellite.sh start
+```
+This ensures the script can access the required environment variables without explicitly redefining them under sudo.
+
+:::
+
+#### ii. Stop the Levo Satellite
+
+Execute following command to stop or uninstall Levo satellite components.
+
+```bash
+./levo_satellite.sh stop
+```
+
+#### iii. Restart the Levo Satellite
+
+To restart the Levo satellite components, execute the following command.
+
+```bash
+./levo_satellite.sh restart
+```
+
+#### iv. Upgrade the Levo Satellite
+
+Execute the following command to upgrade the existing satellite setup.
+
+Running this command will download the latest docker compose file and restarts all the satellite components.
+
+```bash
+./levo_satellite.sh upgrade
+```
+
+#### v. Share Satellite logs with Levo Support
+
+Execute the following command to collect logs from all Satellite components. This will create an archive as /tmp/levoai_satellite_logs_%date-time%.tar.gz
+
+```bash
+./levo_satellite.sh get-logs
+```
+-----------------------
+### Need Help?
+For further assistance, please reach out to [Levo.ai Support](mailto:support@levo.ai).

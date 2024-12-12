@@ -70,7 +70,7 @@ Before installing the sensor service, modify the `config.json` file to match you
         host-exclusions: []
     ```
 
-### 4. Configure Additional Options
+### [Optional] 4. Configure Additional Filters
 
 1. Open the `config.yaml` file in a text editor.
 2. Modify any of these optional flags:
