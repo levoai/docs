@@ -4,7 +4,7 @@ description: Set up Levo.ai Satellite on Docker. Follow our detailed guide for i
 ---
 # Satellite via Docker
 
-# Section: 1
+## Section: 1
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
@@ -199,9 +199,9 @@ If there are exception messages, Tagger is unable to connect to dependent servic
 
 ------------------------------------------------------------------------------------
 
-# Section: 2
+## Section: 2
 
-# Install on Docker using Shell Script
+## Install on Docker using Shell Script
 
 ### 1. Download Shell Script File
 Levo provides Shell Script file for the Satellite that can be installed via Docker.
@@ -210,12 +210,19 @@ Download <DownloadShellScriptLink/> script file to your desktop.
 
 ### 2. Install Satellite
 
-Before running a .sh script, you need to ensure it has executable permissions. Once the script has executable permissions, you can run it in the terminal.
+Permissions: Ensure the script has executable permissions.
 
-This is a command to change file permissions and adds executable permissions to the file. This allows you to run thr script directly using './levo_satellite.sh'
+Otherwise, run the following command to add executable permissions.
 
 ```bash
 chmod +x ./levo_satellite.sh
+```
+
+Set the following environment variables.
+
+```bash
+export LEVOAI_AUTH_KEY='Authorization Key'
+export LEVOAI_ORG_ID='Org ID'
 ```
 
 :::info
@@ -225,20 +232,15 @@ Depending on the region you are installing in, you may need to set a different L
 For example, if the satellite will be used with `app.india-1.levo.ai`, the installation command will be:
 
 ```bash
-export LEVOAI_AUTH_KEY='Authorization Key'
 export LEVOAI_BASE_URL='https://api.india-1.levo.ai'
-export LEVOAI_ORG_ID='Org ID'
 ```
 
 :::
 
-After making the script executable, you can use the following commands:
 
-#### i. Start the Levo Satellite
+#### i. Execute following command to start Levo satellite
 
-Downloads the Docker Compose file if not present.
-
-Starts the Levo Satellite Services.
+To start the Levo Satellite Services.
 
 ```bash
 ./levo_satellite.sh start
@@ -257,7 +259,7 @@ This ensures the script can access the required environment variables without ex
 
 #### ii. Stop the Levo Satellite
 
-This command stops all Levo Satellite services.
+Execute following command to stop or uninstall Levo satellite components.
 
 ```bash
 ./levo_satellite.sh stop
@@ -265,7 +267,7 @@ This command stops all Levo Satellite services.
 
 #### iii. Restart the Levo Satellite
 
-This command stops and then starts the Levo Satellite services.
+To restart the Levo satellite components, execute the following command.
 
 ```bash
 ./levo_satellite.sh restart
@@ -273,22 +275,17 @@ This command stops and then starts the Levo Satellite services.
 
 #### iv. Upgrade the Levo Satellite
 
-This command:
-- Downloads the latest Docker Compose file.
-- Stops and removes existing services.
-- Pulls the latest Docker images.
-- Starts the services with the new configuration.
+Execute the following command to upgrade the existing satellite setup.
+
+Running this command will download the latest docker compose file and restarts all the satellite components.
 
 ```bash
 ./levo_satellite.sh upgrade
 ```
 
-#### v. Get-Logs
+#### v. Share Satellite logs with Levo Support
 
-This command:
-- Collects logs from all running Levo Satellite services.
-- Creates a compressed archive of the logs.
-- Outputs the location of the archive file.
+Execute the following command to collect logs from all Satellite components. This will create an archive as /tmp/levoai_satellite_logs_%date-time%.tar.gz
 
 ```bash
 ./levo_satellite.sh get-logs
