@@ -104,8 +104,8 @@ get-logs() {
     TEMP_DIR=$(mktemp -d)
     echo "Temporary directory created: $TEMP_DIR"
 
-    # Get all service names from docker
-    SERVICES=$(docker ps --format '{{.Names}}')
+    # Get all levoai service names from docker
+    SERVICES=$(docker ps -f name=levoai --format '{{.Names}}')
 
     if [ -z "$SERVICES" ]; then
         echo "Warning: No running services found in docker-compose setup."
