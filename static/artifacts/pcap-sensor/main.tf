@@ -52,13 +52,13 @@ variable "stream_timeout_seconds" {
     default = "1.0"
 }
 
-variable "percentage_cpu_utilization" {
+variable "cpu_percentage_limit" {
     description = "Percentage of CPU allocated to the sensor container out of total task cpu"
     type = string
     default = "5"
 }
 
-variable "percentage_memory_utilization" {
+variable "memory_percentage_limit" {
     description = "Percentage of memory allocated to the sensor container out of total task memory"
     type = string
     default = "5"
@@ -116,8 +116,8 @@ locals {
     existing_container_definitions = local.task_def_json.taskDefinition.containerDefinitions
 
     # Calculate 5% of the task CPU and memory
-    new_container_cpu_limit         = floor(local.task_cpu * var.percentage_cpu_utilization / 100)
-    new_container_memory_limit      = floor(local.task_memory * var.percentage_memory_utilization / 100)
+    new_container_cpu_limit         = floor(local.task_cpu * var.cpu_percentage_limit / 100)
+    new_container_memory_limit      = floor(local.task_memory * var.memory_percentage_limit / 100)
 
     # Add the new container definition
     new_container_definitions = [{

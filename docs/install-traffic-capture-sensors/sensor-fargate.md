@@ -22,10 +22,10 @@ The pcap Sensor can be installed as a sidecar on an existing AWS task using a te
 - Enter values for all the prompts, which include `aws-region`, `task-name`, `satellite-url`, `levo-env`, `org-id` etc.
 - Or edit the variables in the terraform script and add the required values as default.
 - The script will create a new revision of the task-definition with the pcap-sensor as side-car
-- To configure CPU and memory given to the container, update `percentage_cpu_utilization` and `percentage_memory_utilization` variables in the terraform script.
+- To configure CPU and memory given to the container, update `cpu_percentage_limit` and `memory_percentage_limit` variables in the terraform script.
 
 *Note: The default values are set to 5% CPU and memory of the total given to the task.*
-<br>
+
 
 ## Install using JSON
 
