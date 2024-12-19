@@ -9,7 +9,25 @@ description: Install Levo.ai PCAP sensor on AWS Fargate. Follow our detailed gui
 - AWS profile access key and secret access key saved at path  ~/.aws/credentials file
 - The profile should have all the required permissions as listed [here](#aws-permissions)
 
-## Install Sensor on Fargate
+
+## Install using Terraform
+
+The pcap Sensor can be installed as a sidecar on an existing AWS task using a terraform script
+
+- Download the [Terraform script](../../static/artifacts/pcap-sensor/main.tf)
+- Run the following commands
+    - `terraform init`
+    - `terraform plan`
+    - `terraform apply`
+- Enter values for all the prompts, which include `aws-region`, `task-name`, `satellite-url`, `levo-env`, `org-id` etc.
+- Or edit the variables in the terraform script and add the required values as default.
+- The script will create a new revision of the task-definition with the pcap-sensor as side-car
+- To configure CPU and memory given to the container, update `cpu_percentage_limit` and `memory_percentage_limit` variables in the terraform script.
+
+*Note: The default values are set to 5% CPU and memory of the total given to the task.*
+
+
+## Install using JSON
 
 The pcap Sensor can be installed as a sidecar on an existing AWS task by adding to its task definition via the AWS Console.
 
