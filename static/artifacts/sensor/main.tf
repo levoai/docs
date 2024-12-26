@@ -10,6 +10,10 @@ variable "levo_env" {
   description = "Enter your Application environment"
 }
 
+variable "org_id" {
+  description = "Specify your Organization ID (from the Levo Dashboard)"
+}
+
 resource "aws_ecs_task_definition" "levoai-sensor" {
   family                   = "levoai-ebpf-sensor"
   network_mode             = "awsvpc"
@@ -37,7 +41,9 @@ resource "aws_ecs_task_definition" "levoai-sensor" {
         "--satellite-url",
         var.satellite_url,
         "--levo-env",
-        var.levo_env
+        var.levo_env,
+        "--organization-id",
+        var.org_id
       ],
       "environment": [],
       "mountPoints": [

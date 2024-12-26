@@ -1,3 +1,6 @@
+---
+title: "OWASP Baseline: Secure API Response Headers"
+---
 
 # Information Leak Via 'Server' HTTP Response Header
 ![Server Header Info Leak](../assets/baseline/baseline-vuln.svg)

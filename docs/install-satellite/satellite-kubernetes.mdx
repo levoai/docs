@@ -1,9 +1,24 @@
 ---
 sidebar_position: 1
+description: Install Levo.ai Satellite on Kubernetes. Follow our detailed guide for setup, deployment, and ensuring API security with Levo.ai's comprehensive tools.
 ---
 
 
 # Satellite on Kubernetes
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+export function DownloadGetLogsScript() {
+    return (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+            {() => (
+                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/get_levoai_satellite_logs.sh'} download> download</a>
+            )}
+        </BrowserOnly>
+    );
+}
+
+## Setup
 
 ### Prerequisites
 - Kubernetes version >= `v1.18.0`
@@ -19,9 +34,9 @@ sidebar_position: 1
 export LEVOAI_AUTH_KEY=<'Authorization Key'>
 ```
 
-### 2. Install levoai Helm repo
+### 2. Add levoai Helm repo
 ```bash
-helm repo add levoai https://charts.levo.ai && helm repo update
+helm repo add levoai https://charts.levo.ai && helm repo update levoai
 ```
 
 ### 3. Create `levoai` namespace & install Satellite
@@ -55,10 +70,62 @@ You will need to expose the Satellite via either a `LoadBalancer` or `NodePort`,
 # Please modify this command template and choose either 'LoadBalancer' or 'NodePort', prior to execution
 helm upgrade --install -n levoai --create-namespace \
     --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
-    --set levoai-collector.service.type=<LoadBalancer | NodePort> \
+    --set haproxy.service.type=<LoadBalancer | NodePort> \
     # --set global.levoai_config_override.onprem-api.url="https://api.india-1.levo.ai" \
     levoai-satellite levoai/levoai-satellite
 ```
+:::
+
+#### If rabbitmq persistence needs to be disabled
+You will need to set rabbitmq.persistence.enabled property to false.
+
+```bash
+helm upgrade --install -n levoai --create-namespace \
+    --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+    --set rabbitmq.persistence.enabled=false \
+    # --set global.levoai_config_override.onprem-api.url="https://api.india-1.levo.ai" \
+    levoai-satellite levoai/levoai-satellite
+```
+
+
+#### Kubernetes related customizations
+
+##### Add Tolerations, Affinity and Node Selectors
+
+Tolerations, Affinity and Node Selectors for the Satellite pods may be specified via helm values. For example:
+
+```yaml
+tolerations:
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule
+  - key: "devops"
+    operator: "Equal"
+    value: "dedicated"
+    effect: "NoSchedule"
+nodeSelector:s
+  kubernetes.io/hostname: "mavros"
+affinity:
+  nodeAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      nodeSelectorTerms:
+      - matchExpressions:
+        - key: topology.kubernetes.io/zone
+          operator: In
+          values:
+          - antarctica-east1
+          - antarctica-west1
+    preferredDuringSchedulingIgnoredDuringExecution:
+    - weight: 1
+      preference:
+        matchExpressions:
+        - key: another-node-label-key
+          operator: In
+          values:
+          - another-node-label-value
+```
+
+
 
 ### 4. Verify connectivity with Levo.ai
 
@@ -66,7 +133,7 @@ helm upgrade --install -n levoai --create-namespace \
 
 The Satellite is comprised of five sub components 1) levoai-collector, 2) levoai-ion, 3) levoai-rabbitmq, 4)levoai-satellite, and 5) levoai-tagger.
 
-Wait couple of minutes after the install, and check the health of the components by executing the following:
+Wait a couple of minutes after the installation, and check the health of the components by executing the following:
 
 ```bash
 kubectl -n levoai get pods
@@ -109,6 +176,62 @@ Run the below command and note the `external` address/port of the the Collector 
 ```bash
 kubectl get service levoai-collector -n levoai
 ```
+
+### 6. Optionally, enable authentication for satellite APIs.
+Add below config to `values.yml` file to enable authentication for satellite APIs using a unique key. 
+Refer to [Accessing Organization IDs](/integrations/common-tasks.md#accessing-organization-ids) for fetching the Organization ID.
+
+```yaml
+global:
+  levoai_config_override:
+    onprem-api:
+      org-id: <your-org-id>
+haproxy:
+  satelliteAuthnEnabled: false
+```
+
+Install satellite using this `values.yml`.
+
+```bash
+helm upgrade --install -n levoai --create-namespace \
+  -f ./values.yml \
+  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+  levoai-satellite levoai/levoai-satellite
+```
+
+Otherwise, you can pass the `org-id` and `authnEnabled` as arguments to the helm command.
+
+```bash
+helm upgrade --install -n levoai --create-namespace \
+  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+  --set global.levoai_config_override.onprem-api.org-id=<your-org-id> \
+  --set haproxy.authnEnabled=true \
+  levoai-satellite levoai/levoai-satellite
+```
+
+### 7. Optionally, access Satellite through a CNAME and HTTPS
+Add below config to `values.yml` file to add an ingress route for Satellite APIs so that it can be accessed through a CNAME and HTTPS.
+
+```yaml
+haproxy:
+  ingress:
+    enabled: true
+    hostname: <Your CNAME>
+    ingressClassName: haproxy
+    pathType: Prefix
+    extraPaths:
+      - path: /*
+        pathType: Prefix
+        backend:
+          service:
+            name: levoai-haproxy
+            port:
+              number: 80
+```
+
+Please reach out to support@levo.ai if you're using a custom ingress controller.
+
+
 Please proceed to [install Traffic Capture Sensors](/install-traffic-capture-sensors).
 
 ---------------------------------------------------------
@@ -121,7 +244,7 @@ Please proceed to [install Traffic Capture Sensors](/install-traffic-capture-sen
 export LEVOAI_AUTH_KEY=<'Authorization Key' from the original installation> 
 
 # Update helm repo and upgrade installation
-helm repo update
+helm repo update levoai
 
 helm upgrade -n levoai \
   --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
@@ -166,7 +289,7 @@ export LEVOAI_AUTH_KEY=<'Authorization Key' from the original installation>
 export LEVOAI_MIN_URLS_PER_PATTERN=3
 
 # Update helm repo and upgrade installation
-helm repo update
+helm repo update levoai
 
 helm upgrade -n levoai \
   --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
@@ -225,5 +348,13 @@ kubectl -n levoai logs <levoai-tagger-pod-id> | grep "ConnectionRefusedError: [E
 
 If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries. Please contact support@levo.ai for further assistance.
 
-<br></br>
+### Share Satellite logs with Levo Support
 
+Please <DownloadGetLogsScript/> script and execute following commands to collect logs from all Satellite components. This will create an archive as `/tmp/levoai_satellite_logs_%date-time%.tar.gz`.
+
+```bash
+chmod +x get_levoai_satellite_logs.sh
+./get_levoai_satellite_logs.sh
+```
+
+<br></br>

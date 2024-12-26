@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+title: "API A5 - Broken Function Level Authorization | Levo.ai"
 ---
 
 # API A5 - Broken Function Level Authorization

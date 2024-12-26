@@ -1,3 +1,6 @@
+---
+title: "API Security: Prevent Info Disclosure in Response Headers"
+---
 
 # Information Leak Via 'X-Powered-By' HTTP Response Header
 ![X-Powered-By Info Leak](../assets/baseline/baseline-vuln.svg)

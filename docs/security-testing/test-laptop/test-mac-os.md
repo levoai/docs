@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Set up and execute security tests on macOS with Levo.ai. Follow our detailed guide to install Levo CLI and ensure robust API security on your Mac.
 ---
 
 # Test on Mac OS

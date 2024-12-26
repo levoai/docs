@@ -1,14 +1,33 @@
 ---
 sidebar_position: 3
+description: Install Levo.ai PCAP sensor on AWS Fargate. Follow our detailed guide for setup, configuration, and robust API traffic capture and analysis.
 ---
 
-# Sensor on Fargate
+# Sensor on AWS Fargate
 
 ## Prerequisites
 - AWS profile access key and secret access key saved at path  ~/.aws/credentials file
 - The profile should have all the required permissions as listed [here](#aws-permissions)
 
-## Install Sensor on Fargate
+
+## Install using Terraform
+
+The pcap Sensor can be installed as a sidecar on an existing AWS task using a terraform script
+
+- Download the [Terraform script](../../static/artifacts/pcap-sensor/main.tf)
+- Run the following commands
+    - `terraform init`
+    - `terraform plan`
+    - `terraform apply`
+- Enter values for all the prompts, which include `aws-region`, `task-name`, `satellite-url`, `levo-env`, `org-id` etc.
+- Or edit the variables in the terraform script and add the required values as default.
+- The script will create a new revision of the task-definition with the pcap-sensor as side-car
+- To configure CPU and memory given to the container, update `cpu_percentage_limit` and `memory_percentage_limit` variables in the terraform script.
+
+*Note: The default values are set to 5% CPU and memory of the total given to the task.*
+
+
+## Install using JSON
 
 The pcap Sensor can be installed as a sidecar on an existing AWS task by adding to its task definition via the AWS Console.
 
@@ -26,7 +45,7 @@ The steps to add the sensor to your task are as follows
 ```json
 {
     "name": "levo-pcap-sensor",
-    "image": "levoai/pcap-sensor:0.1.1",
+    "image": "levoai/pcap-sensor:0.1.9",
     "cpu": 512,
     "memory": 512,
     "portMappings": [],
@@ -73,6 +92,15 @@ Specify additional flags in the entrypoint
 --host-exclusions           # regex for excluded hosts
 --path-exclusions           # regex for excluded paths
 ```
+
+### 3. Configuring sensor as per memory and CPU resource limits
+
+- For normal/average case use the above JSON
+- For strict resources, use the [Low resource JSON file](../../static/artifacts/pcap-sensor/low_resource.json)
+
+### 4. Filtering out traffic
+- If you need to ignore the traffic from other side-cars in the AWS task, you can use the `--filter` command to ignore the traffic on the non-essential container ports
+eg. `--filter "not port 8888"
 
 <a id="aws-permissions"></a>
 

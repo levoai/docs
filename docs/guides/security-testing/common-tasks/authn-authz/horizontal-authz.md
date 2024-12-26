@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+title: "Stop Unauthorized Access: Secure APIs with Horizontal AuthZ"
 ---
 
 # Providing Authorization Information for `Horizontal Authorization Abuse` Test Cases

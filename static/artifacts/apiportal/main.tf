@@ -30,12 +30,8 @@ variable "refresh_token" {
   description = "Enter your Refresh Token"
 }
 
-variable "env_name" {
-  description = "Enter your Env Name"
-}
-
-variable "app_name" {
-  description = "Enter your App Name"
+variable "levo_org_id" {
+  description = "Enter your Levo ORG ID"
 }
 
 
@@ -65,17 +61,13 @@ resource "aws_ecs_task_definition" "levoai-docs" {
             "essential": true,
             "environment": [
                 {
-                    "name": "APP_NAME",
-                    "value": var.app_name
-                },
-                {
-                    "name": "ENV_NAME",
-                    "value": var.env_name
-                },
-                {
                     "name": "REFRESH_TOKEN",
                     "value": var.refresh_token
                 },
+                {
+                    "name": "LEVO_ORG_ID",
+                    "value": var.levo_org_id
+                }
                 {
                     "name": "LEVO_BASE_URL",
                     "value": "https://api.levo.ai"
