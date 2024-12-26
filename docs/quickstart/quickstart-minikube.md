@@ -44,7 +44,7 @@ minikube mount /proc:/ggproc
 Then, in a new terminal window, run:
 
 ```shell
-helm repo add levoai https://charts.levo.ai && helm repo update
+helm repo add levoai https://charts.levo.ai && helm repo update levoai
 helm pull levoai/levoai-ebpf-sensor --untar
 cd levoai-ebpf-sensor/
 sed -i "s/path: \/proc/path: \/ggproc/" templates/deployment.yaml

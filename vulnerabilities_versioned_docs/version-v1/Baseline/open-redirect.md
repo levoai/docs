@@ -1,3 +1,6 @@
+---
+title: "Stop Phishing Attacks: Prevent API Open Redirects"
+---
 
 # Open/Unrestricted URL Redirect Via URL Query Parameter
 ![Open URL Redirect](../assets/baseline/baseline-vuln.svg)

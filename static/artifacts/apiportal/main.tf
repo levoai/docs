@@ -30,13 +30,8 @@ variable "refresh_token" {
   description = "Enter your Refresh Token"
 }
 
-variable "env_name" {
-  description = "Enter your Env Name"
-  default = "staging"
-}
-
-variable "app_name" {
-  description = "Enter your App Name"
+variable "levo_org_id" {
+  description = "Enter your Levo ORG ID"
 }
 
 variable "base_url" {
@@ -46,7 +41,7 @@ variable "base_url" {
   validation {
     condition     = contains(["1", "2"], var.base_url)
     error_message = "Valid values for the options are are (1, 2)."
-  } 
+  }
 }
 
 locals {
@@ -56,11 +51,11 @@ locals {
 variable "region" {
   type        = string
   description = "Enter your AWS region"
-  
+
   validation {
     condition     = contains(["us-east-2", "us-east-1", "us-west-1", "us-west-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-3", "ap-southeast-4", "ap-south-1", "ap-northeast-3", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ca-central-1", "ca-west-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-south-1", "eu-west-3", "eu-south-2", "eu-north-1", "eu-central-2", "il-central-1", "me-south-1", "me-central-1", "sa-east-1", "us-gov-east-1", "us-gov-west-1"], var.region)
     error_message = "Valid values for the options are are (us-east-2, us-east-1, us-west-1, us-west-2, af-south-1, ap-east-1, ap-south-2, ap-southeast-3, ap-southeast-4, ap-south-1, ap-northeast-3, ap-northeast-2, ap-southeast-1, ap-southeast-2, ap-northeast-1, ca-central-1, ca-west-1, eu-central-1, eu-west-1, eu-west-2, eu-south-1, eu-west-3, eu-south-2, eu-north-1, eu-central-2, il-central-1, me-south-1, me-central-1, sa-east-1, us-gov-east-1, us-gov-west-1)."
-  } 
+  }
 }
 
 resource "aws_ecs_task_definition" "levoai-docs" {
@@ -89,16 +84,12 @@ resource "aws_ecs_task_definition" "levoai-docs" {
             "essential": true,
             "environment": [
                 {
-                    "name": "APP_NAME",
-                    "value": var.app_name
-                },
-                {
-                    "name": "ENV_NAME",
-                    "value": var.env_name
-                },
-                {
                     "name": "REFRESH_TOKEN",
                     "value": var.refresh_token
+                },
+                {
+                    "name": "LEVO_ORG_ID",
+                    "value": var.levo_org_id
                 },
                 {
                     "name": "LEVO_BASE_URL",

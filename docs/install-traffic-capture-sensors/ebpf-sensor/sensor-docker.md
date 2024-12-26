@@ -1,5 +1,6 @@
 ---
 sidebar_position: 3
+title: Install eBPF Sensor on Docker | Levo.ai Documentation
 ---
 
 # Sensor via Docker
@@ -22,9 +23,10 @@ sidebar_position: 3
 sudo docker run --restart unless-stopped \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
   --add-host host.docker.internal:host-gateway \
-  --privileged --detach levoai/ebpf_sensor:0.40.0 \
+  --privileged --detach levoai/ebpf_sensor:0.45.4 \
   --host-proc-path /host/proc/ \
   --satellite-url <satellite-address> \
+  --organization-id <Org ID> \
   --env <'application-environment'> \
   --default-service-name <'Application Name' chosen earlier>
 ```

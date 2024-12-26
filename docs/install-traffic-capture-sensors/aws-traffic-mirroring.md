@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+description: Set up AWS Traffic Mirroring with Levo.ai. Follow our guide to create, list, and delete mirroring sessions using Levo CLI for enhanced API traffic analysis.
 ---
 
 # AWS Traffic Mirroring

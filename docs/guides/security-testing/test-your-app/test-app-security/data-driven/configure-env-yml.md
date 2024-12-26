@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+title: Configure env.yml for Data-Driven Security Testing
 ---
 
 # Configure `environment.yml`

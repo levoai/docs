@@ -1,3 +1,7 @@
+---
+title: "Prevent Session Hijacking: Stop Cookie Poisoning Attacks"
+---
+
 
 # Cookie Poisoning Via Query/Body Parameters
 ![Cookie Poisoning](../assets/baseline/baseline-vuln.svg)

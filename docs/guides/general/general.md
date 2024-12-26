@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+description: Discover general tasks for using Levo.ai. Follow our guides on OS compatibility, private registry setup, and supported platforms for optimal performance.
 ---
 
 This section describes tasks that are common when using Levo.

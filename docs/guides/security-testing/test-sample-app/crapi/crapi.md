@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: "API Security Testing Tutorial: CRAPI Sample Application"
 ---
 
 # Evaluate Levo using the sample application `crAPI`

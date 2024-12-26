@@ -1,5 +1,6 @@
 ---
 sidebar_position: 6
+title: "Prevent Data Leaks & Access Issues: Test Both AuthZ Types"
 ---
 
 # Providing Authorization Information for Test Plans - `Horizontal & Vertical Authorization Abuse` Test Cases

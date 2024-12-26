@@ -1,6 +1,7 @@
 ---
 sidebar_position: 0
 keywords: [API Security, eBPF, API Observability]
+description: Understand key concepts in Levo.ai's API observability. Learn about sensors, satellites, and API catalog creation for effective API management and security.
 ---
 
 # Key Concepts

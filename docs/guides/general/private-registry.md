@@ -1,5 +1,6 @@
 ---
 sidebar_position: 2
+title: "Secure & Organize APIs: Leverage a Private Registry"
 ---
 
 # Use a Private Docker Registry for Kubernetes Installations
@@ -25,7 +26,7 @@ region="us-west-2"
 registry="your.registry"
 
 helm repo add levoai https://charts.levo.ai || true
-helm repo update
+helm repo update levoai
 images=($(helm template levoai/levoai-satellite | yq -N '..|.image? | select(.)' | sort -u))
 images+=($(helm template levoai/levoai-ebpf-sensor | yq -N '..|.image? | select(.)' | sort -u))
 

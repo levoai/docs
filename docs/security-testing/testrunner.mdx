@@ -1,0 +1,155 @@
+---
+id: testrunner
+title: Test Runner
+sidebar_label: Test Runner
+sidebar_position: 2
+description: Set up Levo.ai Test Runner on Docker or Kubernetes. Follow our detailed guide for installation and deployment to enhance API security in your environment.
+---
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+export function DownloadLevoTestRunner() {
+    return (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+            {() => (
+                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/testrunner/levoai-testrunner.sh'} download> levoai-testrunner.sh </a>
+            )}
+        </BrowserOnly>
+    );
+}
+
+## Running Security Tests with Levo.ai
+
+Levo provides you with the ability to run security tests on your application endpoints. These tests can be executed in the following environments:
+
+- **On the Cloud**
+- **On Premises**
+## Requirements for Running Security Tests
+
+To successfully run security tests, you need:
+
+1. A target service URL that is reachable.
+2. A valid configuration for authenticated endpoints.
+3. Valid API endpoint parameters.
+
+### Testing Publicly Reachable Services
+
+If your target service is publicly accessible, you can directly run security tests from the Levo Cloud.
+
+### Testing Internal Services
+
+For internal services that are not publicly reachable, you can use the **Levo Testrunner**. The testrunner is a service that can be installed on your premises.
+
+Once you initiate security tests from the Levo UI, the testrunner will:
+- Pull the tests to your premises.
+- Execute them internally.
+
+This approach ensures secure testing of internal APIs.
+
+---
+
+## Installation
+
+You can install the testrunner
+- [Via helm in Kubernetes environment](#install-testrunner-via-helm-on-kubernetes)
+- [Via docker](#install-testrunner-via-docker)
+
+### Prerequisites
+Before installation, ensure the following:
+
+1. **Levo Authorization Token**: Refer to [Generating CLI Authorization Keys](/integrations/common-tasks.md#generating-cli-authorization-keys).
+2. **Organization ID**: Refer to [Accessing Organization IDs](/integrations/common-tasks.md#accessing-organization-ids).
+3. **Helm or Docker**: Install the appropriate tool based on your chosen installation method.
+
+---
+
+### Install Testrunner via Helm on Kubernetes
+
+Follow these steps to install the testrunner in a Kubernetes environment:
+
+1. Add Levo Helm Repository:
+
+```bash
+helm repo add levoai https://levoai.github.io/helm-charts/
+```
+
+2. Install the Testrunner Helm Chart:
+
+
+```bash
+helm install \
+--set key="auth-key" \
+--set orgId="organization id" \
+--set levoBaseUrl="https://api.levo.ai" \
+testrunner levoai/testrunner
+```
+
+:::info
+
+For apps hosted in different regions, update the `levoBaseUrl`.
+For example, if the testrunner is used with `app.india-1.levo.ai`:
+
+
+```bash
+helm install \
+--set key="auth-key" \
+--set orgId="organization id" \
+--set levoBaseUrl="https://api.india-1.levo.ai" \
+testrunner levoai/testrunner
+```
+:::
+
+<br></br>
+
+### Install Testrunner via Docker
+
+If Docker is installed on your machine, follow these steps to start the testrunner:
+
+1. Download the <DownloadLevoTestRunner/> script.
+2. Make the script executable:
+```bash
+chmod +x levoai-testrunner.sh
+```
+
+3. Set the required environment variables:
+```bash
+export LEVOAI_AUTH_KEY='<your-auth-key>'
+export LEVOAI_ORG_ID='<your-organization-id>'
+```
+
+4. Start the testrunner:
+```bash
+./levoai-testrunner.sh start
+```
+
+:::note
+
+If you are running the script with `sudo`, ensure that the environment variables are also set with `sudo`. Otherwise, the script will not have access to these variables.
+
+Alternatively, you can use the `-E` flag with `sudo` to preserve the user-defined environment variables, like this:
+```bash
+sudo -E ./levoai-testrunner.sh start
+```
+This ensures the script can access the required environment variables without explicitly redefining them under sudo.
+
+:::
+
+5. Stop the testrunner:
+```bash
+./levoai-testrunner.sh stop
+```
+
+:::info
+
+For apps hosted in different regions, set the environment variable `LEVOAI_BASE_URL`.
+```bash
+export LEVOAI_BASE_URL='https://api.india-1.levo.ai'
+```
+
+:::
+
+---
+
+### Need Help?
+For further assistance, please reach out to [Levo.ai Support](mailto:support@levo.ai).
+

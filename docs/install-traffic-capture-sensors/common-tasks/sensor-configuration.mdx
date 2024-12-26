@@ -324,6 +324,7 @@ sudo docker run --restart unless-stopped \
   levoai/ebpf_sensor:latest \
   --host-proc-path /host/proc \
   --satellite-url <hostname|IP:port> \
+  --organization-id <OrgID> \
   --default-service-name <'Application Name' chosen earlier>
 ```
 Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.

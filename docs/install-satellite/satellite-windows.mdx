@@ -1,0 +1,90 @@
+---
+sidebar_position: 7
+description: Set up Levo.ai Satellite on Windows.
+---
+
+# Satellite on Windows
+
+import BrowserOnly from '@docusaurus/BrowserOnly';
+
+export function DownloadDockerComposeLink() {
+    return (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+            {() => (
+                <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/docker-compose.yml'} download> Download</a>
+            )}
+        </BrowserOnly>
+    );
+}
+
+### Prerequisites
+- Access to a Windows Machine.
+- At least 4 CPUs and 8 GB of RAM on the Windows Machine.
+- Docker Desktop for Windows installed on the Windows with WSL enabled.
+
+### 1. Download Docker Compose file
+Levo provides pre-built Docker images for the Satellite that can be installed via Docker Compose.
+<DownloadDockerComposeLink/> the Docker Compose file to your desktop.
+
+### 2. Install Satellite
+
+Set the `LEVOAI_AUTH_KEY` environment variable, please refer to [Generating CLI Authorization Keys](/integrations/common-tasks.md#generating-cli-authorization-keys) for instructions on fetching your key.
+```powershell
+$env:LEVOAI_AUTH_KEY = "<your auth key here>"
+```
+Execute the following from the directory where the Docker Compose file was downloaded.
+```powershell
+docker compose pull; docker compose up -d
+```
+
+:::info
+
+Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the satellite will be used with `app.india-1.levo.ai`, the installation command will be:
+
+```powershell
+$env:LEVOAI_AUTH_KEY = "<your auth key here>"
+$env:LEVOAI_BASE_URL = "https://api.india-1.levo.ai"
+docker compose pull; docker compose up -d
+```
+
+:::
+
+> If `docker compose ...` complains with *"docker: 'compose' is not a docker command."*, you have can try **`docker-compose`** instead.
+
+### 3. Verify connectivity with Levo.ai
+
+#### a. Check Satellite health
+
+The Satellite is comprised of six sub components 1) levoai-collector, 2) levoai-rabbitmq, 3)levoai-satellite, and 4) levoai-tagger 5) levoai-ion 6) levoai-haproxy.
+
+Wait a couple of minutes after the installation, and check the health of the components by executing the following:
+
+```bash
+docker ps -f name=levoai
+```
+
+If the Satellite is healthy, you should see output similar to below.
+
+```bash
+CONTAINER ID   IMAGE                     COMMAND                  CREATED             STATUS                  PORTS                                                                                                                                    NAMES
+2b32cd6b9ced   levoai/collector:stable   "/usr/local/bin/levo…"   10 seconds ago      Up 8 seconds            0.0.0.0:4317->4317/tcp, 9411/tcp                                                                                                         levoai-collector
+06f3c597cad0   levoai/satellite:stable   "gunicorn --capture-…"   10 seconds ago      Up 9 seconds            0.0.0.0:9999->9999/tcp                                                                                                                   levoai-satellite
+89026034c567   levoai/satellite:stable   "python -OO /opt/lev…"   10 seconds ago      Up Less than a second                                                                                                                                            levoai-tagger
+f74524d02fbd   bitnami/rabbitmq:3.10     "/opt/bitnami/script…"   10 seconds ago      Up 9 seconds            5551-5552/tcp, 0.0.0.0:4369->4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 0.0.0.0:15672->15672/tcp, 0.0.0.0:25672->25672/tcp, 15671/tcp   levoai-rabbitmq
+973414e03gba   levoai/ion:stable         "ion start -verbose"     10 seconds ago      Up Less than a second   0.0.0.0:9990->8000/tcp                                                                                                                   levoai-ion
+cb58d3d8d952   levoai/proxy:latest    "docker-entrypoint.s…"      10 seconds ago      Up 7 seconds            0.0.0.0:8081->8081/tcp, 0.0.0.0:9080->8080/tcp                                                                                           levoai-haproxy
+```
+
+#### b. Check connectivity
+Execute the following to check for connectivity health:
+
+```bash
+docker logs levoai-tagger | grep "Ready to process; waiting for messages."
+```
+If connectivity is healthy, you will see output similar to below.
+
+```bash
+{"level": "info", "time": "2022-06-07 08:07:22,439", "line": "rabbitmq_client.py:155", "version": "fc628b50354bf94e544eef46751d44945a2c55bc", "module": "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py", "message": "Ready to process; waiting for messages."}
+```

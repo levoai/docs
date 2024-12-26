@@ -1,8 +1,10 @@
 ---
 sidebar_position: 2
+description: Set up Levo.ai Satellite on Docker. Follow our detailed guide for installation and deployment to enhance API security in Docker environments.
 ---
-
 # Satellite via Docker
+
+## Section: 1
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
 
@@ -11,6 +13,16 @@ export function DownloadDockerComposeLink() {
         <BrowserOnly fallback={<div>Loading...</div>}>
             {() => (
                 <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/docker-compose.yml'} download> Download</a>
+            )}
+        </BrowserOnly>
+    );
+};
+
+export function DownloadShellScriptLink() {
+    return (
+        <BrowserOnly fallback={<div>Loading...</div>}>
+            {() => (
+                  <a href={window.location.protocol + '//' + window.location.host + '/artifacts/satellite/levo_satellite.sh'} download> levo_satellite.sh</a>
             )}
         </BrowserOnly>
     );
@@ -57,7 +69,7 @@ docker compose pull && docker compose up -d
 
 The Satellite is comprised of four sub components 1) levoai-collector, 2) levoai-rabbitmq, 3)levoai-satellite, and 4) levoai-tagger.
 
-Wait couple of minutes after the install, and check the health of the components by executing the following:
+Wait a couple of minutes after the installation, and check the health of the components by executing the following:
 
 ```bash
 docker ps -f name=levoai
@@ -88,13 +100,20 @@ If connectivity is healthy, you will see output similar to below.
 ### 4. Note down `Host:Port` information
 The Collector now runs in a container, and is reachable on the host via port 4317 (on all the host's network interfaces).
 
-Please note down the either the host's IP address or domain name. The Sensor will be configured to communicate with the Collector at <Host's IP|Domain-Name>:4317.
+Please note down either the host's IP address or domain name. The Sensor will be configured to communicate with the Collector at <Host's IP|Domain-Name>:4317.
 
 Please proceed to [install traffic capture sensors](/install-traffic-capture-sensors).
 
 ----------------------------------------------
 
 ## Satellite Lifecycle Management
+
+
+### Upgrade the Satellite
+1. Navigate to directory where you have the Docker Compose file.
+2. [Reinstall](#2-install-satellite) the Satellite. The install always *pulls* the latest Docker images for the Satellite.
+
+> **Note**: If the re-installation fails, please [Uninstall](#uninstall-the-satellite) the Satellite and then reinstall.
 
 ### Uninstall the Satellite
 
@@ -104,22 +123,6 @@ Execute the below command:
 ```bash
 docker compose down --remove-orphans -v
 ```
-
-### Upgrade the Satellite
-1. [Uninstall](#uninstall-the-satellite) the Satellite
-2. [Reinstall](#2-install-satellite) the Satellite. The install always *pulls* the latest Docker images for the Satellite.
-
-
-### Change the `minimum number of URLs` that the satellite needs to observe to detect an API endpoint.
-To detect an API endpoint, Satellite waits for at least '10' URLs to match that endpoint URL pattern.
-This number may cause delays in detecting API endpoints when there is not enough load.
-
-If you want to change this number to suit your environment:
-- export the environment variable `LEVOAI_MIN_URLS_PER_PATTERN` - for example :
-  `export LEVOAI_MIN_URLS_PER_PATTERN=3`
-
-- Reinstall the Satellite to pickup the new configuration
-
 
 ### List Satellite's containers
 ```bash
@@ -140,6 +143,19 @@ docker logs -f <container id>
 ```bash
 docker logs <container id> --since 1m
 ```
+
+----
+
+## Configuration
+
+### Change the `minimum number of URLs` that the satellite needs to observe to detect an API endpoint.
+To detect an API endpoint, Satellite waits for at least '10' URLs to match that endpoint URL pattern.
+This number may cause delays in detecting API endpoints when there is not enough load.
+
+If you want to change this number to suit your environment:
+- Export the environment variable `LEVOAI_MIN_URLS_PER_PATTERN` - for example : `export LEVOAI_MIN_URLS_PER_PATTERN=3`
+
+- Reinstall the Satellite to pickup the new configuration
 
 ------------------------------------------------------------------
 
@@ -181,4 +197,99 @@ docker logs levoai-tagger | grep "ConnectionRefusedError: [Errno 111] Connection
 
 If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries. Please contact support@levo.ai for further assistance.
 
+------------------------------------------------------------------------------------
 
+## Section: 2
+
+## Install on Docker using Shell Script
+
+### 1. Download Shell Script File
+Levo provides Shell Script file for the Satellite that can be installed via Docker.
+
+Download <DownloadShellScriptLink/> script file to your desktop.
+
+### 2. Install Satellite
+
+Permissions: Ensure the script has executable permissions.
+
+Otherwise, run the following command to add executable permissions.
+
+```bash
+chmod +x ./levo_satellite.sh
+```
+
+Set the following environment variables.
+
+```bash
+export LEVOAI_AUTH_KEY='Authorization Key'
+export LEVOAI_ORG_ID='Org ID'
+```
+
+:::info
+
+Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
+
+For example, if the satellite will be used with `app.india-1.levo.ai`, the installation command will be:
+
+```bash
+export LEVOAI_BASE_URL='https://api.india-1.levo.ai'
+```
+
+:::
+
+
+#### i. Start Levo Satellite
+
+Execute following command to start Levo satellite.
+
+```bash
+./levo_satellite.sh start
+```
+:::note
+
+If you are running the script with `sudo`, ensure that the environment variables are also set with `sudo`. Otherwise, the script will not have access to these variables.
+
+Alternatively, you can use the `-E` flag with `sudo` to preserve the user-defined environment variables, like this:
+```bash
+sudo -E ./levo_satellite.sh start
+```
+This ensures the script can access the required environment variables without explicitly redefining them under sudo.
+
+:::
+
+#### ii. Stop the Levo Satellite
+
+Execute following command to stop or uninstall Levo satellite components.
+
+```bash
+./levo_satellite.sh stop
+```
+
+#### iii. Restart the Levo Satellite
+
+To restart the Levo satellite components, execute the following command.
+
+```bash
+./levo_satellite.sh restart
+```
+
+#### iv. Upgrade the Levo Satellite
+
+Execute the following command to upgrade the existing satellite setup.
+
+Running this command will download the latest docker compose file and restarts all the satellite components.
+
+```bash
+./levo_satellite.sh upgrade
+```
+
+#### v. Share Satellite logs with Levo Support
+
+Execute the following command to collect logs from all Satellite components. This will create an archive as /tmp/levoai_satellite_logs_%date-time%.tar.gz
+
+```bash
+./levo_satellite.sh get-logs
+```
+-----------------------
+### Need Help?
+For further assistance, please reach out to [Levo.ai Support](mailto:support@levo.ai).
