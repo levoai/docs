@@ -22,12 +22,12 @@ show_start_usage() {
   echo "Starts the $CONTAINER_NAME with the provided environment variables."
   echo "Ensure the following environment variables are set:"
   echo "  LEVOAI_AUTH_KEY   Your Levo authentication key."
-  echo "  LEVO_ORG_ID       Your Levo organization ID."
+  echo "  LEVOAI_ORG_ID       Your Levo organization ID."
   echo "  LEVOAI_BASE_URL   (Optional) Levo Base URL. Default is '${DEFAULT_LEVOAI_BASE_URL}'."
   echo ""
   echo "Example:"
   echo "  export LEVOAI_AUTH_KEY='your-auth-key'"
-  echo "  export LEVO_ORG_ID='your-org-id'"
+  echo "  export LEVOAI_ORG_ID='your-org-id'"
   echo "  $0 start"
 }
 
@@ -60,6 +60,7 @@ start_container() {
   check_env_var "LEVOAI_ORG_ID"
 
   local base_url="${LEVOAI_BASE_URL:-$DEFAULT_LEVOAI_BASE_URL}"
+  echo "LEVOAI_BASE_URL: $base_url"
 
   echo "Starting the $CONTAINER_NAME..."
   mkdir -p $HOME/.config/configstore
@@ -72,10 +73,9 @@ start_container() {
     -v $PWD:/home/levo/work:rw \
     -e LOCAL_USER_ID=$(id -u) \
     -e LOCAL_GROUP_ID=$(id -g) \
-    -e LEVOAI_BASE_URL="${base_url}" \
+    -e LEVO_BASE_URL="${base_url}" \
+    -e LEVOAI_ORG_ID="${LEVOAI_ORG_ID}" \
     -e TERM=xterm-256color \
-    -e LEVOAI_AUTH_KEY="${LEVOAI_AUTH_KEY}" \
-    -e LEVO_ORG_ID="${LEVOAI_ORG_ID}" \
     -ti $IMAGE_NAME start --key "${LEVOAI_AUTH_KEY}" --organization "${LEVOAI_ORG_ID}"
 
   if [[ $? -eq 0 ]]; then
