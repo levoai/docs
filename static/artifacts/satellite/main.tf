@@ -56,12 +56,13 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
   family                   = "levoai-satellite"
   network_mode             = local.networking_mode
   requires_compatibilities = [local.compute]
-  cpu                   = "4096"
-  memory                = "8192"
+  cpu                      = "4096"
+  memory                   = "8192"
 
-  execution_role_arn    = aws_iam_role.terraform_ecs_execution_role.arn
+  execution_role_arn = aws_iam_role.this.arn
+  task_role_arn      = aws_iam_role.this.arn
 
-  container_definitions  = jsonencode([
+  container_definitions = jsonencode([
     {
       "name": "levoai-satellite",
       "image": "levoai/satellite",
@@ -105,8 +106,8 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
           "value": "docker-compose"
         },
         {
-            "name": "LEVOAI_CONF_OVERRIDES",
-            "value": "{\"onprem-api\": {\"url\": \"$${LEVOAI_BASE_URL}\", \"refresh-token\": \"$${LEVOAI_AUTH_KEY}\", \"org-id\": \"$${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"$${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"}}"
+          "name": "LEVOAI_CONF_OVERRIDES",
+          "value": "{\"onprem-api\": {\"url\": \"$${LEVOAI_BASE_URL}\", \"refresh-token\": \"$${LEVOAI_AUTH_KEY}\", \"org-id\": \"$${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"$${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"}}"
         },
         {
           "name": "LEVOAI_DEBUG_ENABLED",
@@ -158,7 +159,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
       "entryPoint": [],
       "command": [
         "-f",
-        "/usr/local/etc/haproxy/haproxy-ecs.cfg"
+        "/levo/haproxy-ecs.cfg"
       ],
       "environment": [],
       "environmentFiles": [],
@@ -207,8 +208,8 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
           "value": "docker-compose"
         },
         {
-        "name": "LEVOAI_CONF_OVERRIDES",
-        "value": "{\"onprem-api\":{\"url\": \"$${LEVOAI_BASE_URL}\",\"refresh-token\":\"$${LEVOAI_AUTH_KEY}\",\"org-id\": \"$${LEVOAI_ORG_ID}\",\"org-prefix\": \"$${LEVOAI_ORG_PREFIX}\"},\"url_clusterer_id_len\": 1,\"dynamic_url_threshold_factor\": 0.5,\"api_rule_evaluation\":{\"enabled\": true},\"traces_queue\":{\"type\": \"sqs\"}}"
+          "name": "LEVOAI_CONF_OVERRIDES",
+          "value": "{\"onprem-api\":{\"url\": \"$${LEVOAI_BASE_URL}\",\"refresh-token\":\"$${LEVOAI_AUTH_KEY}\",\"org-id\": \"$${LEVOAI_ORG_ID}\",\"org-prefix\": \"$${LEVOAI_ORG_PREFIX}\"},\"url_clusterer_id_len\": 1,\"dynamic_url_threshold_factor\": 0.5,\"api_rule_evaluation\":{\"enabled\": true},\"traces_queue\":{\"type\": \"sqs\"}}"
         },
         {
           "name": "PI_DETECTOR_DATA_DIR",
@@ -272,6 +273,16 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
           "awslogs-region": var.region,
           "awslogs-stream-prefix": "ecs"
         }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "curl -f http://localhost:13133/ || exit 1"
+        ],
+        "interval": 30,
+        "timeout": 5,
+        "retries": 3,
+        "startPeriod": 10
       }
     },
     {
@@ -332,8 +343,8 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
   ])
 }
 
-resource "aws_iam_role" "terraform_ecs_execution_role" {
-  name_prefix = "ecs_execution_role"
+resource "aws_iam_role" "this" {
+  name = "levoai-satellite-ecs-role"
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -345,4 +356,28 @@ resource "aws_iam_role" "terraform_ecs_execution_role" {
       },
     }],
   })
+}
+
+resource "aws_iam_policy" "this" {
+  name   = "levoai-satellite-policy"
+  description = "IAM policy for ECS task to allow logging and SQS access"
+
+  policy = jsonencode({
+	Version = "2012-10-17",
+	Statement = [{
+        Effect = "Allow",
+        Action = [
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
+          "logs:DescribeLogStreams",
+          "sqs:*"
+        ],
+        Resource = "*"
+    }],
+  })
+}
+
+resource "aws_iam_role_policy_attachment" "this" {
+  role       = aws_iam_role.this.name
+  policy_arn = aws_iam_policy.this.arn
 }
