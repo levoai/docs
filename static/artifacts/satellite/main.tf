@@ -65,7 +65,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
   container_definitions = jsonencode([
     {
       "name": "levoai-satellite",
-      "image": "levoai/satellite",
+      "image": "levoai/satellite:stable",
       "cpu": 0,
       "portMappings": [
         {
@@ -144,7 +144,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
     },
     {
       "name": "levoai-haproxy",
-      "image": "levoai/haproxy",
+      "image": "levoai/haproxy:latest",
       "cpu": 0,
       "portMappings": [
         {
@@ -179,7 +179,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
     },
     {
       "name": "levoai-tagger",
-      "image": "levoai/satellite",
+      "image": "levoai/satellite:stable",
       "cpu": 0,
       "portMappings": [],
       "essential": true,
@@ -250,13 +250,27 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
     },
     {
       "name": "levoai-collector",
-      "image": "levoai/collector",
+      "image": "levoai/collector:stable",
       "cpu": 0,
       "portMappings": [
         {
           "name": "levoai-collector-4317-tcp",
           "containerPort": 4317,
           "hostPort": 4317,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        },
+        {
+          "name": "levoai-collector-4318-tcp",
+          "containerPort": 4318,
+          "hostPort": 4318,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        },
+        {
+          "name": "levoai-collector-13133-tcp",
+          "containerPort": 13133,
+          "hostPort": 13133,
           "protocol": "tcp",
           "appProtocol": "http"
         }
@@ -277,7 +291,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
       "healthCheck": {
         "command": [
           "CMD-SHELL",
-          "curl -f http://localhost:13133/ || exit 1"
+          "curl -f http://0.0.0.0:13133/ || exit 1"
         ],
         "interval": 30,
         "timeout": 5,
@@ -287,7 +301,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
     },
     {
       "name": "levoai-ion",
-      "image": "levoai/satellite",
+      "image": "levoai/satellite:stable",
       "cpu": 0,
       "portMappings": [],
       "essential": true,
