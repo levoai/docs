@@ -4,9 +4,9 @@ description: Set up Levo.ai Satellite on Docker. Follow our detailed guide for i
 ---
 # Satellite via Docker
 
-## Section: 1
-
 import BrowserOnly from '@docusaurus/BrowserOnly';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
 export function DownloadDockerComposeLink() {
     return (
@@ -35,9 +35,21 @@ export function DownloadShellScriptLink() {
 - At least 4 CPUs
 - At least 8 GB RAM
 
+<Tabs
+    defaultValue="docker"
+    values={[
+        { label: 'Install using Docker compose', value: 'docker', },
+        { label: 'Install using Shell Script', value: 'sh', },
+    ]}
+    groupId="env"
+>
+<TabItem value="docker">
+
 ### 1. Download Docker Compose file
 Levo provides pre-built Docker images for the Satellite that can be installed via Docker Compose.
 <DownloadDockerComposeLink/> the Docker Compose file to your desktop.
+
+<p></p>
 
 ### 2. Install Satellite
 Execute the following from the directory where the Docker Compose file was downloaded.
@@ -197,11 +209,9 @@ docker logs levoai-tagger | grep "ConnectionRefusedError: [Errno 111] Connection
 
 If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries. Please contact support@levo.ai for further assistance.
 
-------------------------------------------------------------------------------------
+</TabItem>
 
-## Section: 2
-
-## Install on Docker using Shell Script
+<TabItem value="sh">
 
 ### 1. Download Shell Script File
 Levo provides Shell Script file for the Satellite that can be installed via Docker.
@@ -237,8 +247,7 @@ export LEVOAI_BASE_URL='https://api.india-1.levo.ai'
 
 :::
 
-
-#### i. Start Levo Satellite
+#### a. Start Levo Satellite
 
 Execute following command to start Levo satellite.
 
@@ -257,7 +266,7 @@ This ensures the script can access the required environment variables without ex
 
 :::
 
-#### ii. Stop the Levo Satellite
+#### b. Stop the Levo Satellite
 
 Execute following command to stop or uninstall Levo satellite components.
 
@@ -265,7 +274,7 @@ Execute following command to stop or uninstall Levo satellite components.
 ./levo_satellite.sh stop
 ```
 
-#### iii. Restart the Levo Satellite
+#### c. Restart the Levo Satellite
 
 To restart the Levo satellite components, execute the following command.
 
@@ -273,7 +282,7 @@ To restart the Levo satellite components, execute the following command.
 ./levo_satellite.sh restart
 ```
 
-#### iv. Upgrade the Levo Satellite
+#### d. Upgrade the Levo Satellite
 
 Execute the following command to upgrade the existing satellite setup.
 
@@ -283,13 +292,18 @@ Running this command will download the latest docker compose file and restarts a
 ./levo_satellite.sh upgrade
 ```
 
-#### v. Share Satellite logs with Levo Support
+#### e. Share Satellite logs with Levo Support
 
 Execute the following command to collect logs from all Satellite components. This will create an archive as /tmp/levoai_satellite_logs_%date-time%.tar.gz
 
 ```bash
 ./levo_satellite.sh get-logs
 ```
------------------------
+</TabItem>
+
+</Tabs>
+
+-------------------------------
+
 ### Need Help?
 For further assistance, please reach out to [Levo.ai Support](mailto:support@levo.ai).
