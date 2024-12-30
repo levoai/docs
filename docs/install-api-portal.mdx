@@ -59,12 +59,13 @@ docker run --rm --name=levoai-api-portal \
 -p 8080:8080 levoai/api-portal:latest
 ```
 
-- Navigate to `http://localhost:8080` to view the API docs.
+> ##### **_NOTE:_**
+> ##### * If user is part of multiple orgs, you would have to add `-e LEVO_ORG_ID='<LEVO_ORG_ID>` otherwise optional.
+> ##### * If you are running for an app from Levo's India Saas instance, add this environment variable `-e LEVO_BASE_URL='https://api.india-1.levo.ai'`.
 
-Note:
-* If user is part of multiple orgs, you would have to add `-e LEVO_ORG_ID='<LEVO_ORG_ID>'` otherwise optional.
-* If you are running for an app from Levo's India Saas instance, add this environment variable `-e LEVO_BASE_URL='https://api.india-1.levo.ai'`.
+<br/>
 
+- Navigate to `http://localhost:8000` to view the API docs.
 
 
 ### Install via Helm Chart
@@ -87,7 +88,13 @@ helm install levoai-api-portal levoai/levoai-api-portal \
 --set levoOrgId="your_org_id"
 ```
 
-- Port forward and navigate to `http://localhost:8080` to view the API docs.
+> ##### **_NOTE:_**
+> ##### * If user is part of multiple orgs, you would have to add `-e LEVO_ORG_ID='<LEVO_ORG_ID>'` otherwise optional.
+> ##### * If you are running for an app from Levo's India Saas instance, add this environment variable `-e LEVO_BASE_URL='https://api.india-1.levo.ai'`.
+
+<br/>
+
+- Port forward and navigate to `http://localhost:8000` to view the API docs or setup LoadBalancer as per your requirements.
 
 ```bash
 kubectl port-forward services/levoai-api-portal 8080:80
