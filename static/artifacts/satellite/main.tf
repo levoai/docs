@@ -287,16 +287,6 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
           "awslogs-region": var.region,
           "awslogs-stream-prefix": "ecs"
         }
-      },
-      "healthCheck": {
-        "command": [
-          "CMD-SHELL",
-          "curl -f http://0.0.0.0:13133 || exit 1"
-        ],
-        "interval": 30,
-        "timeout": 5,
-        "retries": 3,
-        "startPeriod": 10
       }
     },
     {
