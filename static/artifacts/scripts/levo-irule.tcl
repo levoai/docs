@@ -42,7 +42,6 @@ when HTTP_REQUEST  {
     incr requestId
 
     set request_time [clock clicks -milliseconds]
-    set reqHeaderString "${static::request_header_start}"
     set json_req_header_names_list "\["
     set json_req_header_values_list "\["
     set contentTypeHeaderValue ""
@@ -52,10 +51,7 @@ when HTTP_REQUEST  {
         set contentTypeHeaderValue [HTTP::header value $aHeader]
       }
       set lwcasekey [string map -nocase {"\"" "\\\""}[string tolower $aHeader]]
-      set value [string map -nocase {"\"" "\\\""} [HTTP::header value $aHeader]]
-      
-      set headers "${static::header_name}${lwcasekey}${static::header_value}${value}"
-      append reqHeaderString $headers
+      set value [HTTP::header value $aHeader]
       
       if {$is_first} {
         append json_req_header_names_list "\"$lwcasekey\""
@@ -69,8 +65,6 @@ when HTTP_REQUEST  {
     append json_req_header_names_list "\]"
     append json_req_header_values_list "\]"
     
-    
-    append reqHeaderString ${static::request_header_end}
     set uri [HTTP::uri]
     set method [HTTP::method]
     set queryString [HTTP::query]
@@ -112,7 +106,7 @@ when HTTP_RESPONSE  {
         set contentTypeHeaderValue [HTTP::header value $aHeader]
       }
       set lwcasekey [string map -nocase {"\"" "\\\""}[string tolower $aHeader]]
-      set value [string map -nocase {"\"" "\\\""} [HTTP::header value $aHeader]]
+      set value [HTTP::header value $aHeader]
       
       if {$is_first} {
         append json_res_header_names_list "\"$lwcasekey\""
