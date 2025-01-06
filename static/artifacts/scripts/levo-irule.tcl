@@ -19,7 +19,8 @@ set static::capturable_content_types {json xml x-www-form-urlencoded}
 # Levo.ai's Collector details
 set static::collector_host_ip "<collector-host-ip>"
 set static::collector_host_port "<collector-host-port>"
-set static::collector_uri "/v1/f5-ltm-logs"  # Do not modify
+# Do not modify
+set static::collector_uri "/v1/f5-ltm-logs"
 
 }
 
