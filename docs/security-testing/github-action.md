@@ -1,5 +1,5 @@
 ---
-sidebar_position: 2
+sidebar_position: 3
 ---
 
 # GitHub Action
@@ -150,4 +150,3 @@ outputs:
   failed:
     description: '# of failed test cases'
 ```
-

@@ -42,7 +42,67 @@ By leveraging Levo's API Portal, developers can gain deep insights into their AP
 
 ## Installation
 
-### Creating a Task Definition in your AWS Account using Terraform.
+### Install via Docker
+
+#### Pre-requisites
+- Docker Engine version `18.03.0` and above.
+- Get the refresh token from the Levo App User Profile page.
+
+
+#### Installation Steps
+
+- Run the following command to install the API Portal Docker container.
+
+```bash
+docker run --rm --name=levoai-api-portal \
+-e REFRESH_TOKEN='<REFRESH_TOKEN>' -e LEVO_ORG_ID='<LEVO_ORG_ID>' \
+-p 8080:8080 levoai/api-portal:latest
+```
+
+> ##### **_NOTE:_**
+> ##### * If user is part of multiple orgs, you would have to add `-e LEVO_ORG_ID='<LEVO_ORG_ID>` otherwise optional.
+> ##### * If you are running for an app from Levo's India Saas instance, add this environment variable `-e LEVO_BASE_URL='https://api.india-1.levo.ai'`.
+
+<br/>
+
+- Navigate to `http://localhost:8000` to view the API docs.
+
+
+### Install via Helm Chart
+
+#### Pre-requisites
+- Get the refresh token from the Levo App User Profile page.
+
+#### Installation Steps
+- Add Levo Helm repo
+
+```bash
+helm repo add levoai https://charts.levo.ai && helm repo update levoai
+```
+
+- Run following command to install the API Portal Helm Chart
+
+```bash
+helm install levoai-api-portal levoai/levoai-api-portal \
+--set levoAuthKey="your_auth_key" \
+--set levoOrgId="your_org_id"
+```
+
+> ##### **_NOTE:_**
+> ##### * If user is part of multiple orgs, you would have to add `-e LEVO_ORG_ID='<LEVO_ORG_ID>'` otherwise optional.
+> ##### * If you are running for an app from Levo's India Saas instance, add this environment variable `-e LEVO_BASE_URL='https://api.india-1.levo.ai'`.
+
+<br/>
+
+- Port forward and navigate to `http://localhost:8000` to view the API docs or setup LoadBalancer as per your requirements.
+
+```bash
+kubectl port-forward services/levoai-api-portal 8080:80
+```
+
+### Install via Terraform
+
+#### Creating a Task Definition in your AWS Account using Terraform.
 
 Download the <DownloadMainTF/> file.
 

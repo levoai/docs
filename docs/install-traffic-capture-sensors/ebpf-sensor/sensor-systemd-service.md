@@ -6,51 +6,26 @@ sidebar_position: 6
 
 ## Running the Sensor as a Systemd Service {#running-sensor-systemd}
 
-### 1. Configure Satellite Address
-The Satellite (collector) address is configured in `/etc/levo/sensor/config.yaml`.
+### Configure Satellite Address, Organization-Id and Environment
 
-#### NOTE:
-The default address for the collector in Systemd installations is `https://collector.levo.ai`.
-This address assumes that Levo is hosting the Satellite for you, and you must also specify an organization ID (`organization-id`) via the config file.
-If you wish, you may also host the Satellite yourself and specify the address of the collector in the self-hosted Satellite to direct the Sensor's traffic to it.
+The Satellite address is configured in `/etc/default/levo-ebpf-sensor`. The default Satellite URL is `https://collector.levo.ai`.
 
+Edit `/etc/default/levo-ebpf-sensor`, set the `LEVO_SATELLITE_URL` variable to the desired `host:port` value,
+and set the `LEVO_ORG_ID` to the Organization ID fetched from the Levo Dashboard.
+Set `LEVO_ENV` to the desired environment name in which you wish to see you applications on the Levo Dashboard.
 
-Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satellite Settings) to the address noted from the Satellite install.
-
-```yaml
+```bash
 ...
-# --------------------------------------------------------------------------------------------
-# Satellite Settings:
-# --------------------------------------------------------------------------------------------
-
-# Levo Organization ID. This must be specified when the collector is hosted by Levo.
-# organization-id: ""
-
-# host:port for the collector service receiving the Sensor's API traces.
-collector-endpoint: <Use the default (https://collector.levo.ai) or set to a custom address>
-env: <Your application environment eg. dev, staging, prod etc.>
+LEVO_ENV="your-env"
+LEVO_SATELLITE_URL="your-satellite-url"
+LEVO_ORG_ID="your-org-id"
 ...
 ```
-**Note**: If you change the Satellite address later, you have to restart the Sensor, since it's not a hot property.
 
-### 2. Configure Application Name
-The `Application Name` is configured in `/etc/levo/sensor/config.yaml`.
+Additional sensor configs are present in the file `/etc/levo/sensor/config.yaml`
 
-Edit `/etc/levo/sensor/config.yaml`, and set `default-service-name` to the `Application Name` chosen earlier.
 
-```yaml
-# --------------------------------------------------------------------------------------------
-# Default Application Name:
-#
-# Auto discovered API endpoints and their OpenAPI specifications are show in the API Catalog
-# grouped under this application name. The application name helps segregate and group API
-# endpoints from different environments.
-# --------------------------------------------------------------------------------------------
-#
-default-service-name: <'Application Name' chosen earlier>
-# --------------------------------------------------------------------------------------------
-```
-**Note**: If you change the `Application Name` later, you have to restart the Sensor, since it's not a hot property.
+**A Sensor *restart* is required for the config changes to take effect.**
 
 
 ### 3. Start the Sensor

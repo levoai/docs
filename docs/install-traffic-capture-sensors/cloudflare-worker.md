@@ -1,5 +1,6 @@
 ---
-sidebar_position: 3
+sidebar_position: 4
+description: Deploy Levo.ai PCAP sensor on Cloudflare Worker. Follow our detailed guide to set up and configure for enhanced API traffic capture and analysis.
 ---
 
 # Cloudflare Worker
@@ -13,15 +14,6 @@ sidebar_position: 3
 
 ### Using the CLI
 
-Before proceeding, ensure that you have Wrangler installed and authenticated.
-
-```shell
-# Install wrangler
-npm install --global wrangler
-# Authenticate with Cloudflare
-wrangler login
-```
-
 Follow the steps below to deploy the worker to your account.  
 You can obtain your organization's ID from https://app.levo.ai/settings/organizations or by
 clicking on your profile picture in Levo's dashboard, and navigating to `User Settings -> Organizations`.
@@ -31,10 +23,14 @@ clicking on your profile picture in Levo's dashboard, and navigating to `User Se
 git clone https://github.com/levoai/cf-worker.git
 # cd into the repository
 cd cf-worker
+# Install all dependencies
+yarn
+# Authenticate with Cloudflare
+npx wrangler login
 # Deploy the worker
-wrangler deploy
+npx wrangler deploy
 # Add your organization ID as a secret
-echo <VALUE> | wrangler secret put LEVO_ORG_ID
+echo <VALUE> | npx wrangler secret put LEVO_ORG_ID
 ```
 
 That's it! The worker has been added to your Cloudflare account.
@@ -48,3 +44,34 @@ Check the [repository's README](https://github.com/levoai/cf-worker/blob/main/RE
 ## Configuring Websites to use the Worker
 
 Follow the instructions in the [Cloudflare Docs](https://developers.cloudflare.com/workers/configuration/routing/routes/#set-up-a-route).
+
+:::caution
+When adding a worker route, ensure that the failure mode is set to "Fail open" to allow requests to bypass the worker in case of unexpected errors
+or if the [daily request limit](https://developers.cloudflare.com/workers/platform/limits/#daily-request) runs out.
+:::
+
+<img
+  src={require('../assets/cf-worker-route.png').default}
+  alt="Adding a Cloudflare Worker route"
+  style={{ display: 'block', margin: 'auto', paddingTop: '24px'}}
+/>
+
+
+### Troubleshooting wrangler login
+
+If you encounter an error while running `npx wrangler login`, make sure you have the latest version of Node.js installed. 
+
+- Running above command should open a browser window where you can log in to your Cloudflare account.
+- Once you have logged in successfully, you should be prompted with a consent form to allow Wrangler to access your Cloudflare account.
+
+![](../assets/cloudflare/Wrangler_consentform.png)
+
+- After you click on `Allow`, you will be redirected to a page with a success message.
+
+![](../assets/cloudflare/Wrangler_access_granted.png)
+
+- Now you can close the browser window and return to your terminal where you should see a success message.
+
+
+### Need Help?
+For further assistance, please reach out to [Levo.ai Support](mailto:support@levo.ai).

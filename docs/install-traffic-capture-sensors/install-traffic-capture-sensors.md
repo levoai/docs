@@ -21,6 +21,22 @@ You should install the pcap sensor if:
 
 [**Click here for the installation instructions**](/install-traffic-capture-sensors/pcap-sensor).
 
+## AWS Fargate Sensor
+To install AWS Fargate sensor:
+
+> **_NOTE:_**  You need to have the satellite installed to configure the sensor to point to it. If you haven't done it already, head over to [Install Satellite ](/install-satellite)
+Make sure the satellite is able to listen on port `9999`
+Edit Inbound Rules to accept port `9999` in case the satellite is running on an AWS instance.
+
+[**Click here for the installation instructions**](/install-traffic-capture-sensors/sensor-fargate).
+
+## Windows Sensor
+You should install the windows sensor if:
+
+- Your application workloads are deployed on a windows Servers compute architecture.
+
+[**Click here for the installation instructions**](/install-traffic-capture-sensors/windows-sensor).
+
 ## AWS Traffic Mirroring
 Use this if you want to use traffic mirroring to instrument your application workloads.
 
@@ -41,6 +57,14 @@ You may install Levo's CloudFront Lambda@Edge functions if:
 Note that CloudFront does not provide access to the API endpoint response bodies.
 
 [**Click here for the installation instructions**](/install-traffic-capture-sensors/aws-cloudfront).
+
+## AWS API Gateway
+
+You may instrument your AWS API Gateway endpoints with CloudWatch Logs.
+
+However, CloudWatch only provides endpoints access logs and API endpoint request and response bodies will not be available.
+
+[**Click here for the installation instructions**](/install-traffic-capture-sensors/aws-api-gateway).
 
 ## Azure API Management Policy
 You should install Levo's Azure API Management policy if:

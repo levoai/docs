@@ -1,5 +1,6 @@
 ---
 sidebar_position: 4
+title: "API A4 - Rate Limits & Resource Controls | Levo.ai"
 ---
 
 # API A4 - Lack of Resources and Rate Limits

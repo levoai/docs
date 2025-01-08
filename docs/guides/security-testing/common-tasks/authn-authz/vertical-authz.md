@@ -1,5 +1,6 @@
 ---
 sidebar_position: 5
+title: "Secure Your APIs: Implement Robust Vertical AuthZ Testing"
 ---
 
 # Providing Authorization Information for `Vertical Authorization Abuse` Test Cases

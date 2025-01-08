@@ -1,5 +1,5 @@
 ---
-sidebar_position: 5
+sidebar_position: 3
 ---
 
 # Sensor on MacOS
@@ -108,6 +108,14 @@ The following environment variables can be configured to modify the behavior of 
 - **LEVOAI_LOG_LEVEL**
     - *Description:* Set the log level (e.g., "INFO").
     - *Default:* "INFO"
+
+- **ENABLE_LOG_PARSER**
+    - *Description:* Enable or disable the log parser.
+    - *Default:* true
+
+- **LEVOAI_BASE_URL**
+    - *Description:* Set the base URL for the Levo.ai Platform API.
+    - *Default:* "https://api.levo.ai"
 
 - **APP_NAME**
     - *Description:* Set the application name.

@@ -78,7 +78,6 @@ Sensors running on Kubernetes have an additional section called `Kubernetes Pod 
 # if the service name meta data in unavailable.
 #
 default-service-name: my-api-application
-env: staging
 # --------------------------------------------------------------------------------------------
 
 
@@ -93,7 +92,7 @@ env: staging
 collector-grpc-transport: true
 
 # host:port for the collector service receiving the Sensor's API traces and metrics.
-collector-endpoint: https://collector.levo.ai
+satellite-url: https://collector.levo.ai
 
 # --------------------------------------------------------------------------------------------
 
@@ -324,7 +323,8 @@ sudo docker run --restart unless-stopped \
   --privileged --detach \
   levoai/ebpf_sensor:latest \
   --host-proc-path /host/proc \
-  --collector-endpoint <hostname|IP:port> \
+  --satellite-url <hostname|IP:port> \
+  --organization-id <OrgID> \
   --default-service-name <'Application Name' chosen earlier>
 ```
 Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.

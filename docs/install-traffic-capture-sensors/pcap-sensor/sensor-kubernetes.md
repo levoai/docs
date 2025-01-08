@@ -1,5 +1,6 @@
 ---
-sidebar_position: 3
+sidebar_position: 2
+title: Install PCAP Sensor on Kubernetes | Levo.ai Documentation
 ---
 
 # Sensor on Kubernetes
@@ -12,9 +13,9 @@ sidebar_position: 3
 -   The Kubernetes cluster API endpoint should be reachable from the machine you are running Helm.
 -   `kubectl`  access to the cluster, with  `cluster-admin`  permissions.
 
-### 1. Install levoai helm repo
+### 1. Add levoai helm repo
 ```
-helm repo add levoai https://charts.levo.ai && helm repo update
+helm repo add levoai https://charts.levo.ai && helm repo update levoai
 ```
 
 ### 2. Create levoai namespace and install pcap-sensor
@@ -30,7 +31,7 @@ helm upgrade levoai-pcap-sensor levoai/levoai-pcap-sensor \
   --create-namespace \
   --set sensor.config.levoaiOrgId="your Levo Org ID" \
   --set sensor.config.satelliteUrl="http(s)://hostname|IP:port"
-  --set sensor.confg.levoEnv="your application environment (staging, production etc.)"
+  --set sensor.config.levoEnv="your application environment (staging, production etc.)"
 ```
 
 Set additional configs
@@ -43,4 +44,9 @@ sensor.config.pathAllow="path allow regex"
 sensor.config.hostExclusions="host exclusion regex"
 sensor.config.pathExclusions="path exclusion regex"
 ```
+
+### 3. Configuring sensor as per memory and CPU resource limits
+
+- For normal/average case use the default config
+- For strict resources, use the [Low resource helm values file](../../../static/artifacts/pcap-sensor/low_resource_values.yaml)
 

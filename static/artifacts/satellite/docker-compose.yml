@@ -1,4 +1,3 @@
-version: "3.9"
 services:
   levoai-rabbitmq:
     image: 'rabbitmq:3.12.8-management'
@@ -18,13 +17,25 @@ services:
       RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD:-levoailevoai}
       # send logs to stdout, ref: https://www.rabbitmq.com/logging.html#log-file-location
       RABBITMQ_LOGS: '-'
+      RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS: "-rabbit consumer_timeout 600000"
     command: >
       bash -c "mkdir -p /opt/rabbitmq/resources &&
       openssl req -x509 -nodes -newkey rsa:4096 -subj "/C=IN/ST=Telangana/L=Hyderabad/O=Levo.ai/OU=Security/CN=localhost:5671" -keyout /opt/rabbitmq/resources/ca.key -out /opt/rabbitmq/resources/ca.crt -days 365000 &&
       openssl req -nodes -new -newkey rsa:4096 -subj  "/C=IN/ST=Telangana/L=Hyderabad/O=Levo.ai/OU=Security/CN=localhost:5671"  -keyout /opt/rabbitmq/resources/server.key -out /opt/rabbitmq/resources/server.csr -days 365000 &&
       openssl x509 -req -in /opt/rabbitmq/resources/server.csr -CA /opt/rabbitmq/resources/ca.crt -CAkey /opt/rabbitmq/resources/ca.key -CAcreateserial -out /opt/rabbitmq/resources/server.crt -days 365000 &&
       chmod -R 755 /opt/rabbitmq/resources &&
-      echo -e 'listeners.tcp = none\\nlisteners.ssl.default = 5671\\nssl_options.cacertfile = /opt/rabbitmq/resources/ca.crt\\nssl_options.certfile = /opt/rabbitmq/resources/server.crt\\nssl_options.keyfile = /opt/rabbitmq/resources/server.key\\nssl_options.verify = verify_none' > /etc/rabbitmq/rabbitmq.conf &&
+      echo '
+            heartbeat = 600
+            listeners.tcp.1 = 0.0.0.0:5672
+            listeners.ssl.default = 5671
+            tcp_listen_options.keepalive = true
+            tcp_listen_options.nodelay = true
+            tcp_listen_options.send_timeout = 120000
+            ssl_options.cacertfile = /opt/rabbitmq/resources/ca.crt
+            ssl_options.certfile = /opt/rabbitmq/resources/server.crt
+            ssl_options.keyfile = /opt/rabbitmq/resources/server.key
+            ssl_options.verify = verify_none
+      ' > /etc/rabbitmq/rabbitmq.conf &&
       /usr/local/bin/docker-entrypoint.sh rabbitmq-server"
     deploy:
       resources:
@@ -49,7 +60,7 @@ services:
       - "--worker-tmp-dir"
       - "/dev/shm"
       - "--worker-class"
-      - "gevent"
+      - "uvicorn.workers.UvicornWorker"
       - "--worker-connections"
       - "500"
       - "levoai_e7s.satellite.satellite:create_server()"
@@ -59,7 +70,18 @@ services:
       LEVOAI_DEBUG_SERVER_HOST: ${LEVOAI_DEBUG_SERVER_HOST:-host.docker.internal}
       LEVOAI_MODE: docker-compose
       LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
-      LEVOAI_CONF_OVERRIDES: '{"onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}", "refresh-token": "${LEVOAI_AUTH_KEY}", "org-id": "${LEVOAI_ORG_ID:-}", "org-prefix": "${LEVOAI_ORG_PREFIX:-}"}}'
+      LEVOAI_CONF_OVERRIDES: >
+        {
+          "onprem-api": {
+            "url": "${LEVOAI_BASE_URL:-https://api.levo.ai}",
+            "refresh-token": "${LEVOAI_AUTH_KEY}",
+            "org-id": "${LEVOAI_ORG_ID:-}",
+            "org-prefix": "${LEVOAI_ORG_PREFIX:-}"
+          },
+          "rabbitmq": {
+            "use_ssl": ${LEVOAI_ENABLE_RMQ_SSL:-false}
+          }
+        }
     depends_on:
       levoai-rabbitmq:
         condition: service_healthy
@@ -91,27 +113,15 @@ services:
           "onprem-api": {"url": "${LEVOAI_BASE_URL:-https://api.levo.ai}",
           "refresh-token": "${LEVOAI_AUTH_KEY}", "org-id": "${LEVOAI_ORG_ID:-}",
           "org-prefix": "${LEVOAI_ORG_PREFIX:-}"},
-          "url_clusterer_id_len": "${LEVOAI_URL_CLUSTERER_ID_LEN:-1}",
-          "min_urls_required_per_pattern": "${LEVOAI_MIN_URLS_PER_PATTERN:-10}",
           "dynamic_url_threshold_factor": "${DYNAMIC_URL_THRESHOLD_FACTOR:-0.5}",
-          "cookie_auth_keys": "${LEVOAI_COOKIE_AUTH_KEYS:-}",
           "disable_ml_detector": "${LEVOAI_DISABLE_ML_DETECTOR:-true}",
-          "service_naming": {"strategies": "KUBERNETES_METADATA,HOST_HEADER,DEFAULT"},
-          "user_resolvers": [],
-          "sample_collection": {
-              "enabled": "${LEVOAI_SEND_SAMPLE_PAYLOADS:-False}",
-              "max_samples_per_end_point": "${MAX_SAMPLES_PER_END_POINT:-2}",
-              "users": []
-          },
-          "tagger_batch_interval_minutes": ${LEVOAI_TAGGER_INTERVAL:-5},
           "api_rule_evaluation": {
               "enabled": "${LEVOAI_EVALUATE_API_RULES:-True}"
           },
-          "ion": {
-            "url": "${LEVOAI_ION_URL:-http://levoai-ion:8000}"
-          },
           "enable_ssl_cert_checks": "${LEVOAI_ENABLE_SSL_CERT_CHECKS:-True}",
-          "sensitive_data_config": []
+          "rabbitmq": {
+            "use_ssl": ${LEVOAI_ENABLE_RMQ_SSL:-false}
+          }
         }
     depends_on:
       levoai-rabbitmq:
@@ -143,10 +153,43 @@ services:
           memory: '${LEVOAI_COLLECTOR_MEM_REQ:-256m}'
 
   levoai-ion:
-    image: 'levoai/ion:latest'
+    image: 'levoai/satellite:${LEVOAI_SATELLITE_VERSION:-stable}'
     container_name: levoai-ion
     restart: always
-    expose:
-      - '8000'
-    # volumes:
-    #  - ./path/to/rules:/etc/ion/rules/custom
+    entrypoint:
+      - 'python'
+      - '-OO'
+      - /opt/levoai/e7s/src/python/levoai_ion/ion_server.py
+    depends_on:
+      levoai-rabbitmq:
+        condition: service_healthy
+    environment:
+      LEVOAI_MODE: docker-compose
+      LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
+      LEVOAI_CONF_OVERRIDES: >
+        {
+          "onprem-api": {
+              "url": "${LEVOAI_BASE_URL:-https://api.levo.ai}",
+              "refresh-token": "${LEVOAI_AUTH_KEY}",
+              "org-id": "${LEVOAI_ORG_ID:-}",
+              "org-prefix": "${LEVOAI_ORG_PREFIX:-}"
+          }
+        }
+
+  levoai-haproxy:
+    image: "levoai/haproxy:${LEVOAI_HAPROXY_VERSION:-latest}"
+    container_name: levoai-haproxy
+    restart: always
+    depends_on:
+      - levoai-collector
+      - levoai-satellite
+    ports:
+      - '80:8080'
+    environment:
+      LEVOAI_SATELLITE_AUTHN_ENABLED: ${LEVOAI_SATELLITE_AUTHN_ENABLED:-false}
+      LEVOAI_CONF_OVERRIDES: >
+        {
+          "onprem-api": {
+              "org-id": "${LEVOAI_ORG_ID:-}",
+          }
+        }

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: Jira Integration Guide
 ---
 
 # Jira
@@ -9,8 +10,8 @@ sidebar_position: 1
 This integration allows JIRA tickets to be created/viewed directly from Test Run failures reported by Levo. Below are links to common tasks.
 
 - [Add JIRA Integration](#add-jira-integration)
-- [Creating JIRA Tickets From Test Run Failures](#creating-jira-tickets-from-test-run-failures)
-- [Viewing Linked JIRA Tickets From Test Run Failures](#viewing-linked-jira-tickets-from-test-run-failures)
+- [Creating JIRA Tickets From Vulnerability Page](#creating-jira-tickets-from-vulnerability-page)
+- [Assign / Unassign JIRA Tickets From Vulnerability Page](#assign--unassign-jira-tickets-from-vulnerability-page)
 
 ### Add JIRA Integration
 

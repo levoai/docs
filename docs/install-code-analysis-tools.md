@@ -1,5 +1,6 @@
 ---
 sidebar_position: 6
+description: Install Levo.ai code analysis tools with our comprehensive guide. Enhance your API security with easy setup and detailed instructions.
 ---
 
 # Install Code Analysis Tools
@@ -33,9 +34,11 @@ sidebar_position: 6
     levo scan code \
         --dir <relative path to directory you wish to scan> \
         --app-name <name of the app you wish to see on Dashboard> \
-        --env-name <the environment to which your app should belong>
+        --env-name <the environment to which your app should belong> \
+        --language <programmming language used in repository, default is java>
     ```
 - In the `--dir` option, you can specify the relative subdirectory path (`./path/to/sub-directory`) if you want to scan only a part of the project, or simply DOT (`.`) for the current directory.
+- Use the `--help` option to know the list of available options
 - If there are REST endpoints in the code, they will be imported to the Levo Dashboard, under the given app-name.
 
 
@@ -57,8 +60,59 @@ sidebar_position: 6
         --env-name <the environment to which your app should belong>
     ```
 - In the `--dir` option, you can specify the relative subdirectory path (`./path/to/sub-directory`) if you want to scan only a part of the project, or simply DOT (`.`) for the current directory.
+- Use the `--help` option to know the list of available options
 - If there are OpenAPI/Swagger specs in the project directory, they will be imported to Levo Dashboard.
 - The App Name will be the same as the title of the OpenAPI/Swagger spec.
+
+
+### Github Action
+
+#### Prerequisites
+- An account on Levo.ai
+- An application code repository on GitHub (Currently Java and Python is supported)
+
+#### Action Configuration
+The pre-built action for executing `Scan Code` requires the following configuration settings:
+
+- `authorization-key` : Specify your CLI authorization key here. Refer to [Generating CLI Authorization Keys](/integrations/common-tasks.md#generating-cli-authorization-keys) for instructions on fetching your key
+
+- `organization-id` : Specify your *Organization ID* here. Refer to [Accessing Organization IDs](/integrations/common-tasks.md#accessing-organization-ids) for instructions on fetching your ID
+ 
+- `saas-url` : The URL of the Levo SaaS instance. Default value is `https://api.levo.ai`. For India, use `https://api.india-1.levo.ai`.
+
+- `app-name` : The name of the application you want to see on the Levo Dashboard
+
+- `env-name` : This is an **OPTIONAL** setting. The environment to which your app should belong. Default value is `staging`.
+
+Here is a sample *Scan Code Action* with its configuration:
+
+```YAML
+- name: Levo Scan Repo
+  uses: levoai/actions/scan@v2.3.0
+  with:
+    # Authorization key required to execute the Levo CLI. Please refer to https://app.levo.ai/settings/keys to get your authorization key.
+    authorization-key: <'Specify your CLI authorization key here'>
+
+    # The ID of your organization in Levo dashboard. Please refer to https://app.levo.ai/settings/organization to get your organization id.
+    organization-id: <'Specify your organization ID here'>
+
+    # [OPTIONAL] The environment to which your app should belong. Default: staging.
+    saas-url: "https://api.dev.levo.ai"
+
+    # The name of the application you want to see on the Levo Dashboard.
+    app-name: <'Application Name here'>
+
+    # [OPTIONAL] The environment to which your app should belong. Default: staging.
+    env-name: <'Environment Name here'>
+```
+
+#### Job Outputs
+This pre-built *Action* produces the below [Outputs](https://docs.github.com/en/actions/using-jobs/defining-outputs-for-jobs), which can be referenced by downstream Actions/Jobs.
+
+```YAML
+outputs:
+  scan-success: <'true/false'>
+```
 
 
 [install-cli]: /security-testing/test-laptop

@@ -1,5 +1,6 @@
 ---
 sidebar_position: 1
+title: Install eBPF Sensor on Kubernetes | Levo.ai Documentation
 ---
 
 # Sensor on Kubernetes
@@ -12,26 +13,43 @@ sidebar_position: 1
 - The Kubernetes cluster API endpoint should be reachable from the machine you are running Helm.
 - `kubectl` access to the cluster, with `cluster-admin` permissions.
 
-### 1. Install levoai Helm repo
+### 1. Add levoai Helm repo
 ```bash
-helm repo add levoai https://charts.levo.ai && helm repo update
+helm repo add levoai https://charts.levo.ai && helm repo update levoai
 ```
 
 ### 2. Create `levoai` namespace & install Sensor
 ```bash
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
-# If Sensor is installed on same cluster as Satellite, use 'levoai-collector.levoai:4317'
-#
-# Specify below the 'Application Name' chosen earlier.
+# If Sensor is installed on same cluster as Satellite, use 'levoai-haproxy'
+# If they are installed on different clusters, the haproxy service should be exposed so that it is
+# reachable by the sensor. Use the exposed address as the value for satellite-url.
+# Also specify the Organization ID (copy from levo platform).
 #
 helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --install \
   --namespace levoai \
   --create-namespace \
-  --set sensor.config.default-service-name=<'Application Name' chosen earlier> \
-  --set sensor.config.collector-endpoint=<hostname|IP:port>
-  --set sensor.config.env=<'Application environment'>
+  --set sensor.orgId=<your-org-id>
+  --set sensor.satelliteUrl=levoai-haproxy \
+  --set sensor.levoEnv=<Application environment>
 ```
+
+:::info
+
+You need to expose the levoai-haproxy service so that sensor can reach satellite when it is installed 
+in a different cluster; the installation command will be:
+
+```bash
+helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
+  --install \
+  --namespace levoai \
+  --create-namespace \
+  --set sensor.satelliteUrl=<hostname|IP:port> \
+  --set sensor.levoEnv=<Application environment>
+```
+
+:::
 
 
 ### 3. Verify connectivity with Satellite
@@ -66,12 +84,15 @@ If connectivity is healthy, you should see output similar to below.
 **Please contact `support@levo.ai` if you notice health/connectivity related errors.**
 
 #### NOTE:
-The default address for the collector in helm installations is `levoai-collector:4317`.
+The default address for the satellite url in helm installations is `levoai-haproxy`.
 This address assumes that the Satellite is installed in the same cluster (and namespace) as the Sensor.
-If you wish to, you may also request Levo to host the Satellite for you. In this case, you will need to set the `collector-endpoint` to `https://collector.levo.ai` and specify an organization ID (`organization-id`) via helm values.
+If they are installed on different clusters, the haproxy service should be exposed so that it is
+reachable by the sensor. Use the exposed address as the value for satellite-url.
+If you wish to, you may also request Levo to host the Satellite for you. In this case, you will need to set the
+`satellite-url` to `https://collector.levo.ai` and specify an organization ID (`organization-id`) via helm values.
 
 ```shell
-helm upgrade --set sensor.config.env=<your-application-environment> --set sensor.config.collector-endpoint=https://collector.levo.ai --set sensor.config.organization-id=<your-org-id> levoai-sensor levoai/levoai-ebpf-sensor -n levoai
+helm upgrade --set sensor.levoEnv=<your-application-environment> --set sensor.satelliteUrl=https://collector.levo.ai --set sensor.orgId=<your-org-id> levoai-sensor levoai/levoai-ebpf-sensor -n levoai
 ```
 
 Please proceed to the next step, if there are no errors.

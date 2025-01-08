@@ -1,3 +1,6 @@
+---
+title: "Prevent Unauthorized Access: Address API CORS Issues"
+---
 
 # Cross-Domain (CORS) Misconfiguration (Passive)
 ![Cross-Domain Misconfiguration (Passive)](../assets/baseline/baseline-vuln.svg)

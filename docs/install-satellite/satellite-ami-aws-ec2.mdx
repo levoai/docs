@@ -58,7 +58,7 @@ Under Advanced details > User Data, add the following (pick the appropriate valu
 ```bash
 #!/bin/bash
 echo "LEVOAI_AUTH_KEY='Authorization Key'" > /opt/levoai/.levoenv
-sudo /opt/levoai/levo_satellite.sh start >> satellite-start.log 2>&1
+sudo /opt/levoai/levo_satellite.sh upgrade >> satellite-start.log 2>&1
 # Uncomment the following line to enable the traffic mirroring listener
 # sudo /opt/levoai/levo_traffic_listener.sh start >> traffic-listener-start.log 2>&1
 ```
@@ -70,7 +70,7 @@ Depending on the region you are installing in, you may need to set a different L
 For example, if the satellite will be used with `app.india-1.levo.ai`, add the following line to the `/opt/levoai/.levoenv` file as well.
 
 ```bash
-echo "LEVOAI_BASE_URL='https://api.india-1.levo.ai'" > /opt/levoai/.levoenv
+echo "LEVOAI_BASE_URL='https://api.india-1.levo.ai'" >> /opt/levoai/.levoenv
 ```
 
 :::

@@ -166,7 +166,7 @@ eksctl create addon --name aws-ebs-csi-driver --cluster ${CLUSTER_NAME} --region
 
 ### 5. Install the satellite
 
-Please follow the instructions in the [Install on Kubernetes](satellite-kubernetes.md) section to install the Satellite.
+Please follow the instructions in the [Install on Kubernetes](satellite-kubernetes.mdx) section to install the Satellite.
 
 Please ensure that you note down the address of the collector.
 

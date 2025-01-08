@@ -25,7 +25,14 @@ services:
       openssl req -nodes -new -newkey rsa:4096 -subj  "/C=IN/ST=Telangana/L=Hyderabad/O=Levo.ai/OU=Security/CN=localhost:5671"  -keyout /opt/rabbitmq/resources/server.key -out /opt/rabbitmq/resources/server.csr -days 365000 &&
       openssl x509 -req -in /opt/rabbitmq/resources/server.csr -CA /opt/rabbitmq/resources/ca.crt -CAkey /opt/rabbitmq/resources/ca.key -CAcreateserial -out /opt/rabbitmq/resources/server.crt -days 365000 &&
       chmod -R 755 /opt/rabbitmq/resources &&
-      echo -e 'listeners.tcp = none\\nlisteners.ssl.default = 5671\\nssl_options.cacertfile = /opt/rabbitmq/resources/ca.crt\\nssl_options.certfile = /opt/rabbitmq/resources/server.crt\\nssl_options.keyfile = /opt/rabbitmq/resources/server.key\\nssl_options.verify = verify_none' > /etc/rabbitmq/rabbitmq.conf &&
+      echo '
+            listeners.tcp.1 = 0.0.0.0:5672
+            listeners.ssl.default = 5671
+            ssl_options.cacertfile = /opt/rabbitmq/resources/ca.crt
+            ssl_options.certfile = /opt/rabbitmq/resources/server.crt
+            ssl_options.keyfile = /opt/rabbitmq/resources/server.key
+            ssl_options.verify = verify_none
+      ' > /etc/rabbitmq/rabbitmq.conf &&
       /usr/local/bin/docker-entrypoint.sh rabbitmq-server"
     mem_reservation: 512m
     cpus: 0.5
@@ -38,15 +45,13 @@ services:
       - '9999:9999'
     command:
       - "-w"
-      - "4"
+      - "1"
       - "-b"
       - "0.0.0.0:9999"
-      - "--worker-tmp-dir"
-      - "/dev/shm"
       - "--worker-class"
-      - "gevent"
+      - "uvicorn.workers.UvicornWorker"
       - "--worker-connections"
-      - "500"
+      - "1000"
       - "levoai_e7s.satellite.satellite:create_server()"
     environment:
       LEVOAI_DEBUG_ENABLED: ${LEVOAI_SATELLITE_DEBUG_ENABLED:-false}
@@ -123,9 +128,26 @@ services:
     cpus: 0.5
 
   levoai-ion:
-    image: 'levoai/ion:latest'
-    command: [ "-verbose" ]
+    image: 'levoai/satellite'
     container_name: levoai-ion
     restart: always
-    ports:
-      - '9990:8000'
+    entrypoint:
+      - 'python'
+      - '-OO'
+      - /opt/levoai/e7s/src/python/levoai_ion/ion_server.py
+    depends_on:
+      levoai-rabbitmq:
+        condition: service_healthy
+    environment:
+      LEVOAI_MODE: docker-compose
+      LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
+      LEVOAI_IAM_BASE_URL: ${LEVOAI_IAM_BASE_URL:-https://api.dev.levo.ai}
+      LEVOAI_CONF_OVERRIDES: >
+        {
+          "onprem-api": {
+              "url": "${LEVOAI_BASE_URL:-https://api.dev.levo.ai}",
+              "refresh-token": "${LEVOAI_AUTH_KEY}",
+              "org-id": "${LEVOAI_ORG_ID:-}",
+              "org-prefix": "${LEVOAI_ORG_PREFIX:-}"
+          }
+        }

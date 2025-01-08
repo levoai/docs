@@ -1,5 +1,7 @@
 ---
 sidebar_position: 1
+description: Discover common tasks in Levo.ai's security testing. Learn about API authentication, RBAC info, and running test plans with our comprehensive guide.
+title: Common Security Testing Tasks | Levo.ai Documentation
 ---
 
 # Common Tasks

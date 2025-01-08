@@ -2,8 +2,16 @@ provider "aws" {
   region = "us-west-2"
 }
 
-variable "collector_url" {
-  description = "Enter your Collector Endpoint"
+variable "satellite_url" {
+  description = "Enter your Satellite's Address"
+}
+
+variable "levo_env" {
+  description = "Enter your Application environment"
+}
+
+variable "org_id" {
+  description = "Specify your Organization ID (from the Levo Dashboard)"
 }
 
 resource "aws_ecs_task_definition" "levoai-sensor" {
@@ -30,15 +38,14 @@ resource "aws_ecs_task_definition" "levoai-sensor" {
       "command": [
         "--host-proc-path",
         "/host/proc",
-        "--collector-endpoint",
-        var.collector_url
+        "--satellite-url",
+        var.satellite_url,
+        "--levo-env",
+        var.levo_env,
+        "--organization-id",
+        var.org_id
       ],
-      "environment": [
-        {
-          "name": "OUTSIDE_HOSTNAME",
-          "value": "$(hostname)"
-        }
-      ],
+      "environment": [],
       "mountPoints": [
         {
           "sourceVolume": "host-proc",

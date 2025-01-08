@@ -1,6 +1,7 @@
 ---
 sidebar_position: 2
 keywords: [API Security, ZAP, OWASP, Linux, macOS, Windows, API Observability]
+description: Get started with Levo.ai on macOS. Follow our quickstart guide for seamless installation and setup of the Levo.ai API Security Platform on your Mac.
 ---
 
 # Quickstart on Mac / Laptop
@@ -29,7 +30,7 @@ The Sensor-Satellite setup can be run with the following docker command -
 docker run -e LEVOAI_AUTH_KEY=<your-auth-key> \
   -e LEVOAI_ORG_ID=<your-org-id> \
   --net=host \
-  -v ./logs:/mnt/levo/logs
+  -v ./logs:/mnt/levo/logs \
   levoai/levo-all
 ```
 

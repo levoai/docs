@@ -34,7 +34,7 @@ sudo apt update
 ### 3. Download/install Sensor artifacts
 
 ```bash
-sudo apt install levo-ebpf-sensor=0.29.6
+sudo apt install levo-ebpf-sensor=0.45.4
 ```
 
 ### 4. Start the Sensor
@@ -44,23 +44,26 @@ Please take a look at the [Running the Sensor as a Systemd Service](/install-tra
 
 ## Sensor Lifecycle Management
 
-### Configure Satellite Address (`host:port` information)
+### Configure Satellite Address, Organization-Id and Environment
 
-The Satellite address is configured in `/etc/levo/sensor/config.yaml`. The default `host:port` for Satellite is `localhost:4317`.
+The Satellite address is configured in `/etc/default/levo-ebpf-sensor`. The default Satellite URL is `https://collector.levo.ai`.
 
-Edit `/etc/levo/sensor/config.yaml`, and set `collector-endpoint` (under Satellite Settings) to the desired `host:port` value.
+Edit `/etc/default/levo-ebpf-sensor`, set the `LEVO_SATELLITE_URL` variable to the desired `host:port` value,
+and set the `LEVO_ORG_ID` to the Organization ID fetched from the Levo Dashboard.
+Set `LEVO_ENV` to the desired environment name in which you wish to see you applications on the Levo Dashboard.
 
 ```bash
 ...
-# --------------------------------------------------------------------------------------------
-# Satellite Settings:
-# --------------------------------------------------------------------------------------------
-# host:port for the collector service receiving the sensor's API traces.
-collector-endpoint: <set to desired host:port value>
-# --------------------------------------------------------------------------------------------
+LEVO_ENV="your-env"
+LEVO_SATELLITE_URL="your-satellite-url"
+LEVO_ORG_ID="your-org-id"
 ...
 ```
-**A Sensor *restart* is required for this to take effect.**
+
+Additional sensor configs are present in the file `/etc/levo/sensor/config.yaml`
+
+
+**A Sensor *restart* is required for the config changes to take effect.**
 
 
 ### Start Sensor
@@ -90,6 +93,11 @@ sudo cat syslog | grep 'levo-ebpf-sensor'
 ### Show Sensor Config
 ```bash
 cat /etc/levo/sensor/config.yaml
+```
+
+### Show Sensor Environment file
+```bash
+cat /etc/default/levo-ebpf-sensor
 ```
 
 ### Uninstall Sensor
