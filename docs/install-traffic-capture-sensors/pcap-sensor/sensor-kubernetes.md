@@ -22,7 +22,7 @@ helm repo add levoai https://charts.levo.ai && helm repo update levoai
 
 ```bash
 # Replace 'hostname|IP' & 'port' with the values you noted down from the Satellite install
-# If Sensor is installed on same cluster as Satellite, use 'http://levoai-satellite:9999'
+# If Sensor is installed on same cluster as Satellite, use 'http://levoai-haproxy:80' 
 # Specify below the 'Application Name' chosen earlier.
 #
 helm upgrade levoai-pcap-sensor levoai/levoai-pcap-sensor \
