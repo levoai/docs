@@ -152,7 +152,7 @@ export function DownloadSatTF() {
                 },
                 {
                     "name": "LEVOAI_CONF_OVERRIDES",
-                    "value": "{\"onprem-api\":{\"url\": \"${LEVOAI_BASE_URL}\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"url_clusterer_id_len\": 1,\"min_urls_required_per_pattern\": 10,\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"disable_ml_detector\": true,\"service_naming\":{\"strategies\": \"KUBERNETES_METADATA,HOST_HEADER,DEFAULT\"},\"user_resolvers\": [],\"sample_collection\":{\"enabled\": true,\"max_samples_per_end_point\": 2,\"users\": []},\"tagger_batch_interval_minute\": 5,\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"sensitive_data_config\": [],\"traces_queue\":{\"type\": \"sqs\"}}"
+                    "value": "{\"onprem-api\":{\"url\": \"${LEVOAI_BASE_URL}\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"traces_queue\":{\"type\": \"sqs\"}}"
                 },
                 {
                     "name": "PI_DETECTOR_DATA_DIR",
@@ -291,7 +291,7 @@ Run the following commands in the same directory -
 terraform apply
 ```
 
-> *Enter the Refresh Token, Org ID, AWS Region as prompted and choose the Levo Saas your account is based in (US/India) to create a task definition in your AWS account.*
+> *Enter the Auth Token, Org ID, AWS Region as prompted and choose the Levo Saas your account is based in (US/India) to create a task definition in your AWS account.*
 
 </TabItem>
 </Tabs>

@@ -27,7 +27,7 @@ resource "aws_ecs_cluster" "levo_docs_cluster" {
 }
 
 variable "refresh_token" {
-  description = "Enter your Refresh Token"
+  description = "Enter your Auth Token"
 }
 
 variable "levo_org_id" {

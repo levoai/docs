@@ -2,8 +2,8 @@ provider "aws" {
   region = var.region
 }
 
-variable "refresh_token" {
-  description = "Enter your Refresh Token"
+variable "auth_key" {
+  description = "Enter your Auth Key"
 }
 
 variable "org_id" {
@@ -115,7 +115,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
         },
         {
           "name": "LEVOAI_AUTH_KEY",
-          "value": var.refresh_token
+          "value": var.auth_key
         },
         {
           "name": "LEVOAI_LOG_LEVEL",
@@ -209,7 +209,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
         },
         {
           "name": "LEVOAI_CONF_OVERRIDES",
-          "value": "{\"onprem-api\":{\"url\": \"$${LEVOAI_BASE_URL}\",\"refresh-token\":\"$${LEVOAI_AUTH_KEY}\",\"org-id\": \"$${LEVOAI_ORG_ID}\",\"org-prefix\": \"$${LEVOAI_ORG_PREFIX}\"},\"url_clusterer_id_len\": 1,\"dynamic_url_threshold_factor\": 0.5,\"api_rule_evaluation\":{\"enabled\": true},\"traces_queue\":{\"type\": \"sqs\"},\"findings_queue\": {\"type\": \"sqs\"}}"
+          "value": "{\"onprem-api\":{\"url\": \"$${LEVOAI_BASE_URL}\",\"refresh-token\":\"$${LEVOAI_AUTH_KEY}\",\"org-id\": \"$${LEVOAI_ORG_ID}\",\"org-prefix\": \"$${LEVOAI_ORG_PREFIX}\"},\"dynamic_url_threshold_factor\": 0.5,\"api_rule_evaluation\":{\"enabled\": true},\"traces_queue\":{\"type\": \"sqs\"},\"findings_queue\": {\"type\": \"sqs\"}}"
         },
         {
           "name": "PI_DETECTOR_DATA_DIR",
@@ -221,7 +221,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
         },
         {
           "name": "LEVOAI_AUTH_KEY",
-          "value": var.refresh_token
+          "value": var.auth_key
         },
         {
           "name": "LEVOAI_LOG_LEVEL",
@@ -321,7 +321,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
         },
         {
           "name": "LEVOAI_AUTH_KEY",
-          "value": var.refresh_token
+          "value": var.auth_key
         },
         {
           "name": "LEVOAI_LOG_LEVEL",
