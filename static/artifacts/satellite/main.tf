@@ -317,7 +317,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
         },
         {
         "name": "LEVOAI_CONF_OVERRIDES",
-        "value": "{\"onprem-api\":{\"url\": \"$${LEVOAI_BASE_URL}\",\"refresh-token\":\"$${LEVOAI_AUTH_KEY}\",\"org-id\": \"$${LEVOAI_ORG_ID}\",\"org-prefix\": \"$${LEVOAI_ORG_PREFIX}\"},\"traces_queue\": {\"type\": \"sqs\"},\"findings_queue\": {\"type\": \"sqs\"}}"
+        "value": "{\"onprem-api\":{\"url\": \"$${LEVOAI_BASE_URL}\",\"refresh-token\":\"$${LEVOAI_AUTH_KEY}\",\"org-id\": \"$${LEVOAI_ORG_ID}\"},\"traces_queue\": {\"type\": \"sqs\"},\"findings_queue\": {\"type\": \"sqs\"}}"
         },
         {
           "name": "LEVOAI_AUTH_KEY",
