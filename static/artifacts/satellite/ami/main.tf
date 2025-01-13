@@ -17,8 +17,8 @@ variable "ami_ids" {
   description = "Map of AMI IDs for each region"
 }
 
-variable "refresh_token" {
-  description = "Enter your Satellite Refresh Token"
+variable "auth_key" {
+  description = "Enter your Satellite Auth Key"
 }
 
 variable "key_pair" {
@@ -147,7 +147,7 @@ resource "aws_instance" "levo_satellite_instance" {
   systemctl enable nginx
   systemctl start nginx
 
-  echo "LEVOAI_AUTH_KEY=var.refresh_token" > /opt/levoai/.levoenv
+  echo "LEVOAI_AUTH_KEY=var.auth_key" > /opt/levoai/.levoenv
   sudo /opt/levoai/levo_satellite.sh start >> satellite-start.log 2>&1
   # Uncomment the following line to enable the traffic mirroring listener
   # sudo /opt/levoai/levo_traffic_listener.sh start >> traffic-listener-start.log 2>&1

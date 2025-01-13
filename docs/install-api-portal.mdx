@@ -46,7 +46,7 @@ By leveraging Levo's API Portal, developers can gain deep insights into their AP
 
 #### Pre-requisites
 - Docker Engine version `18.03.0` and above.
-- Get the refresh token from the Levo App User Profile page.
+- Get the Auth/Refresh token from the Levo App User Profile page.
 
 
 #### Installation Steps
@@ -71,7 +71,7 @@ docker run --rm --name=levoai-api-portal \
 ### Install via Helm Chart
 
 #### Pre-requisites
-- Get the refresh token from the Levo App User Profile page.
+- Get the Auth token from the Levo App User Profile page.
 
 #### Installation Steps
 - Add Levo Helm repo
@@ -112,4 +112,4 @@ Run the following command in the same directory -
 terraform apply
 ```
 
-Enter the Refresh Token, Env Name and App Name as prompted to create a task definition for Levo's API-Portal in your AWS account.
+Enter the Auth Token, Env Name and App Name as prompted to create a task definition for Levo's API-Portal in your AWS account.
