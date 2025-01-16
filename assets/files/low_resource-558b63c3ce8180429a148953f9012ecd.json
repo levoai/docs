@@ -1,6 +1,6 @@
 {
     "name": "levo-pcap-sensor",
-    "image": "levoai/pcap-sensor:0.1.9",
+    "image": "levoai/pcap-sensor:0.1.10",
     "cpu": 256,
     "memory": 200,
     "portMappings": [],
