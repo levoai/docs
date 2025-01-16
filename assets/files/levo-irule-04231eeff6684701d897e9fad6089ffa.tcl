@@ -19,6 +19,7 @@ set static::capturable_content_types {json xml x-www-form-urlencoded}
 # Levo.ai's Collector details
 set static::collector_host_ip "<collector-host-ip>"
 set static::collector_host_port "<collector-host-port>"
+set static::organization_id "<levoai-organization-id>"
 # Do not modify
 set static::collector_uri "/v1/f5-ltm-logs"
 
@@ -132,6 +133,7 @@ when HTTP_RESPONSE  {
     # Prepare an HTTP POST request
     set http_request "POST ${static::collector_uri} HTTP/1.1\r\n"
     append http_request "Host: ${static::collector_host_ip}\r\n"
+    append http_request "x-levo-organization-id: ${static::organization_id}\r\n"
     append http_request "Content-Type: application/json\r\n"
 
       
