@@ -45,7 +45,7 @@ The steps to add the sensor to your task are as follows
 ```json
 {
     "name": "levo-pcap-sensor",
-    "image": "levoai/pcap-sensor:0.1.9",
+    "image": "levoai/pcap-sensor:0.1.10",
     "cpu": 512,
     "memory": 512,
     "portMappings": [],
