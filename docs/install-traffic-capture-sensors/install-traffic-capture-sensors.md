@@ -62,8 +62,6 @@ Note that CloudFront does not provide access to the API endpoint response bodies
 
 You may instrument your AWS API Gateway endpoints with CloudWatch Logs.
 
-However, CloudWatch only provides endpoints access logs and API endpoint request and response bodies will not be available.
-
 [**Click here for the installation instructions**](/install-traffic-capture-sensors/aws-api-gateway).
 
 ## Azure API Management Policy

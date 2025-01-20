@@ -9,7 +9,7 @@ import TabItem from '@theme/TabItem';
 
 # Satellite on AWS ECS
 
-export function DownloadMainTF() {
+export function DownloadSatTF() {
     return (
         <BrowserOnly fallback={<div>Loading...</div>}>
             {() => (
@@ -21,12 +21,8 @@ export function DownloadMainTF() {
 
 ### Prerequisites
 - Access to AWS ECS.
-- Levo.ai Org ID. Follow instructions below to copy the org ID.
-- [Login](https://app.levo.ai/login) to Levo.ai.
-- Click on your user profile.
-- Click on `User Settings`
-- Click on `Organizations` on the left navigation panel
-- Click on `Copy` under `Organization ID`
+- Levo Authorization Token: Refer to [Generating CLI Authorization Keys](/integrations/common-tasks.md#generating-cli-authorization-keys).
+- Organization ID: Refer to [Accessing Organization IDs](/integrations/common-tasks.md#accessing-organization-ids).
 - An AWS Role with the policies - _____ to assign to the task.
 
 ### 1. Creating a Task Definition
@@ -156,7 +152,7 @@ export function DownloadMainTF() {
                 },
                 {
                     "name": "LEVOAI_CONF_OVERRIDES",
-                    "value": "{\"onprem-api\":{\"url\": \"${LEVOAI_BASE_URL}\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"url_clusterer_id_len\": 1,\"min_urls_required_per_pattern\": 10,\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"disable_ml_detector\": true,\"service_naming\":{\"strategies\": \"KUBERNETES_METADATA,HOST_HEADER,DEFAULT\"},\"user_resolvers\": [],\"sample_collection\":{\"enabled\": true,\"max_samples_per_end_point\": 2,\"users\": []},\"tagger_batch_interval_minute\": 5,\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"sensitive_data_config\": [],\"traces_queue\":{\"type\": \"sqs\"}}"
+                    "value": "{\"onprem-api\":{\"url\": \"${LEVOAI_BASE_URL}\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"traces_queue\":{\"type\": \"sqs\"}}"
                 },
                 {
                     "name": "PI_DETECTOR_DATA_DIR",
@@ -281,19 +277,24 @@ For example, if the satellite will be used with `app.india-1.levo.ai`, set the `
 
 </TabItem>
 <TabItem value="tf">
-Download the <DownloadMainTF/> file.
 
-Run the following command in the same directory -
+Download the **<DownloadSatTF/>** file.
+
+Run the following command that initialize Terraform configuration files.
+```bash
+terraform init
+```
+
+Run the following commands in the same directory -
 
 ```bash
 terraform apply
 ```
 
-Enter the Refresh Token and Org ID as prompted to create a task definition in your AWS account.
+> *Enter the Auth Token, Org ID, AWS Region as prompted and choose the Levo Saas your account is based in (US/India) to create a task definition in your AWS account.*
 
 </TabItem>
 </Tabs>
-<br/>
 
 ### 2. Run the Satellite
 
@@ -302,6 +303,7 @@ Now that we have created a task definition, we will start our satellite up as a 
 - Head over to `deploy` and select `Create Service`.
 - Choose the cluster you want to deploy the satellite.
 - Under `Compute Options` select `Launch Type`.
+- Add `Service name` in Deployment configuration.
 - Leave the other configurations on default settings, and start the service.
 
 ### 3. Note down `Host:Port` information
