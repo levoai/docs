@@ -1,5 +1,5 @@
 provider "aws" {
-  region     = "us-west-2"
+  region = var.region
 }
 
 resource "aws_vpc" "levo_docs_vpc" {
@@ -27,13 +27,36 @@ resource "aws_ecs_cluster" "levo_docs_cluster" {
 }
 
 variable "refresh_token" {
-  description = "Enter your Refresh Token"
+  description = "Enter your Auth Token"
 }
 
 variable "levo_org_id" {
   description = "Enter your Levo ORG ID"
 }
 
+variable "base_url" {
+  type        = string
+  description = "Choose Levo Saas according to your satellite: \n 1. Levo US Saas\n 2. Levo India Saas\nEnter 1 or 2 accordingly as input"
+
+  validation {
+    condition     = contains(["1", "2"], var.base_url)
+    error_message = "Valid values for the options are are (1, 2)."
+  }
+}
+
+locals {
+  saas = var.base_url == "1" ? "https://api.levo.ai" : var.base_url == "2" ? "https://api.india-1.levo.ai" : "invalid-choice"
+}
+
+variable "region" {
+  type        = string
+  description = "Enter your AWS region"
+
+  validation {
+    condition     = contains(["us-east-2", "us-east-1", "us-west-1", "us-west-2", "af-south-1", "ap-east-1", "ap-south-2", "ap-southeast-3", "ap-southeast-4", "ap-south-1", "ap-northeast-3", "ap-northeast-2", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ca-central-1", "ca-west-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-south-1", "eu-west-3", "eu-south-2", "eu-north-1", "eu-central-2", "il-central-1", "me-south-1", "me-central-1", "sa-east-1", "us-gov-east-1", "us-gov-west-1"], var.region)
+    error_message = "Valid values for the options are are (us-east-2, us-east-1, us-west-1, us-west-2, af-south-1, ap-east-1, ap-south-2, ap-southeast-3, ap-southeast-4, ap-south-1, ap-northeast-3, ap-northeast-2, ap-southeast-1, ap-southeast-2, ap-northeast-1, ca-central-1, ca-west-1, eu-central-1, eu-west-1, eu-west-2, eu-south-1, eu-west-3, eu-south-2, eu-north-1, eu-central-2, il-central-1, me-south-1, me-central-1, sa-east-1, us-gov-east-1, us-gov-west-1)."
+  }
+}
 
 resource "aws_ecs_task_definition" "levoai-docs" {
   family                   = "levoai-api-portal"
@@ -67,10 +90,10 @@ resource "aws_ecs_task_definition" "levoai-docs" {
                 {
                     "name": "LEVO_ORG_ID",
                     "value": var.levo_org_id
-                }
+                },
                 {
                     "name": "LEVO_BASE_URL",
-                    "value": "https://api.levo.ai"
+                    "value": local.saas
                 }
             ],
             "logConfiguration": {
@@ -78,7 +101,7 @@ resource "aws_ecs_task_definition" "levoai-docs" {
                 "options": {
                     "awslogs-create-group": "true",
                     "awslogs-group": "/ecs/api-docs-viewer",
-                    "awslogs-region": "us-west-2",
+                    "awslogs-region": var.region,
                     "awslogs-stream-prefix": "ecs"
                 }
             }
