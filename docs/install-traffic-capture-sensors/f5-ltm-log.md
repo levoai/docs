@@ -22,6 +22,7 @@ To instrument your APIs from the LTM Virtual Servers, you need to:
 
 - Locate `collector_host_ip` and `collector_host_port` inside the script, and set them to appropriate values.
 Note that the virtual server should be able to reach to this IP.
+- Set `organization_id` in the iRule script. It can be fetched from the Levo.ai Dashboard under `User Settings` 
 
 ### Add the iRule to the VirtualServers you want to instrument
 
