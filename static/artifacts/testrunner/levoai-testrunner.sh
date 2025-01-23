@@ -2,7 +2,15 @@
 
 CONTAINER_NAME="levoai-testrunner"
 IMAGE_NAME="levoai/levo:stable"
-DEFAULT_LEVOAI_BASE_URL="https://api.levo.ai"
+DEFAULT_LEVOAI_BASE_URL="https://api.dev.levo.ai"
+
+# Load environment variables from .env file
+if [ -f .env ]; then
+  export $(cat .env | grep -v '#' | awk '/=/ {print $1}')
+else
+  echo "Error: .env file not found."
+  exit 1
+fi
 
 # Function to display usage information
 show_usage() {
@@ -47,8 +55,7 @@ check_env_var() {
   local var_value="${!var_name}"
   if [[ -z "$var_value" ]]; then
     echo "Error: Environment variable $var_name is not set."
-    echo "Try setting the $var_name using the following command:"
-    echo "export $var_name='value'"
+    echo "Try setting the $var_name in the .env file."
     exit 1
   fi
 }
