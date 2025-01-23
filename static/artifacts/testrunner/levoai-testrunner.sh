@@ -2,7 +2,7 @@
 
 CONTAINER_NAME="levoai-testrunner"
 IMAGE_NAME="levoai/levo:stable"
-DEFAULT_LEVOAI_BASE_URL="https://api.dev.levo.ai"
+DEFAULT_LEVOAI_BASE_URL="https://api.levo.ai"
 
 # Load environment variables from .env file
 if [ -f .env ]; then
