@@ -88,3 +88,22 @@ If connectivity is healthy, you will see output similar to below.
 ```bash
 {"level": "info", "time": "2022-06-07 08:07:22,439", "line": "rabbitmq_client.py:155", "version": "fc628b50354bf94e544eef46751d44945a2c55bc", "module": "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py", "message": "Ready to process; waiting for messages."}
 ```
+
+### 4. Troubleshooting
+
+### Enable Debug Logging
+Set the following environment variable to enable debug logging for the Satellite components and then reinstall the satellite or restart the containers.
+
+```powershell
+$env:LEVOAI_LOG_LEVEL = "DEBUG"
+```
+
+This will enable detailed debugging logs for all satellite components, including Tagger, Collector, Ion, and Satellite.
+
+Some various log levels that can be set are `INFO`, `DEBUG`, `WARNING`, `ERROR`. The default log level is `INFO`.
+
+
+---
+
+### Need Help?
+For further assistance, please reach out to [Levo.ai Support](mailto:support@levo.ai).

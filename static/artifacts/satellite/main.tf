@@ -246,6 +246,16 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
           "awslogs-region": var.region,
           "awslogs-stream-prefix": "ecs"
         }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "/opt/levoai/common-public/src/python/levoai_common_public/monitoring/test_health_file.sh || exit 1"
+        ],
+        "interval": 125,
+        "timeout": 3,
+        "retries": 10,
+        "startPeriod": 30
       }
     },
     {
@@ -342,6 +352,16 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
           "awslogs-region": var.region,
           "awslogs-stream-prefix": "ecs"
         }
+      },
+      "healthCheck": {
+        "command": [
+          "CMD-SHELL",
+          "/opt/levoai/common-public/src/python/levoai_common_public/monitoring/test_health_file.sh || exit 1"
+        ],
+        "interval": 125,
+        "timeout": 3,
+        "retries": 10,
+        "startPeriod": 30
       }
     }
   ])

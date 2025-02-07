@@ -336,7 +336,8 @@ Check for authentication errors in the `Tagger` logs:
 kubectl -n levoai logs <levoai-tagger-pod-id> | grep "Exception: Failed to refresh access token"
 ```
 
-If there are exception messages, you have an incorrect or stale `Authorization Key`. Please contact support@levo.ai for further assistance.
+If there are exception messages, you have an incorrect or stale `Authorization Key`. Please contact [Levo.ai Support](mailto:support@levo.ai) for further assistance.
+
 
 ### Connectivity Errors
 
@@ -348,6 +349,21 @@ kubectl -n levoai logs <levoai-tagger-pod-id> | grep "ConnectionRefusedError: [E
 
 If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries. Please contact support@levo.ai for further assistance.
 
+
+### Enable Debug Logging
+Add the following helm option to enable debug logging for the Satellite components.
+
+```bash
+helm upgrade --install -n levoai --create-namespace \
+  --set global.levoai_config_override.onprem-api.refresh-token=$LEVOAI_AUTH_KEY \
+  --set global.levoai.log_level="DEBUG" \
+  levoai-satellite levoai/levoai-satellite
+```
+
+This will enable detailed debugging logs for all satellite components, including Tagger, Collector, Ion, and Satellite.
+
+Some various log levels that can be set are `INFO`, `DEBUG`, `WARNING`, `ERROR`. The default log level is `INFO`.
+
 ### Share Satellite logs with Levo Support
 
 Please <DownloadGetLogsScript/> script and execute following commands to collect logs from all Satellite components. This will create an archive as `/tmp/levoai_satellite_logs_%date-time%.tar.gz`.
@@ -357,4 +373,7 @@ chmod +x get_levoai_satellite_logs.sh
 ./get_levoai_satellite_logs.sh
 ```
 
-<br></br>
+---
+
+### Need Help?
+For further assistance, please reach out to [Levo.ai Support](mailto:support@levo.ai).
