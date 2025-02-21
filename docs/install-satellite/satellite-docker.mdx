@@ -260,9 +260,9 @@ To detect an API endpoint, Satellite waits for at least '10' URLs to match that 
 This number may cause delays in detecting API endpoints when there is not enough load.
 
 If you want to change this number to suit your environment:
-- Export the environment variable `LEVOAI_MIN_URLS_PER_PATTERN` - for example : `export LEVOAI_MIN_URLS_PER_PATTERN=3`
-
-- Reinstall the Satellite to pickup the new configuration
+- Navigate to Levo's dashboard.
+- Click settings from the left navigation bar.
+- Under the API Discovery tab, update `Min. URLs per Pattern` to the desired number and wait for at least 5 mins for satellite to pick up the change.
 
 ------------------------------------------------------------------
 
