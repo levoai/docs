@@ -89,7 +89,7 @@ export function DownloadSatTF() {
                 },
                 {
                     "name": "LEVOAI_CONF_OVERRIDES",
-                    "value": "{\"onprem-api\": {\"url\": \"${LEVOAI_BASE_URL}\", \"refresh-token\": \"${LEVOAI_AUTH_KEY}\", \"org-id\": \"${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"}}"
+                    "value": "{\"onprem-api\": {\"url\": \"${LEVOAI_BASE_URL}\", \"refresh-token\": \"${LEVOAI_AUTH_KEY}\", \"org-id\": \"${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"} }"
                 },
                 {
                     "name": "LEVOAI_DEBUG_ENABLED",
@@ -152,7 +152,7 @@ export function DownloadSatTF() {
                 },
                 {
                     "name": "LEVOAI_CONF_OVERRIDES",
-                    "value": "{\"onprem-api\":{\"url\": \"${LEVOAI_BASE_URL}\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"traces_queue\":{\"type\": \"sqs\"}}"
+                    "value": "{\"onprem-api\":{\"url\": \"${LEVOAI_BASE_URL}\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"traces_queue\":{\"type\": \"sqs\"} }"
                 },
                 {
                     "name": "PI_DETECTOR_DATA_DIR",
@@ -244,6 +244,30 @@ export function DownloadSatTF() {
                     "awslogs-stream-prefix": "ecs"
                 }
             }
+        },
+        {
+            "name": "levoai-haproxy"
+            "image": "levoai/haproxy"
+            "essential": "true"
+            "portMappings": [
+                {
+                    "name": "levoai-haproxy-80-tcp",
+                    "containerPort": 8080,
+                    "hostPort": 80,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "environment": [
+                {
+                    "name": "LEVOAI_SATELLITE_AUTHN_ENABLED",
+                    "value": "false"
+                },
+                {
+                    "name": "LEVOAI_CONF_OVERRIDES",
+                    "value": "{\"org-id\": \"${LEVOAI_ORG_ID}\"}"
+                }
+            ],
         }
     ],
     "taskRoleArn": "INSERT THE ARN OF THE ROLE YOU WANT TO ASSIGN TO THIS TASK HERE",
@@ -308,21 +332,21 @@ Now that we have created a task definition, we will start our satellite up as a 
 
 ### 3. Note down `Host:Port` information
 
-The collector can be accessed over the internet and its IP can be checked from within the cluster.
+The satellite can be accessed over the internet and its IP can be checked from within the cluster.
 
 Head over to the cluster you earlier used to run the satellite on.
 
 Click on Tasks and select the particular satellite task.
 
-Under the `Container details for levoai-collector` go to `Network bindings`. It should look something like this
+Under the `Container details for levoai-haproxy` go to `Network bindings`. It should look something like this
 
 ```bash
 Network bindings
 Host port       Container port      Protocol        External link
-4317            4317                tcp             52.32.232.165:4317
+80              8080                tcp             52.32.232.165:80
 ```
 
-The Collector can now be reached by the Sensors over the internet using this `external-link:4317` (Kindly add inbound rules to the security group being used by this task if you're unable to reach the satellite). Please note this, as it will be required to configure the Sensor.
+The satellite can now be reached by the Sensors over the internet using this `external-link:80` (Kindly add inbound rules to the security group being used by this task if you're unable to reach the satellite). Please note this, as it will be required to configure the Sensor.
 
 Please proceed to [install traffic capture sensors](/install-traffic-capture-sensors).
 

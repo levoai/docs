@@ -343,6 +343,30 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
           "awslogs-stream-prefix": "ecs"
         }
       }
+    },
+    {
+      "name": "levoai-haproxy"
+      "image": "levoai/haproxy"
+      "essential": "true"
+      "portMappings": [
+        {
+          "name": "levoai-haproxy-80-tcp",
+          "containerPort": 8080,
+          "hostPort": 80,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "environment": [
+        {
+            "name": "LEVOAI_SATELLITE_AUTHN_ENABLED",
+            "value": "false"
+        },
+        {
+            "name": "LEVOAI_CONF_OVERRIDES",
+            "value": "{\"org-id\": \"$${LEVOAI_ORG_ID}\"}"
+        }
+      ],
     }
   ])
 }
