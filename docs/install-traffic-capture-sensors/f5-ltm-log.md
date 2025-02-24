@@ -20,8 +20,9 @@ To instrument your APIs from the LTM Virtual Servers, you need to:
 
 - Download the [iRule script](../../static/artifacts/scripts/levo-irule.tcl)
 
-- Locate `collector_host_ip` and `collector_host_port` inside the script, and set them to appropriate values.
-Note that the virtual server should be able to reach to this IP.
+- You need to expose the satellite's levoai-haproxy service so that virtual server should be able to reach satellite. 
+Locate `collector_host_ip` and `collector_host_port` inside the script, and set them to appropriate values.
+You may also need to setup outbound rules on virtual server to allow communication to satellite host.
 
 ### Add the iRule to the VirtualServers you want to instrument
 
