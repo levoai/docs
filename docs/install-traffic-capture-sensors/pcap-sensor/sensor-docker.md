@@ -14,7 +14,7 @@ title: Install PCAP Sensor on Docker | Levo.ai Documentation
 ### Start the sensor
 
 ```bash
-sudo docker run --net=host --rm -it levoai/pcap-sensor:0.1.10 \
+sudo docker run --net=host --rm -it levoai/pcap-sensor:0.2.0 \
 ./bin/init apidump \
 --satellite-url "your satellite url (http(s)://hostname|IP:port)" \
 --levo-env "your application environment (staging, production etc.)" \
