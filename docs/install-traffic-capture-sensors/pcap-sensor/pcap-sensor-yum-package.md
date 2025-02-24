@@ -36,7 +36,7 @@ Install the pcap Sensor from Levo's RPM repository.
 
 1. Install the package in your repository.
   ```shell
-  sudo yum install levo-pcap-sensor-0.1.10
+  sudo yum install levo-pcap-sensor-0.2.0
   ```
 
 Enter `y` when prompted.
