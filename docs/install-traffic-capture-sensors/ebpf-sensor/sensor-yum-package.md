@@ -32,7 +32,7 @@ Install the eBPF Sensor from Levo's RPM repository.
 
 1. Install the package in your repository.
   ```shell
-  sudo yum install levo-ebpf-sensor-0.46.2
+  sudo yum install levo-ebpf-sensor-0.46.3
   ```
 
 Enter `y` when prompted.
