@@ -141,6 +141,7 @@ services:
     restart: always
     ports:
       - '4317:4317'
+      - '54526:54526'
     depends_on:
       - levoai-satellite
     deploy:
