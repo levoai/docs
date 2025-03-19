@@ -89,7 +89,7 @@ export function DownloadSatTF() {
                 },
                 {
                     "name": "LEVOAI_CONF_OVERRIDES",
-                    "value": "{\"onprem-api\": {\"url\": \"${LEVOAI_BASE_URL}\", \"refresh-token\": \"${LEVOAI_AUTH_KEY}\", \"org-id\": \"${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"} }"
+                    "value": "{\"onprem-api\": {\"url\": \"${LEVOAI_BASE_URL}\", \"refresh-token\": \"${LEVOAI_AUTH_KEY}\", \"org-id\": \"${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"},\"spans_queue\": {\"type\": \"sqs\"},\"findings_queue\": {\"type\": \"sqs\"} }"
                 },
                 {
                     "name": "LEVOAI_DEBUG_ENABLED",
@@ -152,7 +152,7 @@ export function DownloadSatTF() {
                 },
                 {
                     "name": "LEVOAI_CONF_OVERRIDES",
-                    "value": "{\"onprem-api\":{\"url\": \"${LEVOAI_BASE_URL}\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"traces_queue\":{\"type\": \"sqs\"} }"
+                    "value": "{\"onprem-api\":{\"url\": \"${LEVOAI_BASE_URL}\",\"refresh-token\":\"${LEVOAI_AUTH_KEY}\",\"org-id\": \"${LEVOAI_ORG_ID}\",\"org-prefix\": \"${LEVOAI_ORG_PREFIX}\"},\"dynamic_url_threshold_factor\": 0.5,\"cookie_auth_keys\": \"${LEVOAI_COOKIE_AUTH_KEYS:-}\",\"api_rule_evaluation\":{\"enabled\": true},\"ion\":{\"url\": \"http://levoai-ion:8000\"},\"enable_ssl_cert_checks\": true,\"traces_queue\":{\"type\": \"sqs\"},\"spans_queue\":{\"type\": \"sqs\"},\"findings_queue\":{\"type\": \"sqs\"} }"
                 },
                 {
                     "name": "PI_DETECTOR_DATA_DIR",
@@ -330,7 +330,7 @@ Now that we have created a task definition, we will start our satellite up as a 
 - Add `Service name` in Deployment configuration.
 - Leave the other configurations on default settings, and start the service.
 
-### 3. Note down `Host:Port` information
+### 3. Note down the Satellite IP and port
 
 The satellite can be accessed over the internet and its IP can be checked from within the cluster.
 
