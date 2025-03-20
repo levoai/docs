@@ -107,7 +107,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
         },
         {
           "name": "LEVOAI_CONF_OVERRIDES",
-          "value": "{\"onprem-api\": {\"url\": \"$${LEVOAI_BASE_URL}\", \"refresh-token\": \"$${LEVOAI_AUTH_KEY}\", \"org-id\": \"$${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"$${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"},\"findings_queue\": {\"type\": \"sqs\"}}"
+          "value": "{\"onprem-api\": {\"url\": \"$${LEVOAI_BASE_URL}\", \"refresh-token\": \"$${LEVOAI_AUTH_KEY}\", \"org-id\": \"$${LEVOAI_ORG_ID:-}\", \"org-prefix\": \"$${LEVOAI_ORG_PREFIX:-}\"},\"traces_queue\": {\"type\": \"sqs\"},\"spans_queue\": {\"type\": \"sqs\"},\"findings_queue\": {\"type\": \"sqs\"}}"
         },
         {
           "name": "LEVOAI_DEBUG_ENABLED",
@@ -209,7 +209,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
         },
         {
           "name": "LEVOAI_CONF_OVERRIDES",
-          "value": "{\"onprem-api\":{\"url\": \"$${LEVOAI_BASE_URL}\",\"refresh-token\":\"$${LEVOAI_AUTH_KEY}\",\"org-id\": \"$${LEVOAI_ORG_ID}\",\"org-prefix\": \"$${LEVOAI_ORG_PREFIX}\"},\"dynamic_url_threshold_factor\": 0.5,\"api_rule_evaluation\":{\"enabled\": true},\"traces_queue\":{\"type\": \"sqs\"},\"findings_queue\": {\"type\": \"sqs\"}}"
+          "value": "{\"onprem-api\":{\"url\": \"$${LEVOAI_BASE_URL}\",\"refresh-token\":\"$${LEVOAI_AUTH_KEY}\",\"org-id\": \"$${LEVOAI_ORG_ID}\",\"org-prefix\": \"$${LEVOAI_ORG_PREFIX}\"},\"dynamic_url_threshold_factor\": 0.5,\"api_rule_evaluation\":{\"enabled\": true},\"traces_queue\":{\"type\": \"sqs\"},\"spans_queue\": {\"type\": \"sqs\"},\"findings_queue\": {\"type\": \"sqs\"}}"
         },
         {
           "name": "PI_DETECTOR_DATA_DIR",
@@ -317,7 +317,7 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
         },
         {
         "name": "LEVOAI_CONF_OVERRIDES",
-        "value": "{\"onprem-api\":{\"url\": \"$${LEVOAI_BASE_URL}\",\"refresh-token\":\"$${LEVOAI_AUTH_KEY}\",\"org-id\": \"$${LEVOAI_ORG_ID}\"},\"traces_queue\": {\"type\": \"sqs\"},\"findings_queue\": {\"type\": \"sqs\"}}"
+        "value": "{\"onprem-api\":{\"url\": \"$${LEVOAI_BASE_URL}\",\"refresh-token\":\"$${LEVOAI_AUTH_KEY}\",\"org-id\": \"$${LEVOAI_ORG_ID}\"},\"traces_queue\": {\"type\": \"sqs\"},\"spans_queue\": {\"type\": \"sqs\"},\"findings_queue\": {\"type\": \"sqs\"}}"
         },
         {
           "name": "LEVOAI_AUTH_KEY",
@@ -343,6 +343,30 @@ resource "aws_ecs_task_definition" "levoai-satellite" {
           "awslogs-stream-prefix": "ecs"
         }
       }
+    },
+    {
+      "name": "levoai-haproxy"
+      "image": "levoai/haproxy"
+      "essential": "true"
+      "portMappings": [
+        {
+          "name": "levoai-haproxy-80-tcp",
+          "containerPort": 8080,
+          "hostPort": 80,
+          "protocol": "tcp",
+          "appProtocol": "http"
+        }
+      ],
+      "environment": [
+        {
+            "name": "LEVOAI_SATELLITE_AUTHN_ENABLED",
+            "value": "false"
+        },
+        {
+            "name": "LEVOAI_CONF_OVERRIDES",
+            "value": "{\"org-id\": \"$${LEVOAI_ORG_ID}\"}"
+        }
+      ],
     }
   ])
 }
