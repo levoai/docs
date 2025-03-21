@@ -24,7 +24,7 @@ aws logs put-retention-policy --log-group-name $log_group_name --retention-in-da
 
 log_group_arn=$(aws logs describe-log-groups --log-group-name-prefix $log_group_name --query 'logGroups[0].arn' --output text)
 
-aws apigatewayv2 update-stage --api-id 'your-apigateway-api-id' --stage-name '$default' --access-log-settings "DestinationArn=$log_group_arn,"'Format="{\"host\":\"$context.domainName\",\"method\":\"$context.httpMethod\",\"path\":\"$context.path\",\"agent\":\"$context.identity.userAgent\",\"code\":\"$context.status\",\"requestId\":\"$context.requestId\",\"ip\":\"$context.identity.sourceIp\",\"requestTime\":\"$context.requestTime\",\"routeKey\":\"$context.routeKey\",\"protocol\":\"$context.protocol\",\"responseLength\":\"$context.responseLength\"}"'
+aws apigatewayv2 update-stage --api-id 'your-apigateway-api-id' --stage-name '$default' --access-log-settings DestinationArn="$log_group_arn",Format="{\"host\":\"$context.domainName\",\"method\":\"$context.httpMethod\",\"path\":\"$context.path\",\"agent\":\"$context.identity.userAgent\",\"code\":\"$context.status\",\"requestId\":\"$context.requestId\",\"ip\":\"$context.identity.sourceIp\",\"requestTime\":\"$context.requestTime\",\"routeKey\":\"$context.routeKey\",\"protocol\":\"$context.protocol\",\"responseLength\":\"$context.responseLength\"}"
 
 aws logs tail --follow $log_group_name
 ```
