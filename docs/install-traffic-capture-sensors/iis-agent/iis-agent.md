@@ -21,7 +21,7 @@ The Levoai IIS Module captures HTTP/HTTPS traffic from your IIS web servers and 
 
 ### 1. Download & Prepare
 
-1. Download the `Levoai-IIS-Module.zip` file from our [downloads portal](https://github.com/levoai/downloads/tree/main/windows)
+1. Download the `Levoai-IIS-Module.zip` file from our [downloads portal](https://github.com/levoai/downloads/tree/main/IIS)
 2. Extract the contents to a directory (recommended: `C:\Program Files\Levo\IISModule\`)
 3. **Important**: Schedule a maintenance window as installation requires an IIS restart
 
