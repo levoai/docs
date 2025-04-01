@@ -1,6 +1,6 @@
 ##################################################################################################
 # eBPF Sensor Configuration Settings (Helm Values)
-# Copyright: Levo Inc., 2024
+# Copyright: Levo Inc., 2025
 #
 # Helm Values file to configure eBPF Sensor.
 # See https://helm.sh/docs/chart_template_guide/values_files/ for more information.
@@ -23,6 +23,7 @@ sensor:
     #http-proxy: "" # Proxy used for HTTP requests
     #https-proxy: "" # Proxy used for HTTPS requests
     #kube-api-rate-limit-time: 30 # Interval between each successful Kube Api call
+    #ignore-ssl-verify: false # Ignore ssl verify when connecting to the collector
     # --------------------------------------------------------------------------------------------
     
     
