@@ -24,6 +24,9 @@ LEVO_ORG_ID="your-org-id"
 
 Additional sensor configs are present in the file `/etc/levo/sensor/config.yaml`
 
+> [!NOTE]
+> 
+> To Connect to Levoai Satellite without SSL verification, set `collector-grpc-transport` to `false` and add the `ignore-ssl-verify` flag as `true` in the `/etc/levo/sensor/config.yaml` file.
 
 **A Sensor *restart* is required for the config changes to take effect.**
 
