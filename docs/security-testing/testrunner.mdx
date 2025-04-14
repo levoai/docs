@@ -113,8 +113,15 @@ chmod +x levoai-testrunner.sh
 
 3. Create .env file in the same directory to set the required environment variables:
 ```
-LEVOAI_AUTH_KEY='<your-auth-key>'
-LEVOAI_ORG_ID='<your-organization-id>'
+LEVOAI_AUTH_KEY=<your-auth-key>
+LEVOAI_ORG_ID=<your-organization-id>
+```
+
+:::info
+
+For customers hosted in India region, add `LEVOAI_BASE_URL` environment variable too.
+```
+LEVOAI_BASE_URL=https://api.india-1.levo.ai
 ```
 
 4. Start the testrunner:
@@ -139,12 +146,7 @@ This ensures the script can access the required environment variables without ex
 ./levoai-testrunner.sh stop
 ```
 
-:::info
 
-For apps hosted in different regions, set the environment variable `LEVOAI_BASE_URL`.
-```bash
-export LEVOAI_BASE_URL='https://api.india-1.levo.ai'
-```
 
 :::
 
