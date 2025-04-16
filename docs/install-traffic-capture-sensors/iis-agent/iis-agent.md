@@ -16,9 +16,9 @@ The Levoai IIS Module captures HTTP/HTTPS traffic from your IIS web servers and 
 - Windows Server with IIS 8.0+
 - Administrator privileges on the Windows server
 - PowerShell 5.0+
-- Windows Media Foundation (required for some IIS components):
+- Windows Media Foundation (necessary for IIS components):
 
-    Run the following command in PowerShell to install:
+    If not installed, run the following command in PowerShell to install:
     ```powershell
     Install-WindowsFeature -Name "Server-Media-Foundation"
     ```
