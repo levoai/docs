@@ -16,6 +16,18 @@ The Levoai IIS Module captures HTTP/HTTPS traffic from your IIS web servers and 
 - Windows Server with IIS 8.0+
 - Administrator privileges on the Windows server
 - PowerShell 5.0+
+- Windows Media Foundation (necessary for IIS components):
+
+    If not installed, run the following command in PowerShell to install:
+    ```powershell
+    Install-WindowsFeature -Name "Server-Media-Foundation"
+    ```
+
+- C++ Redistributables (required for running native modules):
+
+    [Visual C++ Redistributable (x64)](https://aka.ms/vs/17/release/vc_redist.x64.exe)
+
+    [Visual C++ Redistributable (x86)](https://aka.ms/vs/17/release/vc_redist.x86.exe)
 
 ## Installation Steps
 
@@ -89,8 +101,10 @@ To uninstall the module, run the following commands in PowerShell (as Administra
 
 ```powershell
 Import-Module WebAdministration
-Remove-WebGlobalModule -Name "LevoaiIISModule"
-Clear-WebConfiguration -PSPath "MACHINE/WEBROOT/APPHOST" -Filter "system.webServer/modules/add[@name='LevoaiIISModule']"
+Remove-WebGlobalModule -Name "LevoaiIISModule_x64.dll"
+Remove-WebGlobalModule -Name "LevoaiIISModule_x86.dll"
+Clear-WebConfiguration -PSPath "MACHINE/WEBROOT/APPHOST" -Filter "system.webServer/modules/add[@name='LevoaiIISModule_x64.dll']"
+Clear-WebConfiguration -PSPath "MACHINE/WEBROOT/APPHOST" -Filter "system.webServer/modules/add[@name='LevoaiIISModule_x86.dll']"
 iisreset
 ```
 
