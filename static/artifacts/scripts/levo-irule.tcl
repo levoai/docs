@@ -19,14 +19,13 @@ set static::capturable_content_types {json xml x-www-form-urlencoded}
 # Levo.ai's Collector details
 set static::collector_host_ip "<collector-host-ip>"
 set static::collector_host_port "<collector-host-port>"
+set static::organization_id "<levoai-organization-id>"
 # Do not modify
 set static::collector_uri "/v1/f5-ltm-logs"
 
 }
 
 when CLIENT_ACCEPTED {
-
-    set hsl [HSL::open -proto TCP -pool $static::hsl_pool]
     set sessionId "[IP::client_addr][TCP::client_port][IP::local_addr][TCP::local_port][expr { int(100000000 * rand()) }]"
     binary scan [md5 $sessionId] H* correlationId junk
     
@@ -94,7 +93,6 @@ when HTTP_REQUEST_DATA {
 
 when HTTP_RESPONSE  {
     set response_time [clock clicks -milliseconds]
-    set resHeaderString "${static::response_header_start}"
     set json_res_header_names_list "\["
     set json_res_header_values_list "\["
     set contentTypeHeaderValue ""
@@ -116,9 +114,6 @@ when HTTP_RESPONSE  {
         append json_res_header_names_list ",\"$lwcasekey\""
         append json_res_header_values_list ",\"$value\""
       }
-
-      set headers "${static::header_name}${lwcasekey}${static::header_value}${value}"
-      append resHeaderString $headers
     }
     append json_res_header_names_list "\]"
     append json_res_header_values_list "\]"
@@ -132,6 +127,7 @@ when HTTP_RESPONSE  {
     # Prepare an HTTP POST request
     set http_request "POST ${static::collector_uri} HTTP/1.1\r\n"
     append http_request "Host: ${static::collector_host_ip}\r\n"
+    append http_request "x-levo-organization-id: ${static::organization_id}\r\n"
     append http_request "Content-Type: application/json\r\n"
 
       

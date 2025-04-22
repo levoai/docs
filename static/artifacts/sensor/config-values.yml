@@ -1,6 +1,6 @@
 ##################################################################################################
 # eBPF Sensor Configuration Settings (Helm Values)
-# Copyright: Levo Inc., 2024
+# Copyright: Levo Inc., 2025
 #
 # Helm Values file to configure eBPF Sensor.
 # See https://helm.sh/docs/chart_template_guide/values_files/ for more information.
@@ -74,6 +74,16 @@ sensor:
     # export-otel-logs: true
     # export-metrics-to-log: true
     enable-metrics: true
+    # --------------------------------------------------------------------------------------------
+    
+    # --------------------------------------------------------------------------------------------
+    # TLS Settings: Configs for TLS connectivity with Satellite
+    # --------------------------------------------------------------------------------------------
+    #ignore-ssl-verify: false # Ignore ssl verify when connecting to the collector
+    #tls-client-cert-path: "" # TLS Client certificate path
+    #tls-client-key-path: "" # TLS Client key path
+    #tls-ca-cert-path: "" # TLS CA Cert path
+    # --------------------------------------------------------------------------------------------
     
     # --------------------------------------------------------------------------------------------
     # Process Filters: process command names/IDs to monitor & capture API traffic.

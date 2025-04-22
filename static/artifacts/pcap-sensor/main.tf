@@ -16,7 +16,7 @@ variable "task_definition_name" {
 variable "image_name" {
     description = "Levo.ai pcap sensor image name"
     type = string
-    default = "levoai/pcap-sensor:0.1.9"
+    default = "levoai/pcap-sensor:0.2.0"
 }
 
 variable "satellite_url" {

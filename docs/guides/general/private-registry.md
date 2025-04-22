@@ -24,6 +24,7 @@ trap "exit" INT
 
 region="us-west-2"
 registry="your.registry"
+repositoryPrefix="${repositoryPrefix:-}" # Optional, replace with your repository prefix, in case you are using a different repository
 
 helm repo add levoai https://charts.levo.ai || true
 helm repo update levoai
@@ -32,8 +33,13 @@ images+=($(helm template levoai/levoai-ebpf-sensor | yq -N '..|.image? | select(
 
 for image in "${images[@]}"; do
   src_image=${image#"docker.io/"}
-  dest_image="$registry/$src_image"
-  repo_name=${src_image%:*}
+  if [ -n "$repositoryPrefix" ]; then
+    repo_name=${src_image#*/}
+    dest_image="$registry/$repositoryPrefix/$repo_name"
+  else
+    repo_name=${src_image%:*}
+    dest_image="$registry/$src_image"
+  fi
   aws ecr describe-repositories --repository-names $repo_name --region $region || aws ecr create-repository --repository-name $repo_name --region $region
   echo "Copying $src_image to $dest_image"
   docker buildx imagetools create --tag $dest_image $src_image
@@ -54,7 +60,14 @@ kubectl create secret docker-registry ecr-auth --docker-server=your.registry --d
 
 ```yaml
 sensor:
-  imageRepo: your.registry/levoai/ebpf_sensor
+  imageRepo: <your.registry>/levoai/ebpf_sensor
+```
+
+> Note: In case you are using a different repository, please replace `levoai/ebpf_sensor` with the correct repository name.
+
+```yaml
+sensor:
+  imageRepo: <your.registry>/<your-repository-prefix>/ebpf_sensor
 ```
 
 ### Satellite
@@ -65,7 +78,44 @@ global:
     onprem-api:
       org-id: <id>
       refresh-token: <token>
-  imageRegistry: your.registry
+  imageRegistry: <your.registry>
   imagePullSecrets:
     - name: ecr-auth
+```
+
+> Note: In case you are using a different repository, please add the following lines to the `values.yaml`.
+
+```yaml
+global:
+    busyboxImage: <your.repository-prefix>/busybox
+
+rabbitmq:
+  image:
+    repository: <your.repository-prefix>/rabbitmq
+    tag: <version>
+    
+satellite:
+  image:
+    repository: <your.repository-prefix>/satellite
+    tag: <version>
+
+tagger:
+  image:
+    repository: <your.repository-prefix>/satellite
+    tag: <version>
+
+levoai-ion:
+  image:
+    repository: <your.repository-prefix>/satellite
+    tag: <version>
+    
+levoai-collector:
+  image:
+    repository: <your.repository-prefix>/collector
+    tag: <version>
+
+haproxy:
+  image:
+    repository: <your.repository-prefix>/haproxy
+    tag: <version>
 ```

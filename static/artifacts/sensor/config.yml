@@ -1,6 +1,6 @@
 ##############################################################################################
 # eBPF Sensor Configuration Settings (YAML Format)
-# Copyright: Levo Inc., 2024
+# Copyright: Levo Inc., 2025
 ##############################################################################################
 
 
@@ -69,6 +69,16 @@ collector-grpc-transport: true
 # export-otel-logs: true
 # export-metrics-to-log: true
 enable-metrics: true
+# --------------------------------------------------------------------------------------------
+
+# --------------------------------------------------------------------------------------------
+# TLS Settings: Configs for TLS connectivity with Satellite
+# --------------------------------------------------------------------------------------------
+#ignore-ssl-verify: false # Ignore ssl verify when connecting to the collector
+#tls-client-cert-path: "" # TLS Client certificate path
+#tls-client-key-path: "" # TLS Client key path
+#tls-ca-cert-path: "" # TLS CA Cert path
+# --------------------------------------------------------------------------------------------
 
 # --------------------------------------------------------------------------------------------
 # Process Filters: process command names/IDs to monitor & capture API traffic.

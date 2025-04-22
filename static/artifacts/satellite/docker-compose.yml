@@ -123,6 +123,7 @@ services:
             "use_ssl": ${LEVOAI_ENABLE_RMQ_SSL:-false}
           }
         }
+      RUN_SEPARATE_PROCESSES: ${LEVOAI_RUN_SEPARATE_PROCESSES:-true}
     depends_on:
       levoai-rabbitmq:
         condition: service_healthy

@@ -23,7 +23,7 @@ title: Install eBPF Sensor on Docker | Levo.ai Documentation
 sudo docker run --restart unless-stopped \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
   --add-host host.docker.internal:host-gateway \
-  --privileged --detach levoai/ebpf_sensor:0.45.4 \
+  --privileged --detach levoai/ebpf_sensor:0.46.4 \
   --host-proc-path /host/proc/ \
   --satellite-url <satellite-address> \
   --organization-id <Org ID> \

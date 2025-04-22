@@ -24,7 +24,7 @@ aws logs put-retention-policy --log-group-name $log_group_name --retention-in-da
 
 log_group_arn=$(aws logs describe-log-groups --log-group-name-prefix $log_group_name --query 'logGroups[0].arn' --output text)
 
-aws apigatewayv2 update-stage --api-id 'your-apigateway-api-id' --stage-name '$default' --access-log-settings "DestinationArn=$log_group_arn,"'Format="{\"host\":\"$context.domainName\",\"method\":\"$context.httpMethod\",\"path\":\"$context.path\",\"agent\":\"$context.identity.userAgent\",\"code\":\"$context.status\",\"requestId\":\"$context.requestId\",\"ip\":\"$context.identity.sourceIp\",\"requestTime\":\"$context.requestTime\",\"routeKey\":\"$context.routeKey\",\"protocol\":\"$context.protocol\",\"responseLength\":\"$context.responseLength\"}"'
+aws apigatewayv2 update-stage --api-id 'your-apigateway-api-id' --stage-name '$default' --access-log-settings DestinationArn="$log_group_arn",Format="{\"host\":\"$context.domainName\",\"method\":\"$context.httpMethod\",\"path\":\"$context.path\",\"agent\":\"$context.identity.userAgent\",\"code\":\"$context.status\",\"requestId\":\"$context.requestId\",\"ip\":\"$context.identity.sourceIp\",\"requestTime\":\"$context.requestTime\",\"routeKey\":\"$context.routeKey\",\"protocol\":\"$context.protocol\",\"responseLength\":\"$context.responseLength\"}"
 
 aws logs tail --follow $log_group_name
 ```
@@ -34,8 +34,16 @@ aws logs tail --follow $log_group_name
 You may also use Amazon Data Firehose to stream live access logs to Levo's satellite.
 
 1. Configure a CloudWatch log group for APIs in API Gateway (using the above example script)
-1. Create a Firehose stream to send incoming events to a publicly accessible satellite endpoint
+1. Create a Firehose stream to send incoming events to a publicly accessible satellite endpoint by following these steps:
+    - Go to the AWS Data Firehose Service in the AWS Console.
+    - Click on Create Firehose stream.
+    - In Source, choose `Direct PUT` from the dropdown, and in the Destination, choose `HTTP Endpoint`.
+    - In HTTP endpoint URL under Destination, put the satellite's publically accessible endpoint and click on Create Firehose Stream to complete the process.
 1. Connect the CloudWatch log group to the Firehose stream
+    - Open the earlier created log group in AWS CloudWatch.
+    - Go to Subscription Filters and click on Create.
+    - Choose `Create Amazon Data Firehose subscription filter` and select the particular Amazon Data Firehose stream.
+    - Click on `Start Streaming` and you can now see your traffic come up in our Application.
 
 Please contact `support@levo.ai` if you are interested in this setup.
 
