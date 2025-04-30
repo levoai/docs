@@ -127,9 +127,26 @@ services:
     cpus: 0.5
 
   levoai-ion:
-    image: 'levoai/ion:latest'
-    command: [ "-verbose" ]
+    image: 'levoai/satellite'
     container_name: levoai-ion
     restart: always
-    ports:
-      - '9990:8000'
+    entrypoint:
+      - 'python'
+      - '-OO'
+      - /opt/levoai/e7s/src/python/levoai_ion/ion_server.py
+    depends_on:
+      levoai-rabbitmq:
+        condition: service_healthy
+    environment:
+      LEVOAI_MODE: docker-compose
+      LEVOAI_LOG_LEVEL: ${LEVOAI_LOG_LEVEL:-INFO}
+      LEVOAI_IAM_BASE_URL: ${LEVOAI_IAM_BASE_URL:-https://api.levo.ai}
+      LEVOAI_CONF_OVERRIDES: >
+        {
+          "onprem-api": {
+              "url": "${LEVOAI_BASE_URL:-https://api.levo.ai}",
+              "refresh-token": "${LEVOAI_AUTH_KEY}",
+              "org-id": "${LEVOAI_ORG_ID:-}",
+              "org-prefix": "${LEVOAI_ORG_PREFIX:-}"
+          }
+        }
