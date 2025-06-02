@@ -3,6 +3,9 @@ sidebar_position: 1
 title: Install PCAP Sensor on Docker | Levo.ai Documentation
 ---
 
+import version from '@site/src/version.json';
+import CodeBlock from '@theme/CodeBlock';
+
 # Sensor via Docker
 
 ## Install via Docker
@@ -13,13 +16,15 @@ title: Install PCAP Sensor on Docker | Levo.ai Documentation
 
 ### Start the sensor
 
-```bash
-sudo docker run --net=host --rm -it levoai/pcap-sensor:0.2.0 \
+<CodeBlock language="bash">
+{`
+sudo docker run --net=host --rm -it levoai/pcap-sensor:${version.pcap_sensor_version} \
 ./bin/init apidump \
 --satellite-url "your satellite url (http(s)://hostname|IP:port)" \
 --levo-env "your application environment (staging, production etc.)" \
 --levoai-org-id "your levo org id"
-```
+`}
+</CodeBlock>
 Specify additional flags in the command
 ```bash
 --trace-export-interval	"trace export interval in seconds (default 10)"

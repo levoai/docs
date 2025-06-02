@@ -2,6 +2,9 @@
 sidebar_position: 3
 ---
 
+import version from '@site/src/version.json';
+import CodeBlock from '@theme/CodeBlock';
+
 # PCAP Sensor via YUM Package
 
 ## Install on RPM based Linux Distributions via `yum`
@@ -35,9 +38,9 @@ Install the pcap Sensor from Levo's RPM repository.
   ```
 
 1. Install the package in your repository.
-  ```shell
-  sudo yum install levo-pcap-sensor-0.2.0
-  ```
+  <CodeBlock language="bash">
+  sudo yum install levo-pcap-sensor-{version.pcap_sensor_version}
+  </CodeBlock>
 
 Enter `y` when prompted.
 

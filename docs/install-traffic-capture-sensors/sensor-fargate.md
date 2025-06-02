@@ -3,6 +3,9 @@ sidebar_position: 3
 description: Install Levo.ai PCAP sensor on AWS Fargate. Follow our detailed guide for setup, configuration, and robust API traffic capture and analysis.
 ---
 
+import version from '@site/src/version.json';
+import CodeBlock from '@theme/CodeBlock';
+
 # Sensor on AWS Fargate
 
 ## Prerequisites
@@ -41,10 +44,11 @@ The steps to add the sensor to your task are as follows
 - Set the cpu limit as number of CPU Units (*Note: 1 core = 1024 CPU Units*)
 - Set the memory limit in `Mib` (*Note: memory should not exceed the Task memory limit*)
 
-```json
+<CodeBlock language="json">
+{`
 {
     "name": "levo-pcap-sensor",
-    "image": "levoai/pcap-sensor:0.2.0",
+    "image": levoai/pcap-sensor:${version.pcap_sensor_version},
     "cpu": 512,
     "memory": 512,
     "portMappings": [],
@@ -79,7 +83,8 @@ The steps to add the sensor to your task are as follows
         }
     }
 }
-```
+`}
+</CodeBlock>
 
 Specify additional flags in the entrypoint
 ```bash

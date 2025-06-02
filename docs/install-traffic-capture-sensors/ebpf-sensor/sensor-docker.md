@@ -3,6 +3,9 @@ sidebar_position: 3
 title: Install eBPF Sensor on Docker | Levo.ai Documentation
 ---
 
+import version from '@site/src/version.json';
+import CodeBlock from '@theme/CodeBlock';
+
 # Sensor via Docker
 
 ## Install on Linux host via Docker
@@ -15,7 +18,8 @@ title: Install eBPF Sensor on Docker | Levo.ai Documentation
 
 > If you are installing the Satellite and Sensor on the ***same*** Linux host, please do ***NOT*** use `localhost` as the satellite-address below. Use `host.docker.internal`, or the Linux host's `IP address` or `domain name` instead. This is required as the Sensor runs inside a Docker container, and `localhost` resolves to the Sensor container's IP address, instead of the Linux host.
 
-```bash
+<CodeBlock language="bash">
+{`
 # Replace '<satellite-address>' with the values you noted down from the Satellite install
 #
 # Specify below the 'Application Name' chosen earlier. Do not quote the 'Application Name'
@@ -23,13 +27,14 @@ title: Install eBPF Sensor on Docker | Levo.ai Documentation
 sudo docker run --restart unless-stopped \
   -v /sys/kernel/debug:/sys/kernel/debug -v /proc:/host/proc \
   --add-host host.docker.internal:host-gateway \
-  --privileged --detach levoai/ebpf_sensor:0.46.4 \
+  --privileged --detach levoai/ebpf_sensor:${version.ebpf_sensor_version} \
   --host-proc-path /host/proc/ \
   --satellite-url <satellite-address> \
   --organization-id <Org ID> \
   --env <'application-environment'> \
   --default-service-name <'Application Name' chosen earlier>
-```
+`}
+</CodeBlock>
 
 #### NOTE:
 The default address for the collector in Docker-based Sensor installations is `https://collector.levo.ai`.
