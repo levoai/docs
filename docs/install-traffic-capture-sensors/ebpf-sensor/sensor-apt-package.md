@@ -66,9 +66,10 @@ Additional sensor configs are present in the file `/etc/levo/sensor/config.yaml`
 **A Sensor *restart* is required for the config changes to take effect.**
 
 
-### Start Sensor
+### Enable and Start Sensor
 ```bash
 # Note: The default config file is located at: '/etc/levo/sensor/config.yaml'
+sudo systemctl enable levo-ebpf-sensor
 sudo systemctl start levo-ebpf-sensor
 ```
 

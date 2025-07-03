@@ -31,8 +31,9 @@ Additional sensor configs are present in the file `/etc/levo/sensor/config.yaml`
 **A Sensor *restart* is required for the config changes to take effect.**
 
 
-### 3. Start the Sensor
+### 3. Enable and Start the Sensor
 ```bash
+sudo systemctl enable levo-ebpf-sensor
 sudo systemctl start levo-ebpf-sensor
 ```
 

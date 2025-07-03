@@ -302,7 +302,6 @@ helm upgrade levoai-sensor levoai/levoai-ebpf-sensor \
   --install \
   --namespace levoai \
   --create-namespace \
-  --set sensor.config.default-service-name="my-test-app-k8s-c101" \
   --set "sensor.config.monitored-commands={python3,java}"
 ```
 
@@ -325,7 +324,7 @@ sudo docker run --restart unless-stopped \
   --host-proc-path /host/proc \
   --satellite-url <hostname|IP:port> \
   --organization-id <OrgID> \
-  --default-service-name <'Application Name' chosen earlier>
+  --env <application-environment>
 ```
 Please check the Sensor logs to ensure the configuration file does not have any syntax errors, and the Sensor is running with the applied configuration.
 
