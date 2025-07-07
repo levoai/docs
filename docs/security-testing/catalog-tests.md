@@ -16,7 +16,7 @@ Levo provides you with the ability to run a variety of tests on your API endpoin
 
 ![image](https://github.com/user-attachments/assets/2bb5e5d1-7ed2-46e5-b1be-ed8803efc047)
 
-### Select the endpoints to 'Test' and click on the test button at the lower right bottom. 
+### To run tests on specific endpoints, select the endpoints and click on the 'Test' button at the lower right bottom. 
 
 ![image](https://github.com/user-attachments/assets/5fcb8668-a31f-4238-bb19-add2cdb2404f)
 
@@ -33,7 +33,7 @@ For testing using traces, it will use the recent traces to run the tests.
 
 ![image](https://github.com/user-attachments/assets/18590d42-c916-40cd-a06f-a29135b6f8e8)
 
-### Tests will run for all runnable endpoints, you can change the endpoints test parameters if needed.
+### The tests will run for all runnable endpoints.
 
 ![image](https://github.com/user-attachments/assets/35c8c891-02ef-4839-987a-719711c62278)
 
@@ -47,7 +47,7 @@ For testing using traces, it will use the recent traces to run the tests.
 
 <br></br>
 
-### Select Method and Enter a Target URL to run tests against, e.g. `http://crapi.levo.ai` and click on `Run Tests` to start the tests' execution.
+### Choose the test run environment and enter the target URL to run tests against, e.g. `http://crapi-spec-building.levo.ai.app` and click on `Run Tests` to start the tests' execution.
 - `Run on Cloud`: The tests will be run on Levo's platform, i.e., the requests to the target server are made by Levo. This means that the application must be exposed via a publicly reachable domain or IP address.
 - `Run on-prem`: The tests will run on your premise. Head to the **[Testrunners](testrunner.mdx)** page to know how to install **Testrunners**.
 
