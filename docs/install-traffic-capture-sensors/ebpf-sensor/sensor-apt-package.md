@@ -111,5 +111,5 @@ sudo apt clean
 ```
 
 ### Manage Sensor Configuration
-Please refer to [Sensor Configuration](/install-traffic-capture-sensors/common-tasks/sensor-configuration.mdx), and [Applying Configuration Changes](/install-traffic-capture-sensors/common-tasks/sensor-configuration.mdx#running-on-linux-host).
+Please refer to [Sensor Configuration](/install-traffic-capture-sensors/ebpf-sensor/common-tasks/sensor-configuration.mdx), and [Applying Configuration Changes](/install-traffic-capture-sensors/ebpf-sensor/common-tasks/sensor-configuration.mdx#running-on-linux-host).
 

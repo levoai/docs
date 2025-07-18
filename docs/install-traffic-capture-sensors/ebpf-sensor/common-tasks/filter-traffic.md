@@ -74,7 +74,7 @@ If your API Traffic (HTTP) uses one of these ports, please see section below on 
 -------------------------------------------------------------
 
 ## Configure IP Filters
-The below sections describe common filtering scenarios with examples. In all cases the examples show the relevant snippet of the configuration file. Adapt these examples to the [Helm Values config file](../../../static/artifacts/sensor/config-values.yml), if running on Kubernetes.
+The below sections describe common filtering scenarios with examples. In all cases the examples show the relevant snippet of the configuration file. Adapt these examples to the [Helm Values config file](../../../../static/artifacts/sensor/config-values.yml), if running on Kubernetes.
 
 ### IP Filter Examples
 
@@ -392,7 +392,7 @@ The sensor allows filtering of API traffic based on the Kubernetes Pod's metadat
 
 ### K8s Pod Filter Configuration Section
 
-K8s Pod filters are configured in the `k8s-pod-filter-list` section of the [Helm Values config file](../../../static/artifacts/sensor/config-values.yml) as shown below.
+K8s Pod filters are configured in the `k8s-pod-filter-list` section of the [Helm Values config file](../../../../static/artifacts/sensor/config-values.yml) as shown below.
 
 ```yaml
 sensor:
@@ -418,7 +418,7 @@ sensor:
 ```
 
 ### K8s Pod Filter Examples
-Below are common filtering scenarios with examples. In all cases the examples show the relevant snippet of the configuration file. Adapt these examples to the [Helm Values config file](../../../static/artifacts/sensor/config-values.yml).
+Below are common filtering scenarios with examples. In all cases the examples show the relevant snippet of the configuration file. Adapt these examples to the [Helm Values config file](../../../../static/artifacts/sensor/config-values.yml).
 
 #### Trace A Single Deployment In A Specific Namespace
 
@@ -572,7 +572,7 @@ The `rules` sub section defines the override behavior using a YAML array list. E
 
 
 ### URL Filter Examples
-Below are common filtering scenarios with examples. In all cases the examples show the relevant snippet of the configuration file. Adapt these examples to the [Helm Values config file](../../../static/artifacts/sensor/config-values.yml), if running on Kubernetes.
+Below are common filtering scenarios with examples. In all cases the examples show the relevant snippet of the configuration file. Adapt these examples to the [Helm Values config file](../../../../static/artifacts/sensor/config-values.yml), if running on Kubernetes.
 
 #### Ignore All `.js` API Endpoints
 The below filter will ignore all API endpoints with URIs ending with `.js`.
