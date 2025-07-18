@@ -36,7 +36,7 @@ jobs:
         run: |
           mkdir -p patches
           diff -u dest-repo/services/risk-scoring/risk-scoring-service/src/main/resources/cwe-references.md \
-                   source-repo/findings/cwe-references.md > patches/cwe.patch || true
+                   findings/cwe-references.md > patches/cwe.patch || true
 
           if [ -s patches/cwe.patch ]; then
             echo "Changes detected, applying patch..."
