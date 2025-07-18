@@ -2,6 +2,9 @@
 sidebar_position: 4
 ---
 
+import version from '@site/src/version.json';
+import CodeBlock from '@theme/CodeBlock';
+
 # Sensor via APT Package
 
 ## Install on Debian based Linux via `apt`
@@ -33,9 +36,9 @@ sudo apt update
 
 ### 3. Download/install Sensor artifacts
 
-```bash
-sudo apt install levo-ebpf-sensor=0.47.1
-```
+<CodeBlock language="bash">
+sudo apt install levo-ebpf-sensor={version.ebpf_sensor_version}
+</CodeBlock>
 
 ### 4. Start the Sensor
 Please take a look at the [Running the Sensor as a Systemd Service](/install-traffic-capture-sensors/ebpf-sensor/sensor-systemd-service) section for further instructions.
@@ -108,5 +111,5 @@ sudo apt clean
 ```
 
 ### Manage Sensor Configuration
-Please refer to [Sensor Configuration](/install-traffic-capture-sensors/common-tasks/sensor-configuration.mdx), and [Applying Configuration Changes](/install-traffic-capture-sensors/common-tasks/sensor-configuration.mdx#running-on-linux-host).
+Please refer to [Sensor Configuration](/install-traffic-capture-sensors/ebpf-sensor/common-tasks/sensor-configuration.mdx), and [Applying Configuration Changes](/install-traffic-capture-sensors/ebpf-sensor/common-tasks/sensor-configuration.mdx#running-on-linux-host).
 

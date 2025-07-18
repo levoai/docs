@@ -70,7 +70,7 @@ Less than 5%, as the sensor can sample API traffic.
 Yes. API traffic can be sampled in high traffic environments to optimize CPU consumption of the Sensor. Unlike vendors building API security solutions that are anomaly based (where every single API call has to be captured), Levo can aggressively sample API traffic. Sampled API traffic is used to discover API endpoints and their underlying schema.
 
 ### Can API traffic be filtered?
-Yes. Please see [Filtering API Traffic](/install-traffic-capture-sensors/common-tasks/filter-traffic.md).
+Yes. Please see [Filtering API Traffic](/install-traffic-capture-sensors/ebpf-sensor/common-tasks/filter-traffic.md).
 
 ### Can I consume captured API Traces from the sensor?
 Yes. The Sensor exports captured API Traces in industry standard [OpenTelemetry](https://opentelemetry.io/docs/concepts/what-is-opentelemetry/) format. These traces can be visualized using tools like [Jaeger](https://www.jaegertracing.io/), etc.

@@ -71,7 +71,7 @@ const config = {
             from: ['/api-observability/install-guide/install-satellite'],
           },
           {
-            to: '/install-traffic-capture-sensors/common-tasks/sensor-configuration',
+            to: '/install-traffic-capture-sensors/ebpf-sensor/common-tasks/sensor-configuration',
             from: ['/api-observability/common-tasks/sensor/sensor-configuration'],
           },
           {
@@ -119,7 +119,7 @@ const config = {
             from: '/security-contract-testing/tasks/authentication/authn-authz',
           },
           {
-            to: '/install-traffic-capture-sensors/common-tasks/filter-traffic',
+            to: '/install-traffic-capture-sensors/ebpf-sensor/common-tasks/filter-traffic',
             from: '/api-observability/common-tasks/sensor/filter-traffic',
           },
           {
@@ -242,7 +242,7 @@ const config = {
           if (existingPath.includes('/install-traffic-capture-sensors')) {
             return [
               existingPath.replace('/install-traffic-capture-sensors', '/api-observability/install-guide/install-sensor'),
-              existingPath.replace('/install-traffic-capture-sensors/common-tasks', '/api-observability/common-tasks/sensor'),
+              existingPath.replace('/install-traffic-capture-sensors/ebpf-sensor/common-tasks', '/api-observability/common-tasks/sensor'),
             ];
           }
           return undefined; // Return a falsy value: no redirect created
