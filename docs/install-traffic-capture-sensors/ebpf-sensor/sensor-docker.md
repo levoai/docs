@@ -32,7 +32,6 @@ sudo docker run --restart unless-stopped \
   --satellite-url <satellite-address> \
   --organization-id <Org ID> \
   --env <'application-environment'> \
-  --default-service-name <'Application Name' chosen earlier>
 `}
 </CodeBlock>
 

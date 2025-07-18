@@ -91,8 +91,9 @@ Additional options can be configured as follows:
 
 #### Start/Stop the Sensor
 
-To start the sensor
+To enable and start the sensor
 ```bash
+sudo systemctl enable levo-pcap-sensor.service
 sudo systemctl start levo-pcap-sensor.service
 ```
 
