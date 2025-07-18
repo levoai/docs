@@ -1,0 +1,71 @@
+name: Sync CWE References to platform-services
+
+on:
+  push:
+    paths:
+      - 'findings/cwe-references.md'
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-cwe:
+    name: Sync CWE References
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repo (levoai/docs)
+        uses: actions/checkout@v4
+
+      - name: Checkout destination repo (levoai/platform-services)
+        uses: actions/checkout@v4
+        with:
+          repository: levoai/platform-services
+          token: ${{ secrets.REPOSYNC_TOKEN }}
+          path: dest-repo
+
+      - name: Set up Git identity
+        run: |
+          git config user.name "levobot"
+          git config user.email "github-bot@levo.ai"
+
+      - name: Generate patch and apply if changed
+        run: |
+          mkdir -p patches
+          diff -u dest-repo/services/risk-scoring/risk-scoring-service/src/main/resources/cwe-references.md \
+                   source-repo/findings/cwe-references.md > patches/cwe.patch || true
+
+          if [ -s patches/cwe.patch ]; then
+            echo "Changes detected, applying patch..."
+            patch dest-repo/services/risk-scoring/risk-scoring-service/src/main/resources/cwe-references.md patches/cwe.patch
+          else
+            echo "No changes detected."
+          fi
+
+      - name: Commit and create PR if needed
+        working-directory: dest-repo
+        run: |
+          TIMESTAMP=$(date +%s)
+          BRANCH="sync-cwe-refs-${TIMESTAMP}"
+
+          git checkout -b "$BRANCH"
+          git add services/risk-scoring/risk-scoring-service/src/main/resources/cwe-references.md
+
+          if git diff --cached --quiet; then
+            echo "No changes after patch. Skipping PR."
+            exit 0
+          fi
+
+          git commit -m "Sync CWE references from levoai/docs"
+          git push origin "$BRANCH"
+
+          gh pr create \
+            --title "Sync CWE references from levoai/docs" \
+            --body "This PR updates the CWE references from the source repository." \
+            --base main \
+            --head "$BRANCH"
+        env:
+          GH_TOKEN: ${{ secrets.REPOSYNC_TOKEN }}
