@@ -12,7 +12,7 @@ The sensor can filter traffic based on Linux Process names, Linux Process IDs, I
 
 Below diagram shows the outcomes and precedence, when the various filtering criteria mentioned above are combined together.
 
-![API Filter Precedence](../../assets/Sensor-API-Traffic-Filters-Precedence.svg)
+![API Filter Precedence](../../../assets/Sensor-API-Traffic-Filters-Precedence.svg)
 
 Below are details on the supported filtering criteria.
 
