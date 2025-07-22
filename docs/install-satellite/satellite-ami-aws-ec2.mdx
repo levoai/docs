@@ -65,7 +65,7 @@ EOF
 
 chmod 600 /opt/levo/.levoenv
 chown ubuntu:ubuntu /opt/levo/.levoenv
-#sudo /opt/levoai/levo_satellite.sh upgrade >> satellite-start.log 2>&1
+sudo /opt/levo/levo_satellite.sh upgrade >> satellite-start.log 2>&1
 # Uncomment the following line to enable the traffic mirroring listener
 # sudo /opt/levoai/levo_traffic_listener.sh start >> traffic-listener-start.log 2>&1
 ```
