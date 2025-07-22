@@ -57,8 +57,15 @@ Under Advanced details > User Data, add the following (pick the appropriate valu
 
 ```bash
 #!/bin/bash
-echo "LEVOAI_AUTH_KEY='Authorization Key'" > /opt/levoai/.levoenv
-sudo /opt/levoai/levo_satellite.sh upgrade >> satellite-start.log 2>&1
+cat <<EOF > /opt/levo/.levoenv
+LEVOAI_AUTH_KEY="YOUR_LEVOAI_AUTH_KEY"
+LEVOAI_ORG_ID="Your_LEVOAI_ORG_ID"
+LEVOAI_BASE_URL="Base env url"
+EOF
+
+chmod 600 /opt/levo/.levoenv
+chown ubuntu:ubuntu /opt/levo/.levoenv
+#sudo /opt/levoai/levo_satellite.sh upgrade >> satellite-start.log 2>&1
 # Uncomment the following line to enable the traffic mirroring listener
 # sudo /opt/levoai/levo_traffic_listener.sh start >> traffic-listener-start.log 2>&1
 ```
