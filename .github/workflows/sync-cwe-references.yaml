@@ -45,27 +45,14 @@ jobs:
             echo "No changes detected."
           fi
 
-      - name: Commit and create PR if needed
+      - name: Commit and push to main
         working-directory: dest-repo
         run: |
-          TIMESTAMP=$(date +%s)
-          BRANCH="sync-cwe-refs-${TIMESTAMP}"
+          gh auth setup-git
+          git add cwe-references.md
+          git commit -m "Auto-sync CWE references from public docs"
+          git pull --rebase origin main
+          git push origin main
 
-          git checkout -b "$BRANCH"
-          git add services/risk-scoring/risk-scoring-service/src/main/resources/cwe-references.md
-
-          if git diff --cached --quiet; then
-            echo "No changes after patch. Skipping PR."
-            exit 0
-          fi
-
-          git commit -m "Sync CWE references from levoai/docs"
-          git push origin "$BRANCH"
-
-          gh pr create \
-            --title "Sync CWE references from levoai/docs" \
-            --body "This PR updates the CWE references from the source repository." \
-            --base main \
-            --head "$BRANCH"
         env:
           GH_TOKEN: ${{ secrets.REPOSYNC_TOKEN }}
