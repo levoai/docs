@@ -1,4 +1,4 @@
-name: Sync CWE References to platform-services
+name: Findings CWE References
 
 on:
   push:
