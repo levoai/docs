@@ -1,4 +1,4 @@
-# Authentication & Authorization
+## Authentication & Authorization
 
 #### Basic Authentication Used (`basic_auth.py`)
 - **CWE**: 319 - Cleartext Transmission of Sensitive Information
