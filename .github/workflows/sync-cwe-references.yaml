@@ -1,0 +1,58 @@
+name: Findings CWE References
+
+on:
+  push:
+    paths:
+      - 'findings/cwe-references.md'
+    branches:
+      - main
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  sync-cwe:
+    name: Sync CWE References
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source repo (levoai/docs)
+        uses: actions/checkout@v4
+
+      - name: Checkout destination repo (levoai/platform-services)
+        uses: actions/checkout@v4
+        with:
+          repository: levoai/platform-services
+          token: ${{ secrets.REPOSYNC_TOKEN }}
+          path: dest-repo
+
+      - name: Set up Git identity
+        run: |
+          git config user.name "levobot"
+          git config user.email "github-bot@levo.ai"
+
+      - name: Generate patch and apply if changed
+        run: |
+          mkdir -p patches
+          diff -u dest-repo/services/risk-scoring/risk-scoring-service/src/main/resources/cwe-references.md \
+                   findings/cwe-references.md > patches/cwe.patch || true
+
+          if [ -s patches/cwe.patch ]; then
+            echo "Changes detected, applying patch..."
+            patch dest-repo/services/risk-scoring/risk-scoring-service/src/main/resources/cwe-references.md patches/cwe.patch
+          else
+            echo "No changes detected."
+          fi
+
+      - name: Commit and push to main
+        working-directory: dest-repo
+        run: |
+          gh auth setup-git
+          git add cwe-references.md
+          git commit -m "Auto-sync CWE references from public docs"
+          git pull --rebase origin main
+          git push origin main
+
+        env:
+          GH_TOKEN: ${{ secrets.REPOSYNC_TOKEN }}
