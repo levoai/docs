@@ -30,7 +30,7 @@ helm upgrade levoai-pcap-sensor levoai/levoai-pcap-sensor \
   --namespace levoai \
   --create-namespace \
   --set sensor.config.levoaiOrgId="your Levo Org ID" \
-  --set sensor.config.satelliteUrl="http(s)://hostname|IP:port"
+  --set sensor.config.satelliteUrl="http(s)://hostname|IP:port" \
   --set sensor.config.levoEnv="your application environment (staging, production etc.)"
 ```
 
