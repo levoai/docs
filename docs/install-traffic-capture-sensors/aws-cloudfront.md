@@ -22,7 +22,7 @@ clicking on your profile picture in Levo's dashboard, and navigating to `User Se
 ```shell
 git clone https://github.com/levoai/aws-cloudfront-lambda
 cd aws-cloudfront-lambda
-LEVO_ORG_ID=<value> ./install.sh
+LEVO_ORG_ID=<value> LEVO_SATELLITE_URL=<satellite-url> ./install.sh
 ```
 
 ### Associating the Lambdas with a CloudFront Distribution
