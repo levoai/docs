@@ -25,15 +25,16 @@ log_output() {
 }
 
 # Function to extract version from library
-extract_version() {
-    local lib="$1"
-    if [ -f "$lib" ]; then
-        # Look for SSL-related version strings in the binary
-        strings "$lib" 2>/dev/null | grep -E "OpenSSL|GnuTLS|NSS|LibreSSL|BoringSSL|mbedTLS|WolfSSL|Rustls|Botan|BearSSL|s2n" | head -1 || echo "version unknown"
-    else
-        echo "version unknown"
-    fi
-}
+# TODO: Improve version extraction with library-specific logic in future PR
+# extract_version() {
+#     local lib="$1"
+#     if [ -f "$lib" ]; then
+#         # Look for SSL-related version strings in the binary
+#         strings "$lib" 2>/dev/null | grep -E "OpenSSL|GnuTLS|NSS|LibreSSL|BoringSSL|mbedTLS|WolfSSL|Rustls|Botan|BearSSL|s2n" | head -1 || echo "version unknown"
+#     else
+#         echo "version unknown"
+#     fi
+# }
 
 # Function to safely read a file with sudo if needed
 safe_read() {
@@ -124,7 +125,7 @@ SSL_PATTERNS=(
 # Build anchored regex with word boundaries to avoid partial matches
 SSL_REGEX=$(IFS="|"; echo "\\b($(printf '%s' "${SSL_PATTERNS[*]}" | sed 's/ /|/g'))")
 
-declare -A found_libs_map  # map lib_path -> version + count
+declare -A found_libs_map  # map lib_path -> count
 
 if [ -d /proc ]; then
     for proc_dir in /proc/[0-9]*/; do
@@ -151,16 +152,14 @@ if [ -d /proc ]; then
             if [ -n "$libs_found" ]; then
                 for lib in $libs_found; do
                     if [ -f "$lib" ]; then
-                        # Aggregate counts & versions
+                        # Aggregate counts
                         if [[ -z "${found_libs_map[$lib]+_}" ]]; then
-                            version=$(extract_version "$lib")
-                            found_libs_map["$lib"]="1|$version"
+                            found_libs_map["$lib"]="1"
                         else
                             # increment count
-                            count=${found_libs_map[$lib]%%|*}
-                            version=${found_libs_map[$lib]#*|}
+                            count=${found_libs_map[$lib]}
                             count=$((count+1))
-                            found_libs_map["$lib"]="$count|$version"
+                            found_libs_map["$lib"]="$count"
                         fi
                     fi
                 done
@@ -173,9 +172,8 @@ if [ -d /proc ]; then
     else
         log_output "Aggregated SSL libraries usage across processes:"
         for lib in "${!found_libs_map[@]}"; do
-            count=${found_libs_map[$lib]%%|*}
-            version=${found_libs_map[$lib]#*|}
-            log_output "  $lib (Version: $version) - Used by $count process(es)"
+            count=${found_libs_map[$lib]}
+            log_output "  $lib - Used by $count process(es)"
         done
     fi
 else
