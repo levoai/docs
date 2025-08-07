@@ -1,12 +1,17 @@
 #!/bin/bash
-# Enhanced SSL/TLS detection for eBPF hooking
 # Detects SSL/TLS implementations on the system and running processes
 
 set -euo pipefail
 
-# Warn if not root (may miss some processes)
-if [[ $EUID -ne 0 ]]; then
-    echo "⚠️  Warning: Not running as root. Results may be incomplete."
+# Check if we can use sudo for elevated access
+SUDO_CMD=""
+if command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
+    SUDO_CMD="sudo"
+    echo "🔐 Sudo available - will use elevated privileges when needed"
+elif [[ $EUID -eq 0 ]]; then
+    echo "🔐 Running as root - full access available"
+else
+    echo "⚠️  Warning: Not running as root and sudo not available. Results may be incomplete."
 fi
 
 # Create output file with timestamp
@@ -27,6 +32,18 @@ extract_version() {
         strings "$lib" 2>/dev/null | grep -E "OpenSSL|GnuTLS|NSS|LibreSSL|BoringSSL|mbedTLS|WolfSSL|Rustls|Botan|BearSSL|s2n" | head -1 || echo "version unknown"
     else
         echo "version unknown"
+    fi
+}
+
+# Function to safely read a file with sudo if needed
+safe_read() {
+    local file="$1"
+    if [ -r "$file" ]; then
+        cat "$file"
+    elif [ -n "$SUDO_CMD" ]; then
+        $SUDO_CMD cat "$file" 2>/dev/null || echo ""
+    else
+        echo ""
     fi
 }
 
@@ -85,16 +102,25 @@ declare -A found_libs_map  # map lib_path -> version + count
 
 if [ -d /proc ]; then
     for proc_dir in /proc/[0-9]*/; do
+        # Skip if proc_dir doesn't exist (process might have terminated)
+        if [ ! -d "$proc_dir" ]; then
+            continue
+        fi
+        
         maps_file="${proc_dir}maps"
         if [ -f "$maps_file" ]; then
             pid=$(basename "$proc_dir")
             proc_name="unknown"
-            if [ -f "${proc_dir}comm" ]; then
-                proc_name=$(cat "${proc_dir}comm" 2>/dev/null || echo "unknown")
+            
+            # Try to read comm file with sudo if needed
+            comm_file="${proc_dir}comm"
+            if [ -f "$comm_file" ]; then
+                proc_name=$(safe_read "$comm_file" | tr -d '\0' || echo "unknown")
             fi
             
-            # Extract libs matching regex (case insensitive)
-            libs_found=$(grep -E -i "$SSL_REGEX" "$maps_file" 2>/dev/null | awk 'NF>=6{print $6}' | sort -u)
+            # Extract libs matching regex (case insensitive) - use || true to prevent exit on no matches
+            # Also wrap in error handling to prevent exit on permission issues
+            libs_found=$(safe_read "$maps_file" | grep -E -i "$SSL_REGEX" 2>/dev/null | awk 'NF>=6{print $6}' | sort -u || true)
             
             if [ -n "$libs_found" ]; then
                 for lib in $libs_found; do
