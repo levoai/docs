@@ -81,18 +81,44 @@ log_output "2. SSL/TLS LIBRARIES IN RUNNING PROCESSES"
 log_output "Scanning /proc/[pid]/maps for SSL library usage..."
 
 SSL_PATTERNS=(
-    "libssl"      # OpenSSL
-    "libcrypto"   # OpenSSL crypto
-    "libgnutls"   # GnuTLS
-    "libnss"      # NSS
-    "libtls"      # LibreSSL
-    "libboringssl" # BoringSSL
-    "libmbedtls"  # mbedTLS
-    "libwolfssl"  # WolfSSL
-    "librustls"   # Rustls
-    "libbotan"    # Botan
-    "libbearssl"  # BearSSL
-    "libs2n"      # s2n
+    # OpenSSL - Core SSL and crypto libraries
+    "libssl"      # OpenSSL SSL library (libssl.so*)
+    "libcrypto"   # OpenSSL crypto library (libcrypto.so*)
+    
+    # GnuTLS - GNU Transport Layer Security
+    "libgnutls"   # GnuTLS library (libgnutls.so*)
+    
+    # NSS (Network Security Services) - Mozilla's crypto library
+    "libnss"      # NSS core library (libnss3.so, etc.)
+    "libssl3"     # NSS SSL library (libssl3.so)
+    "libsmime3"   # NSS S/MIME library (libsmime3.so)
+    
+    # LibreSSL - OpenSSL fork
+    "libtls"      # LibreSSL TLS library (libtls.so*)
+    # Note: LibreSSL also uses libssl.so* and libcrypto.so* (same as OpenSSL)
+    
+    # BoringSSL - Google's OpenSSL fork (rarely installed as shared libs)
+    "libboringssl" # BoringSSL library (libboringssl.so*)
+    
+    # mbedTLS - ARM's crypto library (complete component detection)
+    "libmbedtls"  # mbedTLS main library (libmbedtls.so*)
+    "libmbedcrypto" # mbedTLS crypto library (libmbedcrypto.so*)
+    "libmbedx509" # mbedTLS X.509 library (libmbedx509.so*)
+    
+    # WolfSSL - Embedded SSL library
+    "libwolfssl"  # WolfSSL library (libwolfssl.so*)
+    
+    # Rustls - Rust TLS library (rarely distributed as shared libs)
+    "librustls"   # Rustls library (librustls.so* - custom builds only)
+    
+    # Botan - C++ crypto library
+    "libbotan"    # Botan library (libbotan-*.so*)
+    
+    # BearSSL - Embedded SSL library (rarely distributed as shared libs)
+    "libbearssl"  # BearSSL library (libbearssl.so* - custom builds only)
+    
+    # s2n - AWS's TLS implementation
+    "libs2n"      # s2n library (libs2n.so*)
 )
 
 # Build anchored regex with word boundaries to avoid partial matches
