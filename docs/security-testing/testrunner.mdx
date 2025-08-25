@@ -77,7 +77,7 @@ helm repo add levoai https://levoai.github.io/helm-charts/
 
 
 ```bash
-helm install \
+helm upgrade --install -n levoai --create-namespace \
 --set key="auth-key" \
 --set orgId="organization id" \
 --set levoBaseUrl="https://api.levo.ai" \
@@ -91,7 +91,7 @@ For example, if the testrunner is used with `app.india-1.levo.ai`:
 
 
 ```bash
-helm install \
+helm upgrade --install -n levoai --create-namespace \
 --set key="auth-key" \
 --set orgId="organization id" \
 --set levoBaseUrl="https://api.india-1.levo.ai" \
