@@ -61,9 +61,9 @@ docker compose pull && docker compose up -d
 
 :::info
 
-Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
+You may need to set a different Levo base URL for the satellite if your Saas/dashboard account is created in India domain.
 
-For example, if the satellite will be used with `app.india-1.levo.ai`, the installation command will be:
+For example, if you are accessing Levo dashboard with `app.india-1.levo.ai`, the installation command will be:
 
 ```bash
 export LEVOAI_AUTH_KEY='Authorization Key'
@@ -156,58 +156,6 @@ docker logs -f <container id>
 docker logs <container id> --since 1m
 ```
 
-----
-
-## Configuration
-
-### Change the `minimum number of URLs` that the satellite needs to observe to detect an API endpoint.
-To detect an API endpoint, Satellite waits for at least '10' URLs to match that endpoint URL pattern.
-This number may cause delays in detecting API endpoints when there is not enough load.
-
-If you want to change this number to suit your environment:
-- Export the environment variable `LEVOAI_MIN_URLS_PER_PATTERN` - for example : `export LEVOAI_MIN_URLS_PER_PATTERN=3`
-
-- Reinstall the Satellite to pickup the new configuration
-
-------------------------------------------------------------------
-
-### Troubleshooting
-
-### Tagger Errors
-
-The `Tagger` component sends API endpoint metadata information to Levo.ai. API Observability will not function if the Tagger is in an errored state.
-
-Please see sample output below from `docker ps | grep -E "levoai/collector|levoai/satellite|bitnami/rabbitmq"`, that shows the Tagger (2nd line item) in an errored state.
-
-```bash
-65fe40867c70   levoai/collector:stable   "/usr/local/bin/levo…"   5 minutes ago   Up 5 minutes                    0.0.0.0:4317->4317/tcp, 9411/tcp                                                                                                         levoai-collector
-45d6c4cccb28   levoai/satellite:stable   "python -OO /opt/lev…"   5 minutes ago   Restarting (1) 55 seconds ago                                                                                                                                            levoai-tagger
-721b5431369a   levoai/satellite:stable   "gunicorn --capture-…"   5 minutes ago   Up 5 minutes                    0.0.0.0:9999->9999/tcp                                                                                                                   levoai-satellite
-a00dc710d4af   bitnami/rabbitmq:3.10     "/opt/bitnami/script…"   5 minutes ago   Up 5 minutes                    5551-5552/tcp, 0.0.0.0:4369->4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 0.0.0.0:15672->15672/tcp, 0.0.0.0:25672->25672/tcp, 15671/tcp   levoai-rabbitmq
-```
-
-Below are common error scenarios:
-
-### Authentication Errors
-
-The `Tagger` component authenticates with Levo.ai using the `Authorization Key`. If Tagger is unable to authenticate, it will error out.
-
-Check for authentication errors in the `Tagger` logs:
-```bash
-docker logs levoai-tagger | grep "Exception: Failed to refresh access token"
-```
-
-If there are exception messages, you have an incorrect or stale `Authorization Key`. Please contact support@levo.ai for further assistance.
-
-### Connectivity Errors
-
-Check for connectivity errors in the `Tagger` logs:
-```bash
-
-docker logs levoai-tagger | grep "ConnectionRefusedError: [Errno 111] Connection refused"
-```
-
-If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries. Please contact support@levo.ai for further assistance.
 
 </TabItem>
 
@@ -237,9 +185,9 @@ export LEVOAI_ORG_ID='Org ID'
 
 :::info
 
-Depending on the region you are installing in, you may need to set a different Levo base URL for the satellite.
+You may need to set a different Levo base URL for the satellite if your Saas/dashboard account is created in India domain.
 
-For example, if the satellite will be used with `app.india-1.levo.ai`, the installation command will be:
+For example, if you are accessing Levo dashboard with `app.india-1.levo.ai`, the installation command will be:
 
 ```bash
 export LEVOAI_BASE_URL='https://api.india-1.levo.ai'
@@ -303,7 +251,73 @@ Execute the following command to collect logs from all Satellite components. Thi
 
 </Tabs>
 
--------------------------------
+----
+
+## Configuration
+
+### Change the `minimum number of URLs` that the satellite needs to observe to detect an API endpoint.
+To detect an API endpoint, Satellite waits for at least '10' URLs to match that endpoint URL pattern.
+This number may cause delays in detecting API endpoints when there is not enough load.
+
+If you want to change this number to suit your environment:
+- Navigate to Levo's dashboard.
+- Click settings from the left navigation bar.
+- Under the API Discovery tab, update `Min. URLs per Pattern` to the desired number and wait for at least 5 mins for satellite to pick up the change.
+
+------------------------------------------------------------------
+
+### Troubleshooting
+
+### Tagger Errors
+
+The `Tagger` component sends API endpoint metadata information to Levo.ai. API Observability will not function if the Tagger is in an errored state.
+
+Please see sample output below from `docker ps | grep -E "levoai/collector|levoai/satellite|bitnami/rabbitmq"`, that shows the Tagger (2nd line item) in an errored state.
+
+```bash
+65fe40867c70   levoai/collector:stable   "/usr/local/bin/levo…"   5 minutes ago   Up 5 minutes                    0.0.0.0:4317->4317/tcp, 9411/tcp                                                                                                         levoai-collector
+45d6c4cccb28   levoai/satellite:stable   "python -OO /opt/lev…"   5 minutes ago   Restarting (1) 55 seconds ago                                                                                                                                            levoai-tagger
+721b5431369a   levoai/satellite:stable   "gunicorn --capture-…"   5 minutes ago   Up 5 minutes                    0.0.0.0:9999->9999/tcp                                                                                                                   levoai-satellite
+a00dc710d4af   bitnami/rabbitmq:3.10     "/opt/bitnami/script…"   5 minutes ago   Up 5 minutes                    5551-5552/tcp, 0.0.0.0:4369->4369/tcp, 5671/tcp, 0.0.0.0:5672->5672/tcp, 0.0.0.0:15672->15672/tcp, 0.0.0.0:25672->25672/tcp, 15671/tcp   levoai-rabbitmq
+```
+
+Below are common error scenarios:
+
+### Authentication Errors
+
+The `Tagger` component authenticates with Levo.ai using the `Authorization Key`. If Tagger is unable to authenticate, it will error out.
+
+Check for authentication errors in the `Tagger` logs:
+```bash
+docker logs levoai-tagger | grep "Exception: Failed to refresh access token"
+```
+
+If there are exception messages, you have an incorrect or stale `Authorization Key`. Please contact support@levo.ai for further assistance.
+
+### Connectivity Errors
+
+Check for connectivity errors in the `Tagger` logs:
+```bash
+
+docker logs levoai-tagger | grep "ConnectionRefusedError: [Errno 111] Connection refused"
+```
+
+If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries.
+
+
+### Enable Debug Logging
+Set the following environment variable to enable debug logging for the Satellite components and then reinstall the satellite or restart the containers.
+
+```bash
+export LEVOAI_LOG_LEVEL='DEBUG'
+```
+
+This will enable detailed debugging logs for all satellite components, including Tagger, Collector, Ion, and Satellite.
+
+Some various log levels that can be set are `INFO`, `DEBUG`, `WARNING`, `ERROR`. The default log level is `INFO`.
+
+
+---
 
 ### Need Help?
 For further assistance, please reach out to [Levo.ai Support](mailto:support@levo.ai).

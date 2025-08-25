@@ -3,12 +3,14 @@ sidebar_position: 3
 description: Install Levo.ai PCAP sensor on AWS Fargate. Follow our detailed guide for setup, configuration, and robust API traffic capture and analysis.
 ---
 
+import version from '@site/src/version.json';
+import CodeBlock from '@theme/CodeBlock';
+
 # Sensor on AWS Fargate
 
 ## Prerequisites
 - AWS profile access key and secret access key saved at path  ~/.aws/credentials file
 - The profile should have all the required permissions as listed [here](#aws-permissions)
-
 
 ## Install using Terraform
 
@@ -42,10 +44,11 @@ The steps to add the sensor to your task are as follows
 - Set the cpu limit as number of CPU Units (*Note: 1 core = 1024 CPU Units*)
 - Set the memory limit in `Mib` (*Note: memory should not exceed the Task memory limit*)
 
-```json
+<CodeBlock language="json">
+{`
 {
     "name": "levo-pcap-sensor",
-    "image": "levoai/pcap-sensor:0.1.10",
+    "image": levoai/pcap-sensor:${version.pcap_sensor_version},
     "cpu": 512,
     "memory": 512,
     "portMappings": [],
@@ -80,7 +83,8 @@ The steps to add the sensor to your task are as follows
         }
     }
 }
-```
+`}
+</CodeBlock>
 
 Specify additional flags in the entrypoint
 ```bash
@@ -93,18 +97,18 @@ Specify additional flags in the entrypoint
 --path-exclusions           # regex for excluded paths
 ```
 
-### 3. Configuring sensor as per memory and CPU resource limits
+### Configuring sensor memory and CPU resource limits
 
 - For normal/average case use the above JSON
 - For strict resources, use the [Low resource JSON file](../../static/artifacts/pcap-sensor/low_resource.json)
 
-### 4. Filtering out traffic
+### Filtering out traffic
 - If you need to ignore the traffic from other side-cars in the AWS task, you can use the `--filter` command to ignore the traffic on the non-essential container ports
 eg. `--filter "not port 8888"
 
 <a id="aws-permissions"></a>
 
-### AWS Permissions needed
+## AWS Permissions needed
 
 Add the **AmazonECS_FullAccess** policy to get access to all the necessary permissions.
 

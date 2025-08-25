@@ -2,6 +2,9 @@
 sidebar_position: 5
 ---
 
+import version from '@site/src/version.json';
+import CodeBlock from '@theme/CodeBlock';
+
 # Sensor via YUM Package
 
 ## Install on RPM based Linux Distributions via `yum` {#sensor-yum-install}
@@ -31,9 +34,9 @@ Install the eBPF Sensor from Levo's RPM repository.
   ```
 
 1. Install the package in your repository.
-  ```shell
-  sudo yum install levo-ebpf-sensor-0.46.1
-  ```
+  <CodeBlock language="bash">
+  sudo yum install levo-ebpf-sensor-{version.ebpf_sensor_version}
+  </CodeBlock>
 
 Enter `y` when prompted.
 

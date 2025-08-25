@@ -95,10 +95,16 @@ After configuring the `config.json` file, you need to install the sensor as a Wi
 2. Navigate to the directory containing the extracted Levoai sensor files.
 3. Run the following command to install the sensor as a service:
     ```bash 
-    levoai-service.exe -service install 
+    levoai-service.exe -service install
 4. Run the following command to check the status of the Levoai service:
-    ```bash
-    Get-Service | Where-Object { $_.Name -like "*Levo*" }
+   For PowerShell:
+      ```bash 
+      Get-Service | Where-Object { $_.Name -like "*Levo*" }
+      ```
+   For Command Prompt (cmd):
+      ```bash 
+      sc query "Levoai Sensor"
+     ```
 5. If the service is installed and running successfully, you will see output similar to the following:
     ```bash
     Status   Name               DisplayName
