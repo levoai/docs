@@ -89,7 +89,7 @@ Before installing the module, modify the `config.json` file to match your specif
 
 - **Module Not Loading**: Check Event Viewer and IIS Manager for error messages
 - **No Data in Portal**: Verify `config.json` settings and network connectivity
-- **Performance Issues**: Contact Levoai support for assistance
+- **Performance Issues**: Contact [Support](mailto:support@levo.ai)
 
 ### Logs Location
 
@@ -112,4 +112,4 @@ iisreset
 
 ## Support
 
-For additional support or assistance, please [contact](mailto:support@levo.ai) Levo.ai technical support.
+For additional support or assistance, please contact [Support](mailto:support@levo.ai).

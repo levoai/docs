@@ -45,7 +45,7 @@ You may also use Amazon Data Firehose to stream live access logs to Levo's satel
     - Choose `Create Amazon Data Firehose subscription filter` and select the particular Amazon Data Firehose stream.
     - Click on `Start Streaming` and you can now see your traffic come up in our Application.
 
-Please contact `support@levo.ai` if you are interested in this setup.
+Please contact [Support](mailto:support@levo.ai) if you are interested in this setup.
 
 ## CloudFront Lambda@Edge Instrumentation
 

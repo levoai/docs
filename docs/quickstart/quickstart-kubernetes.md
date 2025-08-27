@@ -93,4 +93,4 @@ If connectivity is healthy, you should see output similar to below.
 2022/06/13 21:15:40 729071	INFO [ebpf_sensor.cpp->main:120]	Initial connection with Collector was successful.
 ```
 
-**Please contact `support@levo.ai` if you notice health/connectivity related errors.**
+**Please contact [Support](mailto:support@levo.ai) if you notice health/connectivity related errors.**

@@ -13,9 +13,9 @@ title: Import APIs for Data-Driven Testing | Levo.ai Documentation
 Levo requires OpenAPI specifications for security test generation. If you already have OpenAPI specifications, you can simply import them into the API Catalog.
 
 Otherwise OpenAPI specifications can be generated via one of the following methods:
-- Auto-generate OpenAPI from live traffic via Levo's [API Observability](/guides/api-observability.md) solution
-- If you have Postman Collections, use [postman-to-openapi](https://github.com/levoai/postman-to-openapi) to generate OpenAPI from your collections
-- If you have HAR files, you can contact `support@levo.ai` to have them converted to OpenAPI specifications
+- Auto-generate OpenAPI from live traffic via Levo's [API Observability](/guides/api-observability.md) solution.
+- If you have Postman Collections, use [postman-to-openapi](https://github.com/levoai/postman-to-openapi) to generate OpenAPI from your collections.
+- If you have HAR files, you import them using `Add Endpoints` on Applications page.
 
 ## 1. Import your APIs into Levo SaaS
 

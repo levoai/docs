@@ -78,5 +78,5 @@ Follow the steps below to deploy the EdgeWorker using the CLI.
 
 **That's it!**
 
-Your EdgeWorker is now deployed and integrated with your Akamai property. Monitor and analyse your API traffic using the Levo.ai platform. For further support, feel free to reach out to the Levo.ai team at support@levo.ai.
+Your EdgeWorker is now deployed and integrated with your Akamai property. Monitor and analyse your API traffic using the Levo.ai platform. For further support, feel free to reach out to the [Support](mailto:support@levo.ai).
 

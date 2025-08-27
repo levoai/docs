@@ -9,7 +9,7 @@ slug: /
 Levo comprises of two components, a Sensor which runs alongside your application workloads, and a Satellite.
 The Sensor captures live traffic from your environment and sends it to the Satellite for processing.
 
-Levo can host the Satellite for you (reach out to [`support@levo.ai`](mailto:support@levo.ai)), or you can host it yourself.
+Levo can host the Satellite for you (reach out to [Support](mailto:support@levo.ai)), or you can host it yourself.
 
 - [Signup with your enterprise email](https://app.levo.ai/signup)
 - [OS Platform Compatibility Check](/guides/general/os-compat-check)

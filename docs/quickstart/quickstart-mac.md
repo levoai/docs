@@ -49,4 +49,4 @@ docker run -e LEVOAI_AUTH_KEY=<your-auth-key> \
 - For more information on log parser, refer to the [Log Parser](/install-traffic-capture-sensors/sensor-on-macos#log-parser) section.
 
 
-**Please contact `support@levo.ai` if you notice health/connectivity related errors.**
+**Please contact [Support](mailto:support@levo.ai) if you notice health/connectivity related errors.**

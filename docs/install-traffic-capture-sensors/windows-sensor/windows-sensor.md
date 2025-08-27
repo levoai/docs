@@ -162,4 +162,4 @@ Replace `"C:\\Program Files\\Levo\\levoai-sensor.exe"` with the actual path to t
 
 ### 7. Additional Support
 
-For additional support, please [contact](mailto:support@levo.ai) Levo.ai technical support.
+For additional support, please contact [Support](mailto:support@levo.ai).

@@ -81,7 +81,7 @@ If connectivity is healthy, you should see output similar to below.
 2022/06/13 21:15:40 729071	INFO [ebpf_sensor.cpp->main:120]	Initial connection with Collector was successful.
 ```
 
-**Please contact `support@levo.ai` if you notice health/connectivity related errors.**
+**Please contact [Support](mailto:support@levo.ai) if you notice health/connectivity related errors.**
 
 #### NOTE:
 The default address for the satellite url in helm installations is `levoai-haproxy`.
@@ -97,4 +97,61 @@ helm upgrade --set sensor.levoEnv=<your-application-environment> --set sensor.sa
 
 Please proceed to the next step, if there are no errors.
 
-<br></br>
+---
+
+### Using a Private Docker Registry for Kubernetes Installations (Optional)
+If you want to use a private docker registry for the sensor installation, refer to [Using a Private Docker Registry for Kubernetes Installations](/guides/general/private-registry.md).
+
+
+### Optimizing Resource Usage for Levo eBPF Sensor
+
+Resource requests and limits help ensure the Sensor runs efficiently and reliably in your Kubernetes cluster. You can tune these settings to match your environment’s needs and available resources.
+
+#### 1. Configure CPU and Memory Requests/Limits
+
+The Sensor’s resource settings are defined in the Helm chart under `sensor.containerResources`. You can override these values during installation or upgrade:
+
+- **Requests**: Minimum resources guaranteed for the container.
+- **Limits**: Maximum resources the container can use.
+
+Example values.yaml section:
+```yaml
+sensor:
+  containerResources:
+    requests:
+      cpu: 0.5
+      memory: 1Gi
+    limits:
+      cpu: 1.0
+      memory: 2Gi
+```
+
+#### 2. Set Resource Values via Helm
+
+To customize resource allocation, use the following flags with your Helm command:
+
+```shell
+helm upgrade --install -n levoai levoai-sensor levoai/levoai-ebpf-sensor \
+  --set sensor.containerResources.requests.cpu=0.25 \
+  --set sensor.containerResources.limits.cpu=0.5 \
+  --set sensor.containerResources.requests.memory=512Mi \
+  --set sensor.containerResources.limits.memory=1Gi
+```
+
+You can adjust the values (`cpu`, `memory`) to fit your cluster’s capacity and workload.
+
+#### 3. Verify Resource Settings
+
+After deployment, check the resource settings applied to the Sensor pod:
+
+```shell
+kubectl -n levoai get pod <levoai-sensor-pod-name> -o jsonpath='{.spec.containers[*].resources}'
+```
+
+#### 4. Tips for Tuning
+
+- **Monitor Usage**: Use `kubectl top pod` or your cluster’s monitoring tools to observe actual resource consumption.
+- **Adjust Gradually**: Start with conservative values and increase if you notice throttling or OOM (Out Of Memory) errors.
+- **Cluster Constraints**: Ensure your node types and quotas can support the requested resources.
+
+For further assistance with resource optimization, contact [Support](mailto:support@levo.ai).

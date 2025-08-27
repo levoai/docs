@@ -15,7 +15,7 @@ Below are the high level steps for running a previously generated Data Driven Te
 
 - If your Test Plan is in the `Config in Progress` state, goto step 2 below.
 
-- If your Test Plan is not in either of the above states, please contact Levo Support (support@levo.ai).
+- If your Test Plan is not in either of the above states, please contact [Support](mailto:support@levo.ai).
 
 ### 2. Configure Test Fixtures
 

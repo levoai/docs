@@ -254,7 +254,7 @@ If connectivity is **healthy**, you will see output similar to below:
 "message": "Ready to process; waiting for messages."}
 ```
 
-**Please contact `support@levo.ai` if you notice health/connectivity related errors.**
+**Please contact [Support](mailto:support@levo.ai) if you notice health/connectivity related errors.**
 
 
 
