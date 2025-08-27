@@ -74,4 +74,4 @@ If you encounter an error while running `npx wrangler login`, make sure you have
 
 
 ### Need Help?
-For further assistance, please reach out to [Levo.ai Support](mailto:support@levo.ai).
+For further assistance, please reach out to [Support](mailto:support@levo.ai).

@@ -53,7 +53,7 @@ If connectivity is healthy, you should see output similar to below.
 ```
 
 #### Connection Failures
-If the Sensor is unable to connect with the Satellite, you will notice log entries similar to the one below. Please contact `support@levo.ai` for assistance.
+If the Sensor is unable to connect with the Satellite, you will notice log entries similar to the one below. Please contact [Support](mailto:support@levo.ai) for assistance.
 
 ```
 Initial connection with Collector failed. However, the sensor will keep attempting to send future traces.

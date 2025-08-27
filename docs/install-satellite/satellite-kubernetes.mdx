@@ -163,7 +163,7 @@ If connectivity is healthy, you will see output similar to below.
 {"level": "info", "time": "2022-06-07 08:07:22,439", "line": "rabbitmq_client.py:155", "version": "fc628b50354bf94e544eef46751d44945a2c55bc", "module": "/opt/levoai/e7s/src/python/levoai_e7s/satellite/rabbitmq_client.py", "message": "Ready to process; waiting for messages."}
 ```
 
-**Please contact `support@levo.ai` if you notice health/connectivity related errors.**
+**Please contact <a href="mailto:support@levo.ai">Support</a> if you notice health/connectivity related errors.**
 
 ### 5. Note down `Host:Port` information
 
@@ -229,10 +229,17 @@ haproxy:
               number: 80
 ```
 
-Please reach out to support@levo.ai if you're using a custom ingress controller.
+### Using a Private Docker Registry for Kubernetes Installations (Optional)
+If you want to use a private docker registry for the satellite installation, refer to [Using a Private Docker Registry for Kubernetes Installations](/guides/general/private-registry.md).
 
 
-Please proceed to [install Traffic Capture Sensors](/install-traffic-capture-sensors).
+### Using a Custom Ingress Controller (Optional)
+In case you want to use a custom ingress controller, contact <a href="mailto:support@levo.ai">Support</a> for assistance.
+
+
+### Next Steps: Install Traffic Capture Sensors
+Proceed to [install Traffic Capture Sensors](/install-traffic-capture-sensors) to deploy sensors in your environment.
+
 
 ---------------------------------------------------------
 
@@ -322,7 +329,7 @@ Check for authentication errors in the `Tagger` logs:
 kubectl -n levoai logs <levoai-tagger-pod-id> | grep "Exception: Failed to refresh access token"
 ```
 
-If there are exception messages, you have an incorrect or stale `Authorization Key`. Please contact [Levo.ai Support](mailto:support@levo.ai) for further assistance.
+If there are exception messages, you have an incorrect or stale `Authorization Key`. Please contact <a href="mailto:support@levo.ai">Support</a> for further assistance.
 
 
 ### Connectivity Errors
@@ -333,7 +340,7 @@ Check for connectivity errors in the `Tagger` logs:
 kubectl -n levoai logs <levoai-tagger-pod-id> | grep "ConnectionRefusedError: [Errno 111] Connection refused"
 ```
 
-If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries. Please contact support@levo.ai for further assistance.
+If there are exception messages, Tagger is unable to connect to dependent services. It generally establishes connection after 3/4 retries. Please contact <a href="mailto:support@levo.ai">Support</a> for further assistance.
 
 
 ### Enable Debug Logging
@@ -362,4 +369,4 @@ chmod +x get_levoai_satellite_logs.sh
 ---
 
 ### Need Help?
-For further assistance, please reach out to [Levo.ai Support](mailto:support@levo.ai).
+For further assistance, please reach out to <a href="mailto:support@levo.ai">Support</a>.

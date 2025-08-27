@@ -112,4 +112,4 @@ iisreset
 
 ## Support
 
-For additional support or assistance, please [contact](mailto:support@levo.ai) Levo.ai technical support.
+For additional support or assistance, please [Support](mailto:support@levo.ai) Levo.ai technical support.

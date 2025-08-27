@@ -15,7 +15,7 @@ sidebar_position: 2
 ------------------------------------------------------------------------------
 
 ## Getting Help
-Please email `support@levo.ai` for assistance with installation, product questions, roadmap, etc.
+Please contact [Support](mailto:support@levo.ai) for assistance with installation, product questions, roadmap, etc.
 
 Please provide as much details as possible in your support request.
 
@@ -86,7 +86,7 @@ Most modern Linux distributions contain pre-built BTF info. If BTF is missing fo
 ## Satellite
 
 ### I don't care about data privacy in pre-production. Can Levo host the Satellite for me?
-Yes, Levo certainly can host the Satellite for you. Please contact `support@levo.ai` for assistance.
+Yes, Levo certainly can host the Satellite for you. Please contact [Support](mailto:support@levo.ai) for assistance.
 
 ### Can multiple Sensors send API Traces to the same Satellite?
 Yes. Multiple sensors from different hosts/clusters can be configured to send API Traces to the same Satellite.
