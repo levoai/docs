@@ -1,0 +1,28 @@
+---
+sidebar_position: 2
+title: Detection Module on Docker
+---
+# Install using Docker
+
+### Prerequisites
+- Docker Engine version `18.03.0` and above
+- Admin (or `sudo`) privileges on the Docker host
+
+
+### 1. Install Detection Module
+
+```
+docker run --name levo-detection --rm -p 80:80 -p 443:443 -p 8080:8080 levoai/detection
+```
+
+### 2. Check installation health
+```
+curl http://localhost:8080/api/health
+```
+
+### 3. Access the Detection Module Dashboard
+Use the browser to access the detection module dashboard for modifying configs, adding certs etc,
+on `http://localhost:8080`
+
+### 4. Other common tasks
+Check [Common Tasks](docs/install-detection-module/common-tasks.md) page for other use cases and information.

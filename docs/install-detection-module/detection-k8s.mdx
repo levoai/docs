@@ -1,0 +1,75 @@
+---
+sidebar_position: 1
+title: Detection Module on Kubernetes
+---
+
+# Levo Detection Module on Kubernetes
+
+## Install on Kubernetes
+
+### Prerequisites
+- Kubernetes version >= v1.18.0
+- [Helm v3](https://helm.sh/docs/intro/install/) installed and working.
+- The Kubernetes cluster API endpoint should be reachable from the machine you are running Helm.
+- `kubectl` access to the cluster, with `cluster-admin` permissions.
+
+### 1. Add levoai Helm repo
+```bash
+helm repo add levoai https://charts.levo.ai && helm repo update levoai
+```
+
+### 2. Create `levoai` namespace & install Detection module
+```bash
+helm upgrade levoai-detection levoai/levoai-detection \
+  --install \
+  --namespace levoai \
+  --create-namespace
+```
+
+### 3. Add server configurations
+
+- Edit configmap `levoai-detection-nginx`
+```bash
+kubectl edit configmap levoai-detection-nginx
+```
+Add the server details using Nginx configuration.
+
+### 4. Configure TLS for the Detection module
+
+For TLS, create secret using crt and key
+```
+kubectl create secret tls levoai-detection-tls-secret \ 
+		   --cert=./selfsigned.crt \
+		   --key=./selfsigned.key
+```
+
+enable `tls` in `values.yaml` and mention secret name `levoai-detection-tls-secret` in `existingSecretName` 
+
+Edit nginx config using configmap `levoai-detection-nginx`
+
+Certificates will be present in `/etc/nginx/tls`
+
+Sample nginx config
+```nginx
+server {
+            listen 443 ssl;
+            server_name _;
+
+            ssl_certificate /etc/nginx/tls/tls.crt;
+            ssl_certificate_key /etc/nginx/tls/tls.key;
+            location / {
+                proxy_pass https://crapi-web:443;  # Replace with your backend
+            }
+        }
+```
+
+### 5. Other resources.
+
+- Add Custom `modesec` rules in the `levoai-detection-modsec` configmap.
+- Add Custome Lua scripts in the `levoai-detection-lua` configmap.
+- If you want to add multiple server configurations, add them by:
+    - Editing the `levoai-detection-confd` configmap.
+    - Or in the `values.yml` file, under `confD`, add the server config file content.
+- Refer the [common-tasks](docs/install-detection-module/common-tasks.md) page to know more about APIs
+for the detection module.
+
