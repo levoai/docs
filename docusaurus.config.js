@@ -28,7 +28,7 @@ const config = {
           sidebarPath: require.resolve('./sidebars.js'),
           // Please change this to your repo.
           editUrl: 'https://github.com/levoai/docs/edit/main/',
-          routeBasePath: '/',
+          routeBasePath: '/docs',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -286,6 +286,11 @@ const config = {
           {
             href: 'https://github.com/levoai/docs',
             label: 'GitHub',
+            position: 'right',
+          },
+          {
+            to: '/auth/logout',
+            label: 'Logout',
             position: 'right',
           },
         ],
